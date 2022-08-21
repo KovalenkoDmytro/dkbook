@@ -22,8 +22,8 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->unsignedBigInteger('typeOfBusiness_id')->nullable();
-            $table->index('typeOfBusiness_id', 'company_type_of_businesses_idx');
-            $table->foreign('type_of_businesses','companies_fk')->on('type_of_businesses')->references('id');php
+            $table->index('typeOfBusiness_id', 'company_type_of_business_idx');
+            $table->foreign('typeOfBusiness_id','company_typeOfBusiness_fk')->on('type_of_businesses')->references('id');
         });
     }
 
