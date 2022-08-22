@@ -24,6 +24,10 @@ return new class extends Migration
             $table->unsignedBigInteger('typeOfBusiness_id')->nullable();
             $table->index('typeOfBusiness_id', 'company_type_of_business_idx');
             $table->foreign('typeOfBusiness_id','company_typeOfBusiness_fk')->on('type_of_businesses')->references('id');
+
+            $table->unsignedBigInteger('schedules_id')->nullable();
+            $table->index('schedules_id', 'company_schedules_idx');
+            $table->foreign('schedules_id','company_schedules_fk')->on('schedules')->references('id');
         });
     }
 

@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('schedules', function (Blueprint $table) {
+        Schema::create('logo_companies', function (Blueprint $table) {
             $table->id();
-            $table->string('Monday');
-            $table->string('Tuesday');
-            $table->string('Wednesday');
-            $table->string('Thursday');
-            $table->string('Friday');
-            $table->string('Saturday');
-            $table->string('Sunday');
+            $table->string('logo');
             $table->timestamps();
+
+            $table->unsignedBigInteger('companies_id')->nullable();
+            $table->index('companies_id', 'logoCompany_companies_idx');
+            $table->foreign('companies_id','logoCompany_companies_fk')->on('companies')->references('id');
         });
     }
 
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schedules');
+        Schema::dropIfExists('logo_companies');
     }
 };
