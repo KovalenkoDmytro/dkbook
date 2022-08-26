@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('company_logos', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained();
-            $table->string('link');
+            $table->timestamp('date');
+            $table->string('paymentMethod');
+            $table->decimal('cost', 9,2);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_logos');
+        Schema::dropIfExists('transactions');
     }
 };

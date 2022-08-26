@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('services_photo_links', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id');
-            $table->unique(['company_id']);
-            $table->string('link');
+            $table->foreignId('company_id')->constrained();
+            $table->foreignId('employee_schedule_id')->constrained();
+            $table->string('name');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('position');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services_photo_links');
+        Schema::dropIfExists('employees');
     }
 };

@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('company_logos', function (Blueprint $table) {
+        Schema::create('company_service', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('service_id')->constrained();
             $table->foreignId('company_id')->constrained();
-            $table->string('link');
+            $table->unique(['service_id','company_id']);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_logos');
+        Schema::dropIfExists('company_service');
     }
 };

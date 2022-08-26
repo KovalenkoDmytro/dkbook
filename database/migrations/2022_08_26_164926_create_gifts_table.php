@@ -15,9 +15,8 @@ return new class extends Migration
     {
         Schema::create('gifts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id');
-            $table->foreignId('client_id');
-            $table->unique(['company_id','client_id']);
+            $table->foreignId('company_id')->constrained();
+            $table->foreignId('client_id')->constrained();
             $table->string('name');
             $table->decimal('price',9,2);
             $table->timestamp('expiration');

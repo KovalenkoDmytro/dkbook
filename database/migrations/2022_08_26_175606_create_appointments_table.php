@@ -13,10 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('company_logos', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained();
-            $table->string('link');
+            $table->foreignId('client_id')->constrained();
+            $table->foreignId('service_id')->constrained();
+            $table->foreignId('employee_id')->constrained();
+            $table->timestamp('date');
+            $table->string('paymentStatus')->default('unpaid');
+            $table->string('userStatus');
             $table->timestamps();
         });
     }
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_logos');
+        Schema::dropIfExists('appointments');
     }
 };

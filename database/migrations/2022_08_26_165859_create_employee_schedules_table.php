@@ -13,10 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('company_logos', function (Blueprint $table) {
+        Schema::create('employee_schedules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained();
-            $table->string('link');
+            $table->string('monday');
+            $table->string('tuesday');
+            $table->string('wednesday');
+            $table->string('thursday');
+            $table->string('friday');
+            $table->string('saturday');
+            $table->string('sunday');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -28,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_logos');
+        Schema::dropIfExists('employee_schedules');
     }
 };

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('company_client', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id');
-            $table->foreignId('company_id');
+            $table->foreignId('client_id')->constrained();
+            $table->foreignId('company_id')->constrained();
             $table->unique(['client_id','company_id']);
 
             $table->timestamps();

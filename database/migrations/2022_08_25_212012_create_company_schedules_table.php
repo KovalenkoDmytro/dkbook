@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('friday');
             $table->string('saturday');
             $table->string('sunday');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

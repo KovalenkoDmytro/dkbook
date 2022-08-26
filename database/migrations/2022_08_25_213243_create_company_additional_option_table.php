@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('company_additional_option', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('additional_option_id');
-            $table->foreignId('company_id');
+            $table->foreignId('additional_option_id')->constrained();
+            $table->foreignId('company_id')->constrained();
             $table->unique(['additional_option_id','company_id']);
 
 
