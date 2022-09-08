@@ -1,18 +1,58 @@
 <?php
 
+use App\Http\Controllers\Admin\Dashboard;
+use App\Http\Controllers\Auth\IndexController;
+use App\Http\Controllers\Auth\Registration\CreateController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ServiceController;
+use App\View\Components\DataTimePicker\DateTimePicker;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('welcome');
+Route::name('company.')->group(function (){
+    Route::get('/', [HomeController::class, 'index'] )->name('main');
+    Route::get('/register-1', [CreateController::class, 'step1'] )->name('step1');
+    Route::post('/register-1', [CreateController::class, 'createOwner'] )->name('createOwner');
+
+    Route::get('/register-2', [CreateController::class, 'step2'] )->name('step2');
+    Route::post('/register-2', [CreateController::class, 'createCompany'] )->name('createCompany');
+
+    Route::get('/register-3', [CreateController::class, 'step3'] )->name('step3');
+    Route::post('/register-3', [CreateController::class, 'addPhotoCompany'] )->name('addPhotoCompany');
+
+    Route::get('/register-4', [CreateController::class, 'step4'] )->name('step4');
+
 });
+
+Route::name('services.')->group(function (){
+    Route::get('/services', [ServiceController::class, 'create'] )->name('create');
+    Route::post('/services', [ServiceController::class, 'store'] )->name('store');
+    Route::put('/services/{id}', [ServiceController::class, 'update'] )->name('update');
+    Route::delete('/services/{id}', [ServiceController::class, 'destroy'] )->name('destroy');
+});
+
+Route::name('employee.')->group(function (){
+    Route::get('/employee', [EmployeeController::class, 'index'] )->name('index');
+    Route::post('/employee', [EmployeeController::class, 'store'] )->name('store');
+    Route::put('/employee/{id}', [EmployeeController::class, 'update'] )->name('update');
+    Route::delete('/employee/{id}', [EmployeeController::class, 'destroy'] )->name('destroy');
+});
+
+
+
+
+//Route::post('/register', [CreateController::class, 'createCompany'] )->name('createCompany');
+//Route::post('/addTime', [DateTimePicker::class, 'create'] )->name('createScheduledTime');
+
+
+
+
+//Route::name('admin')->middleware('admin')->group(function (){
+//    Route::get('/dashboard', [Dashboard::class, 'index'] );
+//
+//});
+
+
+
+

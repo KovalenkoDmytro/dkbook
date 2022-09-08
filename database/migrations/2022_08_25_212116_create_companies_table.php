@@ -16,9 +16,8 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('business_type_id')->constrained();
-            $table->foreignId('company_id')->constrained();
-
-            $table->string('name');
+            $table->foreignId('company_schedule_id')->default(1)->constrained();
+            $table->string('name')->unique();
             $table->string('address');
             $table->string('socialMedia');
             $table->timestamps();

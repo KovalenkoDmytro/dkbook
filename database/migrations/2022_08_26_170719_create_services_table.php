@@ -15,8 +15,11 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->integer('company_id');
             $table->string('name');
             $table->decimal('price',8,2);
+            $table->integer('timeRange_hour');
+            $table->integer('timeRange_minutes');
             $table->timestamps();
         });
     }

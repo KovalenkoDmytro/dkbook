@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('company_logos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained();
-            $table->string('link');
+            $table->string('path');
             $table->timestamps();
         });
     }

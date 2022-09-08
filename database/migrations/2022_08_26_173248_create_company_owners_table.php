@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('company_owners', function (Blueprint $table) {
             $table->id();
-            $table->string('fullName');
-            $table->string('phone');
-            $table->string('email');
+            $table->string('login')->unique();
             $table->string('password');
+            $table->string('email')->unique();
+            $table->string('fullName');
+            $table->string('phone')->unique();
             $table->string('businessMode');
+
             $table->timestamps();
         });
     }
