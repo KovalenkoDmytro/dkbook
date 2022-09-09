@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
-    public function create()
+    public function index()
     {
         return view('auth.create_service');
     }

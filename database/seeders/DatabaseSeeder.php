@@ -6,6 +6,8 @@ namespace Database\Seeders;
 use App\Models\BusinessType;
 use App\Models\Company;
 use App\Models\CompanySchedule;
+use App\Models\EmployeeSchedule;
+use Database\Factories\EmployeeScheduleFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -30,7 +32,8 @@ class DatabaseSeeder extends Seeder
         BusinessType::create(['name' => 'Tattoo Studio']);
         BusinessType::create(['name' => 'Other']);
 
-        CompanySchedule::factory(2)->create();
+        CompanySchedule::factory(1)->create();
+        EmployeeSchedule::factory(1)->create();
         Company::factory(4)->create();
     }
 }

@@ -4,8 +4,6 @@
     <h2>REGISTRATION</h2>
     <h2>step {{$step}}</h2>
 
-
-
         @if($services->isNotEmpty())
             <ul class="service_items">
                 @foreach($services as $service)
@@ -16,9 +14,6 @@
             </ul>
         @endif
 
-
-
-
     <section class="add-services">
         <div class="add-services_text">
           <span>Add first services</span>
@@ -26,9 +21,9 @@
         </div>
         <div class="">
             <i class="icon icon_plus"></i>
-            <a href="{{route('services.create')}}">Add service</a>
+            <a href="{{route('services.index')}}">Add service</a>
         </div>
-        <button>Next step</button>
+        <a href="{{route('company.step5')}}">Next step</a>
     </section>
 @endsection
 
