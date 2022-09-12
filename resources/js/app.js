@@ -24,12 +24,13 @@ DropDownToggleBtn.forEach(dropDown =>{
         }
     })
 
-    choseOption(DropDownOptionsListItems, DropDownInput)
+    choseOption(DropDownOptionsListItems, DropDownInput, dropDown)
 })
-function choseOption(optionsList, dropDownInput) {
+function choseOption(optionsList, dropDownInput, dropDownToggle) {
         optionsList.forEach(option=>{
             option.addEventListener('click', function (){
                 dropDownInput.value = this.textContent;
+                dropDownToggle.querySelector('.time').textContent = this.textContent;
             })
         })
     }

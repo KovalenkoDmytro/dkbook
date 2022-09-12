@@ -8,7 +8,7 @@ $options = [
 <div id="dropDown" class="dropDown">
     <input type="hidden" id="dropDown_input" name="{{$options['timeFrom']? 'timeFrom' : 'timeTo'}}" value="{{$options['timeList'][0]}}">
     <div class="dropDown_toggle" id="dropDownToggle">
-        <span>{{$options['timeList'][0]}}</span>
+        <span class="time">{{$options['timeList'][0]}}</span>
         <i class="icon icon_arrow-down"></i>
     </div>
     <ul id="dropDown_options" class="dropDown_options">

@@ -2488,13 +2488,14 @@ DropDownToggleBtn.forEach(function (dropDown) {
       DropDownOptionsList.classList.add('open');
     }
   });
-  choseOption(DropDownOptionsListItems, DropDownInput);
+  choseOption(DropDownOptionsListItems, DropDownInput, dropDown);
 });
 
-function choseOption(optionsList, dropDownInput) {
+function choseOption(optionsList, dropDownInput, dropDownToggle) {
   optionsList.forEach(function (option) {
     option.addEventListener('click', function () {
       dropDownInput.value = this.textContent;
+      dropDownToggle.querySelector('.time').textContent = this.textContent;
     });
   });
 } // SelectorDropDown --- end ---
