@@ -2474,6 +2474,30 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+console.log('app.js'); // SelectorDropDown --- start ---
+
+var DropDownToggleBtn = document.querySelectorAll('#dropDown');
+DropDownToggleBtn.forEach(function (dropDown) {
+  var DropDownOptionsList = dropDown.querySelector('#dropDown_options');
+  var DropDownOptionsListItems = dropDown.querySelectorAll('#dropDown_options .dropDown_option');
+  var DropDownInput = dropDown.querySelector('#dropDown_input');
+  dropDown.addEventListener('click', function () {
+    if (DropDownOptionsList.classList.contains('open')) {
+      DropDownOptionsList.classList.remove('open');
+    } else {
+      DropDownOptionsList.classList.add('open');
+    }
+  });
+  choseOption(DropDownOptionsListItems, DropDownInput);
+});
+
+function choseOption(optionsList, dropDownInput) {
+  optionsList.forEach(function (option) {
+    option.addEventListener('click', function () {
+      dropDownInput.value = this.textContent;
+    });
+  });
+} // SelectorDropDown --- end ---
 
 /***/ }),
 
@@ -21816,19 +21840,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/css/app.css":
-/*!*******************************!*\
-  !*** ./resources/css/app.css ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -22209,8 +22220,7 @@ process.umask = function() { return 0; };
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/scss/app.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/scss/app.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

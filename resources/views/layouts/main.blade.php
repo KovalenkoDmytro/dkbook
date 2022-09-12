@@ -13,10 +13,16 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <!-- Scripts -->
-
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
 </head>
 <body>
-    @yield('content')
+    <aside>aside</aside>
+    <nav>navigation</nav>
+    <main class="container">
+        @yield('content')
+    </main>
+    <!-- Scripts -->
+    <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
 </body>
 </html>

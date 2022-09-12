@@ -1,7 +1,8 @@
 <?php
 //todo create DROPDOWN selector anon.component
 ?>
-
+@extends('layouts.main')
+@section('content')
 <h1>Create service page</h1>
 
 <form action="" method="post">
@@ -13,10 +14,11 @@
             <label for="monday">Monday</label>
             <input id="monday" type="checkbox" name="monday"></input>
 
-
+            <x-selectDropDown></x-selectDropDown>
 
         </div>
     </div>
 
     <button type="submit">Add</button>
 </form>
+@endsection

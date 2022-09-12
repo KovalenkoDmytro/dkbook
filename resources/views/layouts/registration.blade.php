@@ -1,4 +1,6 @@
+@extends('layouts.main')
 
+@section('content')
 
     @yield('content')
 
@@ -13,3 +15,4 @@
     </div>
 
     <a href="{{URL::route('company.main')}}">Back to main page</a>
+@endsection

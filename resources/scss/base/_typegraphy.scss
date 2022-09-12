@@ -1,0 +1,17 @@
+
+
+
+.icon{
+    display: block;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    &.icon_arrow-down{
+        margin-left: 5px;
+        height: 20px;
+        width: 20px;
+        background-image: url("/access/arrow-down.svg");
+    }
+}
+

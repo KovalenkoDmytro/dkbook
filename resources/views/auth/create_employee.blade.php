@@ -1,6 +1,7 @@
 <?php
 ?>
-
+@extends('layouts.main')
+@section('content')
 <h1>Create service page</h1>
 
 <form action="{{route('employee.store')}}" method="post">
@@ -20,3 +21,4 @@
 
     <button type="submit">Add</button>
 </form>
+@endsection
