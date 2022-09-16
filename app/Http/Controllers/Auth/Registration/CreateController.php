@@ -175,6 +175,25 @@ class CreateController extends HomeController
             'step' => 5,
             'employees' => $employees,
         ]);
+
+
+
+    }
+
+    public function step6(): View
+    {
+//        $company = Company::find(session()->get('company_id'));
+        $company = Company::find(2);
+
+
+
+        return view("auth.registration.step6", [
+            'steps' => $this->registrationSteps,
+            'step' => 6,
+            'company_id' => session()->get('company_id'),
+            'company_name'=> $company->name,
+        ]);
+
     }
 
     public function endstep()

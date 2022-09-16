@@ -3,7 +3,7 @@
 @section('content')
     <h2>REGISTRATION</h2>
     <h2>step {{$step}}</h2>
-
+    //todo if there is scheduled you can update it
     @if($employees->isNotEmpty())
         <ul class="employee_items">
             @foreach($employees as $employee)

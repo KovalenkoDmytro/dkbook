@@ -10,8 +10,8 @@ class ScheduledController extends Controller
     {
 
         return view('auth.create_scheduled',[
-            'employee_id'=>$id,
-            'employee_name'=>$name,
+            'id'=>$id,
+            'name'=>$name,
         ]);
     }
     public function store(Request $request)

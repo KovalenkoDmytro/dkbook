@@ -25,6 +25,8 @@ Route::name('company.')->group(function (){
     Route::get('/register-4', [CreateController::class, 'step4'] )->name('step4');
 
     Route::get('/register-5', [CreateController::class, 'step5'] )->name('step5');
+
+    Route::get('/register-6', [CreateController::class, 'step6'] )->name('step6');
 });
 
 Route::name('services.')->group(function (){
