@@ -10,7 +10,7 @@
                 <li class="employee_item">
                     <a href="{{route('scheduled.index',[
                             'id'=> $employee['id'],
-                            'name' =>$employee['name']])}}">add scheduled</a>
+                            'table' =>$tableDB])}}">add scheduled</a>
                     <p class="employee_name">{{$employee['name']}}</p>
                 </li>
             @endforeach
@@ -26,7 +26,7 @@
             <i class="icon icon_plus"></i>
             <a href="{{route('employee.index')}}">Add employee</a>
         </div>
-        <button>Next step</button>
+        <a href="{{route('company.step6')}}">Next step</a>
     </section>
 
 

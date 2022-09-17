@@ -44,8 +44,10 @@ Route::name('employee.')->group(function (){
 });
 
 Route::name('scheduled.')->group(function (){
-    Route::get('/scheduled/{id}/{name}', [ScheduledController::class, 'index'] )->name('index');
+    Route::get('/scheduled/{id}/{table}', [ScheduledController::class, 'index'] )->name('index');
     Route::post('/scheduled', [ScheduledController::class, 'store'] )->name('store');
+
+    Route::put('/services/{id}/{table}', [ServiceController::class, 'update'] )->name('update');
 });
 
 

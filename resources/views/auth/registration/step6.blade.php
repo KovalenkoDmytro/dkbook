@@ -8,11 +8,13 @@
     //todo if there is scheduled you can update it
 
 
+
+
     <section class="">
        the latest add scheduled company
         <a href="{{route('scheduled.index',[
                             'id'=> $company_id,
-                            'name' =>$company_name])}}">add scheduled</a>
+                            'table' =>$tableDB])}}">add scheduled</a>
 
     </section>
 

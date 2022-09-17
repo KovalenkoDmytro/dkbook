@@ -1,9 +1,17 @@
 <div class="date-time-picker">
-    <h2>{{$title ?? ''}}</h2>
-    <p>{{$subtitle ?? ''}}</p>
+    @isset($title)
+        <h2>{{$title ?? ''}}</h2>
+    @endif
 
-    <form action="" method="post">
+    @isset($subtitle)
+        <p>{{$subtitle ?? ''}}</p>
+    @endif
+
+
+
         @csrf
+        <input type="hidden" value="{{$attributes['id']}}" name="id" />
+        <input type="hidden" value="{{$attributes['table']}}" name="table" />
         <div class="days">
             @foreach($schedule_days as $day)
                 <div class="day_row">
@@ -16,6 +24,6 @@
                 </div>
             @endforeach
         </div>
-        <button type="submit"> Send data</button>
-    </form>
+        <button type="submit">Send data </button>
+
 </div>
