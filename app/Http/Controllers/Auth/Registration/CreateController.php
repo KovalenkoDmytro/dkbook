@@ -155,27 +155,10 @@ class CreateController extends HomeController
 
     public function step5(): View
     {
-        //todo винести в model
         $company_id = session()->get('company_id');
-        // get all company employee
-        $employeesDB = collect(Employee::all()->where('company_id', $company_id));
-        $employees = collect([]);
-        if(count($employeesDB)>0){
-            $employees = $employeesDB->map(function ($item) {
-                return [
-                    'id' => $item->id,
-                    'name' =>$item->name,
-                    'position'=> $item->position,
-                    'email'=>$item->email,
-                    'phone'=>$item->phone,
-                    'scheduled_id'=>$item->employee_schedule_id,
-                ];
-            });
-        }
-
-
-
+        $employees = Employee::getCompanyEmployees($company_id);
         $employeeModel = new Employee();
+
         return view("auth.registration.step5", [
             'steps' => $this->registrationSteps,
             'step' => 5,
