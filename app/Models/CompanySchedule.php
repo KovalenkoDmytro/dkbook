@@ -24,5 +24,22 @@ class CompanySchedule extends Model
 //        return $this->columnsTable;
 //    }
 
+    //get scheduled company
+    public static  function getScheduled(int $scheduled_id):array{
+
+
+
+        $scheduled = CompanySchedule::find($scheduled_id);
+
+        return [
+            'monday'=>$scheduled->monday,
+            'tuesday'=>$scheduled->tuesday,
+            'wednesday'=>$scheduled->wednesday,
+            'thursday'=>$scheduled->thursday,
+            'friday'=>$scheduled->friday,
+            'saturday'=>$scheduled->saturday,
+            'sunday'=>$scheduled->sunday,
+        ];
+    }
 
 }

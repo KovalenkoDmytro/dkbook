@@ -4,6 +4,9 @@
     <h2>REGISTRATION</h2>
     <h2>step {{$step}}</h2>
     //todo if there is scheduled you can update it
+
+
+
     @if($employees->isNotEmpty())
         <ul class="employee_items">
             @foreach($employees as $employee)
@@ -26,6 +29,7 @@
             <i class="icon icon_plus"></i>
             <a href="{{route('employee.index')}}">Add employee</a>
         </div>
+
         <a href="{{route('company.step6')}}">Next step</a>
     </section>
 

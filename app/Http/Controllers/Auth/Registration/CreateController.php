@@ -6,6 +6,7 @@ use App\Models\BusinessType;
 use App\Models\Company;
 use App\Models\CompanyLogo;
 use App\Models\CompanyOwner;
+use App\Models\CompanySchedule;
 use App\Models\Employee;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -155,7 +156,9 @@ class CreateController extends HomeController
     public function step5(): View
     {
         //todo винести в model
-        $employeesDB = collect(Employee::all()->where('company_id',session()->get('company_id')));
+        $company_id = session()->get('company_id');
+        // get all company employee
+        $employeesDB = collect(Employee::all()->where('company_id', $company_id));
         $employees = collect([]);
         if(count($employeesDB)>0){
             $employees = $employeesDB->map(function ($item) {
@@ -170,9 +173,9 @@ class CreateController extends HomeController
             });
         }
 
+
+
         $employeeModel = new Employee();
-
-
         return view("auth.registration.step5", [
             'steps' => $this->registrationSteps,
             'step' => 5,
@@ -181,23 +184,22 @@ class CreateController extends HomeController
             'tableDB'=>$employeeModel->getTable(),
         ]);
 
-
-
     }
 
     public function step6(): View
     {
 
         $companyModel = new Company();
-
+        $scheduled_id = Company::find(session()->get('company_id'))->company_schedule_id;
+        $scheduled = CompanySchedule::getScheduled($scheduled_id);
 
         return view("auth.registration.step6", [
             'steps' => $this->registrationSteps,
             'step' => 6,
             'company_id' => session()->get('company_id'),
             'tableDB'=>$companyModel->getTable(),
+            'scheduled'=>$scheduled
         ]);
-
     }
 
     public function endstep()

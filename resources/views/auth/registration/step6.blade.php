@@ -1,5 +1,3 @@
-
-
 @extends('layouts.registration')
 
 @section('content')
@@ -9,13 +7,19 @@
 
 
 
-
     <section class="">
-       the latest add scheduled company
-        <a href="{{route('scheduled.index',[
-                            'id'=> $company_id,
-                            'table' =>$tableDB])}}">add scheduled</a>
-
+        the latest add scheduled company
+        @if(isset($scheduled))
+            <x-scheduled-show :scheduled='$scheduled'/>
+{{--            <a href="{{route('scheduled.update',[--}}
+{{--                                'id'=> $company_id,--}}
+{{--                                'table' =>$tableDB])}}">update scheduled</a>--}}
+            <a href="#!">Finish</a>
+            @else
+            <a href="{{route('scheduled.index',[
+                                'id'=> $company_id,
+                                'table' =>$tableDB])}}">add scheduled</a>
+        @endif
     </section>
 
 
