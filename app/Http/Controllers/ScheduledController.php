@@ -12,6 +12,7 @@ use function GuzzleHttp\Promise\all;
 
 class ScheduledController extends Controller
 {
+
     public function index($id, $table):View
     {
         return view('auth.create_scheduled',[
@@ -68,8 +69,12 @@ class ScheduledController extends Controller
         }
         return redirect(route('company.step6'));
     }
+    public function update(Request $request): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
+    {
+        dd($request->all());
 
-    public function update($id, $table){
+
+//        return redirect(route('company.step6'));
 
     }
 }

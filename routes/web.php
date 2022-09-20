@@ -1,13 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\Dashboard;
-use App\Http\Controllers\Auth\IndexController;
 use App\Http\Controllers\Auth\Registration\CreateController;
+use App\Http\Controllers\Auth\Scheduled\CompanyScheduled\EditCompanyScheduled;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ScheduledController;
 use App\Http\Controllers\ServiceController;
-use App\View\Components\DataTimePicker\DateTimePicker;
+//use App\View\Components\DataTimePicker\DateTimePicker;
 use Illuminate\Support\Facades\Route;
 
 
@@ -44,14 +43,26 @@ Route::name('employee.')->group(function (){
 });
 
 Route::name('scheduled.')->group(function (){
-    Route::get('/scheduled/{id}/{table}', [ScheduledController::class, 'index'] )->name('index');
+    Route::get('/scheduled/{id}/{table}', [ScheduledController::class, 'index'] )->name('index')->where(['id'=>'[0-9]+','table'=>'^((?!edit$).)*$']);
     Route::post('/scheduled', [ScheduledController::class, 'store'] )->name('store');
+    Route::post('/scheduled/{id}', [ScheduledController::class, 'update'] )->name('update');
 
-    Route::put('/services/{id}/{table}', [ServiceController::class, 'update'] )->name('update');
+
+//    Route::prefix('company.')->group(function (){
+//        Route::get('/scheduled/{id}/edit', [EditCompanyScheduled::class, 'index'] )->name('edit')->where('id','[0-9]+');
+//    });
+
+    Route::prefix('employee.')->group(function (){
+
+    });
+
+    Route::get('/scheduled/{id}/edit', [EditCompanyScheduled::class, 'index'] )->name('company.edit')->where('id','[0-9]+');
+
 });
 
 
 
+//todo add scheduledEmployee and scheduledCompany controllers
 
 //Route::post('/register', [CreateController::class, 'createCompany'] )->name('createCompany');
 //Route::post('/addTime', [DateTimePicker::class, 'create'] )->name('createScheduledTime');

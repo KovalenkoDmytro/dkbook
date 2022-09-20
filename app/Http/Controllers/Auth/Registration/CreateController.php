@@ -20,6 +20,13 @@ class CreateController extends HomeController
 {
     private int $registrationSteps = 5;
 
+    // todo Add company id  o construktor
+//    private int $company_id = 0;
+//
+//    public function __construct()
+//    {
+//        $this->company_id = session()->get('company_id');
+//    }
 
     public function step1(): View
     {
@@ -97,7 +104,6 @@ class CreateController extends HomeController
         return redirect(route('company.step3'));
     }
 
-
     public function step3(): View
     {
         return view("auth.registration.step3", [
@@ -105,7 +111,6 @@ class CreateController extends HomeController
             'step' => 3,
         ]);
     }
-
 
     public function addPhotoCompany(Request $request)
     {
@@ -128,30 +133,14 @@ class CreateController extends HomeController
 
     public function step4(): View
     {
-        //todo винести в model
-        $servicesDB = collect(Service::all()->where('company_id',session()->get('company_id')));
-        $services = collect([]);
-        if(count($servicesDB)>0){
-            $services = $servicesDB->map(function ($item) {
-                return [
-                    'id' => $item->id,
-                    'company_id' => $item->company_id,
-                    'service_name' =>$item->name,
-                    'service_price'=> $item->price,
-                    'timeRange_hour'=>$item->timeRange_hour,
-                    'timeRange_minutes'=>$item->timeRange_minutes,
-                ];
-            });
-        }
-
-        ;
+        $company_id = session()->get('company_id');
+        $services = Service::getServices($company_id);
         return view("auth.registration.step4", [
             'steps' => $this->registrationSteps,
             'step' => 4,
             'services'=> $services,
         ]);
     }
-
 
     public function step5(): View
     {
@@ -181,7 +170,8 @@ class CreateController extends HomeController
             'step' => 6,
             'company_id' => session()->get('company_id'),
             'tableDB'=>$companyModel->getTable(),
-            'scheduled'=>$scheduled
+            'scheduled'=>$scheduled,
+            'scheduled_id'=>$scheduled_id,
         ]);
     }
 

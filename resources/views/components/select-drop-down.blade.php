@@ -1,7 +1,16 @@
 <div id="dropDown" class="dropDown">
-    <input type="hidden" id="dropDown_input" name="{{$attributes['name']??''}}" value="{{$timeList[0]}}">
+    @if($attributes['value'])
+        <input type="hidden" id="dropDown_input" name="{{$attributes['name']??''}}" value="{{$attributes['value']}}">
+    @else
+        <input type="hidden" id="dropDown_input" name="{{$attributes['name']??''}}" value="{{$timeList[0]}}">
+    @endif
     <div class="dropDown_toggle" id="dropDownToggle">
-        <span class="time">{{$timeList[0]}}</span>
+
+        @if($attributes['value'])
+            <span class="time">{{$attributes['value']}}</span>
+        @else
+            <span class="time">{{$timeList[0]}}</span>
+        @endif
         <i class="icon icon_arrow-down"></i>
     </div>
     <ul id="dropDown_options" class="dropDown_options">
