@@ -34,7 +34,7 @@
                     <div class="day_row">
                         <input type="checkbox" name="{{$day}}">
                         <span>{{$day}}</span>
-                        <div class="hours">
+                        <div class="hours" style="display: flex">
                             <x-select-drop-down name="{{$day}}_from" :value="$hourFrom"/>
                             <x-select-drop-down name="{{$day}}_to" :value="$hourTo"/>
                         </div>
@@ -45,7 +45,7 @@
                     <div class="day_row">
                         <input type="checkbox" name="{{$day}}">
                         <span>{{$day}}</span>
-                        <div class="hours">
+                        <div class="hours" style="display: flex">
                             <x-select-drop-down name="{{$day}}_from"/>
                             <x-select-drop-down name="{{$day}}_to"/>
                         </div>

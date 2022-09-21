@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth\Scheduled\CompanyScheduled;
 
+use App\Http\Controllers\Auth\Scheduled\EditScheduledController;
 use App\Http\Controllers\Controller;
 use App\Models\CompanySchedule;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class EditCompanyScheduled extends Controller
+class EditCompanyScheduled extends EditScheduledController
 {
     public function index($scheduled_id):View
     {
@@ -16,5 +18,11 @@ class EditCompanyScheduled extends Controller
             'id'=>$scheduled_id,
             'scheduled' => $scheduled,
         ]);
+    }
+
+    public function update(Request $request){
+        $table_id = $request->input('id_table');
+        $createdScheduled = $this->getCreatedScheduled($request);
+        CompanySchedule::find($table_id)->update($createdScheduled);
     }
 }

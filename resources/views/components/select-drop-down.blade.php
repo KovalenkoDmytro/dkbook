@@ -13,7 +13,7 @@
         @endif
         <i class="icon icon_arrow-down"></i>
     </div>
-    <ul id="dropDown_options" class="dropDown_options">
+    <ul id="dropDown_options" class="dropDown_options" style="z-index: 2">
         @foreach($timeList as $index => $option)
             <li data-index="{{$index}}" class="dropDown_option">{{$option}}</li>
         @endforeach

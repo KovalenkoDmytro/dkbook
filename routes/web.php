@@ -45,7 +45,7 @@ Route::name('employee.')->group(function (){
 Route::name('scheduled.')->group(function (){
     Route::get('/scheduled/{id}/{table}', [ScheduledController::class, 'index'] )->name('index')->where(['id'=>'[0-9]+','table'=>'^((?!edit$).)*$']);
     Route::post('/scheduled', [ScheduledController::class, 'store'] )->name('store');
-    Route::post('/scheduled/{id}', [ScheduledController::class, 'update'] )->name('update');
+
 
 
 //    Route::prefix('company.')->group(function (){
@@ -57,7 +57,7 @@ Route::name('scheduled.')->group(function (){
     });
 
     Route::get('/scheduled/{id}/edit', [EditCompanyScheduled::class, 'index'] )->name('company.edit')->where('id','[0-9]+');
-
+    Route::post('/scheduled/{id}/edit', [EditCompanyScheduled::class, 'update'] )->name('company.update');
 });
 
 
