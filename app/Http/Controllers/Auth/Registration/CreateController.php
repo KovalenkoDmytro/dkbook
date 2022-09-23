@@ -18,22 +18,12 @@ use Psr\Container\NotFoundExceptionInterface;
 
 class CreateController extends HomeController
 {
-    private int $registrationSteps = 5;
+    private int $registrationSteps = 6;
 
-    // todo Add company id  o construktor
-//    private int $company_id = 0;
-//
-//    public function __construct()
-//    {
-//        $this->company_id = session()->get('company_id');
-//    }
 
     public function step1(): View
     {
-        return view("auth.registration.step1", [
-            'steps' => $this->registrationSteps,
-            'step' => 1,
-        ]);
+        return view("auth.registration.step1");
     }
 
     public function createOwner(Request $request)
@@ -62,10 +52,7 @@ class CreateController extends HomeController
 
     public function step2(): View
     {
-
         return view("auth.registration.step2", [
-            'steps' => $this->registrationSteps,
-            'step' => 2,
             'business_type' => collect(BusinessType::all())->map(function ($type) {
                 return [
                     'id' => $type->id,
@@ -106,10 +93,7 @@ class CreateController extends HomeController
 
     public function step3(): View
     {
-        return view("auth.registration.step3", [
-            'steps' => $this->registrationSteps,
-            'step' => 3,
-        ]);
+        return view("auth.registration.step3");
     }
 
     public function addPhotoCompany(Request $request)
@@ -136,8 +120,6 @@ class CreateController extends HomeController
         $company_id = session()->get('company_id');
         $services = Service::getServices($company_id);
         return view("auth.registration.step4", [
-            'steps' => $this->registrationSteps,
-            'step' => 4,
             'services'=> $services,
         ]);
     }
@@ -149,8 +131,6 @@ class CreateController extends HomeController
         $employeeModel = new Employee();
 
         return view("auth.registration.step5", [
-            'steps' => $this->registrationSteps,
-            'step' => 5,
             'employees' => $employees,
             'company_id'=>session()->get('company_id'),
             'tableDB'=>$employeeModel->getTable(),
@@ -166,8 +146,6 @@ class CreateController extends HomeController
         $scheduled = CompanySchedule::getScheduled($scheduled_id);
 
         return view("auth.registration.step6", [
-            'steps' => $this->registrationSteps,
-            'step' => 6,
             'company_id' => session()->get('company_id'),
             'tableDB'=>$companyModel->getTable(),
             'scheduled'=>$scheduled,

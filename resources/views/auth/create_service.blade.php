@@ -14,11 +14,15 @@
         <p>Time range service</p>
 
         <div class="timeRange">
-            <label for="timeRange_hour">Hour</label>
-            <input id="timeRange_hour" type="text" name="timeRange_hour">
+            <div class="timeRange_item">
+                <span>Hour</span>
+                <x-select-drop-down name="timeRange_hour" :customTimeRange="[00,01,02,03,04]"/>
+            </div>
 
-            <label for="timeRange_minutes">minutes</label>
-            <input id="timeRange_minutes" type="text" name="timeRange_minutes">
+            <div class="timeRange_item">
+                <span>minutes</span>
+                <x-select-drop-down name="timeRange_minutes" :customTimeRange="[05,10,15,20,25,30,35,40,45,50,55]"/>
+            </div>
         </div>
     </div>
 

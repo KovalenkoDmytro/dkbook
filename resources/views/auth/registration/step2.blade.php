@@ -1,8 +1,8 @@
 @extends('layouts.registration')
 
-@section('content')
+@section('registration.content')
     <h2>REGISTRATION</h2>
-    <h2>step {{$step}}</h2>
+
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -44,7 +44,6 @@
         <button type="submit"> SEND data</button>
     </form>
 
-{{--    <x-date-time-picker></x-date-time-picker>--}}
 @endsection
 
 

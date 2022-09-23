@@ -1,8 +1,7 @@
 @extends('layouts.registration')
 
-@section('content')
+@section('registration.content')
     <h2>REGISTRATION</h2>
-    <h2>step {{$step}}</h2>
 
         @if($services->isNotEmpty())
             <ul class="service_items">
