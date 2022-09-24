@@ -26,20 +26,28 @@ class CreateController extends HomeController
         return view("auth.registration.step1");
     }
 
-    public function createOwner(Request $request)
+    public function createOwner(Request $request): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
     {
         $data = $request->validate(
             [
-                'login' => 'string',
-                'password' => 'string',
-                'email' => 'string',
-                'fullName' => 'string',
-                'phone' => 'string',
+                'login' => ['required', 'max:20'],
+                'password' => ['required', 'string', 'min:8'],
+                'confirmPassword' => ['required', 'same:password'],
+                'email' => ['required', 'email', 'string', 'max:50'],
+                'fullName' => ['required', 'string', 'max:35'],
+                'phone' => ['required', 'string', 'max:15'],
                 'businessMode' => 'string',
             ]
         );
-        $data['password'] = Hash::make($request->password);
-        CompanyOwner::create($data);
+        $user['login'] = $data['login'];
+        $user['email'] = $data['email'];
+        $user['fullName'] = $data['fullName'];
+        $user['phone'] = $data['phone'];
+        $user['businessMode'] = $data['businessMode'];
+
+        $user['password'] = Hash::make($request->password);
+
+        CompanyOwner::create($user);
 
         //todo винести в model
         $company_owner = CompanyOwner::where('login', $request->input('login'))->get();
@@ -66,17 +74,16 @@ class CreateController extends HomeController
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function createCompany(Request $request)
+    public function createCompany(Request $request): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
     {
         $data = $request->validate(
             [
-                'name' => 'string',
-                'address' => 'string',
+                'name' => ['required', 'string', 'max:20'],
+                'address' => ['required', 'string', 'max:20'],
                 'socialMedia' => 'string',
-                'business_type_id'=>'integer'
+                'business_type_id' => 'integer'
             ]
         );
-
 
         Company::create($data);
         //todo винести в model
@@ -84,8 +91,8 @@ class CreateController extends HomeController
         session()->put('company_id', $company_id[0]->id);
 
         DB::table('company_company_owner')->updateOrInsert([
-            'company_id'=> session()->get('company_id'),
-            'company_owner_id'=> session()->get('companyOwner_id')
+            'company_id' => session()->get('company_id'),
+            'company_owner_id' => session()->get('companyOwner_id')
         ]);
 
         return redirect(route('company.step3'));
@@ -103,7 +110,7 @@ class CreateController extends HomeController
                 'company_photo' => 'required|image:jpg,jpeg,webP,png',
             ]
         );
-        if($request->hasFile('company_photo')){
+        if ($request->hasFile('company_photo')) {
             $file_path = $request->company_photo->path();
 
             CompanyLogo::create([
@@ -112,7 +119,6 @@ class CreateController extends HomeController
             ]);
             return redirect(route('company.step4'));
         }
-
     }
 
     public function step4(): View
@@ -120,7 +126,7 @@ class CreateController extends HomeController
         $company_id = session()->get('company_id');
         $services = Service::getServices($company_id);
         return view("auth.registration.step4", [
-            'services'=> $services,
+            'services' => $services,
         ]);
     }
 
@@ -130,10 +136,15 @@ class CreateController extends HomeController
         $employees = Employee::getCompanyEmployees($company_id);
         $employeeModel = new Employee();
 
+
+        //todo get employees  and get imployees is
+        $employees_id = Employee::getEmployeeId($company_id);
+        //todo add scheduled
+
         return view("auth.registration.step5", [
             'employees' => $employees,
-            'company_id'=>session()->get('company_id'),
-            'tableDB'=>$employeeModel->getTable(),
+            'company_id' => session()->get('company_id'),
+            'tableDB' => $employeeModel->getTable(),
         ]);
 
     }
@@ -147,16 +158,16 @@ class CreateController extends HomeController
 
         return view("auth.registration.step6", [
             'company_id' => session()->get('company_id'),
-            'tableDB'=>$companyModel->getTable(),
-            'scheduled'=>$scheduled,
-            'scheduled_id'=>$scheduled_id,
+            'tableDB' => $companyModel->getTable(),
+            'scheduled' => $scheduled,
+            'scheduled_id' => $scheduled_id,
         ]);
     }
 
     public function endstep()
     {
         // deleted all data from session
-       session()->flush();
+        session()->flush();
 
     }
 }

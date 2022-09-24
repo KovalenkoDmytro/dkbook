@@ -15,13 +15,14 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'string',
-            'price'=>'integer',
+            'name' => ['required','string','max:25'],
+            'price'=> ['required','string','max:6'],
             'timeRange_hour'=>'integer',
             'timeRange_minutes'=>'integer',
 
         ]);
         $data['company_id']= session()->get('company_id');
+
         Service::create($data);
 
         return redirect(route('company.step4'));
