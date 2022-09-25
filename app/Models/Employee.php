@@ -11,7 +11,7 @@ class Employee extends Model
     protected $table = 'employees';
     protected $guarded = false;
 
-    public  function getTable()
+    public function getTable()
     {
         return $this->table;
     }
@@ -35,12 +35,26 @@ class Employee extends Model
         return $employees;
     }
 
-    public static function getEmployeeId(int $company_id){
-        $employees_id = Employee::all()->where('company_id', $company_id);
-
-        //todo get all emplayee and return array with id
-
-
-        dd($employees_id->all());
+    public static function getEmployee(int $employee_id){
+        $employee = Employee::find($employee_id);
+        return $employee->attributes;
     }
+
+//    public static function getEmployeeScheduleId(int $company_id){
+//        $employees = Employee::all()->where('company_id', $company_id);
+//
+//        if(empty($employees)){
+//            return [];
+//        }else{
+//            $employees_id_scheduled = [];
+//            foreach ($employees as $employee) {
+//
+//                $employees_id_scheduled['employee_id']= $employee->id;
+//                $employees_id_scheduled['employee_schedule_id']= $employee->employee_schedule_id;
+//
+//            }
+//            return $employees_id_scheduled;
+//        }
+//
+//    }
 }

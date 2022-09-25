@@ -12,14 +12,14 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
 class CreateController extends HomeController
 {
-    private int $registrationSteps = 6;
-
+    private int $registrationSteps = 7;
 
     public function step1(): View
     {
@@ -30,12 +30,24 @@ class CreateController extends HomeController
     {
         $data = $request->validate(
             [
-                'login' => ['required', 'max:20'],
+                'login' => [
+                    'required',
+                    Rule::unique('company_owners')->whereNull('deleted_at'),
+                    'max:20'],
                 'password' => ['required', 'string', 'min:8'],
                 'confirmPassword' => ['required', 'same:password'],
-                'email' => ['required', 'email', 'string', 'max:50'],
+                'email' => [
+                    'required',
+                    Rule::unique('company_owners')->whereNull('deleted_at'),
+                    'email',
+                    'max:50',
+                  ],
                 'fullName' => ['required', 'string', 'max:35'],
-                'phone' => ['required', 'string', 'max:15'],
+                'phone' => [
+                    'required',
+                    Rule::unique('company_owners')->whereNull('deleted_at'),
+                    'string',
+                    'max:15'],
                 'businessMode' => 'string',
             ]
         );
@@ -57,7 +69,6 @@ class CreateController extends HomeController
         return redirect(route('company.step2'));
     }
 
-
     public function step2(): View
     {
         return view("auth.registration.step2", [
@@ -78,7 +89,11 @@ class CreateController extends HomeController
     {
         $data = $request->validate(
             [
-                'name' => ['required', 'string', 'max:20'],
+                'name' => [
+                    'required',
+                    Rule::unique('companies')->whereNull('deleted_at'),
+                    'string',
+                    'max:20'],
                 'address' => ['required', 'string', 'max:20'],
                 'socialMedia' => 'string',
                 'business_type_id' => 'integer'
@@ -133,13 +148,8 @@ class CreateController extends HomeController
     public function step5(): View
     {
         $company_id = session()->get('company_id');
-        $employees = Employee::getCompanyEmployees($company_id);
         $employeeModel = new Employee();
-
-
-        //todo get employees  and get imployees is
-        $employees_id = Employee::getEmployeeId($company_id);
-        //todo add scheduled
+        $employees = Employee::getCompanyEmployees($company_id);
 
         return view("auth.registration.step5", [
             'employees' => $employees,
@@ -164,11 +174,11 @@ class CreateController extends HomeController
         ]);
     }
 
-    public function endstep()
+    public function step7(): View
     {
         // deleted all data from session
-        session()->flush();
-
+//        session()->flush();
+        return view('auth.registration.finallyStep');
     }
 }
 

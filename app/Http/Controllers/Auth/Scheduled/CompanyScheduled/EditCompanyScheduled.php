@@ -18,9 +18,10 @@ class EditCompanyScheduled extends EditScheduledController
         ]);
     }
 
-    public function update(Request $request):void{
-        $table_id = $request->input('id_table');
+    public function update(Request $request){
         $createdScheduled = $this->getCreatedScheduled($request);
-        CompanySchedule::find($table_id)->update($createdScheduled);
+        CompanySchedule::find($request->scheduled_id)->update($createdScheduled);
+
+        return redirect(route('company.step6'));
     }
 }

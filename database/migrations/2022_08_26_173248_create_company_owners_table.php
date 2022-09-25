@@ -15,14 +15,15 @@ return new class extends Migration
     {
         Schema::create('company_owners', function (Blueprint $table) {
             $table->id();
-            $table->string('login')->unique();
+            $table->string('login');
             $table->string('password');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('fullName');
-            $table->string('phone')->unique();
+            $table->string('phone');
             $table->string('businessMode');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

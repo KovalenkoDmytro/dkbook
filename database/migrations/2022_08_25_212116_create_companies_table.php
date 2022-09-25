@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('business_type_id')->constrained();
             $table->foreignId('company_schedule_id')->default(1)->constrained();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('address');
             $table->string('socialMedia');
             $table->timestamps();
