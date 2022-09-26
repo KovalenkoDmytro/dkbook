@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -34,11 +35,15 @@ class CreateController extends HomeController
                     'required',
                     Rule::unique('company_owners')->whereNull('deleted_at'),
                     'max:20'],
-                'password' => ['required', 'string', 'min:8'],
+                'password' => [
+                    'required',
+                    Password::min(8)->mixedCase()->symbols()->numbers()->letters(),
+                    ],
                 'confirmPassword' => ['required', 'same:password'],
                 'email' => [
                     'required',
                     Rule::unique('company_owners')->whereNull('deleted_at'),
+                    'string',
                     'email',
                     'max:50',
                   ],
