@@ -209,6 +209,7 @@ template {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  padding: 0 15px;
 }
 @media (min-width: 757px) {
   .container {
@@ -218,6 +219,7 @@ template {
 @media (min-width: 979px) {
   .container {
     max-width: 900px;
+    padding: 0;
   }
 }
 @media (min-width: 1200px) {
@@ -277,4 +279,54 @@ template {
 }
 .dropDown .dropDown_options .dropDown_option:hover {
   background-color: #ededed;
+}
+
+.step_items {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 757px) {
+  .step_items {
+    position: relative;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    flex-direction: row;
+    border-radius: 10px;
+    margin: 15px 0 30px;
+  }
+  .step_items:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    top: 25%;
+    height: 4px;
+    background: #c4c7c8;
+  }
+}
+.step_items .step_item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.step_items .step_item .step_number {
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  border: 2px solid #1991e6;
+  background-color: #ffffff;
+}
+.step_items .step_item .step_desc {
+  margin-top: 10px;
+}
+.step_items .step_item + .step_item {
+  margin-top: 5px;
+}
+@media (min-width: 757px) {
+  .step_items .step_item + .step_item {
+    margin: 0;
+  }
 }

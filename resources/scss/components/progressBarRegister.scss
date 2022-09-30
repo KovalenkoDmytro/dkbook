@@ -1,0 +1,107 @@
+
+
+
+.step_items{
+    display: flex;
+    flex-direction: column;
+
+    @include tablet{
+        position: relative;
+        align-items: center;
+        align-content: center;
+        justify-content: space-between;
+        flex-direction: row;
+        border-radius: 10px;
+        margin: 15px 0 30px;
+        &:before{
+            content: '';
+            position: absolute;
+            width: 100%;
+            top: 25%;
+            height: 4px;
+            background: $border_color;
+
+        }
+    }
+
+    .step_item{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .step_number{
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            border: 2px solid $primary_color;
+            background-color: $background_color;
+        }
+        .step_desc{
+            margin-top: 10px;
+        }
+        //&:before{
+        //    content : attr(data-step);
+        //    position: relative;
+        //    display: block;
+        //    margin-right: 10px;
+        //    @include inner-shadow;
+        //    background: #ddd;
+        //    border: 2px solid #FFF;
+        //    height: 30px;
+        //    width: 30px;
+        //    text-align: center;
+        //    line-height: 30px;
+        //    border-radius: 50%;
+        //    color: #fff;
+        //    left: 0;
+        //    z-index: 2;
+        //    @include tablet{
+        //        position: absolute;
+        //        top: -16px;
+        //    }
+        //}
+        //@include tablet{
+        //    &:after{
+        //        content: "";
+        //        background-size: 35px 35px;
+        //        background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+        //        background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+        //        @include inner-shadow;
+        //        height: 10px;
+        //        left: 0;
+        //        position: absolute;
+        //        top: -5px;
+        //        width: 100%;
+        //    }
+        //}
+
+        &.done{
+            //&:before{
+            //    content: url("/access/check.svg");
+            //    background-color: #57aed1;
+            //}
+            //&:after{
+            //    @include blue-stripe;
+            //    @include inner-shadow;
+            //}
+        }
+        &.active{
+            //&:before{
+            //    background-color: #8bc53f;
+            //}
+            //&:after{
+            //    @include green-stripe;
+            //    @include inner-shadow;
+            //}
+        }
+    }
+    .step_item + .step_item{
+        margin-top: 5px;
+        @include tablet{
+            margin: 0;
+        }
+    }
+}

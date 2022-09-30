@@ -8,6 +8,15 @@ use Illuminate\View\Component;
 
 class ProgressBarRegister extends Component
 {
+    private array $steps = [
+        1 => 'User',
+        2 => 'Company',
+        3 => 'Photo',
+        4 => 'Services',
+        5 => 'Employees',
+        6 => 'Scheduled',
+        7 => 'Finish'
+    ];
     /**
      * Create a new component instance.
      *
@@ -27,7 +36,8 @@ class ProgressBarRegister extends Component
     public function render()
     {
         return view('components.progress-bar-register', [
-            'currentStep' => getCurrentStepRegistration()
+            'currentStep' => getCurrentStepRegistration(),
+            'steps' => $this->steps
         ]);
     }
 }
