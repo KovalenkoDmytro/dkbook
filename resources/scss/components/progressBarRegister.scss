@@ -4,15 +4,13 @@
 .step_items{
     display: flex;
     flex-direction: column;
-
+    margin-bottom: 20px;
     @include tablet{
         position: relative;
-        align-items: center;
-        align-content: center;
-        justify-content: space-between;
         flex-direction: row;
         border-radius: 10px;
         margin: 15px 0 30px;
+        justify-content: space-between;
         &:before{
             content: '';
             position: absolute;
@@ -27,20 +25,88 @@
     .step_item{
         position: relative;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
+
+        @include tablet{
+            flex-direction: column;
+            flex: 1;
+        }
 
         .step_number{
             height: 30px;
             width: 30px;
-            line-height: 30px;
+            line-height: 27px;
             border-radius: 50%;
             text-align: center;
-            border: 2px solid $primary_color;
+            border: 2px solid $border_color;
             background-color: $background_color;
+            position: relative;
+            z-index: 2;
+            &:after{
+                content: '';
+                position: absolute;
+                height: 20px;
+                width: 3px;
+                background-color: $border_color;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: -22px;
+                @include tablet{
+                    content: inherit;
+                }
+            }
         }
         .step_desc{
-            margin-top: 10px;
+            margin-left: 20px;
+            @include  laptop{
+                margin: 10px 0 0;
+            }
+
+        }
+        &:last-child{
+            .step_number::after{
+                content: none;
+            }
+        }
+        &.done{
+            @include tablet{
+                &:after{
+                    position: absolute;
+                    content: "";
+                    border-bottom: 4px solid $primary_color;
+                    width: 100%;
+                    top: 25%;
+                    left: 50%;
+                    z-index: 1;
+                }
+            }
+            .step_number{
+                border-color: $primary_color;
+                font-size: 0;
+                &:after{
+                    background-color: $primary_color;
+                }
+                &:before{
+                    content: '\E800';
+                    font-family: fontello, serif;
+                    font-weight: normal;
+                    font-style: normal;
+                    text-decoration: inherit;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%,-50%);
+                    font-size: 16px;
+                    color: $primary_color;
+                }
+            }
+
+        }
+        &.active{
+            .step_number{
+                border-color: $secondary_color;
+            }
         }
         //&:before{
         //    content : attr(data-step);
@@ -99,7 +165,7 @@
         }
     }
     .step_item + .step_item{
-        margin-top: 5px;
+        margin-top: 15px;
         @include tablet{
             margin: 0;
         }
