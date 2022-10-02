@@ -112,15 +112,22 @@ img {
   border-style: none;
 }
 
-button,
 input,
 optgroup,
 select,
 textarea {
-  font-family: inherit; /* 1 */
-  font-size: 100%; /* 1 */
   line-height: 1.15; /* 1 */
   margin: 0; /* 2 */
+  outline: none;
+  min-height: 35px;
+  border: 1px solid #c4c7c8;
+  padding: 0 15px;
+}
+input:focus,
+optgroup:focus,
+select:focus,
+textarea:focus {
+  border-color: #1991e6;
 }
 
 button,
@@ -242,11 +249,24 @@ template {
   }
 }
 
+.input_group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.input_group.validate_error input {
+  border-color: #e35c5c;
+}
+.input_group .input_title {
+  margin-bottom: 5px;
+}
+.input_group .error {
+  color: #e35c5c;
+}
+
 .dropDown {
   position: relative;
   background: greenyellow;
-  width: 75px;
-  left: 50%;
 }
 .dropDown select {
   display: none;
@@ -407,4 +427,8 @@ template {
   .step_items .step_item + .step_item {
     margin: 0;
   }
+}
+
+.registration_title {
+  text-align: center;
 }

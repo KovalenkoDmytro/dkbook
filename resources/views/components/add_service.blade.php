@@ -1,31 +1,50 @@
-<?php ?>
+<form action="{{route('services.store')}}" method="post">
+    @csrf
+    <p>{{__('Add service')}}</p>
 
-<section class="add-services _modal-add">
-    <div class="modal_header">
-        <i class="icon icon-close"></i>
-        <span>Add service</span>
-    </div>
-    <div class="modal_content">
-        <form action="{{route('company.create')}}" method="post">
-            @csrf
-            <div class="service-name">
-                <label for="addService">
-                    <span>Service name</span>
-                    <input id="addService" type="text">
-                </label>
+    <x-input
+        for="service_name"
+        text="{{__('Service name')}}"
+        id="service_name"
+        name="name"
+        error="{{$errors->first('name') ?? false}}"
+    ></x-input>
+
+
+    <div class="service-timeRange">
+        <p>{{__('Time range service')}}</p>
+
+        <div class="timeRange">
+            <div class="timeRange_item">
+                <span>{{__('Hour')}}</span>
+                @php($hours = [00,01,02,03,04])
+                <x-select-drop-down name="timeRange_hour"
+                                    :custom_properties_name="$hours"
+                                    :custom_values="$hours">
+                </x-select-drop-down>
             </div>
-            <div class="service-price">
-                <label for="servicePrice">
-                    <span>Price</span>
-                    <input id="servicePrice" type="text">
-                </label>
+
+            <div class="timeRange_item">
+                <span>{{__('Minutes')}}</span>
+                @php($minutes = [05,10,15,20,25,30,35,40,45,50,55])
+                <x-select-drop-down name="timeRange_minutes"
+                                    :custom_properties_name="$minutes"
+                                    :custom_values="$minutes">
+                </x-select-drop-down>
             </div>
-
-        </form>
-
+        </div>
     </div>
 
+    <x-input
+        for="service_price"
+        text="{{__('Service price')}}"
+        id="service_price"
+        name="price"
+        placeholder="34.50"
+        error="{{$errors->first('price') ?? false}}"
+    ></x-input>
 
+    <button type="submit">Add __permanent</button>
+</form>
 
-</section>
-
+    <a class="close" href="{{url()->previous()}}"> close __permanent</a>

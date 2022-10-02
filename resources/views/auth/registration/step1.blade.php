@@ -1,68 +1,61 @@
 @extends('layouts.registration')
 
 @section('registration.content')
-    <h2>REGISTRATION PAGE __permanent</h2>
-
-{{--    @if ($errors->any())--}}
-
-{{--        <div class="alert alert-danger">--}}
-{{--            <ul>--}}
-{{--                @foreach ($errors->all() as $error)--}}
-{{--                    <li>{{ $error }}</li>--}}
-{{--                @endforeach--}}
-{{--            </ul>--}}
-{{--        </div>--}}
-{{--    @endif--}}
+    <h1 class="registration_title">{{__('User registration')}}</h1>
 
     <form action="{{route('company.createOwner')}}" method="post">
         @csrf
-        <label for="fullName">
-            <span>{{__('Full Name')}}</span>
-            <input type="text" id="fullName" name="fullName">
-            @error('fullName')
-                <x-field_error :error="$errors->first('fullName')"/>
-            @enderror
-        </label>
+        <x-input
+            for="fullName"
+            text="{{__('Full Name')}}"
+            id="fullName"
+            name="fullName"
+            error="{{$errors->first('fullName') ?? false}}">
+        </x-input>
 
-        <label for="login">
-            <span>{{__('Login')}}</span>
-            <input type="text" id="login" name="login">
-            @error('login')
-                <x-field_error :error="$errors->first('login')"/>
-            @enderror
-        </label>
+        <x-input
+            for="login"
+            text="{{__('Login')}}"
+            id="login"
+            name="login"
+            error="{{$errors->first('login') ?? false}}">
+        </x-input>
 
-        <label for="password">
-            <span>{{__('Password')}}</span>
-            <input type="password" id="password" name="password">
-            @error('password')
-                <x-field_error :error="$errors->first('password')"/>
-            @enderror
-        </label>
+        <x-input
+            for="password"
+            text="{{__('Password')}}"
+            type="password"
+            id="password"
+            name="password"
+            error="{{$errors->first('password') ?? true}}">
+        </x-input>
 
-        <label for="confirmPassword">
-            <span>{{__('Confirm password')}}</span>
-            <input type="password" id="confirmPassword" name="confirmPassword">
-            @error('confirmPassword')
-                <x-field_error :error="$errors->first('confirmPassword')"/>
-            @enderror
-        </label>
+        <x-input
+            for="confirmPassword"
+            text="{{__('Confirm password')}}"
+            type="confirmPassword"
+            id="confirmPassword"
+            name="confirmPassword"
+            error="{{$errors->first('confirmPassword') ?? true}}">
+        </x-input>
 
-        <label for="email">
-            <span>{{__('Email')}}</span>
-            <input type="email" id="email" name="email">
-            @error('email')
-                 <x-field_error :error="$errors->first('email')"/>
-            @enderror
-        </label>
+        <x-input
+            for="email"
+            text="{{__('Email')}}"
+            type="email"
+            id="email"
+            name="email"
+            error="{{$errors->first('email') ?? true}}">
+        </x-input>
 
-        <label for="phone">
-            <span>{{__('Phone')}}</span>
-            <input type="text" id="phone" name="phone">
-            @error('phone')
-                <x-field_error :error="$errors->first('phone')"/>
-            @enderror
-        </label>
+        <x-input
+            for="phone"
+            text="{{__('Phone')}}"
+            id="phone"
+            name="phone"
+            error="{{$errors->first('phone') ?? true}}">
+        </x-input>
+
         <input type="hidden" id="businessMode" name="businessMode" value="businessMode">
 
         <button type="submit"> SEND data __permanent</button>

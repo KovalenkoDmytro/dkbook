@@ -29,7 +29,7 @@ DropDownToggleBtn.forEach(dropDown =>{
 function choseOption(optionsList, dropDownInput, dropDownToggle) {
         optionsList.forEach(option=>{
             option.addEventListener('click', function (){
-                dropDownInput.value = this.textContent;
+                dropDownInput.value = this.dataset.value;
                 dropDownToggle.querySelector('.time').textContent = this.textContent;
             })
         })

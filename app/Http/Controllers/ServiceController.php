@@ -16,7 +16,7 @@ class ServiceController extends Controller
     {
         $data = $request->validate([
             'name' => ['required','string','max:25'],
-            'price'=> ['required','string','max:6'],
+            'price'=> ['required','numeric','max:10000'],
             'timeRange_hour'=>'integer',
             'timeRange_minutes'=>'integer',
 
@@ -26,6 +26,8 @@ class ServiceController extends Controller
         Service::create($data);
 
         return redirect(route('company.step4'));
+        //todo exchange redirect
+//        dd(getCurrentStepRegistration());
     }
     public function update()
     {

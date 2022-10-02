@@ -71,15 +71,20 @@ sup {
 img {
     border-style: none;
 }
-button,
+
 input,
 optgroup,
 select,
 textarea {
-    font-family: inherit; /* 1 */
-    font-size: 100%; /* 1 */
     line-height: 1.15; /* 1 */
     margin: 0; /* 2 */
+    outline: none;
+    min-height: 35px;
+    border: 1px solid $border-color;
+    padding: 0 15px;
+    &:focus{
+        border-color: $primary_color;
+    }
 }
 button,
 input {

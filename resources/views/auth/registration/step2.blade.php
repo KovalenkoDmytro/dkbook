@@ -3,44 +3,38 @@
 @section('registration.content')
     <h2>REGISTRATION__permanent</h2>
 
-
-{{--    @if ($errors->any())--}}
-{{--        <div class="alert alert-danger">--}}
-{{--            <ul>--}}
-{{--                @foreach ($errors->all() as $error)--}}
-{{--                    <li>{{ $error }}</li>--}}
-{{--                @endforeach--}}
-{{--            </ul>--}}
-{{--        </div>--}}
-{{--    @endif--}}
-
-
     <form action="{{route('company.createCompany')}}" method="post">
         @csrf
-        <label for="company_name">
-            <span>{{__('Company Name')}}</span>
-            <input type="text" id="company_name" name="name">
-            @error('name')
-                <x-field_error :error="$errors->first('name')"/>
-            @enderror
-        </label>
+        <x-input
+            for="company_name"
+            text="{{__('Company name')}}"
+            id="company_name"
+            name="name"
+            error="{{$errors->first('name') ?? false}}">
+        </x-input>
 
-        <label>
-            <span>{{__('Choose type of your business')}}</span>
-            <select name="business_type_id">
-                @foreach ($business_type as $business_type_item)
-                    <option name="{{$business_type_item['type']}}" value="{{$business_type_item['id']}}">{{$business_type_item['type']}}</option>
-                @endforeach
-            </select>
-        </label>
+        <x-input
+            for="company_address"
+            text="{{__('Company address')}}"
+            id="company_address"
+            name="address"
+            error="{{$errors->first('address') ?? false}}">
+        </x-input>
 
-        <label for="company_address">
-            <span>{{__('Company address')}}</span>
-            <input type="text" id="company_address" name="address">
-            @error('address')
-                <x-field_error :error="$errors->first('address')"/>
-            @enderror
-        </label>
+        @php
+            $custom_values = $business_type->map(function($item){
+                return $item['id'];
+            });
+            $custom_properties_name = $business_type->map(function($item){
+                return $item['type'];
+            })
+        @endphp
+        <x-select-drop-down
+            name="business_type_id"
+            :custom_values="$custom_values"
+            :custom_properties_name="$custom_properties_name">
+        </x-select-drop-down>
+
 
         <div class="social-Media-links">
             <input type="hidden" name="socialMedia" value="example">

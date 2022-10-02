@@ -2494,7 +2494,7 @@ DropDownToggleBtn.forEach(function (dropDown) {
 function choseOption(optionsList, dropDownInput, dropDownToggle) {
   optionsList.forEach(function (option) {
     option.addEventListener('click', function () {
-      dropDownInput.value = this.textContent;
+      dropDownInput.value = this.dataset.value;
       dropDownToggle.querySelector('.time').textContent = this.textContent;
     });
   });
