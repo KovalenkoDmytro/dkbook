@@ -4,9 +4,6 @@
     <h2>REGISTRATION __permanent</h2>
 
 
-
-
-
     <section class="">
         {{__('the latest add scheduled company')}}
 
@@ -15,7 +12,7 @@
             <a href="{{route('scheduled.company.edit',['id'=> $scheduled_id])}}">
                 {{__('edit scheduled')}}
             </a>
-            <a href="#!">{{__('Finish')}}</a>
+            <a href="{{route('company.step7')}}">{{__('Finish')}}</a>
         @else
             <a href="{{route('scheduled.index',['id'=> $company_id, 'table' =>$tableDB])}}">
                 {{__('add scheduled')}}

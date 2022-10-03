@@ -7,10 +7,6 @@
         <p>{{$subtitle ?? ''}}</p>
     @endif
 
-{{--        @php--}}
-{{--        dd($attributes['update_scheduled'])--}}
-{{--        @endphp--}}
-
         @csrf
         @if($attributes['id'])
             <input type="hidden" value="{{$attributes['id']}}" name="id" />
@@ -34,8 +30,8 @@
                     <div class="day_row">
                         <input type="checkbox" name="{{$day}}">
                         <span>{{$day}}</span>
-                        <div class="hours" style="display: flex">
-                            <x-select-drop-down name="{{$day}}_from" :value="$hourFrom"/>
+                        <div class="hours">
+                            <x-select-drop-down  name="{{$day}}_from" :value="$hourFrom"/>
                             <x-select-drop-down name="{{$day}}_to" :value="$hourTo"/>
                         </div>
                     </div>
@@ -45,7 +41,7 @@
                     <div class="day_row">
                         <input type="checkbox" name="{{$day}}">
                         <span>{{$day}}</span>
-                        <div class="hours" style="display: flex">
+                        <div class="hours">
                             <x-select-drop-down name="{{$day}}_from"/>
                             <x-select-drop-down name="{{$day}}_to"/>
                         </div>
@@ -54,5 +50,5 @@
             @endif
         </div>
         <button type="submit">Send data </button>
-
+        <a class="close" href="{{url()->previous()}}"> close __permanent</a>
 </div>

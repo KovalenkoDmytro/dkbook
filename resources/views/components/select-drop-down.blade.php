@@ -40,16 +40,21 @@
     'custom_properties_name' => false,
     'custom_values'=>false,
 ])
+
 <div id="dropDown" class="dropDown {{$class ?? ''}}">
 
-    @if($custom_properties_name)
+    @if($attributes['value'])
+        <input type="hidden" id="dropDown_input" name="{{$name}}" value="{{$attributes['value']}}">
+    @elseif($custom_properties_name)
         <input type="hidden" id="dropDown_input" name="{{$name}}" value="{{$custom_values[0]}}">
     @else
         <input type="hidden" id="dropDown_input" name="{{$name}}" value="{{$timeList[0]}}">
     @endif
 
     <div class="dropDown_toggle" id="dropDownToggle">
-        @if($custom_properties_name)
+        @if($attributes['value'])
+            <span class="time">{{$attributes['value']}}</span>
+        @elseif($custom_properties_name)
             <span class="time">{{$custom_properties_name[0]}}</span>
         @else
             <span class="time">{{$timeList[0]}}</span>

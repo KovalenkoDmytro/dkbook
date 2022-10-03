@@ -23,6 +23,7 @@ class EditEmployeeScheduled extends EditScheduledController
         $createdScheduled = $this->getCreatedScheduled($request);
          EmployeeSchedule::find($request->schedule_id)->update($createdScheduled);
 
-        return redirect(route('company.step5'));
+//        return redirect(route('company.step6'));
+        //todo exchange redirect
     }
 }
