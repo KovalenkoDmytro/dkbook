@@ -1,8 +1,6 @@
 @extends('layouts.registration')
 
 @section('registration.content')
-    <h1 class="registration_title">{{__('User registration')}}</h1>
-
     <form action="{{route('company.createOwner')}}" method="post">
         @csrf
         <x-input
@@ -56,9 +54,7 @@
             error="{{$errors->first('phone') ?? true}}">
         </x-input>
 
-        <input type="hidden" id="businessMode" name="businessMode" value="businessMode">
-
-        <button type="submit"> SEND data __permanent</button>
+        <button class="btn" type="submit">{{__('Next step')}}</button>
     </form>
 
 @endsection

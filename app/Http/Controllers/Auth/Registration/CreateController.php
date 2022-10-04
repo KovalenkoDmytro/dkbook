@@ -20,7 +20,6 @@ use Psr\Container\NotFoundExceptionInterface;
 
 class CreateController extends HomeController
 {
-    private int $registrationSteps = 7;
 
     public function step1(): View
     {
@@ -60,7 +59,6 @@ class CreateController extends HomeController
         $user['email'] = $data['email'];
         $user['fullName'] = $data['fullName'];
         $user['phone'] = $data['phone'];
-        $user['businessMode'] = $data['businessMode'];
 
         $user['password'] = Hash::make($request->password);
 
@@ -86,10 +84,6 @@ class CreateController extends HomeController
         ]);
     }
 
-    /**
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
-     */
     public function createCompany(Request $request): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
     {
         $data = $request->validate(

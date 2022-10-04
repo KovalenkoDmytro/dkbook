@@ -1,19 +1,23 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1>Register Layout __permanent</h1>
+    @php
+        $currentStep = getCurrentStepRegistration()
+    @endphp
     <x-progress-bar-register/>
-    <div class="buttons">
-        @php
-            $currentStep = getCurrentStepRegistration()
-        @endphp
 
-        @if($currentStep != 1)
-            <a href="{{URL::route('company.step'.$currentStep-1)}}">{{__('Prev step')}}</a>
+    <h1 class="registration_step-title">{{$currentStep['stepName']}} {{__('registration')}}</h1>
+
+
+
+    <div class="buttons">
+
+        @if($currentStep['stepNumber'] != 1)
+            <a href="{{URL::route('company.step'.$currentStep['stepNumber']-1)}}">{{__('Prev step')}}</a>
         @endif
 
-        @if($currentStep != 7)
-            <a href="{{URL::route('company.step'.$currentStep+1)}}">{{__('Next step')}}</a>
+        @if($currentStep['stepNumber'] != 7)
+            <a href="{{URL::route('company.step'.$currentStep['stepNumber']+1)}}">{{__('Next step')}}</a>
         @endif
     </div>
 

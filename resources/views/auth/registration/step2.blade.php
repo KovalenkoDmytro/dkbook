@@ -1,8 +1,6 @@
 @extends('layouts.registration')
 
 @section('registration.content')
-    <h2>REGISTRATION__permanent</h2>
-
     <form action="{{route('company.createCompany')}}" method="post">
         @csrf
         <x-input
@@ -40,8 +38,7 @@
             <input type="hidden" name="socialMedia" value="example">
         </div>
 
-
-        <button type="submit"> SEND data__permanent</button>
+        <button class="btn" type="submit">{{__('Next step')}}</button>
     </form>
 
 @endsection

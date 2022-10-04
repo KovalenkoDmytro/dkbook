@@ -1,8 +1,6 @@
 @extends('layouts.registration')
 
 @section('registration.content')
-    <h2>REGISTRATION __permanent</h2>
-
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -38,7 +36,7 @@
                 <div class="progress-area"></div>
                 <div class="uploaded-area"></div>
             </section>
-            <button type="submit">Send file __permanent</button>
+            <button class="btn" type="submit">{{__('Next step')}}</button>
         </form>
 @endsection
 

@@ -1,8 +1,6 @@
 @extends('layouts.registration')
 
 @section('registration.content')
-    <h2>REGISTRATION__permanent</h2>
-
         @if($services->isNotEmpty())
             <ul class="service_items">
                 @foreach($services as $service)
@@ -25,6 +23,8 @@
             <a href="{{route('services.index')}}">{{__('Add service')}}</a>
         </div>
     </section>
+
+
 @endsection
 
 
