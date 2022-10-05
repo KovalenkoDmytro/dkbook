@@ -1,13 +1,14 @@
 <?php
 
 use App\Http\Controllers\Auth\Registration\CreateController;
+use App\Http\Controllers\Auth\Scheduled\CompanyScheduled\CreateCompanyScheduled;
 use App\Http\Controllers\Auth\Scheduled\CompanyScheduled\EditCompanyScheduled;
+use App\Http\Controllers\Auth\Scheduled\EmployeeScheduled\CreateEmployeeScheduled;
 use App\Http\Controllers\Auth\Scheduled\EmployeeScheduled\EditEmployeeScheduled;
+use App\Http\Controllers\Auth\Scheduled\HomeScheduledController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ScheduledController;
 use App\Http\Controllers\ServiceController;
-
 use Illuminate\Support\Facades\Route;
 
 
@@ -45,14 +46,15 @@ Route::name('employee.')->group(function (){
 
 
 Route::name('scheduled.')->group(function (){
-    Route::get('/scheduled/{id}/{table}', [ScheduledController::class, 'index'] )->name('index')->where(['id'=>'[0-9]+','table'=>'^((?!edit$).)*$']);
-    Route::post('/scheduled', [ScheduledController::class, 'store'] )->name('store');
+    Route::get('/scheduled/{id}/{table}', [HomeScheduledController::class, 'show'] )->name('index')->where(['id'=>'[0-9]+','table'=>'^((?!edit$).)*$']);
 });
 Route::name('scheduled.')->group(function (){
+    Route::post('/company-scheduled/{id}/create', [CreateCompanyScheduled::class, 'store'] )->name('company.store')->where('id','[0-9]+');
     Route::get('/company-scheduled/{id}/edit', [EditCompanyScheduled::class, 'index'] )->name('company.edit')->where('id','[0-9]+');
     Route::put('/company-scheduled/update', [EditCompanyScheduled::class, 'update'] )->name('company.update');
 });
 Route::name('scheduled.')->group(function (){
+    Route::post('/employee-scheduled/{id}/create', [CreateEmployeeScheduled::class, 'store'] )->name('employee.store')->where('id','[0-9]+');
     Route::get('/employee-scheduled/{id}/edit', [EditEmployeeScheduled::class, 'index'] )->name('employee.edit')->where('id','[0-9]+');
     Route::put('/employee-scheduled/update', [EditEmployeeScheduled::class, 'update'] )->name('employee.update');
 });

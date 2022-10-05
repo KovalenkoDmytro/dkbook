@@ -4,9 +4,18 @@ namespace App\Http\Controllers\Auth\Scheduled;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class HomeScheduledController extends Controller
 {
+    public function show($id, $table):View
+    {
+        return view('auth.create_scheduled',[
+            'id'=>$id,
+            'table'=>$table,
+        ]);
+    }
+
     public function createScheduled(object $request):array{
 
         $scheduled = [
@@ -43,4 +52,5 @@ class HomeScheduledController extends Controller
         return $scheduled;
 
     }
+
 }

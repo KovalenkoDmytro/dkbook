@@ -8,7 +8,9 @@
             text="{{__('Company name')}}"
             id="company_name"
             name="name"
-            error="{{$errors->first('name') ?? false}}">
+            error="{{$errors->first('name') ?? false}}"
+            value="{{ old('name') }}"
+        >
         </x-input>
 
         <x-input
@@ -16,7 +18,9 @@
             text="{{__('Company address')}}"
             id="company_address"
             name="address"
-            error="{{$errors->first('address') ?? false}}">
+            error="{{$errors->first('address') ?? false}}"
+            value="{{ old('address') }}"
+        >
         </x-input>
 
         @php

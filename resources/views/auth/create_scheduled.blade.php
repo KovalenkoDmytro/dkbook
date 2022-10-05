@@ -1,15 +1,16 @@
 @extends('layouts.main')
 @section('content')
-<h1>Scheduled page __permanent</h1>
+    <h1>Scheduled page __permanent</h1>
 
-
-<form action="{{route('scheduled.store')}}" method="post">
-    @csrf
-
-    <p> Add schedule for {{$table}} with id {{$id}} __permanent</p>
-    <div class="scheduled_items">
-        <x-date-time-picker :id="$id" :table="$table" />
-    </div>
-    <button type="submit">Add __permanent</button>
-</form>
+    @if($table === 'employees')
+        <form action="{{route('scheduled.employee.store', [$id])}}" method="post">
+    @elseif($table === 'companies')
+        <form action="{{route('scheduled.company.store',[$id]) }}" method="post">
+    @endif
+            @csrf
+            <div class="scheduled_items">
+                <x-date-time-picker :id="$id" :table="$table"/>
+            </div>
+            <button class="btn" type="submit">{{__("Add scheduled")}}</button>
+        </form>
 @endsection

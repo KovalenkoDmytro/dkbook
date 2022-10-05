@@ -22,6 +22,6 @@ class EditCompanyScheduled extends EditScheduledController
         $createdScheduled = $this->getCreatedScheduled($request);
         CompanySchedule::find($request->scheduled_id)->update($createdScheduled);
 
-        return redirect(route('company.step6'));
+        return redirect(getRedirect());
     }
 }

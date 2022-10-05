@@ -24,3 +24,13 @@ function getCurrentStepRegistration():array
 
     return $currentStep;
 }
+
+function getRedirect()
+{
+    $registerProcess = session()->get('registerCurrentStep');
+    $redirect = url()->previous();
+    if (isset($registerProcess)){
+        $redirect = route('company.step'.$registerProcess);
+    }
+    return $redirect;
+}

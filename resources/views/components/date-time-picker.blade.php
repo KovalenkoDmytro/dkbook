@@ -16,8 +16,6 @@
         @endif
 
         <div class="days">
-
-
             @if($attributes['update_scheduled'])
                 @foreach($attributes['update_scheduled'] as $day => $hours)
                     @php
@@ -49,6 +47,6 @@
                 @endforeach
             @endif
         </div>
-        <button type="submit">Send data </button>
-        <a class="close" href="{{url()->previous()}}"> close __permanent</a>
+
+        <a class="btn close" href="{{url()->previous()}}"> close __permanent</a>
 </div>

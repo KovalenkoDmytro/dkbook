@@ -7,11 +7,11 @@
     @method('PUT')
     @csrf
     <input type="hidden" name="schedule_id" value="{{$employee['employee_schedule_id']}}"/>
-    <p> Add schedule for {{$employee['name']}} with id {{$employee['id']}} ___permanent</p>
+    <p> {{__("Edit scheduled for")}} {{$employee['name']}}</p>
 
     <div class="scheduled_items">
         <x-date-time-picker :update_scheduled="$scheduled"/>
     </div>
-    <button type="submit">Update ___permanent</button>
+    <button class="btn" type="submit">{{__("Update scheduled")}}</button>
 </form>
 @endsection

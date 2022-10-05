@@ -23,6 +23,7 @@ class CreateController extends HomeController
 
     public function step1(): View
     {
+
         return view("auth.registration.step1");
     }
 
@@ -74,6 +75,7 @@ class CreateController extends HomeController
 
     public function step2(): View
     {
+
         return view("auth.registration.step2", [
             'business_type' => collect(BusinessType::all())->map(function ($type) {
                 return [
@@ -114,6 +116,7 @@ class CreateController extends HomeController
 
     public function step3(): View
     {
+
         return view("auth.registration.step3");
     }
 

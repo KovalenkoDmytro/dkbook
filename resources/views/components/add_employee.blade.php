@@ -8,6 +8,7 @@
         id="employee_name"
         name="name"
         error="{{$errors->first('name') ?? false}}"
+        value="{{ old('name') }}"
     >
     </x-input>
 
@@ -17,6 +18,7 @@
         id="employee_email"
         name="email"
         error="{{$errors->first('email') ?? false}}"
+        value="{{ old('email') }}"
     >
     </x-input>
 
@@ -26,6 +28,7 @@
         id="employee_position"
         name="position"
         error="{{$errors->first('position') ?? false}}"
+        value="{{ old('position') }}"
     >
     </x-input>
 
@@ -35,9 +38,10 @@
         id="employee_phone"
         name="phone"
         error="{{$errors->first('phone') ?? false}}"
+        value="{{ old('phone') }}"
     >
     </x-input>
 
-    <button type="submit">Add</button>
-    <a class="close" href="{{url()->previous()}}"> close __permanent</a>
+    <button class="btn" type="submit">{{__('Add employee')}}</button>
+    <a class="btn close" href="{{url()->previous()}}"> close __permanent</a>
 </form>

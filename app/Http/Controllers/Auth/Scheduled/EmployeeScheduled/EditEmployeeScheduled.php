@@ -9,21 +9,23 @@ use Illuminate\Http\Request;
 
 class EditEmployeeScheduled extends EditScheduledController
 {
-    public function index($id){
+    public function index($id)
+    {
         $employee = Employee::getEmployee($id);
-        $scheduled = EmployeeSchedule::find($employee['employee_schedule_id'])->only('monday','tuesday','wednesday','thursday','friday','saturday','sunday');
+        $scheduled = EmployeeSchedule::find($employee['employee_schedule_id'])->only('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
 
-        return view('auth.scheduledEmployee.edit',[
-            'employee'=>$employee,
+        return view('auth.scheduledEmployee.edit', [
+            'employee' => $employee,
             'scheduled' => $scheduled,
         ]);
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         $createdScheduled = $this->getCreatedScheduled($request);
-         EmployeeSchedule::find($request->schedule_id)->update($createdScheduled);
+        EmployeeSchedule::find($request->schedule_id)->update($createdScheduled);
 
-//        return redirect(route('company.step6'));
-        //todo exchange redirect
+        return redirect(getRedirect());
+
     }
 }

@@ -13,14 +13,4 @@ class EditScheduledController extends HomeScheduledController
         return $this->createScheduled($request);
     }
 
-
-
-//    public function update(Request $request): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
-//    {
-//        dd($request->all());
-//
-//
-////        return redirect(route('company.step6'));
-//
-//    }
 }

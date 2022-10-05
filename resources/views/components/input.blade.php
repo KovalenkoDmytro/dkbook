@@ -4,13 +4,15 @@
 'type'=>'text',
 'id'=>$default_id,
 'name'=>'example',
+'value'=>'',
 'placeholder'=> '',
 'text'=>'example',
 'error'=>false,
+
 ])
 
 <label class="{{$error? 'input_group validate_error' : 'input_group'}}" for='{{$for}}'>
     <span class="input_title">{{$text}}</span>
-    <input type='{{$type}}' id='{{$id}}' name='{{$name}}' placeholder="{{$placeholder}}">
+    <input type='{{$type}}' id='{{$id}}' name='{{$name}}' placeholder="{{$placeholder}}" value="{{$value}}">
     <p class="error">{{$error}}</p>
 </label>

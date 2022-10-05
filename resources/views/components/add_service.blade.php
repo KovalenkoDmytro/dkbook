@@ -8,6 +8,7 @@
         id="service_name"
         name="name"
         error="{{$errors->first('name') ?? false}}"
+        value="{{ old('name') }}"
     ></x-input>
 
 
@@ -44,7 +45,7 @@
         error="{{$errors->first('price') ?? false}}"
     ></x-input>
 
-    <button type="submit">Add __permanent</button>
+    <button class="btn" type="submit">{{__('Add')}}</button>
 </form>
 
     <a class="close" href="{{url()->previous()}}"> close __permanent</a>

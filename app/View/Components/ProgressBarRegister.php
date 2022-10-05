@@ -28,6 +28,7 @@ class ProgressBarRegister extends Component
      */
     public function render()
     {
+        session()->put('registerCurrentStep', getCurrentStepRegistration()['stepNumber']);
         return view('components.progress-bar-register', [
             'currentStep' => getCurrentStepRegistration()['stepNumber'],
             'steps' => HomeController::getStepsName(),
