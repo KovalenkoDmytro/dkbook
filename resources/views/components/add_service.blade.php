@@ -1,7 +1,8 @@
 <form action="{{route('services.store')}}" method="post">
     @csrf
-    <p>{{__('Add service')}}</p>
 
+    <p>{{__('Add service')}}</p>
+    <a class="btn icon icon_close" href="{{url()->previous()}}"></a>
     <x-input
         for="service_name"
         text="{{__('Service name')}}"
@@ -45,7 +46,10 @@
         error="{{$errors->first('price') ?? false}}"
     ></x-input>
 
+
     <button class="btn" type="submit">{{__('Add')}}</button>
+
+
 </form>
 
-    <a class="close" href="{{url()->previous()}}"> close __permanent</a>
+

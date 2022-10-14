@@ -14,3 +14,40 @@
         max-width: 1156px;
     }
 }
+
+
+.buttons_wrapper{
+    display: flex;
+    .btn:not(:only-child){
+        margin-right: 10px;
+        &:last-child{
+            margin-right: 0;
+        }
+    }
+}
+
+.btn{
+    display: block;
+    color: $button_text_color;
+    background-color: $button_color;
+    border-radius: $border_radius;
+    border: none;
+    margin: 10px 0 ;
+    padding: 10px 15px;
+    cursor: pointer;
+    width: max-content;
+    @include transition;
+    &:hover{
+      background-color: $button_color_hover;
+        color: $button_text_color_hover;
+        a{
+            color: $button_text_color_hover;
+        }
+    }
+    a{
+        color: $button_text_color;
+    }
+    &.icon_close{
+        margin-left: auto;
+    }
+}

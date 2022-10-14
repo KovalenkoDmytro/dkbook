@@ -1,0 +1,24 @@
+.scheduled_items{
+    .date-time-picker{
+        .days{
+            .day_row{
+                label{
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    input{
+                        margin-right: 10px;
+                    }
+                }
+                .hours{
+                    display: grid;
+                    grid-template-columns: repeat(2,1fr);
+                    grid-gap: 10px;
+                }
+            }
+            .day_row + .day_row{
+                margin-top: 10px;
+            }
+        }
+    }
+}

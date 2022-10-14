@@ -14,7 +14,7 @@
         @if($attributes['table'])
             <input type="hidden" value="{{$attributes['table']}}" name="table" />
         @endif
-
+        <a class="btn icon icon_close" href="{{url()->previous()}}"></a>
         <div class="days">
             @if($attributes['update_scheduled'])
                 @foreach($attributes['update_scheduled'] as $day => $hours)
@@ -26,8 +26,10 @@
                         $hourTo = substr($hours,$hourToValue);
                     @endphp
                     <div class="day_row">
-                        <input type="checkbox" name="{{$day}}">
-                        <span>{{$day}}</span>
+                        <label>
+                            <input type="checkbox" name="{{$day}}">
+                            <span>{{$day}}</span>
+                        </label>
                         <div class="hours">
                             <x-select-drop-down  name="{{$day}}_from" :value="$hourFrom"/>
                             <x-select-drop-down name="{{$day}}_to" :value="$hourTo"/>
@@ -37,8 +39,11 @@
             @else
                 @foreach($schedule_days as $day)
                     <div class="day_row">
-                        <input type="checkbox" name="{{$day}}">
-                        <span>{{$day}}</span>
+                        <label>
+                            <input type="checkbox" name="{{$day}}">
+                            <span>{{$day}}</span>
+                        </label>
+
                         <div class="hours">
                             <x-select-drop-down name="{{$day}}_from"/>
                             <x-select-drop-down name="{{$day}}_to"/>
@@ -48,5 +53,5 @@
             @endif
         </div>
 
-        <a class="btn close" href="{{url()->previous()}}"> close __permanent</a>
+
 </div>

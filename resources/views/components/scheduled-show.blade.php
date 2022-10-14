@@ -1,4 +1,4 @@
-<h1>Scheduled Component</h1>
+<h1>Scheduled Component__permanent</h1>
 
 <ul class="scheduled_items">
 

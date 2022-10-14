@@ -2,3 +2,13 @@
 .registration_title{
     text-align: center;
 }
+
+.employee_items{
+    .employee_item{
+        display: flex;
+        align-items: center;
+        .employee_name{
+            margin-right: 10px;
+        }
+    }
+}

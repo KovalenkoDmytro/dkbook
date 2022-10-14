@@ -31,11 +31,15 @@
                 return $item['type'];
             })
         @endphp
-        <x-select-drop-down
-            name="business_type_id"
-            :custom_values="$custom_values"
-            :custom_properties_name="$custom_properties_name">
-        </x-select-drop-down>
+        <div class="dropDown_group">
+            <p class="title">{{__('Type of business')}}</p>
+            <x-select-drop-down
+                name="business_type_id"
+                :custom_values="$custom_values"
+                :custom_properties_name="$custom_properties_name">
+            </x-select-drop-down>
+        </div>
+
 
 
         <div class="social-Media-links">

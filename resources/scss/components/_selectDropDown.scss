@@ -1,12 +1,25 @@
+.dropDown_group{
+    margin: 10px 0;
+    .title{
+        margin-bottom: 5px;
+    }
+}
 .dropDown {
     position: relative;
-    background: greenyellow;
-    //width: 75px;
-    //left: 50%;
     select {
         display: none;
     }
-
+    &.open{
+        .dropDown_toggle{
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .dropDown_options{
+            display: block;
+            border-bottom-left-radius: $border_radius;
+            border-bottom-right-radius: $border_radius;
+        }
+    }
     .dropDown_toggle {
         display: flex;
         justify-content: space-between;
@@ -19,6 +32,8 @@
         background: $background_color;
         transition: border-color ease-in-out 0.15s;
         box-shadow: none;
+        border-radius: $border_radius;
+        cursor: pointer;
         @include border;
     }
 
@@ -35,9 +50,7 @@
         cursor: pointer;
         @include scrollbar;
         @include border;
-        &.open{
-            display: block;
-        }
+
 
         .dropDown_option{
             padding: 7px;
@@ -50,6 +63,19 @@
             &:hover{
                 background-color: $gray_light_color;
             }
+        }
+    }
+}
+
+.timeRange{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    margin: 10px 0;
+    .timeRange_item{
+        >span{
+            display: block;
+            margin-bottom: 10px;
         }
     }
 }

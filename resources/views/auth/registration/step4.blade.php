@@ -19,24 +19,25 @@
           </p>
         </div>
 
-        @if($services->isNotEmpty())
-            <div class="btn">
-                <i class="icon icon_plus"></i>
-                <a href="{{route('services.index')}}">{{__('Add next one service')}}</a>
-            </div>
-        @else
-            <div class="btn">
-                <i class="icon icon_plus"></i>
-                <a href="{{route('services.index')}}">{{__('Add first service')}}</a>
-            </div>
-        @endif
+        <div class="buttons_wrapper">
+            @if($services->isNotEmpty())
+                <div class="btn">
+                    <i class="icon icon_plus"></i>
+                    <a href="{{route('services.index')}}">{{__('Add next one service')}}</a>
+                </div>
+            @else
+                <div class="btn">
+                    <i class="icon icon_plus"></i>
+                    <a href="{{route('services.index')}}">{{__('Add first service')}}</a>
+                </div>
+            @endif
 
-        @if($services->isNotEmpty())
-            <div class="btn">
-                <a href="{{route('company.step5')}}">{{__('Next step')}}</a>
-            </div>
-        @endif
-
+            @if($services->isNotEmpty())
+                <div class="btn">
+                    <a href="{{route('company.step5')}}">{{__('Next step')}}</a>
+                </div>
+            @endif
+        </div>
     </section>
 
 

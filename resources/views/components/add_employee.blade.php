@@ -1,7 +1,7 @@
 <form action="{{route('employee.store')}}" method="post">
     @csrf
     <p>{{__('Add employee')}}</p>
-
+    <a class="btn icon icon_close" href="{{url()->previous()}}"></a>
     <x-input
         for="employee_name"
         text="{{__('Name')}}"
@@ -42,6 +42,6 @@
     >
     </x-input>
 
-    <button class="btn" type="submit">{{__('Add employee')}}</button>
-    <a class="btn close" href="{{url()->previous()}}"> close __permanent</a>
+        <button class="btn" type="submit">{{__('Add employee')}}</button>
+
 </form>

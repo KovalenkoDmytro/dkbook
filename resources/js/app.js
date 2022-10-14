@@ -17,10 +17,10 @@ DropDownToggleBtn.forEach(dropDown =>{
     let DropDownInput = dropDown.querySelector('#dropDown_input')
 
     dropDown.addEventListener('click',function(){
-        if(DropDownOptionsList.classList.contains('open')){
-            DropDownOptionsList.classList.remove('open')
+        if(dropDown.classList.contains('open')){
+            dropDown.classList.remove('open')
         }else{
-            DropDownOptionsList.classList.add('open')
+            dropDown.classList.add('open')
         }
     })
 
