@@ -21,6 +21,6 @@
         @endif
     </div>
 
-    <a href="{{URL::route('company.main')}}">{{__('Back to main page')}}</a>
+    <a href="{{URL::route('main')}}">{{__('Back to main page')}}</a>
     @yield('registration.content')
 @endsection

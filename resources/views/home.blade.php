@@ -1,4 +1,4 @@
-@extends('layouts.app.blade_COPY.php')
+Home page
 
 @section('content')
     <div class="container">

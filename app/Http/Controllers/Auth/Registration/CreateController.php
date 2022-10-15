@@ -10,6 +10,7 @@ use App\Models\CompanySchedule;
 use App\Models\Employee;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -23,11 +24,13 @@ class CreateController extends HomeController
 
     public function step1(): View
     {
-
+        if(Auth::check()){
+            redirect(route('dashboard.main'));
+        }
         return view("auth.registration.step1");
     }
 
-    public function createOwner(Request $request): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
+    public function createOwner(Request $request)
     {
         $data = $request->validate(
             [
@@ -63,14 +66,24 @@ class CreateController extends HomeController
 
         $user['password'] = Hash::make($request->password);
 
-        CompanyOwner::create($user);
+        $owner = CompanyOwner::create($user);
+
 
         //todo винести в model
         $company_owner = CompanyOwner::where('login', $request->input('login'))->get();
 
         session()->put('companyOwner_id', $company_owner[0]->id);
 
-        return redirect(route('company.step2'));
+
+        if($owner){
+            Auth::login($owner);
+            return redirect(route('company.step2'));
+        }
+
+        return redirect(route('company.step1'))->withErrors([
+            'formError' => 'Error when created user'
+        ]);
+
     }
 
     public function step2(): View

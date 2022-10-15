@@ -1,19 +1,23 @@
 <?php
 
+use App\Http\Controllers\Auth\Dashboard\DashboardController;
 use App\Http\Controllers\Auth\Registration\CreateController;
 use App\Http\Controllers\Auth\Scheduled\CompanyScheduled\CreateCompanyScheduled;
 use App\Http\Controllers\Auth\Scheduled\CompanyScheduled\EditCompanyScheduled;
 use App\Http\Controllers\Auth\Scheduled\EmployeeScheduled\CreateEmployeeScheduled;
 use App\Http\Controllers\Auth\Scheduled\EmployeeScheduled\EditEmployeeScheduled;
 use App\Http\Controllers\Auth\Scheduled\HomeScheduledController;
+use App\Http\Controllers\Auth\User\LoginController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', [HomeController::class, 'index'] )->name('main');
 
 Route::name('company.')->group(function (){
-    Route::get('/', [HomeController::class, 'index'] )->name('main');
+
     Route::get('/register-1', [CreateController::class, 'step1'] )->name('step1');
     Route::post('/register-1', [CreateController::class, 'createOwner'] )->name('createOwner');
 
@@ -60,4 +64,18 @@ Route::name('scheduled.')->group(function (){
 });
 
 
+Route::name('user.')->group(function (){
+    Route::get('/login', [LoginController::class, 'index'] )->name('login');
+    Route::post('/login', [LoginController::class, 'login'] );
+
+
+    Route::get('/logout', function (){
+        Auth::logout();
+        return redirect(route('main'));
+    } )->name('logout');
+});
+
+Route::name('dashboard.')->group(function (){
+    Route::get('/main', [DashboardController::class, 'index'] )->middleware('auth')->name('main');
+});
 
