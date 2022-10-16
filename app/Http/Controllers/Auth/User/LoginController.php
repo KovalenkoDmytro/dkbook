@@ -21,10 +21,26 @@ class LoginController extends Controller
 //           return redirect(route('dashboard.main'));
 //        }
 
+        if (Auth::attempt($formFields)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended(route('dashboard.main'));
+        }
         dd(Auth::check());
 //        return redirect(route('user.login'))->withErrors([
 //            'error'=>'Email or password is not correct'
 //        ]);
 
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect(route('main'));
     }
 }

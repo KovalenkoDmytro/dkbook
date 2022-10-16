@@ -11,6 +11,7 @@ class CompanyOwner extends Model implements Authenticatable
 {
     use HasFactory;
     protected $guarded = false;
+    public $table = 'company_owners';
 
     public static function createUser(array $data)
     {

@@ -69,10 +69,7 @@ Route::name('user.')->group(function (){
     Route::post('/login', [LoginController::class, 'login'] );
 
 
-    Route::get('/logout', function (){
-        Auth::logout();
-        return redirect(route('main'));
-    } )->name('logout');
+    Route::get('/logout', [LoginController::class,'logout'] )->name('logout');
 });
 
 Route::name('dashboard.')->group(function (){

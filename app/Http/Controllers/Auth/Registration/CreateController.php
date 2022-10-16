@@ -64,6 +64,7 @@ class CreateController extends HomeController
 
         if($owner_model){
             Auth::login($owner_model);
+
             return redirect()->intended(route('company.step2'));
         }
 
