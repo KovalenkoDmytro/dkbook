@@ -12,12 +12,10 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
-use Psr\Container\ContainerExceptionInterface;
-use Psr\Container\NotFoundExceptionInterface;
+
 
 class CreateController extends HomeController
 {
@@ -59,25 +57,14 @@ class CreateController extends HomeController
                 'businessMode' => 'string',
             ]
         );
-        $user['login'] = $data['login'];
-        $user['email'] = $data['email'];
-        $user['fullName'] = $data['fullName'];
-        $user['phone'] = $data['phone'];
+        $owner_model = CompanyOwner::createUser($data);
 
-        $user['password'] = Hash::make($request->password);
-
-        $owner = CompanyOwner::create($user);
-
-
-        //todo винести в model
-        $company_owner = CompanyOwner::where('login', $request->input('login'))->get();
-
+        $company_owner = CompanyOwner::getUser($request->input('login'));
         session()->put('companyOwner_id', $company_owner[0]->id);
 
-
-        if($owner){
-            Auth::login($owner);
-            return redirect(route('company.step2'));
+        if($owner_model){
+            Auth::login($owner_model);
+            return redirect()->intended(route('company.step2'));
         }
 
         return redirect(route('company.step1'))->withErrors([

@@ -17,13 +17,14 @@ class LoginController extends Controller
     {
         $formFields = $request->only('email','password');
 
-        if (Auth::attempt($formFields)){
-           return redirect(route('dashboard.main'));
-        }
+//        if (Auth::attempt($formFields)){
+//           return redirect(route('dashboard.main'));
+//        }
 
-        return redirect(route('user.login'))->withErrors([
-            'error'=>'Email or password is not correct'
-        ]);
+        dd(Auth::check());
+//        return redirect(route('user.login'))->withErrors([
+//            'error'=>'Email or password is not correct'
+//        ]);
 
     }
 }

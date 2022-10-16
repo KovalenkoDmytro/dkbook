@@ -5,10 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Hash;
+
 class CompanyOwner extends Model implements Authenticatable
 {
     use HasFactory;
     protected $guarded = false;
+
+    public static function createUser(array $data)
+    {
+        return CompanyOwner::create([
+            'login' => $data['login'],
+            'email' => $data['email'],
+            'fullName' => $data['fullName'],
+            'phone' => $data['phone'],
+            'password' => Hash::make($data['password']),
+        ]);
+    }
+
+    public static function getUser(string $login){
+        return CompanyOwner::where('login', $login)->get();
+    }
 
     public function getAuthIdentifierName()
     {
