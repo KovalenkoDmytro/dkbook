@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class CompanyOwner extends Model implements Authenticatable
 {
@@ -30,17 +30,17 @@ class CompanyOwner extends Model implements Authenticatable
 
     public function getAuthIdentifierName()
     {
-        // TODO: Implement getAuthIdentifierName() method.
+        return $this->primaryKey;
     }
 
     public function getAuthIdentifier()
     {
-        // TODO: Implement getAuthIdentifier() method.
+        return $this->{$this->getAuthIdentifierName()};
     }
 
     public function getAuthPassword()
     {
-        // TODO: Implement getAuthPassword() method.
+        return $this->password;
     }
 
     public function getRememberToken()
