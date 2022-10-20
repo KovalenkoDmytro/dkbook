@@ -2,15 +2,14 @@
 <h1>Home page</h1>
 
 @auth('web')
-    <a href="">Logout</a>
-    <p>Your ADMIN</p>
+    <a href="{{route('user.logout')}}">Logout _permanent</a>
+    <p>Your ADMIN _permanent</p>
 @endauth
 
 
 @guest('web')
-
-<p>Your guest</p>
-<a href="">Login</a>
+<p>Your guest _permanent</p>
+<a href="{{route('user.login')}}">Login_permanent</a>
 @endguest
 
 

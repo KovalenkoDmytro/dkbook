@@ -1,5 +1,6 @@
-
+@props(['error'=> false])
 <div>
+    <p>{{$error}}</p>
     <h1>Login</h1>
     <form action="" method="post">
         @csrf

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('fullName');
             $table->string('phone');
+            $table->rememberToken();
 
             $table->timestamps();
             $table->softDeletes();

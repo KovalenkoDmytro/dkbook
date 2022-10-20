@@ -16,20 +16,16 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $formFields = $request->only('email','password');
+        $remember_me = $request->has('remember_me');
 
-//        if (Auth::attempt($formFields)){
-//           return redirect(route('dashboard.main'));
-//        }
-
-        if (Auth::attempt($formFields)) {
+        if (Auth::attempt($formFields,$remember_me)) {
             $request->session()->regenerate();
-
             return redirect()->intended(route('dashboard.main'));
         }
-        dd(Auth::check());
-//        return redirect(route('user.login'))->withErrors([
-//            'error'=>'Email or password is not correct'
-//        ]);
+
+        return redirect(route('user.login'))->withErrors([
+            'incorrect'=>'Email or password is not correct'
+        ]);
 
     }
 
