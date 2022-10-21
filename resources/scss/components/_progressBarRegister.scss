@@ -104,64 +104,10 @@
 
         }
         &.active{
+            font-weight: 600;
             .step_number{
                 border-color: $secondary_color;
             }
-        }
-        //&:before{
-        //    content : attr(data-step);
-        //    position: relative;
-        //    display: block;
-        //    margin-right: 10px;
-        //    @include inner-shadow;
-        //    background: #ddd;
-        //    border: 2px solid #FFF;
-        //    height: 30px;
-        //    width: 30px;
-        //    text-align: center;
-        //    line-height: 30px;
-        //    border-radius: 50%;
-        //    color: #fff;
-        //    left: 0;
-        //    z-index: 2;
-        //    @include tablet{
-        //        position: absolute;
-        //        top: -16px;
-        //    }
-        //}
-        //@include tablet{
-        //    &:after{
-        //        content: "";
-        //        background-size: 35px 35px;
-        //        background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
-        //        background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
-        //        @include inner-shadow;
-        //        height: 10px;
-        //        left: 0;
-        //        position: absolute;
-        //        top: -5px;
-        //        width: 100%;
-        //    }
-        //}
-
-        &.done{
-            //&:before{
-            //    content: url("/access/check.svg");
-            //    background-color: #57aed1;
-            //}
-            //&:after{
-            //    @include blue-stripe;
-            //    @include inner-shadow;
-            //}
-        }
-        &.active{
-            //&:before{
-            //    background-color: #8bc53f;
-            //}
-            //&:after{
-            //    @include green-stripe;
-            //    @include inner-shadow;
-            //}
         }
     }
     .step_item + .step_item{

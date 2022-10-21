@@ -10,6 +10,7 @@ html {
 
 body {
     margin: 0;
+    font-family: $font-family;
 }
 
 main {
@@ -71,6 +72,9 @@ sup {
 }
 img {
     border-style: none;
+}
+p{
+    line-height: 1.5;
 }
 
 input,
