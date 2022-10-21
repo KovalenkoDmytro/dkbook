@@ -18,11 +18,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
 </head>
 <body>
-{{--    <aside>aside</aside>--}}
-{{--    <nav>navigation</nav>--}}
-    <main class="container">
-        @yield('content')
-    </main>
+
+    @yield('content')
+
 
     <!-- Scripts -->
     <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>

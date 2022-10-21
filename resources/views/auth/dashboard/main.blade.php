@@ -1,4 +1,20 @@
-<h1>WELCOME TO ADMIN PANEL</h1>
+@extends('layouts.main')
+
+@section('content')
 
 
-<a href="{{route('user.logout')}}">Logout _permanent</a>
+    <aside>aside</aside>
+    <nav>navigation</nav>
+    <main class="container">
+        <h1>WELCOME TO ADMIN PANEL</h1>
+
+        <a href="{{route('user.logout')}}">Logout _permanent</a>
+
+    </main>
+
+
+
+@endsection
+
+
+

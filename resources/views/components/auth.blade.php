@@ -1,24 +1,42 @@
-@props(['error'=> false])
+@props(['error_auth'=> false])
 <div>
-    <p>{{$error}}</p>
-    <h1>Login</h1>
+    <p>{{$error_auth}}</p>
+    <h1>Login_permanent</h1>
     <form action="" method="post">
         @csrf
-        <div>
-            <label for="email">Email</label>
-            <input type="text" id="email" name="email" placeholder="mail@gmail.com">
-        </div>
-        <div>
-            <label for="password">Password</label>
-            <input type="text" id="password" name="password" placeholder="Min. 8 characters">
-        </div>
+
+            <x-input
+                for="email"
+                text="{{__('Email')}}"
+                id="email"
+                name="email"
+                error="{{$errors->first('error_auth') ?? false}}"
+                value="{{ old('email') }}"
+                placeholder="{{__('StevJobs@apple.com')}}"
+            >
+            </x-input>
+
+            <x-input
+                for="password"
+                text="{{__('Password')}}"
+                id="password"
+                name="password"
+                error="{{$errors->first('error_auth') ?? false}}"
+                value="{{ old('password') }}"
+                placeholder="{{__('Min. 8 characters')}}"
+            >
+            </x-input>
+
+
         <label for="remember_me">
             <input type="checkbox" id="remember_me" name="remember_me">
-            <p>Remember me</p>
+            <p>{{__('Remember me')}}</p>
         </label>
-        <a href="#!" title="Forget password">Forget password</a>
-        <button type="submit">Login</button>
-        <p>No register yet? <a href="{{ URL::route('company.step1')}}" title="Create an Account">Create an Account</a></p>
+
+
+        <a href="#!" title="Forget password">{{__('Forget password')}}</a>
+        <button class="btn" type="submit">{{__('Login')}}</button>
+        <p>{{__('No register yet?')}} <a class="btn" href="{{ URL::route('company.step1')}}" title="Create an Account">{{__('Create an Account')}}</a></p>
 
     </form>
 </div>

@@ -24,7 +24,7 @@ class LoginController extends Controller
         }
 
         return redirect(route('user.login'))->withErrors([
-            'incorrect'=>'Email or password is not correct'
+            'error_auth'=>'Email or password is not correct'
         ]);
 
     }
