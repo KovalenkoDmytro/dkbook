@@ -7,7 +7,7 @@
                 <span class="step_number">{{$i}}</span>
                 <span class="step_desc">{{$steps[$i]}}</span>
             </li>
-        @elseif($currentStep === $i)
+        @elseif($currentStep == $i)
             <li class="step_item active">
                 <span class="step_number">{{$i}}</span>
                 <span class="step_desc">{{$steps[$i]}}</span>
