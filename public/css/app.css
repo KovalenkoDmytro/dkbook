@@ -334,6 +334,25 @@ template {
   margin-top: 10px;
 }
 
+.page-registration .company_scheduled .scheduled_items {
+  border: 1px solid #c4c7c8;
+}
+.page-registration .company_scheduled .scheduled_item {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-bottom: 1px solid #c4c7c8;
+}
+.page-registration .company_scheduled .scheduled_item .day {
+  padding: 15px;
+}
+.page-registration .company_scheduled .scheduled_item .hours {
+  border-left: 1px solid #c4c7c8;
+  padding: 15px;
+}
+.page-registration .company_scheduled .scheduled_item:last-child {
+  border-bottom: initial;
+}
+
 .dropDown_group {
   margin: 10px 0;
 }

@@ -10,6 +10,7 @@
             name="name"
             error="{{$errors->first('name') ?? false}}"
             value="{{ old('name') }}"
+            placeholder="{{__('Apple')}}"
         >
         </x-input>
 
@@ -20,6 +21,7 @@
             name="address"
             error="{{$errors->first('address') ?? false}}"
             value="{{ old('address') }}"
+            placeholder="{{__('1600 Amphitheatre Pkwy, Mountain View, CA 94043, United States')}}"
         >
         </x-input>
 

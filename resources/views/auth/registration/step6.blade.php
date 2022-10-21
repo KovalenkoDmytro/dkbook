@@ -1,8 +1,9 @@
 @extends('layouts.registration')
 
 @section('registration.content')
-    <section class="">
-        {{__('the latest add scheduled company')}}
+    <section class="company_scheduled">
+        <p> {{__('the latest add scheduled company')}}</p>
+
             @if(isset($scheduled) && $scheduled_id !=1)
                 <x-scheduled-show :scheduled='$scheduled'/>
             <div class="buttons_wrapper">

@@ -1,0 +1,25 @@
+.page-registration{
+    .company_scheduled{
+        .scheduled_items{
+            border: 1px solid $border_color;
+        }
+        .scheduled_item{
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            border-bottom: 1px solid $border_color;
+            .day{
+                padding: 15px;
+            }
+            .hours{
+                border-left: 1px solid $border_color;
+                padding: 15px;
+            }
+            &:last-child{
+                border-bottom: initial;
+            }
+        }
+    }
+
+}
+
+
