@@ -9,7 +9,9 @@
             id="fullName"
             name="fullName"
             error="{{$errors->first('fullName') ?? false}}"
-            value="{{ old('fullName') }}">
+            value="{{ old('fullName') }}"
+            placeholder="{{__('Steve Jobs')}}"
+        >
         </x-input>
 
         <x-input
@@ -18,7 +20,9 @@
             id="login"
             name="login"
             error="{{$errors->first('login') ?? false}}"
-            value="{{ old('login') }}">
+            value="{{ old('login') }}"
+            placeholder="{{__('Jobs')}}"
+        >
         </x-input>
 
         <x-input
@@ -29,6 +33,7 @@
             name="password"
             error="{{$errors->first('password') ?? true}}"
             value="{{ old('password') }}"
+            placeholder="{{__('min 8 characters, 1 uppercase, 1 lowercase, 1 number, and 1 special character?')}}"
         >
         </x-input>
 
@@ -49,7 +54,9 @@
             id="email"
             name="email"
             error="{{$errors->first('email') ?? true}}"
-            value="{{ old('email') }}">
+            value="{{ old('email') }}"
+            placeholder="{{__('SteveJobs@apple.com')}}"
+        >
         </x-input>
 
         <x-input
@@ -58,7 +65,9 @@
             id="phone"
             name="phone"
             error="{{$errors->first('phone') ?? true}}"
-            value="{{ old('phone') }}">
+            value="{{ old('phone') }}"
+            placeholder="{{__('+1(22)333-333-333')}}"
+        >
         </x-input>
 
         <button class="btn" type="submit">{{__('Next step')}}</button>
