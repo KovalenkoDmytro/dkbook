@@ -11,8 +11,14 @@ class Company extends Model
     protected $table = 'companies';
     protected $guarded = false;
 
+
     public function getTable()
     {
         return $this->table;
     }
+
+    public static function getCompany($owner_id){
+        return Company::where('id', $owner_id)->first();
+    }
+
 }
