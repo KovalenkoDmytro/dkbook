@@ -1,20 +1,10 @@
-@extends('layouts.main')
 
-@section('content')
+@extends('layouts.dashboard')
 
-
-    <aside>aside</aside>
-    <nav>navigation</nav>
-    <main class="container">
-        <h1>WELCOME TO ADMIN PANEL</h1>
-
-        <a href="{{route('user.logout')}}">Logout _permanent</a>
-
-    </main>
-
-
-
+@section('dashboard.content')
+    <h1>WELCOME TO Dashboard _permanent</h1>
 @endsection
+
 
 
 

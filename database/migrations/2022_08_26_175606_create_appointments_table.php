@@ -18,10 +18,10 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained();
             $table->foreignId('client_id')->constrained();
             $table->foreignId('service_id')->constrained();
-            $table->foreignId('employee_id')->constrained();
+            $table->foreignId('employee_id')->nullable();
             $table->timestamp('date');
-            $table->string('paymentStatus')->default('unpaid');
-            $table->string('userStatus');
+            $table->string('payed')->default(false);
+//            $table->string('userStatus');
             $table->timestamps();
         });
     }

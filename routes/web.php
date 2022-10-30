@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\Dashboard\DashboardController;
+use App\Http\Controllers\Auth\Dashboard\Calendar\CalendarController;
 use App\Http\Controllers\Auth\Registration\CreateController;
 use App\Http\Controllers\Auth\Scheduled\CompanyScheduled\CreateCompanyScheduled;
 use App\Http\Controllers\Auth\Scheduled\CompanyScheduled\EditCompanyScheduled;
@@ -74,5 +75,6 @@ Route::name('user.')->group(function (){
 
 Route::name('dashboard.')->group(function (){
     Route::get('/main', [DashboardController::class, 'index'] )->middleware('auth')->name('main');
+    Route::get('/calendar', [CalendarController::class, 'index'] )->middleware('auth')->name('calendar');
 });
 

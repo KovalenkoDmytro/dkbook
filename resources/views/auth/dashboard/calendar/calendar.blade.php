@@ -1,0 +1,21 @@
+@extends('layouts.dashboard')
+
+@section('dashboard.content')
+<h1>WELCOME TO Calendar</h1>
+<div id='calendar'></div>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth'
+        });
+        calendar.render();
+    });
+
+</script>
+
+@endsection
+
+
+
