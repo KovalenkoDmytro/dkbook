@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('service_id')->constrained();
             $table->foreignId('employee_id')->nullable();
             $table->timestamp('date');
-            $table->string('payed')->default(false);
+            $table->boolean('payed')->default(false);
 //            $table->string('userStatus');
             $table->timestamps();
         });

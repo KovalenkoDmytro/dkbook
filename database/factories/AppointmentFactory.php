@@ -24,7 +24,7 @@ class AppointmentFactory extends Factory
             'client_id' => Client::all()->random()->id,
             'service_id' => Service::all()->random()->id,
             'employee_id'=>null,
-            'date'=>$this->faker->dateTime,
+            'date'=>$this->faker->dateTimeBetween('- 2 days','+ 1 days'),
 
         ];
     }

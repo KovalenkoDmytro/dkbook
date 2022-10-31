@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
         Client::factory(15)->create();
         Service::factory(15)->create();
         Appointment::factory()
-            ->count(25)
+            ->count(50)
             ->state(new Sequence(
                 ['payed' => true],
                 ['payed' => false]
