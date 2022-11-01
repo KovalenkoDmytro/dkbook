@@ -70,6 +70,10 @@
         >
         </x-input>
 
+        <!-- get user timezone  start -->
+        <input type="hidden" name="timezone" id="timezone">
+        <!--  end -->
+
         <button class="btn" type="submit">{{__('Next step')}}</button>
     </form>
 

@@ -3,11 +3,12 @@
 
 @import "base/typegraphy";
 @import "base/normalize";
+@import "base/main";
 
 @import "layout/main";
 @import "layout/inputs";
 @import "layout/scheduled";
-
+@import "layout/calendar/dailyCalenday";
 @import "layout/registerSteps/company_scheduled";
 
 @import "components/selectDropDown";

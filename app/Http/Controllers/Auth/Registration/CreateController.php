@@ -55,6 +55,7 @@ class CreateController extends HomeController
                     'string',
                     'max:15'],
                 'businessMode' => 'string',
+                'timezone'=> 'string',
             ]
         );
         $owner_model = CompanyOwner::createUser($data);

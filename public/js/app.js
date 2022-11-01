@@ -2474,7 +2474,60 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-console.log('app.js'); // SelectorDropDown --- start ---
+console.log('app.js'); //--callback-- it is a function witch will be to call
+// --viewport-- is device size where callback will be to call
+// --viewport can receive a parameters with number which equals device screen size: it's mobile, laptop, and all
+
+var app = {
+  'view': 'laptop',
+  'run': function run(callback, viewport, DOM_element_selector) {
+    // check element into DOM
+    if (document.querySelector(DOM_element_selector) !== null) {
+      switch (viewport) {
+        case 'mobile':
+          if (window.innerWidth <= 979) {
+            callback();
+          }
+
+          break;
+
+        case 'laptop':
+          if (window.innerWidth > 979 && window.innerWidth <= 1200) {
+            callback();
+          }
+
+          break;
+
+        case 'all':
+          callback();
+          break;
+      }
+    }
+  }
+}; // -- general function end ---
+
+app.run(function () {
+  var appointmentsToggle_btns = document.querySelectorAll('#appointment_toggle');
+  var html = document.querySelector('html');
+  appointmentsToggle_btns.forEach(function (btn) {
+    var appointmentInformation = btn.closest('.appointment_item').querySelector('.appointment_information');
+    var close_btn = btn.closest('.appointment_item').querySelector('.icon_close');
+    btn.addEventListener('click', function () {
+      appointmentInformation.classList.add('show');
+      html.classList.add('overlay');
+    });
+    close_btn.addEventListener('click', function () {
+      appointmentInformation.classList.remove('show');
+      html.classList.remove('overlay');
+    });
+  });
+}, 'all', '#dailyCalendar'); // set user timezone in registration step 1
+
+app.run(function () {
+  var timezone = moment.tz.guess();
+  var timezone_input = document.querySelector('#timezone');
+  timezone_input.value = timezone;
+}, 'all', '#timezone'); // SelectorDropDown --- start ---
 
 var DropDownToggleBtn = document.querySelectorAll('#dropDown');
 DropDownToggleBtn.forEach(function (dropDown) {

@@ -16,6 +16,10 @@
 
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
+
+
+
+
 </head>
 <body>
 
@@ -23,6 +27,13 @@
 
 
     <!-- Scripts -->
+
+    <!-- Time library  -->
+    <script type="text/javascript" src="{{ asset('/access/js/Time/moment.js') }}"></script>
+    <!-- TimeZone library for get user timezone  -->
+    <script type="text/javascript" src="{{ asset('/access/js/Time/moment-timezone-with-data.js') }}"></script>
+
+
     <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
 </body>
 </html>

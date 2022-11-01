@@ -9,8 +9,9 @@ use App\Models\Client;
 use App\Models\Company;
 use App\Models\Employee;
 use App\Models\Service;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+
 
 class CalendarController extends DashboardController
 {
@@ -41,8 +42,15 @@ class CalendarController extends DashboardController
         return $appointments;
     }
 
+
     public function index(){
+        $userTimezone = Auth::user()->timezone;
+        $date = Carbon::now()->timezone($userTimezone)->toArray();
+
+
+
         return view('auth.dashboard.calendar.calendar', [
+            'today'=> $date,
             'appointments' => $this->getAppointments(),
         ]);
     }

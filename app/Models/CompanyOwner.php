@@ -21,6 +21,7 @@ class CompanyOwner extends Model implements Authenticatable
             'fullName' => $data['fullName'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
+            'timezone' => $data['timezone']
         ]);
     }
 

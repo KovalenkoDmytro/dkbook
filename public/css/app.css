@@ -246,6 +246,29 @@ template {
   display: none;
 }
 
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+html.overlay {
+  overflow: hidden;
+}
+html.overlay body:before {
+  content: "";
+  position: fixed;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.icon_close {
+  cursor: pointer;
+}
+
 .container {
   margin: 0 auto;
   display: flex;
@@ -337,6 +360,57 @@ template {
 }
 .scheduled_items .date-time-picker .days .day_row + .day_row {
   margin-top: 10px;
+}
+
+.page-calendar .dailyCalendar .hour_items {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #c4c7c8;
+}
+.page-calendar .dailyCalendar .hour_items .hours_item {
+  display: grid;
+  grid-template-columns: 10% 90%;
+  border-top: 1px solid #c4c7c8;
+}
+.page-calendar .dailyCalendar .hour_items .hours_item:first-child {
+  border-top: none;
+}
+.page-calendar .dailyCalendar .hour_items .hours_item.currently {
+  background-color: #f89406;
+}
+.page-calendar .dailyCalendar .hour_items .hours_item .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  border-right: 1px solid #c4c7c8;
+}
+.page-calendar .dailyCalendar .hour_items .hours_item .appointments {
+  padding: 5px 15px;
+}
+.page-calendar .dailyCalendar .hour_items .hours_item .appointments .appointment_item .appointment_toggle {
+  height: 10px;
+  width: 100%;
+  background-color: #60A4A7;
+  border: 1px solid #c4c7c8;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.page-calendar .dailyCalendar .hour_items .hours_item .appointments .appointment_item .appointment_toggle:hover {
+  background-color: #1991e6;
+}
+.page-calendar .dailyCalendar .hour_items .hours_item .appointments .appointment_item .appointment_information {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+  background-color: #ffffff;
+}
+.page-calendar .dailyCalendar .hour_items .hours_item .appointments .appointment_item .appointment_information.show {
+  opacity: 1;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .page-registration .company_scheduled .scheduled_items {
