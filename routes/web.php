@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\Dashboard\Calendar\DailyCalendarController;
 use App\Http\Controllers\Auth\Dashboard\DashboardController;
 use App\Http\Controllers\Auth\Dashboard\Calendar\CalendarController;
 use App\Http\Controllers\Auth\Registration\CreateController;
@@ -73,8 +74,10 @@ Route::name('user.')->group(function (){
     Route::get('/logout', [LoginController::class,'logout'] )->name('logout');
 });
 
-Route::name('dashboard.')->group(function (){
-    Route::get('/main', [DashboardController::class, 'index'] )->middleware('auth')->name('main');
-    Route::get('/calendar', [CalendarController::class, 'index'] )->middleware('auth')->name('calendar');
+Route::name('dashboard.')->middleware('auth')->group(function (){
+    Route::get('/main', [DashboardController::class, 'index'] )->name('main');
+//    Route::get('/calendar', [CalendarController::class, 'index'] )->middleware('auth')->name('calendar');
+    Route::get('/calendar/', [CalendarController::class, 'index'] )->name('calendar');
+    Route::get('/calendar/day/{date?}', [DailyCalendarController::class, 'index'] )->name('daily_calendar');
 });
 

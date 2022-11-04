@@ -11,47 +11,29 @@ use App\Models\Employee;
 use App\Models\Service;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Http\Request;
 
 class CalendarController extends DashboardController
 {
-    public function getCompanyAppointments(){
-        $company = Company::getCompany(auth()->id());
-        return Appointment::getAppointments($company->id)->all();
-    }
 
-    public function getAppointments() :array{
-        $appointmentsModel = $this->getCompanyAppointments();
-        $appointments = [];
-        foreach ($appointmentsModel as $key => $appointment ){
-            $appointments[$key]['id'] = $appointment->id;
-            $appointments[$key]['client'] = Client::getClient($appointment->client_id);
-            $appointments[$key]['service'] = Service::all()->where('id', $appointment->service_id)->first();
-            if ($appointment->employee_id !== null){
-                $appointments[$key]['employee'] = Employee::all()->where('id', $appointment->employee_id)->first();
-            }else{
-                $appointments[$key]['employee'] = null;
-            }
-            $appointments[$key]['date'] = $appointment->date;
-            if ($appointment->payed){
-                $appointments[$key]['payed'] = true;
-            }else{
-                $appointments[$key]['payed'] = false;
-            }
-        }
-        return $appointments;
+    public $today = '';
+
+    public function __construct()
+    {
+        $this->today = Carbon::now();
     }
 
 
-    public function index(){
+    public function index(Request $request)
+    {
+
         $userTimezone = Auth::user()->timezone;
-        $date = Carbon::now()->timezone($userTimezone)->toArray();
-
+        $current_user_date = $this->today->timezone($userTimezone)->toArray();
 
 
         return view('auth.dashboard.calendar.calendar', [
-            'today'=> $date,
-            'appointments' => $this->getAppointments(),
+            'today'=>$this->today
+
         ]);
     }
 }
