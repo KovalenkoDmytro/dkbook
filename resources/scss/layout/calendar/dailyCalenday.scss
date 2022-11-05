@@ -8,7 +8,7 @@
             border: 1px solid $border_color;
             .hours_item{
                 display: grid;
-                grid-template-columns: 10% 90%;
+                grid-template-columns: 10% 85% 5%;
                 border-top: 1px solid $border_color;
                 &:first-child{
                     border-top: none;
@@ -52,6 +52,24 @@
                         }
                     }
 
+                }
+                .addTask{
+                    display: flex;
+                    align-items: center;
+                    align-content: center;
+                    justify-content: center;
+                    .icon_plus{
+                        cursor: pointer;
+                        &:before {
+                            @include transition;
+                            font-size: 20px;
+                        }
+                        &:hover{
+                            &:before{
+                                color: $link_color_hover;
+                            }
+                        }
+                    }
                 }
             }
         }

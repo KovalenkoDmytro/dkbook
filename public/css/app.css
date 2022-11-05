@@ -31,6 +31,9 @@
 .icon.icon_edit:before {
   content: "\e808";
 }
+.icon.icon_plus:before {
+  content: "\e809";
+}
 
 * {
   margin: 0;
@@ -369,7 +372,7 @@ html.overlay body:before {
 }
 .page-calendar .dailyCalendar .hour_items .hours_item {
   display: grid;
-  grid-template-columns: 10% 90%;
+  grid-template-columns: 10% 85% 5%;
   border-top: 1px solid #c4c7c8;
 }
 .page-calendar .dailyCalendar .hour_items .hours_item:first-child {
@@ -411,6 +414,22 @@ html.overlay body:before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.page-calendar .dailyCalendar .hour_items .hours_item .addTask {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.page-calendar .dailyCalendar .hour_items .hours_item .addTask .icon_plus {
+  cursor: pointer;
+}
+.page-calendar .dailyCalendar .hour_items .hours_item .addTask .icon_plus:before {
+  transition: all 0.5s;
+  font-size: 20px;
+}
+.page-calendar .dailyCalendar .hour_items .hours_item .addTask .icon_plus:hover:before {
+  color: #1991e6;
 }
 
 .page-registration .company_scheduled .scheduled_items {

@@ -43,5 +43,10 @@
             content: '\E808';
         }
     }
+    &.icon_plus{
+        &:before{
+            content: '\E809';
+        }
+    }
 }
 

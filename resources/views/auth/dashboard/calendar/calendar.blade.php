@@ -7,6 +7,7 @@
         <p>{{$today}}</p>
         <a href="{{route('dashboard.daily_calendar',['day'=>$today])}}" class="today">TODAY {{$today}}</a>
 
+
         <div id='calendar'></div>
 
 

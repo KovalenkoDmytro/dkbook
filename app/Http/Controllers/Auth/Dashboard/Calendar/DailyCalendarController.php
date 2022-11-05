@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 class DailyCalendarController extends CalendarController
 {
     private array $appointments = [];
+    private object $prev_day;
+    private object $next_day;
 
     public function index(Request $request)
     {
@@ -20,19 +22,24 @@ class DailyCalendarController extends CalendarController
 
         $userTimezone = Auth::user()->timezone;
 
-        if($request->has('day')){
-            $current_day = $request->query('day');
-            $current_day = Carbon::parse($current_day);
-            $this->appointments = $appointment->getDailyAppointments($company->id, $current_day);
-        }else{
-            $current_day = $this->today;
+        if ($request->has('day')) {
+            $chose_day = $request->query('day');
+            $chose_day = Carbon::parse($chose_day);
+            $this->appointments = $appointment->getDailyAppointments($company->id, $chose_day);
+        } else {
+            $chose_day = $this->today;
         }
 
+        $this->prev_day = Carbon::createFromDate($chose_day->year, $chose_day->month, $chose_day->day - 1);
+        $this->next_day = Carbon::createFromDate($chose_day->year, $chose_day->month, $chose_day->day + 1);
+
+
+
         return view('auth.dashboard.calendar.daily_calendar', [
-            'yesterday' => $current_day->subDay(1)->toDateString(),
+            'preview_day' => $this->prev_day->toDateString(),
             'today' => $this->today->timezone($userTimezone)->toArray(),
-            'current_day' => $current_day,
-            'tomorrow' => $current_day->addDay(2)->toDateString(),
+            'chose_day' => $chose_day,
+            'next_day' => $this->next_day->toDateString(),
             'appointments' => $this->appointments,
         ]);
     }
