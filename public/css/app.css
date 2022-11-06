@@ -377,17 +377,17 @@ html.overlay body:before {
   margin-top: 10px;
 }
 
-.page-calendar .monthlyCalendar .days .days_name {
+.weeks .week {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 }
-.page-calendar .monthlyCalendar .days .days_name .day_name {
+.weeks .week .day {
   text-align: center;
   padding: 2px 0;
   border: 1px solid #c4c7c8;
   font-weight: 600;
 }
-.page-calendar .monthlyCalendar .days .days_name .day_name + .day_name {
+.weeks .week .day + .day {
   border-left: none;
 }
 

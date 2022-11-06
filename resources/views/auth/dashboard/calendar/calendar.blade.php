@@ -8,6 +8,7 @@
         <a href="{{route('dashboard.daily_calendar',['day'=>$today->toDateString()])}}" class="today">TODAY {{$today->toDateString()}}</a>
 
         <div class="monthlyCalendar">
+
 {{--            <div class="days">--}}
 
 {{--                <div class="days_name">--}}
