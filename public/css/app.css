@@ -34,6 +34,12 @@
 .icon.icon_plus:before {
   content: "\e809";
 }
+.icon.icon_right:before {
+  content: "\f105";
+}
+.icon.icon_left:before {
+  content: "\f104";
+}
 
 * {
   margin: 0;
@@ -78,6 +84,12 @@ pre {
 a {
   background-color: transparent;
   text-decoration: none;
+  transition: all 0.5s;
+}
+@media (min-width: 979px) {
+  a:hover {
+    color: #1991e6;
+  }
 }
 
 abbr[title] {
@@ -365,6 +377,37 @@ html.overlay body:before {
   margin-top: 10px;
 }
 
+.page-calendar .monthlyCalendar .days .days_name {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.page-calendar .monthlyCalendar .days .days_name .day_name {
+  text-align: center;
+  padding: 2px 0;
+  border: 1px solid #c4c7c8;
+  font-weight: 600;
+}
+.page-calendar .monthlyCalendar .days .days_name .day_name + .day_name {
+  border-left: none;
+}
+
+.page-calendar .dailyCalendar .calendar_head {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.page-calendar .dailyCalendar .calendar_head span {
+  display: block;
+}
+@media (min-width: 979px) {
+  .page-calendar .dailyCalendar .calendar_head .chose_day {
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+  }
+}
 .page-calendar .dailyCalendar .hour_items {
   display: flex;
   flex-direction: column;
@@ -430,6 +473,30 @@ html.overlay body:before {
 }
 .page-calendar .dailyCalendar .hour_items .hours_item .addTask .icon_plus:hover:before {
   color: #1991e6;
+}
+.page-calendar .dailyCalendar .calendar_pagination {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.page-calendar .dailyCalendar .calendar_pagination .pagination_items {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+.page-calendar .dailyCalendar .calendar_pagination .pagination_items .pagination_item {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+.page-calendar .dailyCalendar .calendar_pagination .pagination_items .pagination_item:last-child {
+  margin-left: 10px;
+}
+.page-calendar .dailyCalendar .calendar_pagination .pagination_items .pagination_item .icon_left {
+  margin-right: 10px;
+}
+.page-calendar .dailyCalendar .calendar_pagination .pagination_items .pagination_item .icon_right {
+  margin-left: 10px;
 }
 
 .page-registration .company_scheduled .scheduled_items {

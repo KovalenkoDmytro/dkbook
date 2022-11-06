@@ -1,0 +1,19 @@
+.page-calendar {
+    .monthlyCalendar{
+        .days{
+            .days_name{
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                .day_name{
+                    text-align: center;
+                    padding: 2px 0;
+                    border: 1px solid $border_color;
+                    font-weight: 600;
+                }
+                .day_name + .day_name{
+                    border-left: none;
+                }
+            }
+        }
+    }
+}

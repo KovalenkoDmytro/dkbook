@@ -48,5 +48,16 @@
             content: '\E809';
         }
     }
+    &.icon_right{
+        &:before{
+            content: '\F105';
+        }
+    }
+
+    &.icon_left{
+        &:before{
+            content: '\F104';
+        }
+    }
 }
 

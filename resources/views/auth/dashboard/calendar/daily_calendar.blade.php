@@ -1,23 +1,36 @@
 @php
-//    dump($chose_day);
-
+    $present_day = $today->toArray();
 @endphp
 @extends('layouts.dashboard')
 
 @section('dashboard.content')
     <div class="page-calendar">
-        <h1>WELCOME TO Calendar</h1>
-
         <div id="dailyCalendar" class="dailyCalendar">
+            <p class="calendar_head">
+                <span class="chose_day">{{$chose_day->toFormattedDateString()}}</span>
+                <span>{{__('chose_day')}}</span>
+            </p>
             <div class="calendar_pagination">
-                <a href="{{route('dashboard.daily_calendar',['day'=>$preview_day])}}" class="yesterday">{{$preview_day}}</a>
-                <p class="today">{{__('today')}} {{$today['formatted']}}</p>
-                <p class="today">show_day {{$chose_day}}</p>
-                <a href="{{route('dashboard.daily_calendar',['day'=>$next_day])}}" class="tomorrow">{{$next_day}}</a>
+                <a class="today" href="{{route('dashboard.daily_calendar',['day'=>$today->toDateString()])}}">
+                    <span>{{__('today')}} </span>
+                    <span>{{ $today->toFormattedDateString()}}</span>
+                </a>
+                <div class="pagination_items">
+                    <a href="{{route('dashboard.daily_calendar',['day'=>$preview_day->toDateString()])}}"
+                       class="pagination_item yesterday">
+                        <i class="icon icon_left"></i>
+                        <span>{{$preview_day->toFormattedDateString()}}</span>
+                    </a>
+                    <a href="{{route('dashboard.daily_calendar',['day'=>$next_day->toDateString()])}}"
+                       class="pagination_item tomorrow">
+                        <span>{{$next_day->toFormattedDateString()}}</span>
+                        <i class="icon icon_right"></i>
+                    </a>
+                </div>
             </div>
             <div class="hour_items">
                 @for($count = 0 ; $count < 24; $count++)
-                    <div class="{{ $today['hour'] === $count ? 'hours_item currently' :'hours_item'}}">
+                    <div class="{{ $present_day['hour'] === $count ? 'hours_item currently' :'hours_item'}}">
                         <div class="title">{{$count < 10? '0'.$count : $count}}:00</div>
                         <div class="appointments">
                             @foreach($appointments as $appointment)
@@ -42,14 +55,11 @@
                         <div class="addTask">
                             <i id="addTask" class="icon icon_plus"></i>
                         </div>
-
                     </div>
                 @endfor
             </div>
         </div>
-
     </div>
-
 @endsection
 
 

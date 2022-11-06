@@ -36,6 +36,13 @@ pre {
 a {
     background-color: transparent;
     text-decoration: none;
+    @include transition;
+    @include laptop{
+        &:hover{
+            color: $link_color_hover;
+        }
+    }
+
 }
 abbr[title] {
     border-bottom: none; /* 1 */
