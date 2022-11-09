@@ -387,6 +387,9 @@ html.overlay body:before {
   border: 1px solid #c4c7c8;
   font-weight: 600;
 }
+.weeks .week .day.today {
+  background-color: #1991e6;
+}
 .weeks .week .day + .day {
   border-left: none;
 }

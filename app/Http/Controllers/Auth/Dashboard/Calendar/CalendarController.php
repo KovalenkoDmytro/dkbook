@@ -59,7 +59,11 @@ class CalendarController extends DashboardController
                     $day_index = array_search($day, $first_week);
 
                     if ($day_index || $day_index === 0){
-                        echo  "<a class='day' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'>{$weeks[$week][$day_index]->day}</a>";
+                        if ($weeks[$week][$day_index]->day === $this->today->day){
+                            echo "<a class='day today' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'>{$weeks[$week][$day_index]->day}</a>";
+                        }else{
+                            echo "<a class='day' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'>{$weeks[$week][$day_index]->day}</a>";
+                        }
                     }else{
                         echo "<p class='day'>Empty</p>";
                     }
@@ -69,7 +73,11 @@ class CalendarController extends DashboardController
                 for ($day = 0; $day < 7; $day++) {
 
                     if (isset($weeks[$week][$day])) {
-                        echo "<a class='day' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'>{$weeks[$week][$day]->day}</a>";
+                        if ($weeks[$week][$day]->day === $this->today->day){
+                            echo "<a class='day today' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'>{$weeks[$week][$day]->day}</a>";
+                        }else{
+                            echo "<a class='day' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'>{$weeks[$week][$day]->day}</a>";
+                        }
                     }
                     else {
                         echo "<p class='day'>Empty</p>";

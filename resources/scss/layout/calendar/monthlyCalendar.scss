@@ -10,6 +10,9 @@
                     padding: 2px 0;
                     border: 1px solid $border_color;
                     font-weight: 600;
+                    &.today{
+                        background-color: $primary_color;
+                    }
                 }
                 .day + .day{
                     border-left: none;
