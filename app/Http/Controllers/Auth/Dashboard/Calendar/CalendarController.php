@@ -35,61 +35,55 @@ class CalendarController extends DashboardController
     private function createMonthlyCalendar()
     {
 
-
         $weeks = [];
         foreach ($this->days_of_month as $day) {
             $weeks[$day->weekNumberInMonth][] = $day;
         }
 
-        $first_week = array_map(function ($day){
+        $first_week = array_map(function ($day) {
             return $day->dayOfWeekIso;
-        },$weeks[1]);
+        }, $weeks[1]);
 
-
-
-        echo '<div class="weeks"> ';
+        $html = '<div class="weeks"> ';
 
         for ($week = 1; $week <= count($weeks); $week++) {
-            echo '<div class="week"> ';
+            $html .= '<div class="week"> ';
 
+            $first_week_html = '';
+            $other_week_html = '';
             // create first week
             if ($week === 1) {
                 for ($day = 1; $day <= 7; $day++) {
-
                     $day_index = array_search($day, $first_week);
-
-                    if ($day_index || $day_index === 0){
-                        if ($weeks[$week][$day_index]->day === $this->today->day){
-                            echo "<a class='day today' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'>{$weeks[$week][$day_index]->day}</a>";
-                        }else{
-                            echo "<a class='day' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'>{$weeks[$week][$day_index]->day}</a>";
+                    if ($day_index || $day_index === 0) {
+                        if ($weeks[$week][$day_index]->day === $this->today->day) {
+                            $first_week_html .= "<a class='day today' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'>{$weeks[$week][$day_index]->day}</a>";
+                        } else {
+                            $first_week_html .= "<a class='day' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'>{$weeks[$week][$day_index]->day}</a>";
                         }
-                    }else{
-                        echo "<p class='day'>Empty</p>";
+                    } else {
+                        $first_week_html .= "<p class='day'>Empty</p>";
                     }
                 }
-
+                $html .= $first_week_html;
             } else {
                 for ($day = 0; $day < 7; $day++) {
-
                     if (isset($weeks[$week][$day])) {
-                        if ($weeks[$week][$day]->day === $this->today->day){
-                            echo "<a class='day today' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'>{$weeks[$week][$day]->day}</a>";
-                        }else{
-                            echo "<a class='day' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'>{$weeks[$week][$day]->day}</a>";
+                        if ($weeks[$week][$day]->day === $this->today->day) {
+                            $other_week_html .= "<a class='day today' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'>{$weeks[$week][$day]->day}</a>";
+                        } else {
+                            $other_week_html .= "<a class='day' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'>{$weeks[$week][$day]->day}</a>";
                         }
-                    }
-                    else {
-                        echo "<p class='day'>Empty</p>";
+                    } else {
+                        $other_week_html .= "<p class='day'>Empty</p>";
                     }
                 }
+                $html .= $other_week_html;
             }
-
-
-            echo '</div>';
+            $html .= '</div>';
         }
-        echo '</div>';
-
+        $html .= '</div>';
+        return $html;
     }
 
 
@@ -101,7 +95,7 @@ class CalendarController extends DashboardController
         return view('auth.dashboard.calendar.calendar', [
             'today' => $this->today->timezone($userTimezone),
             'monthlyDates' => $this->days_of_month,
-//            'calendar'=>$this->createMonthlyCalendar(),
+            'calendar' => $this->createMonthlyCalendar(),
         ]);
     }
 
