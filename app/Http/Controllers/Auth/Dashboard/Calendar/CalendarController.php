@@ -85,7 +85,7 @@ class CalendarController extends DashboardController
         }
         $days .= '</div>';
 
-        $html.=$days;
+        $html .= $days;
 
 
         for ($week = 1; $week <= count($weeks); $week++) {
@@ -98,7 +98,9 @@ class CalendarController extends DashboardController
                 for ($day = 1; $day <= 7; $day++) {
                     $day_index = array_search($day, $first_week);
                     if ($day_index || $day_index === 0) {
-                        if ($weeks[$week][$day_index]->day === $this->today->day) {
+                        if(($weeks[$week][$day_index]->day === $this->today->day) &&
+                            ($this->chose_month->month === $this->today->month)
+                        ) {
                             $first_week_html .= "<a class='day today' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'>{$weeks[$week][$day_index]->day}</a>";
                         } else {
                             $first_week_html .= "<a class='day' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'>{$weeks[$week][$day_index]->day}</a>";
@@ -111,7 +113,9 @@ class CalendarController extends DashboardController
             } else {
                 for ($day = 0; $day < 7; $day++) {
                     if (isset($weeks[$week][$day])) {
-                        if ($weeks[$week][$day]->day === $this->today->day) {
+                        if (($weeks[$week][$day]->day === $this->today->day) &&
+                            ($this->chose_month->month === $this->today->month)
+                        ) {
                             $other_week_html .= "<a class='day today' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'>{$weeks[$week][$day]->day}</a>";
                         } else {
                             $other_week_html .= "<a class='day' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'>{$weeks[$week][$day]->day}</a>";
@@ -137,7 +141,7 @@ class CalendarController extends DashboardController
 
         return view('auth.dashboard.calendar.calendar', [
             'prevMonth' => $this->getPreviewMonth(),
-            'choseMonth'=> $this->chose_month,
+            'choseMonth' => $this->chose_month,
             'nextMonth' => $this->getNextMonth(),
 
             'today' => $this->today->timezone($userTimezone),
