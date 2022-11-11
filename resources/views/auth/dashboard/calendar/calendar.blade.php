@@ -16,7 +16,7 @@
                     <a href="{{route('dashboard.calendar',['month'=>$prevMonth->toDateString()])}}" class="prevMonth">
                         <i class="icon icon_left"></i>
                     </a>
-                    <a href="{{route('dashboard.calendar',['month'=>$today->toDateString()])}}" class="prevMonth">{{__('Today')}}</a>
+                    <a href="{{route('dashboard.calendar',['month'=>$today->toDateString()])}}" class="currentMonth">{{__('Today')}}</a>
                     <a href="{{route('dashboard.calendar',['month'=>$nextMonth->toDateString()])}}" class="nextMonth">
                         <i class="icon icon_right"></i>
                     </a>

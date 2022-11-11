@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 class CalendarController extends DashboardController
 {
 
-    public $today;
-    private $days_of_month;
-    private $chose_month;
+    public Carbon $today;
+    private array $days_of_month;
+    private Carbon $chose_month;
 
     public function __construct(Request $request)
     {
@@ -27,9 +27,6 @@ class CalendarController extends DashboardController
         $this->days_of_month = $this->getMonthlyDays();
     }
 
-//    private function getCurrentMonth(){
-//        return $this->today->month;
-//    }
     private function getPreviewMonth(): Carbon
     {
         $time = new Carbon;
@@ -52,10 +49,7 @@ class CalendarController extends DashboardController
         $days_in_month = [];
 
         for ($day = 1; $day <= $count_days_in_month; $day++) {
-
-
             $days_in_month[] = Carbon::parse("{$this->chose_month->year}-{$this->chose_month->month}-{$day}");
-
         }
         return $days_in_month;
     }
@@ -101,12 +95,12 @@ class CalendarController extends DashboardController
                         if(($weeks[$week][$day_index]->day === $this->today->day) &&
                             ($this->chose_month->month === $this->today->month)
                         ) {
-                            $first_week_html .= "<a class='day today' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'>{$weeks[$week][$day_index]->day}</a>";
+                            $first_week_html .= "<a class='day today' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'><p class='date'>{$weeks[$week][$day_index]->day}</p><div class='appointments'></div></a>";
                         } else {
-                            $first_week_html .= "<a class='day' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'>{$weeks[$week][$day_index]->day}</a>";
+                            $first_week_html .= "<a class='day' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'><p class='date'>{$weeks[$week][$day_index]->day}</p><div class='appointments'></div></a>";
                         }
                     } else {
-                        $first_week_html .= "<p class='day'>Empty</p>";
+                        $first_week_html .= "<p class='day _other'></p>";
                     }
                 }
                 $html .= $first_week_html;
@@ -116,12 +110,12 @@ class CalendarController extends DashboardController
                         if (($weeks[$week][$day]->day === $this->today->day) &&
                             ($this->chose_month->month === $this->today->month)
                         ) {
-                            $other_week_html .= "<a class='day today' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'>{$weeks[$week][$day]->day}</a>";
+                            $other_week_html .= "<a class='day today' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'><p class='date'>{$weeks[$week][$day]->day}</p><div class='appointments'></div></a>";
                         } else {
-                            $other_week_html .= "<a class='day' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'>{$weeks[$week][$day]->day}</a>";
+                            $other_week_html .= "<a class='day' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'><p class='date'>{$weeks[$week][$day]->day}</p><div class='appointments'></div></a>";
                         }
                     } else {
-                        $other_week_html .= "<p class='day'>Empty</p>";
+                        $other_week_html .= "<p class='day _other'></p>";
                     }
                 }
                 $html .= $other_week_html;
@@ -132,22 +126,16 @@ class CalendarController extends DashboardController
         return $html;
     }
 
-
     public function index(Request $request)
     {
-
-
         $userTimezone = Auth::user()->timezone;
 
         return view('auth.dashboard.calendar.calendar', [
             'prevMonth' => $this->getPreviewMonth(),
             'choseMonth' => $this->chose_month,
             'nextMonth' => $this->getNextMonth(),
-
             'today' => $this->today->timezone($userTimezone),
             'calendar' => $this->createMonthlyCalendar(),
         ]);
     }
-
-
 }

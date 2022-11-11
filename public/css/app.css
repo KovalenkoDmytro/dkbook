@@ -389,26 +389,80 @@ html.overlay body:before {
   align-items: center;
   align-content: center;
 }
+@media (min-width: 979px) {
+  .page-calendar .monthlyCalendar .calendar_head .choseMonth {
+    font-size: 25px;
+  }
+}
+.page-calendar .monthlyCalendar .calendar_head .choseMonth .month {
+  font-weight: 700;
+  margin-right: 7px;
+}
 .page-calendar .monthlyCalendar .calendar_head .pagination {
   display: flex;
   align-items: center;
   align-content: center;
+}
+.page-calendar .monthlyCalendar .calendar_head .pagination a {
+  cursor: pointer;
+  border: 1px solid #c4c7c8;
+  height: 25px;
+  min-width: 25px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.page-calendar .monthlyCalendar .calendar_head .pagination a.currentMonth {
+  padding: 0 10px;
+  margin: 0 5px;
+  font-weight: 600;
+}
+.page-calendar .monthlyCalendar .calendar {
+  height: 50vh;
 }
 .page-calendar .monthlyCalendar .calendar .week, .page-calendar .monthlyCalendar .calendar .days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 }
 .page-calendar .monthlyCalendar .calendar .week .day, .page-calendar .monthlyCalendar .calendar .days .day {
-  text-align: center;
-  padding: 2px 0;
+  text-align: right;
+  padding: 2px 5px 2px 0;
   border: 1px solid #c4c7c8;
+  border-bottom: none;
   font-weight: 600;
 }
-.page-calendar .monthlyCalendar .calendar .week .day.today, .page-calendar .monthlyCalendar .calendar .days .day.today {
-  background-color: #1991e6;
+.page-calendar .monthlyCalendar .calendar .week .day.today .date, .page-calendar .monthlyCalendar .calendar .days .day.today .date {
+  border-radius: 50%;
+  background-color: #fb4444;
+  color: #ffffff;
+}
+.page-calendar .monthlyCalendar .calendar .week .day .date, .page-calendar .monthlyCalendar .calendar .days .day .date {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.page-calendar .monthlyCalendar .calendar .week:last-child .day, .page-calendar .monthlyCalendar .calendar .days:last-child .day {
+  border-bottom: 1px solid #c4c7c8;
 }
 .page-calendar .monthlyCalendar .calendar .week .day + .day, .page-calendar .monthlyCalendar .calendar .days .day + .day {
   border-left: none;
+}
+.page-calendar .monthlyCalendar .calendar .week {
+  height: 20%;
+}
+.page-calendar .monthlyCalendar .calendar .week .day {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.page-calendar .monthlyCalendar .calendar .days {
+  margin-bottom: 5px;
+}
+.page-calendar .monthlyCalendar .calendar .days .day {
+  border: none;
 }
 
 .page-calendar .dailyCalendar .calendar_head {
