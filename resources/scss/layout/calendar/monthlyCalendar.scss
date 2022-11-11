@@ -1,8 +1,24 @@
-//.page-calendar {
-//    .monthlyCalendar{
-//        display: flex;
-        .weeks{
-            .week{
+.page-calendar {
+    .monthlyCalendar{
+        .calendar_head{
+            display: flex;
+            align-items: center;
+            align-content: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            .choseMonth{
+                display: flex;
+                align-items: center;
+                align-content: center;
+            }
+            .pagination{
+                display: flex;
+                align-items: center;
+                align-content: center;
+            }
+        }
+        .calendar{
+            .week,.days{
                 display: grid;
                 grid-template-columns: repeat(7, 1fr);
                 .day{
@@ -19,5 +35,5 @@
                 }
             }
         }
-//    }
-//}
+    }
+}

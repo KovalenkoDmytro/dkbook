@@ -13,28 +13,58 @@ class CalendarController extends DashboardController
 
     public $today;
     private $days_of_month;
+    private $chose_month;
 
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->today = Carbon::now();
+        $month = new Carbon;
+        if ($request->has('month')) {
+            $this->chose_month = $month->parse($request->month);;
+        } else {
+            $this->chose_month = $this->today;
+        }
         $this->days_of_month = $this->getMonthlyDays();
+    }
+
+//    private function getCurrentMonth(){
+//        return $this->today->month;
+//    }
+    private function getPreviewMonth(): Carbon
+    {
+        $time = new Carbon;
+        return $time->parse($this->chose_month)
+            ->clone($this->chose_month)->subMonth();
+    }
+
+    private function getNextMonth(): Carbon
+    {
+        $time = new Carbon;
+        return $time->parse($this->chose_month)
+            ->clone($this->chose_month)->addMonth();
     }
 
     private function getMonthlyDays(): array
     {
-        $count_days_in_month = $this->today->daysInMonth;
+        $time = new Carbon;
+        $count_days_in_month = $time->parse($this->chose_month)->daysInMonth;
+
         $days_in_month = [];
 
         for ($day = 1; $day <= $count_days_in_month; $day++) {
-            $days_in_month[] = Carbon::parse("{$this->today->year}-{$this->today->month}-{$day}");
+
+
+            $days_in_month[] = Carbon::parse("{$this->chose_month->year}-{$this->chose_month->month}-{$day}");
+
         }
         return $days_in_month;
     }
 
-
-    private function createMonthlyCalendar()
+    private function createMonthlyCalendar(): string
     {
 
+
+        //creat weeks
         $weeks = [];
         foreach ($this->days_of_month as $day) {
             $weeks[$day->weekNumberInMonth][] = $day;
@@ -44,7 +74,19 @@ class CalendarController extends DashboardController
             return $day->dayOfWeekIso;
         }, $weeks[1]);
 
-        $html = '<div class="weeks"> ';
+
+        $html = '<div class="calendar"> ';
+
+        //create name days of week
+        $days = '<div class="days">';
+        $period = CarbonPeriod::create('2022-11-07', '2022-11-13');
+        foreach ($period->toArray() as $day) {
+            $days .= "<p class='day'>{$day->locale(config('global.user.location'))->shortDayName} </p>";
+        }
+        $days .= '</div>';
+
+        $html.=$days;
+
 
         for ($week = 1; $week <= count($weeks); $week++) {
             $html .= '<div class="week"> ';
@@ -90,11 +132,15 @@ class CalendarController extends DashboardController
     public function index(Request $request)
     {
 
+
         $userTimezone = Auth::user()->timezone;
-        $this->createMonthlyCalendar();
+
         return view('auth.dashboard.calendar.calendar', [
+            'prevMonth' => $this->getPreviewMonth(),
+            'choseMonth'=> $this->chose_month,
+            'nextMonth' => $this->getNextMonth(),
+
             'today' => $this->today->timezone($userTimezone),
-            'monthlyDates' => $this->days_of_month,
             'calendar' => $this->createMonthlyCalendar(),
         ]);
     }
