@@ -56,7 +56,7 @@ class CalendarController extends DashboardController
         return $days_in_month;
     }
 
-    private function createMonthlyCalendar(): string
+    private function createMonthlyCalendar()
     {
         //creat weeks
         $weeks = [];
@@ -96,9 +96,9 @@ class CalendarController extends DashboardController
                             ($this->chose_month->month === $this->today->month) &&
                             ($this->chose_month->year === $this->today->year)
                         ) {
-                            $first_week_html .= "<a class='day today' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'><p class='date'>{$weeks[$week][$day_index]->day}</p><div class='appointments'></div></a>";
+                            $first_week_html .= "<a class='day today' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'><p class='date'>{$weeks[$week][$day_index]->day}</p><div class='appointments'>{$this->createAppointments($weeks[$week][$day_index]->toDateString())}</div></a>";
                         } else {
-                            $first_week_html .= "<a class='day' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'><p class='date'>{$weeks[$week][$day_index]->day}</p><div class='appointments'></div></a>";
+                            $first_week_html .= "<a class='day' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'><p class='date'>{$weeks[$week][$day_index]->day}</p><div class='appointments'>{$this->createAppointments($weeks[$week][$day_index]->toDateString())}</div></a>";
                         }
                     } else {
                         $first_week_html .= "<p class='day _other'></p>";
@@ -112,9 +112,9 @@ class CalendarController extends DashboardController
                             ($this->chose_month->month === $this->today->month)&&
                             ($this->chose_month->year === $this->today->year)
                         ) {
-                            $other_week_html .= "<a class='day today' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'><p class='date'>{$weeks[$week][$day]->day}</p><div class='appointments'></div></a>";
+                            $other_week_html .= "<a class='day today' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'><p class='date'>{$weeks[$week][$day]->day}</p><div class='appointments'>{$this->createAppointments($weeks[$week][$day]->toDateString())}</div></a>";
                         } else {
-                            $other_week_html .= "<a class='day' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'><p class='date'>{$weeks[$week][$day]->day}</p><div class='appointments'></div></a>";
+                            $other_week_html .= "<a class='day' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'><p class='date'>{$weeks[$week][$day]->day}</p><div class='appointments'>{$this->createAppointments($weeks[$week][$day]->toDateString())}</div></a>";
                         }
                     } else {
                         $other_week_html .= "<p class='day _other'></p>";
@@ -126,6 +126,30 @@ class CalendarController extends DashboardController
         }
         $html .= '</div>';
         return $html;
+//        return $weeks;
+    }
+
+    private function createAppointments($day){
+
+        $day_appointments = array_filter($this->appointments,function($element) use ($day) {
+            $date =  Carbon::parse($element['date']);
+            if($date->toDateString() === $day ){
+                return $day;
+            }
+        });
+
+
+        $count = count($day_appointments);
+
+        if ($count>0){
+            return "<i class='icon icon_client'></i><p>({$count})</p>";
+        }
+
+//        $html = '';
+//        foreach ($day_appointments as $appointment){
+//            $html.= "<p class='appointment'></p>";
+//        }
+//        return $html;
     }
 
     public function index(Request $request)

@@ -59,5 +59,15 @@
             content: '\E80D';
         }
     }
+    &.icon_information{
+        &:before{
+            content: '\E80E';
+        }
+    }
+    &.icon_client{
+        &:before{
+            content: '\E80F';
+        }
+    }
 }
 
