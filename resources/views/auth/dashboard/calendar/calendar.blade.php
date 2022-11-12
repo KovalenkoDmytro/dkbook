@@ -4,7 +4,7 @@
     <div class="page-calendar">
         <h1>WELCOME TO Calendar</h1>
 
-
+        @dump($appointments)
 
         <div class="monthlyCalendar">
             <div class="calendar_head">

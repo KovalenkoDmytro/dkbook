@@ -34,9 +34,14 @@ class Appointment extends Model
     }
 
 
-    public function getAllAppointments($company_id): array
+    public function getMonthlyAppointments($company_id, $date): array
     {
-        $appointmentsModel = Appointment::where('company_id', $company_id)->get()->all();
+        $current_date = Carbon::parse($date);
+        $appointmentsModel = Appointment::where('company_id', $company_id, $date)
+            ->whereYear('date', $current_date->year)
+            ->whereMonth('date', $current_date->month)
+            ->get()
+            ->all();
 
         return $this->createAppointments_Array($appointmentsModel);
     }

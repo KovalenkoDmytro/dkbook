@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth\Dashboard\Calendar;
 
 use App\Http\Controllers\Auth\Dashboard\DashboardController;
+use App\Models\Appointment;
+use App\Models\Company;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Auth;
@@ -10,10 +12,10 @@ use Illuminate\Http\Request;
 
 class CalendarController extends DashboardController
 {
-
     public Carbon $today;
     private array $days_of_month;
     private Carbon $chose_month;
+    private array $appointments = [];
 
     public function __construct(Request $request)
     {
@@ -56,8 +58,6 @@ class CalendarController extends DashboardController
 
     private function createMonthlyCalendar(): string
     {
-
-
         //creat weeks
         $weeks = [];
         foreach ($this->days_of_month as $day) {
@@ -93,7 +93,8 @@ class CalendarController extends DashboardController
                     $day_index = array_search($day, $first_week);
                     if ($day_index || $day_index === 0) {
                         if(($weeks[$week][$day_index]->day === $this->today->day) &&
-                            ($this->chose_month->month === $this->today->month)
+                            ($this->chose_month->month === $this->today->month) &&
+                            ($this->chose_month->year === $this->today->year)
                         ) {
                             $first_week_html .= "<a class='day today' href='/calendar/day?day={$weeks[$week][$day_index]->format("Y-m-d")}'><p class='date'>{$weeks[$week][$day_index]->day}</p><div class='appointments'></div></a>";
                         } else {
@@ -108,7 +109,8 @@ class CalendarController extends DashboardController
                 for ($day = 0; $day < 7; $day++) {
                     if (isset($weeks[$week][$day])) {
                         if (($weeks[$week][$day]->day === $this->today->day) &&
-                            ($this->chose_month->month === $this->today->month)
+                            ($this->chose_month->month === $this->today->month)&&
+                            ($this->chose_month->year === $this->today->year)
                         ) {
                             $other_week_html .= "<a class='day today' href='/calendar/day?day={$weeks[$week][$day]->format("Y-m-d")}'><p class='date'>{$weeks[$week][$day]->day}</p><div class='appointments'></div></a>";
                         } else {
@@ -129,6 +131,10 @@ class CalendarController extends DashboardController
     public function index(Request $request)
     {
         $userTimezone = Auth::user()->timezone;
+        $appointments = new Appointment();
+        $company = Company::getCompany(auth()->id());
+
+        $this->appointments = $appointments->getMonthlyAppointments($company->id, $this->chose_month);
 
         return view('auth.dashboard.calendar.calendar', [
             'prevMonth' => $this->getPreviewMonth(),
@@ -136,6 +142,7 @@ class CalendarController extends DashboardController
             'nextMonth' => $this->getNextMonth(),
             'today' => $this->today->timezone($userTimezone),
             'calendar' => $this->createMonthlyCalendar(),
+            'appointments'=> $this->appointments
         ]);
     }
 }

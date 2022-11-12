@@ -18,7 +18,7 @@ class DailyCalendarController extends CalendarController
 
     public function index(Request $request)
     {
-        $company = Company::getCompany(auth()->id());
+
         $appointment = new Appointment();
 
         $userTimezone = Auth::user()->timezone;
@@ -26,10 +26,12 @@ class DailyCalendarController extends CalendarController
         if ($request->has('day')) {
             $chose_day = $request->query('day');
             $chose_day = Carbon::parse($chose_day);
-            $this->appointments = $appointment->getDailyAppointments($company->id, $chose_day);
         } else {
             $chose_day = $this->today;
+
         }
+        $company = Company::getCompany(auth()->id());
+        $this->appointments = $appointment->getDailyAppointments($company->id, $chose_day);
 
         $this->prev_day = Carbon::createFromDate($chose_day->year, $chose_day->month, $chose_day->day - 1);
         $this->next_day = Carbon::createFromDate($chose_day->year, $chose_day->month, $chose_day->day + 1);
