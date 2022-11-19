@@ -58,7 +58,9 @@
                     border: 1px solid $border_color;
                     border-bottom: none;
                     font-weight: 600;
-
+                    &.weekend{
+                        background-color: #ffffe6;
+                    }
 
                     &.today {
                         .date {
@@ -75,6 +77,7 @@
                         display: flex;
                         align-content: center;
                         justify-content: center;
+                        align-items: center;
                     }
                 }
 

@@ -438,6 +438,9 @@ html.overlay body:before {
   border-bottom: none;
   font-weight: 600;
 }
+.page-calendar .monthlyCalendar .calendar .week .day.weekend, .page-calendar .monthlyCalendar .calendar .days .day.weekend {
+  background-color: #ffffe6;
+}
 .page-calendar .monthlyCalendar .calendar .week .day.today .date, .page-calendar .monthlyCalendar .calendar .days .day.today .date {
   border-radius: 50%;
   background-color: #fb4444;
@@ -449,6 +452,7 @@ html.overlay body:before {
   display: flex;
   align-content: center;
   justify-content: center;
+  align-items: center;
 }
 .page-calendar .monthlyCalendar .calendar .week:last-child .day, .page-calendar .monthlyCalendar .calendar .days:last-child .day {
   border-bottom: 1px solid #c4c7c8;
