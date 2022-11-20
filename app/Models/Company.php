@@ -17,8 +17,12 @@ class Company extends Model
         return $this->table;
     }
 
-    public static function getCompany($owner_id){
-        return Company::where('id', $owner_id)->first();
+    public static function getCompany($company_id){
+        return Company::where('id', $company_id)->first();
     }
 
+    public function owners(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany( CompanyOwner::class);
+    }
 }

@@ -79,5 +79,10 @@ Route::name('dashboard.')->middleware('auth')->group(function (){
 //    Route::get('/calendar', [CalendarController::class, 'index'] )->middleware('auth')->name('calendar');
     Route::get('/calendar/month/{date?}', [CalendarController::class, 'index'] )->name('calendar');
     Route::get('/calendar/day/{date?}', [DailyCalendarController::class, 'index'] )->name('daily_calendar');
+
+
+    Route::get('/employees', [EmployeeController::class, 'show'] )->name('employees');
+
+
 });
 

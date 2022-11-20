@@ -21,8 +21,6 @@
                     </a>
                 </div>
             </div>
-{{--             {!! $calendar !!}--}}
-
 
             @php
                 $first_week = array_map(function ($day) {
@@ -86,14 +84,10 @@
                         @endfor
                     </div>
                 @endif
-
                 @endforeach
             </div>
         </div>
-
-
     </div>
-
 @endsection
 
 

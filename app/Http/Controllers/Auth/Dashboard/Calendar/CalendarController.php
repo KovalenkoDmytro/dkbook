@@ -84,7 +84,7 @@ class CalendarController extends DashboardController
     {
         $userTimezone = Auth::user()->timezone;
         $appointments = new Appointment();
-        $company = Company::getCompany(auth()->id());
+        $company = Company::getCompany(Auth::user()->companies()->orderBy('id')->first()->id);
 
         $this->appointments = $appointments->getMonthlyAppointments($company->id, $this->chose_month);
 

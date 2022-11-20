@@ -27,7 +27,9 @@
 }
 
 .btn{
-    display: block;
+    display: flex;
+    align-items: center;
+    align-content: center;
     color: $button_text_color;
     background-color: $button_color;
     border-radius: $border_radius;
@@ -46,6 +48,9 @@
     }
     a{
         color: $button_text_color;
+    }
+    .icon{
+        margin-right: 7px;
     }
     &.icon_close{
         margin-left: auto;

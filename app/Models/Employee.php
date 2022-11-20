@@ -17,8 +17,9 @@ class Employee extends Model
     }
 
     public static function getCompanyEmployees(int $company_id){
-        $employeesDB = collect(Employee::all()->where('company_id', $company_id));
+        $employeesDB = Employee::all()->where('company_id', $company_id);
         $employees = collect([]);
+
         if(count($employeesDB)>0){
             $employees = $employeesDB->map(function ($item) {
                 return [
@@ -40,21 +41,5 @@ class Employee extends Model
         return $employee->attributes;
     }
 
-//    public static function getEmployeeScheduleId(int $company_id){
-//        $employees = Employee::all()->where('company_id', $company_id);
-//
-//        if(empty($employees)){
-//            return [];
-//        }else{
-//            $employees_id_scheduled = [];
-//            foreach ($employees as $employee) {
-//
-//                $employees_id_scheduled['employee_id']= $employee->id;
-//                $employees_id_scheduled['employee_schedule_id']= $employee->employee_schedule_id;
-//
-//            }
-//            return $employees_id_scheduled;
-//        }
-//
-//    }
+
 }

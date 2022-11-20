@@ -324,7 +324,9 @@ html.overlay body:before {
 }
 
 .btn {
-  display: block;
+  display: flex;
+  align-items: center;
+  align-content: center;
   color: #ffffff;
   background-color: #803080;
   border-radius: 5px;
@@ -346,6 +348,9 @@ html.overlay body:before {
 }
 .btn a {
   color: #ffffff;
+}
+.btn .icon {
+  margin-right: 7px;
 }
 .btn.icon_close {
   margin-left: auto;
