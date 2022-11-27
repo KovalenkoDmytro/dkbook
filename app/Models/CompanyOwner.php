@@ -29,9 +29,9 @@ class CompanyOwner extends Model implements Authenticatable
         return CompanyOwner::where('login', $login)->get();
     }
 
-    public function companies(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function company()
     {
-        return $this ->belongsToMany(Company::class);
+        return $this->hasOne(Company::class);
     }
 
     public function getAuthIdentifierName()

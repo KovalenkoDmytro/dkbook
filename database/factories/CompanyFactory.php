@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\BusinessType;
 use App\Models\Company;
+use App\Models\CompanyOwner;
 use App\Models\CompanySchedule;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,6 +23,7 @@ class CompanyFactory extends Factory
         return [
             'business_type_id'=>BusinessType::all()->random()->id,
             'company_schedule_id'=>CompanySchedule::all()->random()->id,
+            'company_owner_id'=>1,
             'name'=>fake()->company,
             'address'=>fake()->address,
             'socialMedia'=>fake()->imageUrl,

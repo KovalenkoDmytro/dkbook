@@ -3,6 +3,8 @@
 @endphp
 @extends('layouts.dashboard')
 
+@dump($chose_day)
+
 @section('dashboard.content')
     <div class="page-calendar">
         <div id="dailyCalendar" class="dailyCalendar">

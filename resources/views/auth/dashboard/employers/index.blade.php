@@ -1,10 +1,11 @@
 @extends('layouts.dashboard')
 
 @dump($employees)
+{{--@dump($company_owner->company->id)--}}
 
 @section('dashboard.content')
     <h1>Employees pages</h1>
-
+    {{$employees->links()}}
     <ul>
         @foreach($employees as $employee)
             <li class="employee">
@@ -24,4 +25,5 @@
         @endforeach
     </ul>
 
+        {{$employees->links()}}
 @endsection

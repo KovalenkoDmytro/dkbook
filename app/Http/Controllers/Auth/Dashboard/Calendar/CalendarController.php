@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth\Dashboard\Calendar;
 use App\Http\Controllers\Auth\Dashboard\DashboardController;
 use App\Models\Appointment;
 use App\Models\Company;
+use App\Models\CompanyOwner;
+use App\Models\CompanySchedule;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Auth;
@@ -84,8 +86,19 @@ class CalendarController extends DashboardController
     {
         $userTimezone = Auth::user()->timezone;
         $appointments = new Appointment();
-        $company = Company::getCompany(Auth::user()->companies()->orderBy('id')->first()->id);
 
+        // CompanyOwner
+        //Auth::user();
+
+        // Company for CompanyOwner
+        //Auth::user()->company;
+
+        $c =  CompanyOwner::with('company')
+            ->where('id', \auth()->id())
+            ->first();
+
+
+        $company = Auth::user()->company;
         $this->appointments = $appointments->getMonthlyAppointments($company->id, $this->chose_month);
 
         return view('auth.dashboard.calendar.calendar', [

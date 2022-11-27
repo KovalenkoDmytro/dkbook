@@ -50,15 +50,7 @@ class EmployeeController extends Controller
 
     public function show(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-
-
-        $company = Company::getCompany(Auth::user()->companies()->orderBy('id')->first()->id);
-
-        $employees = Employee::getCompanyEmployees($company->id);
-
-        return view('auth.dashboard.employers.index',[
-            'employees' => $employees
-        ]);
+        return view('auth.dashboard.employers.index');
     }
 
 }

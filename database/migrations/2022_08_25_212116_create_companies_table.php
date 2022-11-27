@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('business_type_id')->constrained();
             $table->foreignId('company_schedule_id')->default(1)->constrained();
+            $table->foreignId('company_owner_id')->nullable()->constrained();
             $table->string('name');
             $table->string('address');
             $table->string('socialMedia');

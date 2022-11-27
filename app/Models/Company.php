@@ -21,8 +21,16 @@ class Company extends Model
         return Company::where('id', $company_id)->first();
     }
 
-    public function owners(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public  function owner()
     {
-        return $this->belongsToMany( CompanyOwner::class);
+        return $this->belongsTo( CompanyOwner::class);
+    }
+
+    public function scheduled (){
+        return $this->belongsTo(CompanySchedule::class);
+    }
+
+    public function business_type(){
+        return $this->belongsTo(BusinessType::class);
     }
 }

@@ -16,6 +16,9 @@ class CreateController extends Controller
 {
 
 
+    static public function getTest(){
+        echo 'test';
+    }
 
 //    function create():View{
 //        return view('register');

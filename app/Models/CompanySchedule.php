@@ -26,4 +26,10 @@ class CompanySchedule extends Model
         ];
     }
 
+    public function company()
+    {
+        return $this->hasOne(Company::class);
+    }
+
+
 }

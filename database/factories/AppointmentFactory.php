@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Client;
 use App\Models\Company;
+use App\Models\Employee;
 use App\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,8 +24,8 @@ class AppointmentFactory extends Factory
             'company_id' => Company::all()->random()->id,
             'client_id' => Client::all()->random()->id,
             'service_id' => Service::all()->random()->id,
-            'employee_id'=>null,
-            'date'=>$this->faker->dateTimeBetween('- 2 days','+ 1 days'),
+            'employee_id'=>Employee::all()->random()->id,
+            'date'=>$this->faker->dateTimeBetween('- 5 days','+ 10 days'),
 
         ];
     }

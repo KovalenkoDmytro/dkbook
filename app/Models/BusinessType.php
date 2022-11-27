@@ -10,4 +10,8 @@ class BusinessType extends Model
     use HasFactory;
     protected $guarded = false;
 
+
+    public function company(){
+        return $this->hasMany(Company::class);
+    }
 }
