@@ -1,0 +1,30 @@
+@mixin center{
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.pagination{
+    @include center;
+    justify-content: space-between;
+    .pagination__results{
+        @include center;
+    }
+    .pagination_navigation{
+        @include center;
+        .pagination__links{
+            @include center;
+
+            .active{
+                background-color: $button_color_hover;
+            }
+        }
+
+        .btn{
+            margin: 0;
+            &.dots, &.inactive{
+                background-color: $gray_color;
+            }
+        }
+    }
+}

@@ -155,7 +155,7 @@ textarea {
   min-height: 35px;
   border: 1px solid #c4c7c8;
   padding: 0 15px;
-  border-radius: 5px;
+  border-radius: 0;
 }
 input:focus,
 optgroup:focus,
@@ -329,7 +329,7 @@ html.overlay body:before {
   align-content: center;
   color: #ffffff;
   background-color: #803080;
-  border-radius: 5px;
+  border-radius: 0;
   border: none;
   margin: 10px 0;
   padding: 10px 15px;
@@ -642,8 +642,8 @@ html.overlay body:before {
 }
 .dropDown.open .dropDown_options {
   display: block;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .dropDown .dropDown_toggle {
   display: flex;
@@ -657,7 +657,7 @@ html.overlay body:before {
   background: #ffffff;
   transition: border-color ease-in-out 0.15s;
   box-shadow: none;
-  border-radius: 5px;
+  border-radius: 0;
   cursor: pointer;
   border: 1px solid #c4c7c8;
 }
@@ -820,6 +820,37 @@ html.overlay body:before {
   }
 }
 
+.pagination {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+.pagination .pagination__results {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+.pagination .pagination_navigation {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+.pagination .pagination_navigation .pagination__links {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+.pagination .pagination_navigation .pagination__links .active {
+  background-color: #60A4A7;
+}
+.pagination .pagination_navigation .btn {
+  margin: 0;
+}
+.pagination .pagination_navigation .btn.dots, .pagination .pagination_navigation .btn.inactive {
+  background-color: #8e8e8e;
+}
+
 .page-registration .registration_step-title {
   margin-top: 70px;
   font-weight: 500;
@@ -841,7 +872,7 @@ html.overlay body:before {
   margin: 30px auto;
   border: 1px solid #c4c7c8;
   padding: 25px 15px;
-  border-radius: 5px;
+  border-radius: 0;
 }
 .page-registration .finishStepBlock .title {
   font-size: 25px;
@@ -854,4 +885,15 @@ html.overlay body:before {
 }
 .page-registration .finishStepBlock .btn {
   margin: 20px auto 0;
+}
+
+@media (min-width: 757px) {
+  .page-employees .employees {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 25px;
+  }
+}
+.page-employees .employees .employee .employee__photo {
+  max-width: 150px;
 }

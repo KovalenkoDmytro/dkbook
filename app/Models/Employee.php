@@ -17,7 +17,7 @@ class Employee extends Model
     }
 
     public static function getCompanyEmployees(int $company_id){
-        return Employee::where('company_id', $company_id)->paginate(15);
+        return Employee::where('company_id', $company_id)->paginate(3);
     }
 
     public static function getEmployee(int $employee_id){
