@@ -87,19 +87,7 @@ class CalendarController extends DashboardController
         $userTimezone = Auth::user()->timezone;
         $appointments = new Appointment();
 
-        // CompanyOwner
-        //Auth::user();
-
-        // Company for CompanyOwner
-        //Auth::user()->company;
-
-        $c =  CompanyOwner::with('company')
-            ->where('id', \auth()->id())
-            ->first();
-
-
-        $company = Auth::user()->company;
-        $this->appointments = $appointments->getMonthlyAppointments($company->id, $this->chose_month);
+        $this->appointments = $appointments->getMonthlyAppointments($this->chose_month);
 
         return view('auth.dashboard.calendar.calendar', [
             'prevMonth' => $this->getPreviewMonth(),

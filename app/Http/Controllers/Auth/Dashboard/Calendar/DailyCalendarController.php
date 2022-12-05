@@ -31,8 +31,8 @@ class DailyCalendarController extends CalendarController
 
         }
 
-        $company = Auth::user()->company;
-        $this->appointments = $appointment->getDailyAppointments($company->id, $chose_day);
+
+        $this->appointments = $appointment->getDailyAppointments($chose_day);
 
         $this->prev_day = Carbon::createFromDate($chose_day->year, $chose_day->month, $chose_day->day - 1);
         $this->next_day = Carbon::createFromDate($chose_day->year, $chose_day->month, $chose_day->day + 1);

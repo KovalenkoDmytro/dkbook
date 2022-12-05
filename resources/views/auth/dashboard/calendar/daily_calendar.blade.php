@@ -3,7 +3,7 @@
 @endphp
 @extends('layouts.dashboard')
 
-@dump($chose_day)
+@dump($appointments)
 
 @section('dashboard.content')
     <div class="page-calendar">
@@ -46,8 +46,9 @@
                                         <div class="appointment_information">
                                             <i class="icon icon_close"></i>
                                             <p>{{$appointment['date']}}</p>
-                                            <p>service - {{$appointment['service']->name}}</p>
-                                            <p>client- {{$appointment['client']->name}}</p>
+{{--                                            <p>service - {{$appointment->service->name}}</p>--}}
+{{--                                            <p>client- {{$appointment->client->name}}</p>--}}
+{{--                                            <p>employee- {{$appointment->employee->name}}</p>--}}
                                             <p>payed - {{$appointment['payed'] ? 'payed' : 'unpayed'}}</p>
                                         </div>
                                     </div>

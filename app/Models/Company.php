@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,5 +33,9 @@ class Company extends Model
 
     public function business_type(){
         return $this->belongsTo(BusinessType::class);
+    }
+
+    public function appointments(){
+        return $this->hasMany(Appointment::class);
     }
 }
