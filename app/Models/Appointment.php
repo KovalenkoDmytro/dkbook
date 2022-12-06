@@ -44,7 +44,10 @@ class Appointment extends Model
             ->whereYear('date', $date->year)
             ->whereMonth('date', $date->month)
             ->whereDay('date', $date->day)
+            ->with('company','client','service','employee')
             ->get()
             ->all();
+
+
     }
 }
