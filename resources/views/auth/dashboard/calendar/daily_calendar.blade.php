@@ -3,7 +3,7 @@
 @endphp
 @extends('layouts.dashboard')
 
-@dump($appointments)
+{{--@dump($appointments)--}}
 
 @section('dashboard.content')
     <div class="page-calendar">
