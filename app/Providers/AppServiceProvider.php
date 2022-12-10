@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Company;
 use App\Models\Employee;
+use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -39,5 +40,6 @@ class AppServiceProvider extends ServiceProvider
                 ]
             );
         });
+
     }
 }

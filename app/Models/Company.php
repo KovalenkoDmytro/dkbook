@@ -28,7 +28,7 @@ class Company extends Model
     }
 
     public function scheduled (){
-        return $this->belongsTo(CompanySchedule::class);
+        return $this->belongsTo(CompanySchedule::class,'company_schedule_id');
     }
 
     public function business_type(){
@@ -38,4 +38,18 @@ class Company extends Model
     public function appointments(){
         return $this->hasMany(Appointment::class);
     }
+
+    public function employees(){
+        return $this->belongsToMany(Employee::class,'company_employee');
+    }
+
+    public function services(){
+        return $this->hasMany(Service::class);
+    }
+
+    public function clients(){
+        return $this->belongsToMany(Client::class,'company_client');
+    }
+
+
 }

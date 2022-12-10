@@ -17,6 +17,8 @@
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('/access/css/DropDownSelector/TomSelect.css') }}">
+
 
 
 
@@ -33,6 +35,7 @@
     <!-- TimeZone library for get user timezone  -->
     <script type="text/javascript" src="{{ asset('/access/js/Time/moment-timezone-with-data.js') }}"></script>
 
+    <script type="text/javascript" src="{{ asset('/access/js/DropDownSelector/TomSelect.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
 </body>

@@ -41,24 +41,44 @@ class DatabaseSeeder extends Seeder
         BusinessType::create(['name' => 'Other']);
 
         CompanyOwner::factory(1)->create();
+        $clients = Client::factory(6)->create();
+
+
 
         CompanySchedule::factory(1)->create();
         EmployeeSchedule::factory(1)->create();
-        Company::factory(1)->create();
+
+
+        $employees = Employee::factory(6)->create();
+
+        //        create relationship Client-Company
+        Company::factory(1)
+            ->create()
+            ->each(function ($company) use ($clients) {
+            $company->clients()->attach($clients->random(5));})
+            ->each(function ($company) use ($employees) {
+                $company->employees()->attach($employees->random(5));
+            });
 
 
 
-        Employee::factory(30)->create();
-
-        Client::factory(15)->create();
 
 
+
+
+
+
+
+
+//        create services
         $names = ['Manicures', 'Pedicures', 'Hair Care', 'Waxing', 'Body Massage','Pre-Bridal Grooming',];
         foreach($names as $name) {
             Service::factory()->create([
                 'name' => $name,
             ]);
         }
+
+//        create appointments
 
         Appointment::factory()
             ->count(500)

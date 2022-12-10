@@ -142,8 +142,8 @@ class CreateController extends HomeController
 
     public function step4(): View
     {
-        $company_id = session()->get('company_id');
-        $services = Service::getServices($company_id);
+//        $company_id = session()->get('company_id');
+        $services = Service::getServices();
         return view("auth.registration.step4", [
             'services' => $services,
         ]);

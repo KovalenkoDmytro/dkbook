@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\Dashboard\Appointment\AppointmentController;
 use App\Http\Controllers\Auth\Dashboard\Calendar\DailyCalendarController;
 use App\Http\Controllers\Auth\Dashboard\DashboardController;
 use App\Http\Controllers\Auth\Dashboard\Calendar\CalendarController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Auth\User\LoginController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
+use App\View\Components\CreateDailyAppointmentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -76,12 +78,18 @@ Route::name('user.')->group(function (){
 
 Route::name('dashboard.')->middleware('auth')->group(function (){
     Route::get('/main', [DashboardController::class, 'index'] )->name('main');
-//    Route::get('/calendar', [CalendarController::class, 'index'] )->middleware('auth')->name('calendar');
     Route::get('/calendar/month/{date?}', [CalendarController::class, 'index'] )->name('calendar');
     Route::get('/calendar/day/{date?}', [DailyCalendarController::class, 'index'] )->name('daily_calendar');
 
-
     Route::get('/employees', [EmployeeController::class, 'show'] )->name('employees');
+
+
+    Route::get('/createDailyAppointment/{date}', [CreateDailyAppointmentController::class, 'index'] )->name('createDailyAppointment');
+
+
+
+    Route::post('/appointment/create', [AppointmentController::class, 'store'] )->name('createAppointment');
+
 
 
 });

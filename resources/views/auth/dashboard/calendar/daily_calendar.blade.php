@@ -4,7 +4,6 @@
 @extends('layouts.dashboard')
 
 {{--@dump($appointments)--}}
-
 @section('dashboard.content')
     <div class="page-calendar">
         <div id="dailyCalendar" class="dailyCalendar">
@@ -33,6 +32,9 @@
             <div class="hour_items">
                 @for($count = 0 ; $count < 24; $count++)
                     <div class="{{ $present_day['hour'] === $count ? 'hours_item currently' :'hours_item'}}">
+{{--                        @php--}}
+{{--                            $day_hour = :00--}}
+{{--                        @endphp--}}
                         <div class="title">{{$count < 10? '0'.$count : $count}}:00</div>
                         <div class="appointments">
                             @foreach($appointments as $appointment)
@@ -55,9 +57,11 @@
                                 @endif
                             @endforeach
                         </div>
-                        <div class="addTask">
+                        <a class="addTask"
+                           href="{{route('dashboard.createDailyAppointment',['date'=>$chose_day->toFormattedDateString().' '.$count.':00'])}}"
+                        >
                             <i id="addTask" class="icon icon_plus"></i>
-                        </div>
+                        </a>
                     </div>
                 @endfor
             </div>

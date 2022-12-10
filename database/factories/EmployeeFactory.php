@@ -19,7 +19,6 @@ class EmployeeFactory extends Factory
     public function definition()
     {
         return [
-            'company_id' =>Company::all()->random()->id,
             'employee_schedule_id'=>CompanySchedule::all()->random()->id,
             'name'=>$this->faker->name,
             'phone'=>$this->faker->phoneNumber,
