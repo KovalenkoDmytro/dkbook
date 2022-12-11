@@ -58,7 +58,7 @@
                             @endforeach
                         </div>
                         <a class="addTask"
-                           href="{{route('dashboard.createDailyAppointment',['date'=>$chose_day->toFormattedDateString().' '.$count.':00'])}}"
+                           href="{{route('dashboard.index',['date'=>$chose_day->toFormattedDateString().' '.$count.':00'])}}"
                         >
                             <i id="addTask" class="icon icon_plus"></i>
                         </a>

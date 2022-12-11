@@ -3,18 +3,18 @@
     $minutes = array();
     $employees =Auth::user()->company->employees;
 
-
 @endphp
 
 {{--@dump($services)--}}
-@dump($chose_date)
+{{--@dump($chose_date)--}}
+@dump($available_employees)
 @extends('layouts.dashboard')
 @section('dashboard.content')
     <div class="modal_window">
         @php($minutes = [5,10,15,20,25,30,35,40,45,50,55])
     </div>
 
-    <form action="{{route('dashboard.createAppointment')}}" method="POST">
+    <form action="{{route('dashboard.store')}}" method="POST">
 
         <div class="services">
             <label for="select_service">{{__("service")}}</label>
@@ -48,7 +48,11 @@
         <div class="employees">
             <label for="select_employee">{{__("employees")}}</label>
             <select id="select_employee" autocomplete="off">
-
+                @foreach($available_employees as $employee)
+                    <option value="{{$employee->id}}">
+                        {{$employee->name}}
+                    </option>
+                @endforeach
             </select>
         </div>
     </form>

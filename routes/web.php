@@ -84,11 +84,12 @@ Route::name('dashboard.')->middleware('auth')->group(function (){
     Route::get('/employees', [EmployeeController::class, 'show'] )->name('employees');
 
 
-    Route::get('/createDailyAppointment/{date}', [CreateDailyAppointmentController::class, 'index'] )->name('createDailyAppointment');
+//    Route::get('/createDailyAppointment/{date}', [CreateDailyAppointmentController::class, 'index'] )->name('createDailyAppointment');
 
 
 
-    Route::post('/appointment/create', [AppointmentController::class, 'store'] )->name('createAppointment');
+    Route::get('/appointment/create/{date}', [AppointmentController::class, 'index'] )->name('index');
+    Route::post('/appointment/create', [AppointmentController::class, 'store'] )->name('store');
 
 
 
