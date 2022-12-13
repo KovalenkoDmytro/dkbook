@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -19,15 +19,6 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('/access/css/DropDownSelector/TomSelect.css') }}">
 
-
-
-
-</head>
-<body>
-
-    @yield('content')
-
-
     <!-- Scripts -->
 
     <!-- Time library  -->
@@ -38,5 +29,14 @@
     <script type="text/javascript" src="{{ asset('/access/js/DropDownSelector/TomSelect.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
+
+
+</head>
+<body>
+
+    @yield('content')
+
+
+
 </body>
 </html>

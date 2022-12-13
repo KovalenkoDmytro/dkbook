@@ -2,12 +2,11 @@
     $services = Auth::user()->company->services;
     $minutes = array();
     $employees =Auth::user()->company->employees;
-
 @endphp
 
 {{--@dump($services)--}}
 {{--@dump($chose_date)--}}
-@dump($available_employees)
+{{--@dump($available_employees)--}}
 @extends('layouts.dashboard')
 @section('dashboard.content')
     <div class="modal_window">
@@ -15,20 +14,27 @@
     </div>
 
     <form action="{{route('dashboard.store')}}" method="POST">
+        <x-input type="hidden" id="chose_data" value="{{$chose_date->toDateTimeString()}}"></x-input>
+        <x-drop-down-selector
+            id="select_service"
+            label="{{__('service')}}"
+            :options="$services"
+        >
+        </x-drop-down-selector>
+{{--        <div class="services">--}}
+{{--            <label for="select_service">{{__("service")}}</label>--}}
+{{--            <select id="select_service" autocomplete="off">--}}
+{{--                @foreach($services as $service)--}}
+{{--                    <option value="{{$service->id}}"--}}
+{{--                            data-hour="{{$service->timeRange_hour}}"--}}
+{{--                            data-minutes="{{$service->timeRange_minutes}}"--}}
+{{--                            data-price="{{$service->price}}">--}}
+{{--                        {{$service->name}}--}}
+{{--                    </option>--}}
+{{--                @endforeach--}}
+{{--            </select>--}}
+{{--        </div>--}}
 
-        <div class="services">
-            <label for="select_service">{{__("service")}}</label>
-            <select id="select_service" autocomplete="off">
-                @foreach($services as $service)
-                    <option value="{{$service->id}}"
-                            data-hour="{{$service->timeRange_hour}}"
-                            data-minutes="{{$service->timeRange_minutes}}"
-                            data-price="{{$service->price}}">
-                        {{$service->name}}
-                    </option>
-                @endforeach
-            </select>
-        </div>
         <div class="time">
             <p>{{__('hour')}} {{$chose_date->hour}}</p>
             <div class="minutes">
@@ -45,16 +51,16 @@
             placeholder="{{__('Adam Leen')}}"
             text="{{__('Add new client')}}"
         ></x-input>
-        <div class="employees">
-            <label for="select_employee">{{__("employees")}}</label>
-            <select id="select_employee" autocomplete="off">
-                @foreach($available_employees as $employee)
-                    <option value="{{$employee->id}}">
-                        {{$employee->name}}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+{{--        <div class="employees">--}}
+{{--            <label for="select_employee">{{__("employees")}}</label>--}}
+{{--            <select id="select_employee" autocomplete="off">--}}
+{{--                @foreach($available_employees as $employee)--}}
+{{--                    <option value="{{$employee->id}}">--}}
+{{--                        {{$employee->name}}--}}
+{{--                    </option>--}}
+{{--                @endforeach--}}
+{{--            </select>--}}
+{{--        </div>--}}
     </form>
 
 

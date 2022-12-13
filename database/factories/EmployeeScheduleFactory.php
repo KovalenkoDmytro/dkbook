@@ -17,13 +17,13 @@ class EmployeeScheduleFactory extends Factory
     public function definition()
     {
         return [
-            'monday' => '08:00 - 20:00',
-            'tuesday' => '08:00 - 20:00',
-            'wednesday' => '08:00 - 20:00',
-            'thursday' => '08:00 - 20:00',
-            'friday' => '08:00 - 20:00',
-            'saturday' => '08:00 - 20:00',
-            'sunday' => '08:00 - 20:00',
+            'monday' => $this->faker->randomElement(['08:00 - 16:00', '08:00 - 20:00', '11:00 - 19:00', '08:00 - 12:00']),
+            'tuesday' => $this->faker->randomElement(['08:00 - 16:00', '08:00 - 20:00', '11:00 - 19:00', '08:00 - 12:00']),
+            'wednesday' => $this->faker->randomElement(['08:00 - 16:00', '08:00 - 20:00', '11:00 - 19:00', '08:00 - 12:00']),
+            'thursday' => $this->faker->randomElement(['08:00 - 16:00', '08:00 - 20:00', '11:00 - 19:00', '08:00 - 12:00']),
+            'friday' => $this->faker->randomElement(['08:00 - 16:00', '08:00 - 20:00', '11:00 - 19:00', '08:00 - 12:00']),
+            'saturday' => $this->faker->randomElement([null, '08:00 - 20:00', '11:00 - 19:00', '08:00 - 12:00']),
+            'sunday' => $this->faker->randomElement(['08:00 - 10:00', null, '11:00 - 14:00', '08:00 - 12:00']),
         ];
     }
 }

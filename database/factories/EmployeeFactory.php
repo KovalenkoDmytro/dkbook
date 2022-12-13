@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Company;
 use App\Models\CompanySchedule;
+use App\Models\EmployeeSchedule;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,7 @@ class EmployeeFactory extends Factory
     public function definition()
     {
         return [
-            'employee_schedule_id'=>CompanySchedule::all()->random()->id,
+            'employee_schedule_id'=>EmployeeSchedule::all()->random()->id,
             'name'=>$this->faker->name,
             'phone'=>$this->faker->phoneNumber,
             'email'=>$this->faker->email,

@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
 
 
         CompanySchedule::factory(1)->create();
-        EmployeeSchedule::factory(1)->create();
+        EmployeeSchedule::factory(4)->create();
 
 
         $employees = Employee::factory(6)->create();

@@ -92,6 +92,6 @@ Route::name('dashboard.')->middleware('auth')->group(function (){
     Route::post('/appointment/create', [AppointmentController::class, 'store'] )->name('store');
 
 
-
+    Route::post('/employees/available', [EmployeeController::class, 'getAvailableEmployee'] );
 });
 

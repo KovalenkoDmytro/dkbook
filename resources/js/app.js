@@ -1,4 +1,5 @@
 import './bootstrap';
+import {initDropDownSelector} from "./DropDownSelector";
 
 
 console.log('app.js')
@@ -12,24 +13,27 @@ console.log('app.js')
 const app = {
     'view': 'laptop',
     'run': function (callback, viewport, DOM_element_selector) {
-        // check element into DOM
-        if (document.querySelector(DOM_element_selector) !== null) {
-            switch (viewport) {
-                case 'mobile':
-                    if (window.innerWidth <= 979) {
+        window.addEventListener('load',()=>{
+            // check element into DOM
+            if (document.querySelector(DOM_element_selector) !== null) {
+                switch (viewport) {
+                    case 'mobile':
+                        if (window.innerWidth <= 979) {
+                            callback()
+                        }
+                        break;
+                    case 'laptop':
+                        if (window.innerWidth > 979 && window.innerWidth <= 1200) {
+                            callback()
+                        }
+                        break;
+                    case 'all':
                         callback()
-                    }
-                    break;
-                case 'laptop':
-                    if (window.innerWidth > 979 && window.innerWidth <= 1200) {
-                        callback()
-                    }
-                    break;
-                case 'all':
-                    callback()
-                    break
+                        break
+                }
             }
-        }
+        })
+
     }
 }
 // -- general function end ---
@@ -57,15 +61,6 @@ app.run(()=>{
     })
 },'all','#dailyCalendar')
 
-
-
-
-
-
-
-
-
-
 // set user timezone in registration step 1
 app.run(() => {
     const timezone = moment.tz.guess();
@@ -74,7 +69,52 @@ app.run(() => {
 }, 'all', '#timezone');
 
 
+app.run(() => {
+    const getAvailableEmployees = function() {
+        return function() {
+            const chose_service = dropDownSelector_select_service.getValue()
+            const chose_date = document.querySelector('#chose_data').value
+            const data = {
+                'date':chose_date,
+                'service_id': chose_service
+            }
 
+
+            fetch('/employees/available',{
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json, text-plain, */*",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify(data),
+                credentials: "same-origin",
+            })
+                .then(response => response.json())
+                .then(
+                    json => {
+                        console.log(json)
+                        console.log(dropDownSelector_select_service.getValue())
+                    })
+
+        };
+    };
+
+    const dropDownSelector_select_service = new TomSelect(`#select_service`, {
+        create: true,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        },
+        onItemAdd : getAvailableEmployees(),
+    });
+
+
+
+
+
+}, 'all', '#select_service');
 
 
 
