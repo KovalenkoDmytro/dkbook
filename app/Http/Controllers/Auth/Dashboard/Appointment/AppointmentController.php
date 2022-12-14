@@ -13,13 +13,12 @@ class AppointmentController extends Controller
     public function index(Request $request, $date)
     {
         $test = new Employee();
-        $test->getAvailableEmployees($date);
+        $test->getAvailableEmployees($date, 2);
 
         $chose_date = Carbon::parse($date);
-//        $available_employees = $test->getAvailableEmployees($chose_date);
+
         return view('components.create-daily-appointment-controller',[
             'chose_date' => $chose_date,
-//            'available_employees' =>$available_employees
         ]);
     }
 

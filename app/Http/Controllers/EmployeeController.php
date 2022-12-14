@@ -56,25 +56,16 @@ class EmployeeController extends Controller
 
     public function getAvailableEmployee(Request $request){
 
-          $date = $request->get('date');
-          $service_id = $request->get('service_id');
-
+        $date = $request->get('date');
+        $service_id = (int)$request->get('service_id');
 
         $employee = new Employee();
-        $available_employees = $employee-> getAvailableEmployees($date);
-//
-//        $available_employees_array = array();
-//        foreach($employees as $employee){
-//            $available_employees_array[]= $employee->name;
-//        }
+        $available_employees = $employee-> getAvailableEmployees($date, $service_id);
 
-
-
-//        var_dump('test');
         return response()->json([
             'time'=>$date,
             'employees'=>$available_employees
         ]);
-//        return json_encode(['test'=>'vaslue']);
+
     }
 }

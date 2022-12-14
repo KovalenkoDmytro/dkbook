@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
         EmployeeSchedule::factory(4)->create();
 
 
-        $employees = Employee::factory(6)->create();
+        $employees = Employee::factory(10)->create();
 
         //        create relationship Client-Company
         Company::factory(1)
@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
             ->each(function ($company) use ($clients) {
             $company->clients()->attach($clients->random(5));})
             ->each(function ($company) use ($employees) {
-                $company->employees()->attach($employees->random(5));
+                $company->employees()->attach($employees->random(7));
             });
 
 
@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
         //    and    create relationship Service-Employee
         Service::all()
             ->each(function ($service) use ($employees) {
-                $service->employees()->attach($employees->random(6));
+                $service->employees()->attach($employees->random(5));
         });
 
 
