@@ -46,6 +46,7 @@ class Employee extends Model
             $time_start = trim(substr($time_range,0,strpos($time_range,'-')));
             $time_end = trim(substr($time_range,strpos($time_range,'-')+1));
 
+            dump($employee->services);
 
 
             if ($chose_date->between(Carbon::createFromTimeString($time_start), Carbon::createFromTimeString($time_end))) {
@@ -64,6 +65,10 @@ class Employee extends Model
 
     public function company(){
         return $this->belongsToMany(Company::class, 'company_employee');
+    }
+
+    public function services(){
+        return $this->belongsToMany(Service::class,'employee_service');
     }
 
 }

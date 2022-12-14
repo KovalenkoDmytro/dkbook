@@ -61,27 +61,24 @@ class DatabaseSeeder extends Seeder
             });
 
 
-
-
-
-
-
-
-
-
-
 //        create services
+
         $names = ['Manicures', 'Pedicures', 'Hair Care', 'Waxing', 'Body Massage','Pre-Bridal Grooming',];
         foreach($names as $name) {
             Service::factory()->create([
                 'name' => $name,
             ]);
         }
+        //    and    create relationship Service-Employee
+        Service::all()
+            ->each(function ($service) use ($employees) {
+                $service->employees()->attach($employees->random(6));
+        });
+
 
 //        create appointments
-
         Appointment::factory()
-            ->count(500)
+            ->count(20)
             ->state(new Sequence(
                 ['payed' => true],
                 ['payed' => false]
