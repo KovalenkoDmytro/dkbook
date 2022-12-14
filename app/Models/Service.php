@@ -16,11 +16,13 @@ class Service extends Model
         return Service::all()->where('company_id',Auth::user()->company->id);
     }
 
-    public function company(){
+    public function company(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
         return $this->belongsTo(Company::class);
     }
 
-    public function employees(){
+    public function employees(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
         return $this->belongsToMany(Employee::class,'employee_service');
     }
 }

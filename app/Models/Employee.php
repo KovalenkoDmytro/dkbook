@@ -61,17 +61,17 @@ class Employee extends Model
         return $available_employees;
     }
 
-    public function scheduled()
+    public function scheduled(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(EmployeeSchedule::class, 'employee_schedule_id');
     }
 
-    public function company()
+    public function company(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Company::class, 'company_employee');
     }
 
-    public function services()
+    public function services(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Service::class, 'employee_service');
     }

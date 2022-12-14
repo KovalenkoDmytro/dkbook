@@ -22,32 +22,38 @@ class Company extends Model
         return Company::where('id', $company_id)->first();
     }
 
-    public  function owner()
+    public  function owner(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo( CompanyOwner::class);
     }
 
-    public function scheduled (){
+    public function scheduled (): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
         return $this->belongsTo(CompanySchedule::class,'company_schedule_id');
     }
 
-    public function business_type(){
+    public function business_type(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
         return $this->belongsTo(BusinessType::class);
     }
 
-    public function appointments(){
+    public function appointments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(Appointment::class);
     }
 
-    public function employees(){
+    public function employees(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
         return $this->belongsToMany(Employee::class,'company_employee');
     }
 
-    public function services(){
+    public function services(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(Service::class);
     }
 
-    public function clients(){
+    public function clients(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
         return $this->belongsToMany(Client::class,'company_client');
     }
 

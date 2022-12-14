@@ -54,7 +54,8 @@ class EmployeeController extends Controller
         return view('auth.dashboard.employers.index');
     }
 
-    public function getAvailableEmployee(Request $request){
+    public function getAvailableEmployee(Request $request): \Illuminate\Http\JsonResponse
+    {
 
         $date = $request->get('date');
         $service_id = (int)$request->get('service_id');
