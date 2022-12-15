@@ -13,7 +13,7 @@ class Client extends Model
         return Client::where('id', $client_id)->get()->first();
     }
 
-    public function companes()
+    public function companies()
     {
         return $this->belongsToMany(Company::class,'company_client');
     }

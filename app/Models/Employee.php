@@ -38,10 +38,13 @@ class Employee extends Model
     {
         $chose_date = \Carbon\Carbon::parse($date);
         $available_employees = array();
-        $employees = Auth::user()->company->employees;
         $dayOfWeek = strtolower($chose_date->englishDayOfWeek);
+        $owner = CompanyOwner::with('company.employees.scheduled', 'company.employees.services')
+            ->where('id', \auth()->id())
+            ->first();
 
-        foreach ($employees as $employee) {
+
+        foreach ($owner->company->employees as $employee) {
             $time_range = $employee->scheduled->$dayOfWeek;
             $time_start = trim(substr($time_range, 0, strpos($time_range, '-')));
             $time_end = trim(substr($time_range, strpos($time_range, '-') + 1));

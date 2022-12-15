@@ -1,15 +1,9 @@
-@php
-    $services = Auth::user()->company->services;
-    $minutes = array();
-    $employees =Auth::user()->company->employees;
-@endphp
-
-{{--@dump($services)--}}
+{{--@dump($owner)--}}
 {{--@dump($chose_date)--}}
 {{--@dump($available_employees)--}}
 @extends('layouts.dashboard')
 @section('dashboard.content')
-    <div class="modal_window">
+    <div class="modal_window" id="create_appointment">
         @php($minutes = [5,10,15,20,25,30,35,40,45,50,55])
     </div>
 
@@ -18,22 +12,17 @@
         <x-drop-down-selector
             id="select_service"
             label="{{__('service')}}"
-            :options="$services"
+            :options="$owner->company->services"
         >
         </x-drop-down-selector>
-{{--        <div class="services">--}}
-{{--            <label for="select_service">{{__("service")}}</label>--}}
-{{--            <select id="select_service" autocomplete="off">--}}
-{{--                @foreach($services as $service)--}}
-{{--                    <option value="{{$service->id}}"--}}
-{{--                            data-hour="{{$service->timeRange_hour}}"--}}
-{{--                            data-minutes="{{$service->timeRange_minutes}}"--}}
-{{--                            data-price="{{$service->price}}">--}}
-{{--                        {{$service->name}}--}}
-{{--                    </option>--}}
-{{--                @endforeach--}}
-{{--            </select>--}}
-{{--        </div>--}}
+
+        <x-drop-down-selector
+            id="select_employee"
+            label="{{__('employees')}}"
+            placeholder="Employee..."
+        >
+        </x-drop-down-selector>
+
 
         <div class="time">
             <p>{{__('hour')}} {{$chose_date->hour}}</p>
@@ -51,17 +40,17 @@
             placeholder="{{__('Adam Leen')}}"
             text="{{__('Add new client')}}"
         ></x-input>
-{{--        <div class="employees">--}}
-{{--            <label for="select_employee">{{__("employees")}}</label>--}}
-{{--            <select id="select_employee" autocomplete="off">--}}
-{{--                @foreach($available_employees as $employee)--}}
-{{--                    <option value="{{$employee->id}}">--}}
-{{--                        {{$employee->name}}--}}
-{{--                    </option>--}}
-{{--                @endforeach--}}
-{{--            </select>--}}
-{{--        </div>--}}
+
+        <x-drop-down-selector
+            id="select_clients"
+            label="{{__('clients')}}"
+            :options="$owner->company->clients"
+        >
+        </x-drop-down-selector>
+
+
     </form>
+
 
 
 @endsection

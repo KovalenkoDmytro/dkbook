@@ -9,16 +9,16 @@
         <label for="{{$id}}">{{__("service")}}</label>
     @endif
 
-    @if($options)
-        <select id="{{$id}}" autocomplete="off" {{$attributes}}>
+    <select id="{{$id}}" autocomplete="off" {{$attributes}}>
+        @if($options)
+            <option value="">Select a ...</option>
             @foreach($options as $option)
                 <option value="{{$option->id}}">
                     {{$option->name}}
                 </option>
             @endforeach
-        </select>
-    @endif
-
+        @endif
+    </select>
 
 </div>
 

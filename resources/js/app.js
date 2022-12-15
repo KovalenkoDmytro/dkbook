@@ -1,10 +1,8 @@
 import './bootstrap';
-import {initDropDownSelector} from "./DropDownSelector";
+
 
 
 console.log('app.js')
-
-
 
 
 //--callback-- it is a function witch will be to call
@@ -13,7 +11,7 @@ console.log('app.js')
 const app = {
     'view': 'laptop',
     'run': function (callback, viewport, DOM_element_selector) {
-        window.addEventListener('load',()=>{
+        window.addEventListener('load', () => {
             // check element into DOM
             if (document.querySelector(DOM_element_selector) !== null) {
                 switch (viewport) {
@@ -39,27 +37,27 @@ const app = {
 // -- general function end ---
 
 
-app.run(()=>{
+app.run(() => {
 
     const appointmentsToggle_btns = document.querySelectorAll('#appointment_toggle')
     const html = document.querySelector('html')
 
-    appointmentsToggle_btns.forEach((btn)=>{
+    appointmentsToggle_btns.forEach((btn) => {
 
         const appointmentInformation = btn.closest('.appointment_item').querySelector('.appointment_information')
         const close_btn = btn.closest('.appointment_item').querySelector('.icon_close')
 
-        btn.addEventListener('click',function (){
+        btn.addEventListener('click', function () {
             appointmentInformation.classList.add('show');
             html.classList.add('overlay')
         })
 
-        close_btn.addEventListener('click',()=>{
+        close_btn.addEventListener('click', () => {
             appointmentInformation.classList.remove('show');
             html.classList.remove('overlay')
         })
     })
-},'all','#dailyCalendar')
+}, 'all', '#dailyCalendar')
 
 // set user timezone in registration step 1
 app.run(() => {
@@ -70,17 +68,16 @@ app.run(() => {
 
 
 app.run(() => {
-    const getAvailableEmployees = function() {
-        return function() {
+    const getAvailableEmployees = function () {
+        return function () {
             const chose_service = dropDownSelector_select_service.getValue()
             const chose_date = document.querySelector('#chose_data').value
             const data = {
-                'date':chose_date,
+                'date': chose_date,
                 'service_id': chose_service
             }
 
-
-            fetch('/employees/available',{
+            fetch('/employees/available', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -91,12 +88,25 @@ app.run(() => {
                 body: JSON.stringify(data),
                 credentials: "same-origin",
             })
-                .then(response => response.json())
-                .then(
-                    json => {
-                        console.log(json)
-                        console.log(dropDownSelector_select_service.getValue())
-                    })
+                .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error('Something went wrong');
+                    }
+                )
+                .then((responseJson) => {
+                    console.log(responseJson)
+                    console.log(dropDownSelector_select_service.getValue())
+
+                    dropDownSelector_select_employee.clear()
+                    dropDownSelector_select_employee.clearOptions()
+                    dropDownSelector_select_employee.addOptions(responseJson.employees)
+
+                })
+                .catch((error) => {
+                    console.log(error)
+                });
 
         };
     };
@@ -107,16 +117,27 @@ app.run(() => {
             field: "text",
             direction: "asc"
         },
-        onItemAdd : getAvailableEmployees(),
+        onItemAdd: getAvailableEmployees(),
+    });
+    const dropDownSelector_select_employee = new TomSelect('#select_employee', {
+        valueField: 'id',
+        searchField: 'name',
+        options: [],
+        render: {
+            option: function (data, escape) {
+                return '<div>' +
+                    '<span class="employee__name">' + escape(data.name) + '</span>' +
+                    '<span class="employee__position">' + escape(data.position) + '</span>' +
+                    '</div>';
+            },
+            item: function (data, escape) {
+                return '<div title="' + escape(data.name) + '">' + escape(data.name) + '</div>';
+            }
+        }
     });
 
 
-
-
-
-}, 'all', '#select_service');
-
-
+}, 'all', '#create_appointment');
 
 
 // SelectorDropDown --- start ---

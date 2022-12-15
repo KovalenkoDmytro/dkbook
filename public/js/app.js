@@ -2483,9 +2483,6 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-/* harmony import */ var _DropDownSelector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DropDownSelector */ "./resources/js/DropDownSelector.js");
-/* harmony import */ var _DropDownSelector__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_DropDownSelector__WEBPACK_IMPORTED_MODULE_1__);
-
 
 console.log('app.js'); //--callback-- it is a function witch will be to call
 // --viewport-- is device size where callback will be to call
@@ -2563,10 +2560,19 @@ app.run(function () {
         body: JSON.stringify(data),
         credentials: "same-origin"
       }).then(function (response) {
-        return response.json();
-      }).then(function (json) {
-        console.log(json);
+        if (response.ok) {
+          return response.json();
+        }
+
+        throw new Error('Something went wrong');
+      }).then(function (responseJson) {
+        console.log(responseJson);
         console.log(dropDownSelector_select_service.getValue());
+        dropDownSelector_select_employee.clear();
+        dropDownSelector_select_employee.clearOptions();
+        dropDownSelector_select_employee.addOptions(responseJson.employees);
+      })["catch"](function (error) {
+        console.log(error);
       });
     };
   };
@@ -2579,7 +2585,20 @@ app.run(function () {
     },
     onItemAdd: getAvailableEmployees()
   });
-}, 'all', '#select_service'); // SelectorDropDown --- start ---
+  var dropDownSelector_select_employee = new TomSelect('#select_employee', {
+    valueField: 'id',
+    searchField: 'name',
+    options: [],
+    render: {
+      option: function option(data, escape) {
+        return '<div>' + '<span class="employee__name">' + escape(data.name) + '</span>' + '<span class="employee__position">' + escape(data.position) + '</span>' + '</div>';
+      },
+      item: function item(data, escape) {
+        return '<div title="' + escape(data.name) + '">' + escape(data.name) + '</div>';
+      }
+    }
+  });
+}, 'all', '#create_appointment'); // SelectorDropDown --- start ---
 
 var DropDownToggleBtn = document.querySelectorAll('#dropDown');
 DropDownToggleBtn.forEach(function (dropDown) {
