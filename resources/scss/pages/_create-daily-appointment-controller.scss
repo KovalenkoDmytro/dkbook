@@ -1,0 +1,9 @@
+.page__create_appointment{
+    .create_client__form{
+        display: none;
+        &.__show{
+            display: block;
+        }
+    }
+}
+

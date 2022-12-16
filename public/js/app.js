@@ -2598,6 +2598,36 @@ app.run(function () {
       }
     }
   });
+  var dropDownSelector_select_clients = new TomSelect('#select_clients', {
+    create: true,
+    sortField: {
+      field: "text",
+      direction: "asc"
+    },
+    onChange: function onChange() {
+      var clientCreate__form = document.querySelector('#create_client__form');
+
+      if (clientCreate__form.classList.contains('__show')) {
+        clientCreate__form.classList.remove('__show');
+      }
+    },
+    onOptionAdd: function onOptionAdd(value) {
+      var _this = this;
+
+      setTimeout(function () {
+        var clientCreate__form = document.querySelector('#create_client__form');
+        var clientName__input = clientCreate__form.querySelector('#client_name');
+        clientName__input.value = value; // remove added option
+
+        _this.clear();
+
+        _this.removeOption(value); // to show create client form
+
+
+        clientCreate__form.classList.add('__show');
+      }, 300);
+    }
+  });
 }, 'all', '#create_appointment'); // SelectorDropDown --- start ---
 
 var DropDownToggleBtn = document.querySelectorAll('#dropDown');

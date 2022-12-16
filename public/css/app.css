@@ -897,3 +897,10 @@ html.overlay body:before {
 .page-employees .employees .employee .employee__photo {
   max-width: 150px;
 }
+
+.page__create_appointment .create_client__form {
+  display: none;
+}
+.page__create_appointment .create_client__form.__show {
+  display: block;
+}
