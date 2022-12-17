@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CompanyOwner;
 use App\Models\Employee;
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -18,13 +19,18 @@ class AppointmentController extends Controller
             ->first();
         $chose_date = Carbon::parse($date);
 
+        $minutes = CarbonInterval::minutes(5)->toPeriod('01:00', '01:59');
+
+
         return view('components.create-daily-appointment-controller',[
             'chose_date' => $chose_date,
-            'owner'=>$owner
+            'owner'=>$owner,
+            'minutes_range'=>$minutes
         ]);
     }
 
     public function store(Request $request){
+        dd($request->all());
         $chose_time = $request->all();
 
     }

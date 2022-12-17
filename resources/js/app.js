@@ -112,12 +112,17 @@ app.run(() => {
     };
 
     const dropDownSelector_select_service = new TomSelect(`#select_service`, {
-        create: true,
         sortField: {
             field: "text",
             direction: "asc"
         },
         onItemAdd: getAvailableEmployees(),
+    });
+    const dropDownSelector_select_minutes = new TomSelect(`#select_minutes`, {
+        sortField: {
+            field: "value",
+            direction: "asc"
+        },
     });
     const dropDownSelector_select_employee = new TomSelect('#select_employee', {
         valueField: 'id',
@@ -136,38 +141,36 @@ app.run(() => {
         }
     });
     const dropDownSelector_select_clients = new TomSelect('#select_clients', {
-        create: true,
+        create: function(value){
+
+            const clientCreate__form = document.querySelector('#create_client__form')
+            const clientName__input = clientCreate__form.querySelector('#client_name')
+            clientName__input.value = value;
+            this.close()
+
+            // to show create client form
+            clientCreate__form.classList.add('__show')
+
+        },
+        persist:false,
         sortField: {
             field: "text",
             direction: "asc"
         },
+        diacritics:true,
+        maxOptions: 999,
         onChange:function() {
             const clientCreate__form = document.querySelector('#create_client__form')
             if(clientCreate__form.classList.contains('__show')){
                 clientCreate__form.classList.remove('__show')
             }
         },
-        onOptionAdd: function(value) {
-            setTimeout(()=>{
-                const clientCreate__form = document.querySelector('#create_client__form')
-                const clientName__input = clientCreate__form.querySelector('#client_name')
-                clientName__input.value = value;
-
-                // remove added option
-                this.clear()
-                this.removeOption(value)
-
-                // to show create client form
-                clientCreate__form.classList.add('__show')
-            },300)
-        },
-
 
     });
 
 
 
-}, 'all', '#create_appointment');
+}, 'all', '.page__create_appointment');
 
 
 // SelectorDropDown --- start ---
