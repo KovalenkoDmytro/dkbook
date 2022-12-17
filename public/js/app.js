@@ -2544,7 +2544,7 @@ app.run(function () {
   var getAvailableEmployees = function getAvailableEmployees() {
     return function () {
       var chose_service = dropDownSelector_select_service.getValue();
-      var chose_date = document.querySelector('#chose_data').value;
+      var chose_date = document.querySelector('#chose_data').getAttribute('data-date');
       var data = {
         'date': chose_date,
         'service_id': chose_service

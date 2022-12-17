@@ -71,7 +71,7 @@ app.run(() => {
     const getAvailableEmployees = function () {
         return function () {
             const chose_service = dropDownSelector_select_service.getValue()
-            const chose_date = document.querySelector('#chose_data').value
+            const chose_date = document.querySelector('#chose_data').getAttribute('data-date')
             const data = {
                 'date': chose_date,
                 'service_id': chose_service

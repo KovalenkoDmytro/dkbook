@@ -7,7 +7,7 @@
     <div class="page__create_appointment">
         <form action="{{route('dashboard.store')}}" method="POST">
             @csrf
-            <x-input type="hidden" id="chose_data" value="{{$chose_date->toDateTimeString()}}"></x-input>
+            <div type="hidden" id="chose_data" data-date="{{$chose_date->toDateTimeString()}}"></div>
             <x-drop-down-selector
                 id="select_service"
                 label="{{__('service')}}"
@@ -28,7 +28,7 @@
                     <label for="select_minutes">{{__("minutes")}}</label>
                     <select id="select_minutes" autocomplete="off" name="minutes">
                         @foreach($minutes_range as $minute)
-                            <option value="{{$minute->format('i')}}">{{$minute->format('i')}}</option>
+                            <option value="{{$chose_date->copy()->addMinutes($minute->format('i'))->toDateTimeString()}}">{{$minute->format('i')}}</option>
                         @endforeach
                     </select>
                 </div>
