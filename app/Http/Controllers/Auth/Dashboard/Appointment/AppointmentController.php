@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth\Dashboard\Appointment;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateAppointment;
 use App\Models\CompanyOwner;
 use App\Models\Employee;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AppointmentController extends Controller
 {
@@ -29,10 +31,10 @@ class AppointmentController extends Controller
         ]);
     }
 
-    public function store(Request $request){
-        dd($request->all());
-        $chose_time = $request->all();
+    public function store(CreateAppointment $request){
 
+        $data = $request->validated();
     }
+
 
 }
