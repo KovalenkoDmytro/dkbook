@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Auth\Dashboard\Appointment;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateAppointment;
+use App\Models\Appointment;
+use App\Models\Client;
 use App\Models\CompanyOwner;
 use App\Models\Employee;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class AppointmentController extends Controller
@@ -34,6 +37,45 @@ class AppointmentController extends Controller
     public function store(CreateAppointment $request){
 
         $data = $request->validated();
+
+        dump($data);
+
+        if(isset($data['client']['id'])){
+            Appointment::create([
+                    'company_id' => Auth::user()->company->id,
+                    'client_id' => (int)$data['client']['id'],
+                    'service_id' => (int)$data['service_id'],
+                    'employee_id'=> (int)$data['employee_id'],
+                    'date'=> $data['booked_date'],
+                ]
+            );
+
+        }else{
+            $client = Client::create([
+                'name'=>(string)$data['client']['name'],
+                'phone'=>(string)$data['client']['phone'],
+                'email'=>(string)$data['client']['email'],
+            ]);
+
+            //add client to piv table
+            Auth::user()->company->clients()->attach([$client->id]);
+
+            Appointment::create([
+                    'company_id' => Auth::user()->company->id,
+                    'client_id' => (int)$client->id,
+                    'service_id' => (int)$data['service_id'],
+                    'employee_id'=> (int)$data['employee_id'],
+                    'date'=> $data['booked_date'],
+                ]
+            );
+
+        }
+
+
+
+
+
+
     }
 
 

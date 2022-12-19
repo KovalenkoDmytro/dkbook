@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class Appointment extends Model
 {
     use HasFactory;
+    protected $guarded = false;
 
     public function company(){
         return $this->belongsTo(Company::class);

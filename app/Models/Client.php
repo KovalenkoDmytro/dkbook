@@ -8,10 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     use HasFactory;
-
-    public static function getClient($client_id){
-        return Client::where('id', $client_id)->get()->first();
-    }
+    protected $guarded = false;
 
     public function companies()
     {
