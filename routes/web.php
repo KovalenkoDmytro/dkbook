@@ -84,7 +84,6 @@ Route::name('dashboard.')->middleware('auth')->group(function (){
     Route::get('/employees', [EmployeeController::class, 'show'] )->name('employees');
 
 
-//    Route::get('/createDailyAppointment/{date}', [CreateDailyAppointmentController::class, 'index'] )->name('createDailyAppointment');
 
 
 

@@ -2,13 +2,10 @@
 
 namespace App\Providers;
 
-use App\Models\Company;
-use App\Models\Employee;
-use App\Models\Service;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\View;
 
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,17 +26,30 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer([
-            'auth.dashboard.employers.index'
-        ],function ($view){
-            $view->with(
+        /**
+         * Paginate a standard Laravel Collection.
+         *
+         * @param int $perPage
+         * @param int $total
+         * @param int $page
+         * @param string $pageName
+         * @return array
+         */
+        Collection::macro('paginate', function($perPage, $total = null, $page = null, $pageName = 'page') {
+            $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
+
+            return new LengthAwarePaginator(
+                $this->forPage($page, $perPage),
+                $total ?: $this->count(),
+                $perPage,
+                $page,
                 [
-                    'company_owner' => Auth::user(),
-                    'company'=> Auth::user()->company,
-                    'employees'=>Employee::getCompanyEmployees(Auth::user()->company->id),
+                    'path' => LengthAwarePaginator::resolveCurrentPath(),
+                    'pageName' => $pageName,
                 ]
             );
         });
+
 
     }
 }

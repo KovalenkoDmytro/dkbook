@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Company;
+use App\Models\CompanyOwner;
 use App\Models\Employee;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+
 
 class EmployeeController extends Controller
 {
@@ -51,7 +50,14 @@ class EmployeeController extends Controller
 
     public function show(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('auth.dashboard.employers.index');
+
+        $owner = CompanyOwner::with('company.employees.scheduled', 'company.employees.services', 'company.clients')
+            ->where('id', \auth()->id())
+            ->first();
+
+        return view('auth.dashboard.employees.index',[
+            'employees'=>$owner->company->employees->paginate(3),
+        ]);
     }
 
     public function getAvailableEmployee(Request $request): \Illuminate\Http\JsonResponse
