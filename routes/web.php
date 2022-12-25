@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\Scheduled\EmployeeScheduled\CreateEmployeeSchedule
 use App\Http\Controllers\Auth\Scheduled\EmployeeScheduled\EditEmployeeScheduled;
 use App\Http\Controllers\Auth\Scheduled\HomeScheduledController;
 use App\Http\Controllers\Auth\User\LoginController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
@@ -44,7 +45,16 @@ Route::name('employee.')->group(function (){
     Route::put('/employee/update/{id}', [EmployeeController::class, 'update'] )->name('update');
     Route::delete('/employee/destroy/{id}', [EmployeeController::class, 'destroy'] )->name('destroy');
     Route::post('/employees/available', [EmployeeController::class, 'getAvailableEmployee'] );
+});
 
+//client
+Route::name('client.')->middleware('auth')->group(function (){
+    Route::get('/client', [ClientController::class, 'index'] )->name('index');
+    Route::get('/client/create', [ClientController::class, 'create'] )->name('create');
+    Route::post('/client/create', [ClientController::class, 'store'] )->name('store');
+    Route::get('/client/{id}', [ClientController::class, 'show'] )->name('show');
+    Route::put('/client/update/{id}', [ClientController::class, 'update'] )->name('update');
+    Route::delete('/client/destroy/{id}', [ClientController::class, 'destroy'] )->name('destroy');
 });
 
 
@@ -72,10 +82,10 @@ Route::name('dashboard.')->middleware('auth')->group(function (){
     Route::get('/calendar/month/{date?}', [CalendarController::class, 'index'] )->name('calendar');
     Route::get('/calendar/day/{date?}', [DailyCalendarController::class, 'index'] )->name('daily_calendar');
 
-
     //appointment
     Route::get('/appointment/create/{date}', [AppointmentController::class, 'index'] )->name('index');
     Route::post('/appointment/create', [AppointmentController::class, 'store'] )->name('store');
+
 
 
 });
