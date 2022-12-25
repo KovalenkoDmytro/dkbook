@@ -45,12 +45,6 @@ Route::name('employee.')->group(function (){
     Route::delete('/employee/destroy/{id}', [EmployeeController::class, 'destroy'] )->name('destroy');
     Route::post('/employees/available', [EmployeeController::class, 'getAvailableEmployee'] );
 
-    //employee
-//    Route::get('/employees', [EmployeeController::class, 'show'] )->name('employees');
-//
-
-
-
 });
 
 

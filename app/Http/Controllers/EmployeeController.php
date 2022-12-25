@@ -40,11 +40,15 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function update(){
+    public function update(Request $request, $id){
 
     }
 
-    public function destroy(){
+    public function destroy(Request $request, $id){
+        dump($id);
+
+
+//        redirect()->back()
 
     }
 

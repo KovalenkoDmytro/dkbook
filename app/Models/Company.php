@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class Company extends Model
 {
     use HasFactory;
+
     protected $table = 'companies';
     protected $guarded = false;
 
@@ -19,22 +20,28 @@ class Company extends Model
         return $this->table;
     }
 
-    public function getEmployee($employee_id){
-
-        $employees = Auth::user()->company->employees->toArray();
-        return array_filter($employees,function($employee) use ($employee_id) {
-            return $employee['id'] === $employee_id;
+    public function getEmployee($employee_id)
+    {
+        $employees = Auth::user()->company->employees;
+        $employee_array = $employees->filter(function ($value, $key) use ($employee_id) {
+            return $value->id === $employee_id;
         });
+
+        foreach ($employee_array as $item) {
+            $employee = $item;
+        }
+        return $employee;
+
     }
 
-    public  function owner(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function owner(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo( CompanyOwner::class);
+        return $this->belongsTo(CompanyOwner::class);
     }
 
-    public function scheduled (): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function scheduled(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(CompanySchedule::class,'company_schedule_id');
+        return $this->belongsTo(CompanySchedule::class, 'company_schedule_id');
     }
 
     public function business_type(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -49,7 +56,7 @@ class Company extends Model
 
     public function employees(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Employee::class,'company_employee');
+        return $this->belongsToMany(Employee::class, 'company_employee');
     }
 
     public function services(): \Illuminate\Database\Eloquent\Relations\HasMany
@@ -59,7 +66,7 @@ class Company extends Model
 
     public function clients(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Client::class,'company_client');
+        return $this->belongsToMany(Client::class, 'company_client');
     }
 
 
