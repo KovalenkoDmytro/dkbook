@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Company extends Model
 {
@@ -18,8 +19,12 @@ class Company extends Model
         return $this->table;
     }
 
-    public static function getCompany($company_id){
-        return Company::where('id', $company_id)->first();
+    public function getEmployee($employee_id){
+
+        $employees = Auth::user()->company->employees->toArray();
+        return array_filter($employees,function($employee) use ($employee_id) {
+            return $employee['id'] === $employee_id;
+        });
     }
 
     public  function owner(): \Illuminate\Database\Eloquent\Relations\BelongsTo

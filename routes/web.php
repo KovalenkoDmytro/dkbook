@@ -37,11 +37,24 @@ Route::name('services.')->group(function (){
     Route::delete('/services/{id}', [ServiceController::class, 'destroy'] )->name('destroy');
 });
 Route::name('employee.')->group(function (){
-    Route::get('/employee', [EmployeeController::class, 'index'] )->name('index');
-    Route::post('/employee', [EmployeeController::class, 'store'] )->name('store');
-    Route::put('/employee/{id}', [EmployeeController::class, 'update'] )->name('update');
-    Route::delete('/employee/{id}', [EmployeeController::class, 'destroy'] )->name('destroy');
+    Route::get('/employees', [EmployeeController::class, 'index'] )->name('index');
+    Route::get('/employee/create', [EmployeeController::class, 'create'] )->name('create');
+    Route::post('/employee/create', [EmployeeController::class, 'store'] )->name('store');
+    Route::get('/employee/{id}', [EmployeeController::class, 'show'] )->name('show');
+    Route::put('/employee/update/{id}', [EmployeeController::class, 'update'] )->name('update');
+    Route::delete('/employee/destroy/{id}', [EmployeeController::class, 'destroy'] )->name('destroy');
+    Route::post('/employees/available', [EmployeeController::class, 'getAvailableEmployee'] );
+
+    //employee
+//    Route::get('/employees', [EmployeeController::class, 'show'] )->name('employees');
+//
+
+
+
 });
+
+
+
 Route::name('scheduled.')->group(function (){
     // scheduled company
     Route::get('/scheduled/{id}/{table}', [HomeScheduledController::class, 'show'] )->name('index')->where(['id'=>'[0-9]+','table'=>'^((?!edit$).)*$']);
@@ -65,9 +78,6 @@ Route::name('dashboard.')->middleware('auth')->group(function (){
     Route::get('/calendar/month/{date?}', [CalendarController::class, 'index'] )->name('calendar');
     Route::get('/calendar/day/{date?}', [DailyCalendarController::class, 'index'] )->name('daily_calendar');
 
-    //employee
-    Route::get('/employees', [EmployeeController::class, 'show'] )->name('employees');
-    Route::post('/employees/available', [EmployeeController::class, 'getAvailableEmployee'] );
 
     //appointment
     Route::get('/appointment/create/{date}', [AppointmentController::class, 'index'] )->name('index');

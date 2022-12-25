@@ -1,6 +1,5 @@
 <form action="{{route('employee.store')}}" method="post">
     @csrf
-    <p>{{__('Add employee')}}</p>
     <a class="btn icon icon_close" href="{{url()->previous()}}"></a>
     <x-input
         for="employee_name"
@@ -11,7 +10,6 @@
         value="{{ old('name') }}"
         placeholder="{{__('SteveJobs@apple.com')}}">
     </x-input>
-
     <x-input
         for="employee_email"
         text="{{__('Email')}}"
@@ -21,7 +19,6 @@
         value="{{ old('email') }}"
         placeholder="{{__('SteveJobs@apple.com')}}">
     </x-input>
-
     <x-input
         for="employee_position"
         text="{{__('Position')}}"
@@ -31,7 +28,6 @@
         value="{{ old('position') }}"
         placeholder="{{__('CEO')}}">
     </x-input>
-
     <x-input
         for="employee_phone"
         text="{{__('Phone')}}"
@@ -41,7 +37,5 @@
         value="{{ old('phone') }}"
         placeholder="{{__('+1(22)333-333-333')}}">
     </x-input>
-
-        <button class="btn" type="submit">{{__('Add employee')}}</button>
-
+    <button class="btn" type="submit">{{__('Add employee')}}</button>
 </form>
