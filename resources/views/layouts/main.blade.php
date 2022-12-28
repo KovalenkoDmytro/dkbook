@@ -19,7 +19,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('/access/css/DropDownSelector/TomSelect.css') }}">
 
-    <!-- Scripts -->
+
 
     <!-- Time library  -->
     <script type="text/javascript" src="{{ asset('/access/js/Time/moment.js') }}"></script>
@@ -27,6 +27,8 @@
     <script type="text/javascript" src="{{ asset('/access/js/Time/moment-timezone-with-data.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('/access/js/DropDownSelector/TomSelect.js') }}"></script>
+
+{{--    <script type="text/javascript" src="{{ asset('/access/js/Table/datatables.js') }}"></script>--}}
 
     <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
 
