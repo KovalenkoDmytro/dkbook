@@ -4284,7 +4284,7 @@
 				'id': ! features.f ? tableId+'_filter' : null,
 				'class': classes.sFilter
 			} )
-			.append( $('<label/>' ).append( str ) );
+			.append( $('<label class="input_group __result"/>' ).append( str ) );
 
 		var searchFn = function(event) {
 			/* Update all other filter input elements for the new display */
@@ -4919,7 +4919,8 @@
 		var select = $('<select/>', {
 			'name':          tableId+'_length',
 			'aria-controls': tableId,
-			'class':         classes.sLengthSelect
+			'class':         classes.sLengthSelect,
+            'id': 'dataTables__select',
 		} );
 
 		for ( var i=0, ien=lengths.length ; i<ien ; i++ ) {
@@ -14658,7 +14659,7 @@
 		"sFilterInput": "",
 
 		/* Page length */
-		"sLengthSelect": "",
+		"sLengthSelect": "dataTables__select",
 
 		/* Scrolling */
 		"sScrollWrapper": "dataTables_scroll",
