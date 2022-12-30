@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmployeeRequest;
 use App\Models\CompanyOwner;
 use App\Models\Employee;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -19,19 +21,36 @@ class EmployeeController extends Controller
             ->first();
 
         return view('auth.employee.index', [
-            'employees'=>$owner->company->employees->paginate(3),
+            'employees' => $owner->company->employees->paginate(3),
         ]);
     }
 
-    public function create(){
+    public function create()
+    {
         return view('auth.employee.create');
     }
 
-    public function store(Request $request){
+    public function store(EmployeeRequest $request)
+    {
+        $company = Auth::user()->company;
+        $new_employee = $request->validated();
+        $new_employee['employee_schedule_id'] = 1;
+
+
+        try {
+            $employee = Employee::firstOrCreate($new_employee);
+            $company->employees()->attach($employee->id);
+            return redirect()->route('employee.index')->with('success', 'employee has been added');
+
+        } catch (QueryException $exception) {
+            return redirect()->back()->with('error', $exception->errorInfo[2]);
+
+        }
 
     }
 
-    public function show(Request $request, $id){
+    public function show(Request $request, $id)
+    {
 
         $employee = Auth::user()->company->getEmployee((int)$id);
 
@@ -40,11 +59,13 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
 
     }
 
-    public function destroy(Request $request, $id){
+    public function destroy(Request $request, $id)
+    {
         dump($id);
 
 
@@ -114,11 +135,11 @@ class EmployeeController extends Controller
         $service_id = (int)$request->get('service_id');
 
         $employee = new Employee();
-        $available_employees = $employee-> getAvailableEmployees($date, $service_id);
+        $available_employees = $employee->getAvailableEmployees($date, $service_id);
 
         return response()->json([
-            'time'=>$date,
-            'employees'=>$available_employees
+            'time' => $date,
+            'employees' => $available_employees
         ]);
 
     }
