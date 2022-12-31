@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\Scheduled\EmployeeScheduled\CreateEmployeeScheduled;
+use App\Http\Requests\Employee\CreateRequest;
+use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use App\Http\Requests\EmployeeRequest;
 use App\Models\CompanyOwner;
 use App\Models\Employee;
@@ -30,7 +33,7 @@ class EmployeeController extends Controller
         return view('auth.employee.create');
     }
 
-    public function store(EmployeeRequest $request)
+    public function store(CreateEmployeeScheduled $request)
     {
         $company = Auth::user()->company;
         $new_employee = $request->validated();
@@ -59,8 +62,33 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateEmployeeRequest $request, $id)
     {
+        $employee = Employee::find($id);
+        $employee->name = $request->input('name');
+        $employee->position = $request->input('position');
+
+        if(is_null($request->input('email'))){
+            $employee->email = null;
+
+        }else{
+            $employee->email = $request->input('email');
+        }
+
+        if(is_null($request->input('phone'))){
+            $employee->phone = null;
+        }else{
+            $employee->phone = $request->input('phone');
+        }
+
+        try {
+        $employee->update();
+            return redirect()->route('employee.index')->with('success', 'employee has been updated');
+
+        } catch (QueryException $exception) {
+            return redirect()->back()->with('error', $exception->errorInfo[2]);
+
+        }
 
     }
 

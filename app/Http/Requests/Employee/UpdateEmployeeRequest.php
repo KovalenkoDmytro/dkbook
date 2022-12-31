@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Employee;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EmployeeRequest extends FormRequest
+class UpdateEmployeeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,24 +26,26 @@ class EmployeeRequest extends FormRequest
         return [
             "name" => [
                 'required',
-                'string'
+                'string',
+                'max:20',
             ],
             "email" => [
                 'nullable',
                 'email',
-                'unique:employees',
                 'email:rfc,dns',
                 'max:50',
             ],
             "position" => [
                 'required',
-                'string'
+                'string',
+                'max:25',
             ],
             "phone" => [
+                'nullable',
                 'string',
-                'max:13',
+                'regex:/^[\+\(\s.\-\/\d\)]{5,30}$/u',
+                'max:15',
                 'min:9',
-                'unique:employees'
             ],
         ];
     }

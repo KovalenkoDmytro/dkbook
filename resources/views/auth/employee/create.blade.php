@@ -38,7 +38,7 @@
             name="phone"
             error="{{$errors->first('phone') ?? false}}"
             value="{{ old('phone') }}"
-            placeholder="{{__('+(48)333-333-333')}}">
+            placeholder="{{__('+48333-333-333')}}">
         </x-input>
         <button class="btn" type="submit">{{__('Add employee')}}</button>
     </form>

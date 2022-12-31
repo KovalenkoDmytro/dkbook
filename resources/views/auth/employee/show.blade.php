@@ -5,6 +5,7 @@
         @method('PUT')
         @csrf
         <a class="btn" href="{{url()->previous()}}">{{__('Preview page')}}</a>
+        <input type="hidden" name="id" value="{{$employee ->id}}">
         <x-input
             for="employee_name"
             text="{{__('Name')}}"
