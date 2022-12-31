@@ -76,7 +76,7 @@ class Employee extends Model
 
     public function services(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Service::class, 'employee_service');
+        return $this->belongsToMany(Service::class, 'service_employee');
     }
 
 }

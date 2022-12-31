@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Auth\Scheduled\EmployeeScheduled\CreateEmployeeScheduled;
-use App\Http\Requests\Employee\CreateRequest;
+
+use App\Http\Requests\Employee\CreateEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
-use App\Http\Requests\EmployeeRequest;
+use App\Models\Company;
 use App\Models\CompanyOwner;
 use App\Models\Employee;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
+
 
 
 class EmployeeController extends Controller
@@ -33,7 +33,7 @@ class EmployeeController extends Controller
         return view('auth.employee.create');
     }
 
-    public function store(CreateEmployeeScheduled $request)
+    public function store(CreateEmployeeRequest $request)
     {
         $company = Auth::user()->company;
         $new_employee = $request->validated();
@@ -82,7 +82,7 @@ class EmployeeController extends Controller
         }
 
         try {
-        $employee->update();
+            $employee->update();
             return redirect()->route('employee.index')->with('success', 'employee has been updated');
 
         } catch (QueryException $exception) {
@@ -94,10 +94,18 @@ class EmployeeController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        dump($id);
+        $company = Auth::user()->company;
+        $employee = Employee::find($id);
 
+        try {
+            $employee->services()->detach();
+            $company->employees()->detach($employee->id);
+            $employee->delete();
+            return redirect()->route('employee.index')->with('success', 'employee has been deleted');
 
-//        redirect()->back()
+        } catch (QueryException $exception) {
+            return redirect()->back()->with('error', $exception->errorInfo[2]);
+        }
 
     }
 

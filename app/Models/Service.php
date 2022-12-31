@@ -23,6 +23,6 @@ class Service extends Model
 
     public function employees(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Employee::class,'employee_service');
+        return $this->belongsToMany(Employee::class,'service_employee');
     }
 }

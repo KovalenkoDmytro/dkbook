@@ -1,6 +1,13 @@
 @extends('layouts.dashboard')
 
 @section('dashboard.content')
+
+    @if (Session::has('error'))
+        <div class="alert alert-error">
+            <h2>{!! Session::get('error') !!}</h2>
+        </div>
+    @endif
+
     <form action="{{route('employee.update',[$employee ->id])}}" method="post">
         @method('PUT')
         @csrf
