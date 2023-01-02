@@ -8,6 +8,17 @@
 <script type="text/javascript" src="{{ asset('/access/js/Table/datatables.js') }}"></script>
 
 @section('dashboard.content')
+    @if (Session::has('success'))
+        <div class="alert alert-success">
+            <h2>{!! Session::get('success') !!}</h2>
+        </div>
+    @endif
+
+    @if (Session::has('error'))
+        <div class="alert alert-error">
+            <h2>{!! Session::get('error') !!}</h2>
+        </div>
+    @endif
     <div class="page-clients __index">
         <h1>{{__('Clients pages')}}</h1>
         <div class="clients">
@@ -22,9 +33,15 @@
                 <tbody>
                 @foreach($clients as $client)
                     <tr>
-                        <td>{{$client->name}}</td>
-                        <td>{{$client->phone}}</td>
-                        <td>{{$client->email}}</td>
+                        <td>
+                            <a href="{{route('client.show',[$client->id])}}">{{$client->name}}</a>
+                        </td>
+                        <td>
+                            <a href="tel:{{$client->phone}}">{{$client->phone}}</a>
+                        </td>
+                        <td>
+                            <a href="mailto:{{$client->email}}?subject=Mail from employee">{{$client->email}}</a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -52,7 +69,7 @@
             <"pagination"ip>
             `,
             searchDelay: 1500,
-            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            lengthMenu: [[3, 25, 50, -1], [3, 25, 50, "All"]],
             // fixedHeader: true,
             // responsive: true,
             // buttons: [
