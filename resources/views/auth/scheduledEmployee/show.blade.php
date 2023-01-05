@@ -7,7 +7,7 @@
         @method('PUT')
         @csrf
         <div class="scheduled_items">
-            <x-date-time-picker :update_scheduled="$scheduled"/>
+            <x-date-time-picker :scheduled="$scheduled"/>
         </div>
         <button class="btn" type="submit">{{__("Update scheduled")}}</button>
     </form>

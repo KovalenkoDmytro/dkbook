@@ -10,8 +10,8 @@
 
         <a class="btn icon icon_close" href="{{url()->previous()}}"></a>
         <div class="days">
-            @if($attributes['update_scheduled'])
-                @foreach($attributes['update_scheduled'] as $day => $hours)
+{{--            @if($attributes['update_scheduled'])--}}
+                @foreach($attributes['scheduled'] as $day => $hours)
                     @php
                         $hourFromValue = strpos($hours,' ');
                         $hourFrom = substr($hours,0,$hourFromValue);
@@ -21,7 +21,7 @@
                     @endphp
                     <div class="day_row">
                         <label>
-                            <input type="checkbox" name="{{$day}}">
+                            <input type="checkbox" >
                             <span>{{$day}}</span>
                         </label>
                         <div class="hours">
@@ -30,20 +30,20 @@
                         </div>
                     </div>
                 @endforeach
-            @else
-                @foreach($schedule_days as $day)
-                    <div class="day_row">
-                        <label>
-                            <input type="checkbox" name="{{$day}}">
-                            <span>{{$day}}</span>
-                        </label>
+{{--            @else--}}
+{{--                @foreach($schedule_days as $day)--}}
+{{--                    <div class="day_row">--}}
+{{--                        <label>--}}
+{{--                            <input type="checkbox" >--}}
+{{--                            <span>{{$day}}</span>--}}
+{{--                        </label>--}}
 
-                        <div class="hours">
-                            <x-select-drop-down name="{{$day}}_from"/>
-                            <x-select-drop-down name="{{$day}}_to"/>
-                        </div>
-                    </div>
-                @endforeach
-            @endif
+{{--                        <div class="hours">--}}
+{{--                            <x-select-drop-down name="{{$day}}_from"/>--}}
+{{--                            <x-select-drop-down name="{{$day}}_to"/>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                @endforeach--}}
+{{--            @endif--}}
         </div>
 </div>
