@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Scheduled;
+namespace App\Http\Controllers\Auth\Scheduleds;
 
 use App\Http\Controllers\Controller;
 

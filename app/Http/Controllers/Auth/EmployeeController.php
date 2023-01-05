@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Employee\CreateEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
-use App\Models\Company;
 use App\Models\CompanyOwner;
 use App\Models\Employee;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 
 
 class EmployeeController extends Controller
@@ -56,10 +55,8 @@ class EmployeeController extends Controller
     {
 
         $employee = Auth::user()->company->getEmployee((int)$id);
-
-        return view('auth.employee.show', [
-            'employee' => $employee
-        ]);
+        $employee_scheduled = $employee->scheduled;
+        return view('auth.employee.show', compact(['employee', 'employee_scheduled']));
     }
 
     public function update(UpdateEmployeeRequest $request, $id)

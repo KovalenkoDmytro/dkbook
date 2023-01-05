@@ -2,8 +2,6 @@
     $present_day = $today->toArray();
 @endphp
 @extends('layouts.dashboard')
-
-{{--@dump($appointments)--}}
 @section('dashboard.content')
     <div class="page-calendar">
         <div id="dailyCalendar" class="dailyCalendar">
@@ -12,17 +10,17 @@
                 <span>{{__('chose_day')}}</span>
             </p>
             <div class="calendar_pagination">
-                <a class="today" href="{{route('dashboard.daily_calendar',['day'=>$today->toDateString()])}}">
+                <a class="today" href="{{route('dailyCalendar.index',['day'=>$today->toDateString()])}}">
                     <span>{{__('today')}} </span>
                     <span>{{ $today->toFormattedDateString()}}</span>
                 </a>
                 <div class="pagination_items">
-                    <a href="{{route('dashboard.daily_calendar',['day'=>$preview_day->toDateString()])}}"
+                    <a href="{{route('dailyCalendar.index',['day'=>$preview_day->toDateString()])}}"
                        class="pagination_item yesterday">
                         <i class="icon icon_left"></i>
                         <span>{{$preview_day->toFormattedDateString()}}</span>
                     </a>
-                    <a href="{{route('dashboard.daily_calendar',['day'=>$next_day->toDateString()])}}"
+                    <a href="{{route('dailyCalendar.index',['day'=>$next_day->toDateString()])}}"
                        class="pagination_item tomorrow">
                         <span>{{$next_day->toFormattedDateString()}}</span>
                         <i class="icon icon_right"></i>
@@ -32,9 +30,6 @@
             <div class="hour_items">
                 @for($count = 0 ; $count < 24; $count++)
                     <div class="{{ $present_day['hour'] === $count ? 'hours_item currently' :'hours_item'}}">
-{{--                        @php--}}
-{{--                            $day_hour = :00--}}
-{{--                        @endphp--}}
                         <div class="title">{{$count < 10? '0'.$count : $count}}:00</div>
                         <div class="appointments">
                             @foreach($appointments as $appointment)

@@ -1,16 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Dashboard\Calendar;
+namespace App\Http\Controllers\Auth\Calendars;
 
-use App\Http\Controllers\Auth\Dashboard\DashboardController;
+use App\Http\Controllers\Auth\DashboardController;
 use App\Models\Appointment;
-use App\Models\Company;
-use App\Models\CompanyOwner;
-use App\Models\CompanySchedule;
 use Carbon\Carbon;
-use Carbon\CarbonPeriod;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CalendarController extends DashboardController
 {
@@ -89,7 +85,7 @@ class CalendarController extends DashboardController
 
         $this->appointments = $appointments->getMonthlyAppointments($this->chose_month);
 
-        return view('auth.dashboard.calendar.calendar', [
+        return view('auth.calendar.calendar', [
             'prevMonth' => $this->getPreviewMonth(),
             'choseMonth' => $this->chose_month,
             'nextMonth' => $this->getNextMonth(),

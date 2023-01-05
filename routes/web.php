@@ -1,27 +1,27 @@
 <?php
 
-use App\Http\Controllers\Auth\Dashboard\Appointment\AppointmentController;
-use App\Http\Controllers\Auth\Dashboard\Calendar\DailyCalendarController;
-use App\Http\Controllers\Auth\Dashboard\DashboardController;
-use App\Http\Controllers\Auth\Dashboard\Calendar\CalendarController;
-use App\Http\Controllers\Auth\Registration\CreateController;
-use App\Http\Controllers\Auth\Scheduled\CompanyScheduled\CreateCompanyScheduled;
-use App\Http\Controllers\Auth\Scheduled\CompanyScheduled\EditCompanyScheduled;
-use App\Http\Controllers\Auth\Scheduled\EmployeeScheduled\CreateEmployeeScheduled;
-use App\Http\Controllers\Auth\Scheduled\EmployeeScheduled\EditEmployeeScheduled;
-use App\Http\Controllers\Auth\Scheduled\HomeScheduledController;
+use App\Http\Controllers\Auth\AppointmentController;
+use App\Http\Controllers\Auth\Calendars\CalendarController;
+use App\Http\Controllers\Auth\Calendars\DailyCalendarController;
+use App\Http\Controllers\Auth\ClientController;
+use App\Http\Controllers\Auth\DashboardController;
+use App\Http\Controllers\Auth\EmployeeController;
+use App\Http\Controllers\Auth\Scheduleds\CompanyScheduled\CreateCompanyScheduled;
+use App\Http\Controllers\Auth\Scheduleds\CompanyScheduled\EditCompanyScheduled;
+use App\Http\Controllers\Auth\Scheduleds\EmployeeScheduled\CreateEmployeeScheduled;
+use App\Http\Controllers\Auth\Scheduleds\EmployeeScheduled\EditEmployeeScheduled;
+use App\Http\Controllers\Auth\Scheduleds\HomeScheduledController;
+use App\Http\Controllers\Auth\ServiceController;
 use App\Http\Controllers\Auth\User\LoginController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\Registration\CreateController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'] )->name('main');
 
-Route::name('company.')->group(function (){
-    Route::get('/register-1', [CreateController::class, 'step1'] )->name('step1');
-    Route::post('/register-1', [CreateController::class, 'createOwner'] )->name('createOwner');
+Route::name('registration.')->group(function (){
+    Route::get('/step1', [CreateController::class, 'step1'] )->name('step1');
+    Route::post('/step1', [CreateController::class, 'createOwner'] )->name('createOwner');
     Route::get('/register-2', [CreateController::class, 'step2'] )->name('step2');
     Route::post('/register-2', [CreateController::class, 'createCompany'] )->name('createCompany');
     Route::get('/register-3', [CreateController::class, 'step3'] )->name('step3');
@@ -46,8 +46,6 @@ Route::name('employee.')->group(function (){
     Route::delete('/employee/destroy/{id}', [EmployeeController::class, 'destroy'] )->name('destroy');
     Route::post('/employees/available', [EmployeeController::class, 'getAvailableEmployee'] );
 });
-
-//client
 Route::name('client.')->middleware('auth')->group(function (){
     Route::get('/client', [ClientController::class, 'index'] )->name('index');
     Route::get('/client/create', [ClientController::class, 'create'] )->name('create');
@@ -56,9 +54,6 @@ Route::name('client.')->middleware('auth')->group(function (){
     Route::put('/client/update/{id}', [ClientController::class, 'update'] )->name('update');
     Route::delete('/client/destroy/{id}', [ClientController::class, 'destroy'] )->name('destroy');
 });
-
-
-
 Route::name('scheduled.')->group(function (){
     // scheduled company
     Route::get('/scheduled/{id}/{table}', [HomeScheduledController::class, 'show'] )->name('index')->where(['id'=>'[0-9]+','table'=>'^((?!edit$).)*$']);
@@ -75,12 +70,22 @@ Route::name('user.')->group(function (){
     Route::post('/login', [LoginController::class, 'login'] );
     Route::get('/logout', [LoginController::class,'logout'] )->name('logout');
 });
+
+
+
+Route::name('monthlyCalendar.')->middleware('auth')->group(function (){
+    Route::get('/calendar/month/{date?}', [CalendarController::class, 'index'] )->name('index');
+});
+
+Route::name('dailyCalendar.')->middleware('auth')->group(function (){
+    Route::get('/calendar/day/{date?}', [DailyCalendarController::class, 'index'] )->name('index');
+});
+
+
 Route::name('dashboard.')->middleware('auth')->group(function (){
     Route::get('/main', [DashboardController::class, 'index'] )->name('main');
 
-    //calendar
-    Route::get('/calendar/month/{date?}', [CalendarController::class, 'index'] )->name('calendar');
-    Route::get('/calendar/day/{date?}', [DailyCalendarController::class, 'index'] )->name('daily_calendar');
+
 
     //appointment
     Route::get('/appointment/create/{date}', [AppointmentController::class, 'index'] )->name('index');

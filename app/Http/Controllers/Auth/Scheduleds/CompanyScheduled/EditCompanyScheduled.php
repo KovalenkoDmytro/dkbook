@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Scheduled\CompanyScheduled;
+namespace App\Http\Controllers\Auth\Scheduleds\CompanyScheduled;
 
-use App\Http\Controllers\Auth\Scheduled\EditScheduledController;
+use App\Http\Controllers\Auth\Scheduleds\EditScheduledController;
 use App\Models\CompanySchedule;
 use Illuminate\Http\Request;
 use Illuminate\View\View;

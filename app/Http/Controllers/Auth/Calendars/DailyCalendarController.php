@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Dashboard\Calendar;
+namespace App\Http\Controllers\Auth\Calendars;
 
 use App\Models\Appointment;
-use App\Models\Company;
 use Carbon\Carbon;
-use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +35,7 @@ class DailyCalendarController extends CalendarController
         $this->prev_day = Carbon::createFromDate($chose_day->year, $chose_day->month, $chose_day->day - 1);
         $this->next_day = Carbon::createFromDate($chose_day->year, $chose_day->month, $chose_day->day + 1);
 
-        return view('auth.dashboard.calendar.daily_calendar', [
+        return view('auth.calendar.dailyCalendar', [
             'preview_day' => $this->prev_day,
             'today' => $this->today->timezone($userTimezone),
             'chose_day' => $chose_day,

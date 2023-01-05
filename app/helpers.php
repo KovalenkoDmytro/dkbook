@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\Auth\Registration\HomeController;
+use App\Http\Controllers\Registration\HomeController;
 use Illuminate\Support\Str;
-
 
 
 function getCurrentStepRegistration():array

@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Dashboard;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Company;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {

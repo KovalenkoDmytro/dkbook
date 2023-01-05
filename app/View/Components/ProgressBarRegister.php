@@ -2,9 +2,7 @@
 
 namespace App\View\Components;
 
-use App\Http\Controllers\Auth\Registration\CreateController;
-use App\Http\Controllers\Auth\Registration\HomeController;
-use Illuminate\Support\Str;
+use App\Http\Controllers\Registration\HomeController;
 use Illuminate\View\Component;
 
 class ProgressBarRegister extends Component

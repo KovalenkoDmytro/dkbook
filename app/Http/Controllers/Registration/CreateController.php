@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Registration;
+namespace App\Http\Controllers\Registration;
 
 use App\Models\BusinessType;
 use App\Models\Company;

@@ -7,6 +7,7 @@
             <h2>{!! Session::get('error') !!}</h2>
         </div>
     @endif
+{{--    @dump($employee_scheduled)--}}
     <div class="page-employee __show">
         <form action="{{route('employee.update',[$employee ->id])}}" method="post">
             @method('PUT')
