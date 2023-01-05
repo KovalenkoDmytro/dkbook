@@ -2,8 +2,6 @@
 
 
 @section('dashboard.content')
-    @dump($client)
-    <h1> {{__('Add new client')}}</h1>
     <div class="page-client __show">
         <form action="{{route('client.update',$client->id)}}" method="post">
             @csrf
@@ -35,7 +33,7 @@
                 value="{{ $client->phone }}"
                 placeholder="{{__('+48333-333-333')}}">
             </x-input>
-            <button class="btn" type="submit">{{__('Add employee')}}</button>
+            <button class="btn" type="submit">{{__('Update')}}</button>
         </form>
     </div>
 
