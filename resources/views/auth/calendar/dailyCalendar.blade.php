@@ -45,7 +45,7 @@
                                             <p>{{$appointment['date']}}</p>
                                             <p>service - {{$appointment->service->name}}</p>
                                             <p>client- {{$appointment->client->name}}</p>
-                                            <p>employee- {{$appointment->employee->name}}</p>
+                                            <p>employee- {{$appointment->employee->name ?? 'deleted'}}</p>
                                             <p>payed - {{$appointment['payed'] ? 'payed' : 'unpayed'}}</p>
                                         </div>
                                     </div>

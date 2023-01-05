@@ -7,13 +7,7 @@
         <p>{{$subtitle ?? ''}}</p>
     @endif
 
-        @csrf
-        @if($attributes['id'])
-            <input type="hidden" value="{{$attributes['id']}}" name="id" />
-        @endif
-        @if($attributes['table'])
-            <input type="hidden" value="{{$attributes['table']}}" name="table" />
-        @endif
+
         <a class="btn icon icon_close" href="{{url()->previous()}}"></a>
         <div class="days">
             @if($attributes['update_scheduled'])
@@ -52,6 +46,4 @@
                 @endforeach
             @endif
         </div>
-
-
 </div>

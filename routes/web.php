@@ -6,11 +6,12 @@ use App\Http\Controllers\Auth\Calendars\DailyCalendarController;
 use App\Http\Controllers\Auth\ClientController;
 use App\Http\Controllers\Auth\DashboardController;
 use App\Http\Controllers\Auth\EmployeeController;
-use App\Http\Controllers\Auth\Scheduleds\CompanyScheduled\CreateCompanyScheduled;
-use App\Http\Controllers\Auth\Scheduleds\CompanyScheduled\EditCompanyScheduled;
-use App\Http\Controllers\Auth\Scheduleds\EmployeeScheduled\CreateEmployeeScheduled;
-use App\Http\Controllers\Auth\Scheduleds\EmployeeScheduled\EditEmployeeScheduled;
-use App\Http\Controllers\Auth\Scheduleds\HomeScheduledController;
+use App\Http\Controllers\Auth\Schedules\CompanyScheduled\CreateCompanyScheduled;
+use App\Http\Controllers\Auth\Schedules\CompanyScheduled\EditCompanyScheduled;
+use App\Http\Controllers\Auth\Schedules\EmployeeScheduled\CreateEmployeeScheduled;
+use App\Http\Controllers\Auth\Schedules\EmployeeScheduled\EditEmployeeScheduled;
+use App\Http\Controllers\Auth\Schedules\EmployeeScheduledController;
+use App\Http\Controllers\Auth\Schedules\HomeScheduledController;
 use App\Http\Controllers\Auth\ServiceController;
 use App\Http\Controllers\Auth\User\LoginController;
 use App\Http\Controllers\HomeController;
@@ -61,10 +62,12 @@ Route::name('scheduled.')->group(function (){
     Route::get('/company-scheduled/{id}/edit', [EditCompanyScheduled::class, 'index'] )->name('company.edit')->where('id','[0-9]+');
     Route::put('/company-scheduled/update', [EditCompanyScheduled::class, 'update'] )->name('company.update');
     //scheduled employee
-    Route::post('/employee-scheduled/{id}/create', [CreateEmployeeScheduled::class, 'store'] )->name('employee.store')->where('id','[0-9]+');
-    Route::get('/employee-scheduled/{id}/edit', [EditEmployeeScheduled::class, 'index'] )->name('employee.edit')->where('id','[0-9]+');
-    Route::put('/employee-scheduled/update', [EditEmployeeScheduled::class, 'update'] )->name('employee.update');
+//    Route::post('/employee-scheduled/{id}/create', [CreateEmployeeScheduled::class, 'store'] )->name('employee.store')->where('id','[0-9]+');
+//    Route::get('/employee-scheduled/{id}/edit', [EditEmployeeScheduled::class, 'index'] )->name('employee.edit')->where('id','[0-9]+');
+//    Route::put('/employee-scheduled/update', [EditEmployeeScheduled::class, 'update'] )->name('employee.update');
 });
+
+
 Route::name('user.')->group(function (){
     Route::get('/login', [LoginController::class, 'index'] )->name('login');
     Route::post('/login', [LoginController::class, 'login'] );
@@ -76,9 +79,13 @@ Route::name('user.')->group(function (){
 Route::name('monthlyCalendar.')->middleware('auth')->group(function (){
     Route::get('/calendar/month/{date?}', [CalendarController::class, 'index'] )->name('index');
 });
-
 Route::name('dailyCalendar.')->middleware('auth')->group(function (){
     Route::get('/calendar/day/{date?}', [DailyCalendarController::class, 'index'] )->name('index');
+});
+
+Route::name('employeeScheduled.')->group(function (){
+    Route::get('/employeeScheduled/{id}', [EmployeeScheduledController::class, 'show'] )->name('show');
+    Route::put('/employeeScheduled/update/{id}', [EmployeeScheduledController::class, 'update'] )->name('update');
 });
 
 

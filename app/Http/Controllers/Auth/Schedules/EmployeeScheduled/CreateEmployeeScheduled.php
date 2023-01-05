@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Scheduleds\EmployeeScheduled;
+namespace App\Http\Controllers\Auth\Schedules\EmployeeScheduled;
 
-use App\Http\Controllers\Auth\Scheduleds\HomeScheduledController;
+use App\Http\Controllers\Auth\Schedules\HomeScheduledController;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\EmployeeSchedule;

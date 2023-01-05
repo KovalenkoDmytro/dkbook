@@ -32,6 +32,7 @@ class Company extends Model
         }
         return $employee;
 
+
     }
 
     public function owner(): \Illuminate\Database\Eloquent\Relations\BelongsTo

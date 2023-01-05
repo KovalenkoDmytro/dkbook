@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Scheduleds\EmployeeScheduled;
+namespace App\Http\Controllers\Auth\Schedules\EmployeeScheduled;
 
-use App\Http\Controllers\Auth\Scheduleds\EditScheduledController;
+use App\Http\Controllers\Auth\Schedules\EditScheduledController;
 use App\Models\Employee;
 use App\Models\EmployeeSchedule;
 use Illuminate\Http\Request;

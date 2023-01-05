@@ -58,5 +58,9 @@
             @csrf
             <button type="submit" class="btn">{{__('Destroy')}}</button>
         </form>
+
+        <a class="btn" href="{{route('employeeScheduled.show',[$employee ->id])}}">
+            <span> {{__('Scheduled')}}</span>
+        </a>
     </div>
 @endsection
