@@ -6,6 +6,7 @@
 @import "base/main";
 
 @import "layout/main";
+@import "layout/aside";
 @import "layout/inputs";
 @import "layout/scheduled";
 @import "layout/calendar/monthlyCalendar";
@@ -15,6 +16,7 @@
 @import "components/selectDropDown";
 @import "components/progressBarRegister";
 @import "components/pagination";
+@import "components/navigation";
 
 
 @import "pages/registration";

@@ -69,7 +69,7 @@ class CreateController extends HomeController
             return redirect()->intended(route('company.step2'));
         }
 
-        return redirect(route('company.step1'))->withErrors([
+        return redirect(route('registration.step1'))->withErrors([
             'formError' => 'Error when created user'
         ]);
 

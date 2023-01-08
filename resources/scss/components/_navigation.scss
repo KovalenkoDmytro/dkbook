@@ -1,0 +1,19 @@
+.navigation{
+    .navigation__link{
+        display: flex;
+        align-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 15px;
+        color: $white_color;
+        @include transition;
+        &:hover{
+            background-color: $success_color;
+        }
+        .link__icon{
+            max-width: 40px;
+            margin-right: 15px;
+            filter: invert(100%) sepia(0%) saturate(20%) hue-rotate(253deg) brightness(104%) contrast(105%);
+        }
+    }
+}

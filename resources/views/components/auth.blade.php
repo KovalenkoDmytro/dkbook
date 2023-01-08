@@ -36,7 +36,7 @@
 
         <a href="#!" title="Forget password">{{__('Forget password')}}</a>
         <button class="btn" type="submit">{{__('Login')}}</button>
-        <p>{{__('No register yet?')}} <a class="btn" href="{{ URL::route('company.step1')}}" title="Create an Account">{{__('Create an Account')}}</a></p>
+        <p>{{__('No register yet?')}} <a class="btn" href="{{ URL::route('registration.step1')}}" title="Create an Account">{{__('Create an Account')}}</a></p>
 
     </form>
 </div>
