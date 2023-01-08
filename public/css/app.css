@@ -302,11 +302,11 @@ main {
 
 .layout {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .container {
-  margin: 0 auto;
+  margin: 40px auto;
   display: flex;
   flex-direction: column;
   padding: 0 15px;
@@ -871,6 +871,13 @@ aside {
   background-color: #8e8e8e;
 }
 
+.navigation__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
 .navigation .navigation__link {
   display: flex;
   align-content: center;
@@ -931,6 +938,9 @@ aside {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 25px;
   }
+}
+.page-employees .employees .employee {
+  margin: 40px 0;
 }
 .page-employees .employees .employee .employee__photo {
   max-width: 150px;

@@ -35,12 +35,24 @@ class DailyCalendarController extends CalendarController
         $this->prev_day = Carbon::createFromDate($chose_day->year, $chose_day->month, $chose_day->day - 1);
         $this->next_day = Carbon::createFromDate($chose_day->year, $chose_day->month, $chose_day->day + 1);
 
+
+        $working_time = Auth::user()->company->scheduled->toArray();
+        $day_working_time = $working_time[strtolower($chose_day->englishDayOfWeek)];
+
+
+        preg_match_all('/[0-9]{1,2}:[0-9]{1,2}/', $day_working_time, $day_working_time);
+        $times_start = strtotime($day_working_time[0][0]);
+        $times_end = strtotime($day_working_time[0][1]);
+
+
         return view('auth.calendar.dailyCalendar', [
             'preview_day' => $this->prev_day,
             'today' => $this->today->timezone($userTimezone),
             'chose_day' => $chose_day,
             'next_day' => $this->next_day,
             'appointments' => $this->appointments,
+            'times_start' => (int)date('H', $times_start),
+            'times_end' => (int)date('H', $times_end),
         ]);
     }
 }

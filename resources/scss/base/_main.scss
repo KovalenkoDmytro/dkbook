@@ -29,10 +29,10 @@ main{
 }
 .layout{
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
 }
 .container {
-    margin: 0 auto;
+    margin: 40px auto;
     display: flex;
     flex-direction: column;
     padding: 0 15px;

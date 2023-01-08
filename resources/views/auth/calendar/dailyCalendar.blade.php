@@ -7,7 +7,7 @@
         <div id="dailyCalendar" class="dailyCalendar">
             <p class="calendar_head">
                 <span class="chose_day">{{$chose_day->toFormattedDateString()}}</span>
-                <span>{{__('chose_day')}}</span>
+                <span>{{$chose_day->locale(App::currentLocale())->dayName}}</span>
             </p>
             <div class="calendar_pagination">
                 <a class="today" href="{{route('dailyCalendar.index',['day'=>$today->toDateString()])}}">
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="hour_items">
-                @for($count = 0 ; $count < 24; $count++)
+                @for($count = $times_start ; $count <= $times_end; $count++)
                     <div class="{{ $present_day['hour'] === $count ? 'hours_item currently' :'hours_item'}}">
                         <div class="title">{{$count < 10? '0'.$count : $count}}:00</div>
                         <div class="appointments">
