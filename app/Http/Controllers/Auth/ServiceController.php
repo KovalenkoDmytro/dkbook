@@ -3,34 +3,63 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ServiceRequest;
 use App\Models\Service;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
     public function index()
     {
-        return view('auth.create_service');
+        return view('auth.service.index');
     }
-    public function store(Request $request)
+    public function create()
     {
-        $data = $request->validate([
-            'name' => ['required','string','max:25'],
-            'price'=> ['required','numeric','max:10000'],
-            'timeRange_hour'=>'integer',
-            'timeRange_minutes'=>'integer',
+        return view('auth.service.create');
+    }
+    public function store(ServiceRequest $request)
+    {
+        try {
+//            $new_client = $request->validated();
+//            $client = Client::firstOrCreate($new_client);
+//            $company->clients()->attach($client->id);
+//            return redirect()->route('client.index')->with('success', 'client has been added');
 
-        ]);
-        $data['company_id']= session()->get('company_id');
+        } catch (QueryException $exception) {
+            return redirect()->back()->with('error', $exception->errorInfo[2]);
 
-        Service::create($data);
+        }
+//        $data = $request->validate([
+//            'name' => ['required','string','max:25'],
+//            'price'=> ['required','numeric','max:10000'],
+//            'timeRange_hour'=>'integer',
+//            'timeRange_minutes'=>'integer',
+//
+//        ]);
+//        $data['company_id']= session()->get('company_id');
 
-        return redirect(route('company.step4'));
+//        Service::create($data);
+
+//        return redirect(route('company.step4'));
         //todo exchange redirect
 //        dd(getCurrentStepRegistration());
     }
-    public function update()
+    public function edit()
     {
+        return view('auth.service.edit');
+    }
+
+    public function update(ServiceRequest $request)
+    {
+        try {
+//            $client->update();
+//            return redirect()->route('client.index')->with('success', 'client has been added');
+
+        } catch (QueryException $exception) {
+            return redirect()->back()->with('error', $exception->errorInfo[2]);
+
+        }
     }
     public function destroy()
     {

@@ -20,6 +20,10 @@
             <img class="link__icon" src="{{asset('/access/icons/clients.svg')}}">
             <span>{{__('Clients')}} </span>
         </a>
+        <a class="navigation__link" href="{{route('services.index')}}" title="services">
+            <img class="link__icon" src="">
+            <span>{{__('Services')}} </span>
+        </a>
     </nav>
     <div class="navigation __footer">
         <a class="navigation__link" href="{{route('user.logout')}}" title="logout">

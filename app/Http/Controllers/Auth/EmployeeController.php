@@ -51,12 +51,12 @@ class EmployeeController extends Controller
 
     }
 
-    public function show(Request $request, $id)
+    public function edit(Request $request, $id)
     {
 
         $employee = Auth::user()->company->getEmployee((int)$id);
         $employee_scheduled = $employee->scheduled;
-        return view('auth.employee.show', compact(['employee', 'employee_scheduled']));
+        return view('auth.employee.edit', compact(['employee', 'employee_scheduled']));
     }
 
     public function update(UpdateEmployeeRequest $request, $id)

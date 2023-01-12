@@ -30,7 +30,7 @@
                     <a href="mailto:{{$employee['email']}}">{{$employee['email']}}</a>
                     <a href="tel:{{$employee['phone']}}">{{$employee['phone']}}</a>
 
-                    <a class="btn" href="{{route('employee.show',[$employee->id])}}" >
+                    <a class="btn" href="{{route('employee.edit',[$employee->id])}}" >
                         <span>{{__('Edit')}}</span>
                     </a>
                 </div>

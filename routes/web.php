@@ -34,26 +34,27 @@ Route::name('registration.')->group(function (){
 });
 Route::name('services.')->group(function (){
     Route::get('/services', [ServiceController::class, 'index'] )->name('index');
-    Route::post('/services', [ServiceController::class, 'store'] )->name('store');
-    Route::put('/services/{id}', [ServiceController::class, 'update'] )->name('update');
-    Route::delete('/services/{id}', [ServiceController::class, 'destroy'] )->name('destroy');
+    Route::get('/service/create', [ServiceController::class, 'create'] )->name('create');
+    Route::post('/service', [ServiceController::class, 'store'] )->name('store');
+    Route::get('/service/{id}/edit', [ServiceController::class, 'edit'] )->name('edit');
+    Route::put('/service/{id}', [ServiceController::class, 'update'] )->name('update');
+    Route::delete('/service/{id}', [ServiceController::class, 'destroy'] )->name('destroy');
 });
 Route::name('employee.')->group(function (){
     Route::get('/employees', [EmployeeController::class, 'index'] )->name('index');
     Route::get('/employee/create', [EmployeeController::class, 'create'] )->name('create');
-    Route::post('/employee/create', [EmployeeController::class, 'store'] )->name('store');
-    Route::get('/employee/{id}', [EmployeeController::class, 'show'] )->name('show');
-    Route::put('/employee/update/{id}', [EmployeeController::class, 'update'] )->name('update');
-    Route::delete('/employee/destroy/{id}', [EmployeeController::class, 'destroy'] )->name('destroy');
+    Route::post('/employee', [EmployeeController::class, 'store'] )->name('store');
+    Route::get('/employee/{id}/edit', [EmployeeController::class, 'edit'] )->name('edit');
+    Route::put('/employee/{id}', [EmployeeController::class, 'update'] )->name('update');
+    Route::delete('/employee/{id}', [EmployeeController::class, 'destroy'] )->name('destroy');
     Route::post('/employees/available', [EmployeeController::class, 'getAvailableEmployee'] );
 });
 Route::name('client.')->middleware('auth')->group(function (){
-    Route::get('/client', [ClientController::class, 'index'] )->name('index');
+    Route::get('/clients', [ClientController::class, 'index'] )->name('index');
     Route::get('/client/create', [ClientController::class, 'create'] )->name('create');
-    Route::post('/client/create', [ClientController::class, 'store'] )->name('store');
-    Route::get('/client/{id}', [ClientController::class, 'show'] )->name('show');
-    Route::put('/client/update/{id}', [ClientController::class, 'update'] )->name('update');
-    Route::delete('/client/destroy/{id}', [ClientController::class, 'destroy'] )->name('destroy');
+    Route::post('/client', [ClientController::class, 'store'] )->name('store');
+    Route::get('/client/{id}', [ClientController::class, 'edit'] )->name('edit');
+    Route::put('/client/{id}', [ClientController::class, 'update'] )->name('update');
 });
 Route::name('scheduled.')->group(function (){
     // scheduled company

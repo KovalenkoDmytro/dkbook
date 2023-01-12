@@ -44,11 +44,11 @@ class ClientController extends Controller
 
     }
 
-    public function show($id)
+    public function edit($id)
     {
         $client = Client::find((int)$id);
 
-        return view('auth.client.show', compact(['client']));
+        return view('auth.client.edit', compact(['client']));
     }
 
     public function update(UpdateClienRequest $request, $id)
@@ -80,8 +80,4 @@ class ClientController extends Controller
         }
     }
 
-    public function destroy(Request $request, $id)
-    {
-        dump($id);
-    }
 }
