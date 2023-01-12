@@ -10,18 +10,18 @@
                 <span>{{$chose_day->locale(App::currentLocale())->dayName}}</span>
             </p>
             <div class="calendar_pagination">
-                <a class="today" href="{{route('dailyCalendar.index',['day'=>$today->toDateString()])}}">
+                <a class="btn today" href="{{route('dailyCalendar.index',['day'=>$today->toDateString()])}}">
                     <span>{{__('today')}} </span>
                     <span>{{ $today->toFormattedDateString()}}</span>
                 </a>
                 <div class="pagination_items">
                     <a href="{{route('dailyCalendar.index',['day'=>$preview_day->toDateString()])}}"
-                       class="pagination_item yesterday">
+                       class="btn pagination_item yesterday">
                         <i class="icon icon_left"></i>
                         <span>{{$preview_day->toFormattedDateString()}}</span>
                     </a>
                     <a href="{{route('dailyCalendar.index',['day'=>$next_day->toDateString()])}}"
-                       class="pagination_item tomorrow">
+                       class="btn pagination_item tomorrow">
                         <span>{{$next_day->toFormattedDateString()}}</span>
                         <i class="icon icon_right"></i>
                     </a>
@@ -52,7 +52,7 @@
                                 @endif
                             @endforeach
                         </div>
-                        <a class="addTask"
+                        <a class="btn addTask"
                            href="{{route('dashboard.index',['date'=>$chose_day->toFormattedDateString().' '.$count.':00'])}}"
                         >
                             <i id="addTask" class="icon icon_plus"></i>

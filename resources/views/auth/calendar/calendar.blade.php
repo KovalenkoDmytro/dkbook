@@ -10,11 +10,11 @@
                     <p class="year">{{$choseMonth->year}}</p>
                 </div>
                 <div class="pagination">
-                    <a href="{{route('monthlyCalendar.index',['month'=>$prevMonth->toDateString()])}}" class="prevMonth">
+                    <a href="{{route('monthlyCalendar.index',['month'=>$prevMonth->toDateString()])}}" class="btn prevMonth">
                         <i class="icon icon_left"></i>
                     </a>
-                    <a href="{{route('monthlyCalendar.index',['month'=>$today->toDateString()])}}" class="currentMonth">{{__('Today')}}</a>
-                    <a href="{{route('monthlyCalendar.index',['month'=>$nextMonth->toDateString()])}}" class="nextMonth">
+                    <a href="{{route('monthlyCalendar.index',['month'=>$today->toDateString()])}}" class="btn currentMonth">{{__('Today')}}</a>
+                    <a href="{{route('monthlyCalendar.index',['month'=>$nextMonth->toDateString()])}}" class="btn nextMonth">
                         <i class="icon icon_right"></i>
                     </a>
                 </div>
