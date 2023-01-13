@@ -1,40 +1,13 @@
-import './bootstrap';
+// import './bootstrap';
 
 
+import {app} from './helpers'
+import {initDropDownList} from "./dropDownList";
 
 console.log('app.js')
 
 
-//--callback-- it is a function witch will be to call
-// --viewport-- is device size where callback will be to call
-// --viewport can receive a parameters with number which equals device screen size: it's mobile, laptop, and all
-const app = {
-    'view': 'laptop',
-    'run': function (callback, viewport, DOM_element_selector) {
-        window.addEventListener('load', () => {
-            // check element into DOM
-            if (document.querySelector(DOM_element_selector) !== null) {
-                switch (viewport) {
-                    case 'mobile':
-                        if (window.innerWidth <= 979) {
-                            callback()
-                        }
-                        break;
-                    case 'laptop':
-                        if (window.innerWidth > 979 && window.innerWidth <= 1200) {
-                            callback()
-                        }
-                        break;
-                    case 'all':
-                        callback()
-                        break
-                }
-            }
-        })
 
-    }
-}
-// -- general function end ---
 
 
 app.run(() => {
@@ -173,31 +146,11 @@ app.run(() => {
 }, 'all', '.page__create_appointment');
 
 
-// SelectorDropDown --- start ---
-const DropDownToggleBtn = document.querySelectorAll('#dropDown')
-DropDownToggleBtn.forEach(dropDown => {
-    let DropDownOptionsList = dropDown.querySelector('#dropDown_options');
-    let DropDownOptionsListItems = dropDown.querySelectorAll('#dropDown_options .dropDown_option');
-    let DropDownInput = dropDown.querySelector('#dropDown_input')
+// DropDownList --- start ---
+app.run(() => {
+    initDropDownList()
+}, 'all', '#dropDownList');
 
-    dropDown.addEventListener('click', function () {
-        if (dropDown.classList.contains('open')) {
-            dropDown.classList.remove('open')
-        } else {
-            dropDown.classList.add('open')
-        }
-    })
+// DropDownList --- end ---
 
-    choseOption(DropDownOptionsListItems, DropDownInput, dropDown)
-})
 
-function choseOption(optionsList, dropDownInput, dropDownToggle) {
-    optionsList.forEach(option => {
-        option.addEventListener('click', function () {
-            dropDownInput.value = this.dataset.value;
-            dropDownToggle.querySelector('.time').textContent = this.textContent;
-        })
-    })
-}
-
-// SelectorDropDown --- end ---

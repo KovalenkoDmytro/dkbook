@@ -7,12 +7,14 @@ use App\Http\Requests\ServiceRequest;
 use App\Models\Service;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
     public function index()
     {
-        return view('auth.service.index');
+        $services = Auth::user()->company->services;
+        return view('auth.service.index',compact('services'));
     }
     public function create()
     {
@@ -21,37 +23,23 @@ class ServiceController extends Controller
     public function store(ServiceRequest $request)
     {
         try {
-//            $new_client = $request->validated();
-//            $client = Client::firstOrCreate($new_client);
-//            $company->clients()->attach($client->id);
-//            return redirect()->route('client.index')->with('success', 'client has been added');
+            $new_service = $request->validated();
+            Service::firstOrCreate($new_service);
+            return redirect()->route('services.index')->with('success', 'service has been added');
 
         } catch (QueryException $exception) {
             return redirect()->back()->with('error', $exception->errorInfo[2]);
-
         }
-//        $data = $request->validate([
-//            'name' => ['required','string','max:25'],
-//            'price'=> ['required','numeric','max:10000'],
-//            'timeRange_hour'=>'integer',
-//            'timeRange_minutes'=>'integer',
-//
-//        ]);
-//        $data['company_id']= session()->get('company_id');
-
-//        Service::create($data);
-
-//        return redirect(route('company.step4'));
-        //todo exchange redirect
-//        dd(getCurrentStepRegistration());
     }
-    public function edit()
+    public function edit($id)
     {
-        return view('auth.service.edit');
+        $service = Service::find((int)$id);
+        return view('auth.service.edit',compact('service'));
     }
 
     public function update(ServiceRequest $request)
     {
+        dd($request->all());
         try {
 //            $client->update();
 //            return redirect()->route('client.index')->with('success', 'client has been added');

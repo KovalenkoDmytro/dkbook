@@ -2464,16 +2464,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./resources/js/DropDownSelector.js":
-/*!******************************************!*\
-  !*** ./resources/js/DropDownSelector.js ***!
-  \******************************************/
-/***/ (() => {
-
-
-
-/***/ }),
-
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -2482,43 +2472,13 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers */ "./resources/js/helpers.js");
+/* harmony import */ var _dropDownList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dropDownList */ "./resources/js/dropDownList.js");
+// import './bootstrap';
 
-console.log('app.js'); //--callback-- it is a function witch will be to call
-// --viewport-- is device size where callback will be to call
-// --viewport can receive a parameters with number which equals device screen size: it's mobile, laptop, and all
 
-var app = {
-  'view': 'laptop',
-  'run': function run(callback, viewport, DOM_element_selector) {
-    window.addEventListener('load', function () {
-      // check element into DOM
-      if (document.querySelector(DOM_element_selector) !== null) {
-        switch (viewport) {
-          case 'mobile':
-            if (window.innerWidth <= 979) {
-              callback();
-            }
-
-            break;
-
-          case 'laptop':
-            if (window.innerWidth > 979 && window.innerWidth <= 1200) {
-              callback();
-            }
-
-            break;
-
-          case 'all':
-            callback();
-            break;
-        }
-      }
-    });
-  }
-}; // -- general function end ---
-
-app.run(function () {
+console.log('app.js');
+_helpers__WEBPACK_IMPORTED_MODULE_0__.app.run(function () {
   var appointmentsToggle_btns = document.querySelectorAll('#appointment_toggle');
   var html = document.querySelector('html');
   appointmentsToggle_btns.forEach(function (btn) {
@@ -2535,12 +2495,12 @@ app.run(function () {
   });
 }, 'all', '#dailyCalendar'); // set user timezone in registration step 1
 
-app.run(function () {
+_helpers__WEBPACK_IMPORTED_MODULE_0__.app.run(function () {
   var timezone = moment.tz.guess();
   var timezone_input = document.querySelector('#timezone');
   timezone_input.value = timezone;
 }, 'all', '#timezone');
-app.run(function () {
+_helpers__WEBPACK_IMPORTED_MODULE_0__.app.run(function () {
   var getAvailableEmployees = function getAvailableEmployees() {
     return function () {
       var chose_service = dropDownSelector_select_service.getValue();
@@ -2627,31 +2587,11 @@ app.run(function () {
       }
     }
   });
-}, 'all', '.page__create_appointment'); // SelectorDropDown --- start ---
+}, 'all', '.page__create_appointment'); // DropDownList --- start ---
 
-var DropDownToggleBtn = document.querySelectorAll('#dropDown');
-DropDownToggleBtn.forEach(function (dropDown) {
-  var DropDownOptionsList = dropDown.querySelector('#dropDown_options');
-  var DropDownOptionsListItems = dropDown.querySelectorAll('#dropDown_options .dropDown_option');
-  var DropDownInput = dropDown.querySelector('#dropDown_input');
-  dropDown.addEventListener('click', function () {
-    if (dropDown.classList.contains('open')) {
-      dropDown.classList.remove('open');
-    } else {
-      dropDown.classList.add('open');
-    }
-  });
-  choseOption(DropDownOptionsListItems, DropDownInput, dropDown);
-});
-
-function choseOption(optionsList, dropDownInput, dropDownToggle) {
-  optionsList.forEach(function (option) {
-    option.addEventListener('click', function () {
-      dropDownInput.value = this.dataset.value;
-      dropDownToggle.querySelector('.time').textContent = this.textContent;
-    });
-  });
-} // SelectorDropDown --- end ---
+_helpers__WEBPACK_IMPORTED_MODULE_0__.app.run(function () {
+  (0,_dropDownList__WEBPACK_IMPORTED_MODULE_1__.initDropDownList)();
+}, 'all', '#dropDownList'); // DropDownList --- end ---
 
 /***/ }),
 
@@ -2698,13 +2638,72 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/calendar.js":
-/*!**********************************!*\
-  !*** ./resources/js/calendar.js ***!
-  \**********************************/
-/***/ (() => {
+/***/ "./resources/js/dropDownList.js":
+/*!**************************************!*\
+  !*** ./resources/js/dropDownList.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-console.log('calendar');
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "initDropDownList": () => (/* binding */ initDropDownList)
+/* harmony export */ });
+function initDropDownList() {
+  console.log('module --DropDownList');
+  var dropDownLists = document.querySelectorAll('#dropDownList');
+  dropDownLists.forEach(function (dropDownList) {
+    new TomSelect(dropDownList.querySelector('select'), {
+      maxOptions: 500
+    });
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/js/helpers.js":
+/*!*********************************!*\
+  !*** ./resources/js/helpers.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "app": () => (/* binding */ app)
+/* harmony export */ });
+//--callback-- it is a function witch will be to call
+// --viewport-- is device size where callback will be to call
+// --viewport can receive a parameters with number which equals device screen size: it's mobile, laptop, and all
+var app = {
+  'view': 'laptop',
+  'run': function run(callback, viewport, DOM_element_selector) {
+    window.addEventListener('load', function () {
+      // check element into DOM
+      if (document.querySelector(DOM_element_selector) !== null) {
+        switch (viewport) {
+          case 'mobile':
+            if (window.innerWidth <= 979) {
+              callback();
+            }
+
+            break;
+
+          case 'laptop':
+            if (window.innerWidth > 979 && window.innerWidth <= 1200) {
+              callback();
+            }
+
+            break;
+
+          case 'all':
+            callback();
+            break;
+        }
+      }
+    });
+  }
+}; // -- general function end ---
 
 /***/ }),
 
@@ -22385,8 +22384,8 @@ process.umask = function() { return 0; };
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/bootstrap.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/calendar.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/DropDownSelector.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/dropDownList.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/helpers.js")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/scss/app.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	

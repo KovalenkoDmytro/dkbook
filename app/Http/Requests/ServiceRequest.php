@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class ServiceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -24,7 +25,43 @@ class ServiceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "name" => [
+                'required',
+                'string',
+                'max:20',
+            ],
+            'timeRange_hour'=> [
+                'required',
+                'numeric',
+                'max:4',
+            ],
+            'timeRange_minutes'=> [
+                'required',
+                'numeric',
+                'max:59',
+            ],
+            'price'=> [
+                'required',
+                'numeric',
+                'max:999',
+                'regex:/^\d+(\.\d{1,2})?$/'
+            ],
+            'company_id'=>[
+                'required',
+                'numeric',
+            ]
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'company_id' => Auth::user()->company->id,
+        ]);
     }
 }
