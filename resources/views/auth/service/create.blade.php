@@ -19,25 +19,39 @@
         <div class="service-timeRange">
             <p>{{__('Time range service')}}</p>
 
-{{--            <div class="timeRange">--}}
-{{--                <div class="timeRange_item">--}}
-{{--                    <span>{{__('Hour')}}</span>--}}
-{{--                    @php($hours = [00,01,02,03,04])--}}
-{{--                    <x-select-drop-down name="timeRange_hour"--}}
-{{--                                        :custom_properties_name="$hours"--}}
-{{--                                        :custom_values="$hours">--}}
-{{--                    </x-select-drop-down>--}}
-{{--                </div>--}}
+            <div class="timeRange">
+                <div class="timeRange_item">
+                    <span>{{__('Hour')}}</span>
+                    <x-dropDownList
+                        class="hour"
+                        name="timeRange_hour"
+                    >
+                        <x-slot:options>
+                            @foreach(range(0, 5) as $hour)
+                                <option value="{{$hour}}">
+                                    {{$hour}}
+                                </option>
+                            @endforeach
+                        </x-slot:options>
+                    </x-dropDownList>
+                </div>
 
-{{--                <div class="timeRange_item">--}}
-{{--                    <span>{{__('Minutes')}}</span>--}}
-{{--                    @php($minutes = [05,10,15,20,25,30,35,40,45,50,55])--}}
-{{--                    <x-select-drop-down name="timeRange_minutes"--}}
-{{--                                        :custom_properties_name="$minutes"--}}
-{{--                                        :custom_values="$minutes">--}}
-{{--                    </x-select-drop-down>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+                <div class="timeRange_item">
+                    <span>{{__('Minutes')}}</span>
+                    <x-dropDownList
+                        class="minutes"
+                        name="timeRange_minutes"
+                    >
+                        <x-slot:options>
+                            @foreach(range(0, 59, 5) as $minute)
+                                <option value="{{$minute}}">
+                                    {{$minute}}
+                                </option>
+                            @endforeach
+                        </x-slot:options>
+                    </x-dropDownList>
+                </div>
+            </div>
         </div>
 
         <x-input

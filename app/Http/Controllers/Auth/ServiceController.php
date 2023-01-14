@@ -14,12 +14,14 @@ class ServiceController extends Controller
     public function index()
     {
         $services = Auth::user()->company->services;
-        return view('auth.service.index',compact('services'));
+        return view('auth.service.index', compact('services'));
     }
+
     public function create()
     {
         return view('auth.service.create');
     }
+
     public function store(ServiceRequest $request)
     {
         try {
@@ -31,24 +33,28 @@ class ServiceController extends Controller
             return redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
+
     public function edit($id)
     {
         $service = Service::find((int)$id);
-        return view('auth.service.edit',compact('service'));
+        return view('auth.service.edit', compact('service'));
     }
 
-    public function update(ServiceRequest $request)
+    public function update(ServiceRequest $request, $id)
     {
-        dd($request->all());
         try {
-//            $client->update();
-//            return redirect()->route('client.index')->with('success', 'client has been added');
+            $service = Service::find((int)$id);
+            $service_update = $request->validated();
+            $service->update($service_update);
+
+            return redirect()->route('services.edit', [$id])->with('success', 'service has been updated');
 
         } catch (QueryException $exception) {
             return redirect()->back()->with('error', $exception->errorInfo[2]);
 
         }
     }
+
     public function destroy()
     {
     }

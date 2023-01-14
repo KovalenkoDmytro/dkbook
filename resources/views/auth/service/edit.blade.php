@@ -1,5 +1,11 @@
 @extends('layouts.dashboard')
 @section('dashboard.content')
+    @if (Session::has('success'))
+        <div class="alert alert-success">
+            <h2>{!! Session::get('success') !!}</h2>
+        </div>
+    @endif
+
     @if (Session::has('error'))
         <div class="alert alert-error">
             <h2>{!! Session::get('error') !!}</h2>
