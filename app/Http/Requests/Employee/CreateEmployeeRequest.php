@@ -48,6 +48,15 @@ class CreateEmployeeRequest extends FormRequest
                 'min:9',
                 'unique:employees'
             ],
+            "employee_schedule_id"=>[
+                'numeric'
+            ]
         ];
+    }
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'employee_schedule_id' => 1
+        ]);
     }
 }

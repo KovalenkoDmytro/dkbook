@@ -1,7 +1,12 @@
 @extends('layouts.dashboard')
 @section('dashboard.content')
     <h1> {{__('Add new employee')}}</h1>
-
+    @if (Session::has('error'))
+        <div class="alert alert-error">
+            <h2>{!! Session::get('error') !!}</h2>
+        </div>
+    @endif
+{{--    @dump($services)--}}
     <form action="{{route('employee.store')}}" method="post">
         @csrf
         <x-input
@@ -40,6 +45,20 @@
             value="{{ old('phone') }}"
             placeholder="{{__('+48333-333-333')}}">
         </x-input>
+
+        <x-dropDownList
+            name="services[]"
+            label="{{__('Services')}}"
+            multiple
+        >
+            <x-slot:options>
+                @foreach($services as $service)
+                    <option value="{{$service->id}}">{{$service->name}}</option>
+                @endforeach
+            </x-slot:options>
+
+        </x-dropDownList>
+
         <button class="btn" type="submit">{{__('Add employee')}}</button>
     </form>
 @endsection

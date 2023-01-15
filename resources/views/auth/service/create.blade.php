@@ -1,6 +1,11 @@
 @extends('layouts.dashboard')
 @section('dashboard.content')
     <h1>Create service page __permanent</h1>
+    @if (Session::has('error'))
+        <div class="alert alert-error">
+            <h2>{!! Session::get('error') !!}</h2>
+        </div>
+    @endif
     <form action="{{route('services.store')}}" method="post">
         @csrf
 

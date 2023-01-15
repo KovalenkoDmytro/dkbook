@@ -8,6 +8,7 @@ use App\Http\Requests\Employee\CreateEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use App\Models\CompanyOwner;
 use App\Models\Employee;
+use App\Models\Service;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,34 +30,36 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        return view('auth.employee.create');
+        $services = Auth::user()->company->services;
+        return view('auth.employee.create', compact('services'));
     }
 
     public function store(CreateEmployeeRequest $request)
     {
         $company = Auth::user()->company;
         $new_employee = $request->validated();
-        $new_employee['employee_schedule_id'] = 1;
-
 
         try {
             $employee = Employee::firstOrCreate($new_employee);
             $company->employees()->attach($employee->id);
+
+            if ($request->has('services')) {
+                $employee->services()->sync($request->get('services'));
+            }
             return redirect()->route('employee.index')->with('success', 'employee has been added');
 
         } catch (QueryException $exception) {
             return redirect()->back()->with('error', $exception->errorInfo[2]);
 
         }
-
     }
 
     public function edit(Request $request, $id)
     {
-
+        $services = Auth::user()->company->services;
         $employee = Auth::user()->company->getEmployee((int)$id);
         $employee_scheduled = $employee->scheduled;
-        return view('auth.employee.edit', compact(['employee', 'employee_scheduled']));
+        return view('auth.employee.edit', compact(['employee', 'employee_scheduled', 'services']));
     }
 
     public function update(UpdateEmployeeRequest $request, $id)
@@ -65,21 +68,28 @@ class EmployeeController extends Controller
         $employee->name = $request->input('name');
         $employee->position = $request->input('position');
 
-        if(is_null($request->input('email'))){
+        if (is_null($request->input('email'))) {
             $employee->email = null;
 
-        }else{
+        } else {
             $employee->email = $request->input('email');
         }
 
-        if(is_null($request->input('phone'))){
+        if (is_null($request->input('phone'))) {
             $employee->phone = null;
-        }else{
+        } else {
             $employee->phone = $request->input('phone');
         }
 
         try {
             $employee->update();
+            if ($request->has('services')){
+                $employee->services()->sync($request->get('services'));
+            }else
+                foreach ($employee->services()->get() as $services){
+                    $employee->services()->detach($services->id);
+            }
+
             return redirect()->route('employee.index')->with('success', 'employee has been updated');
 
         } catch (QueryException $exception) {

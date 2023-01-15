@@ -5,6 +5,11 @@ export function initDropDownList() {
     dropDownLists.forEach(dropDownList =>{
         new TomSelect(dropDownList.querySelector('select'),{
             maxOptions: 500,
+            plugins: {
+                remove_button:{
+                    title:'Remove this item',
+                }
+            },
         });
     });
 }

@@ -1,6 +1,11 @@
 @extends('layouts.dashboard')
 @section('dashboard.content')
     <h1> {{__('Add new employee')}}</h1>
+    @if (Session::has('error'))
+        <div class="alert alert-error">
+            <h2>{!! Session::get('error') !!}</h2>
+        </div>
+    @endif
     <div class="page-client __create">
         <form action="{{route('client.store')}}" method="post">
             @csrf

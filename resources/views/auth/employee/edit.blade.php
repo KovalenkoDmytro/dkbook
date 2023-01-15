@@ -8,6 +8,8 @@
         </div>
     @endif
 {{--    @dump($employee_scheduled)--}}
+{{--    @dump($services)--}}
+{{--    @dump($employee->services)--}}
     <div class="page-employee __show">
         <form action="{{route('employee.update',[$employee ->id])}}" method="post">
             @method('PUT')
@@ -50,6 +52,20 @@
                 value="{{ $employee -> phone }}"
                 placeholder="{{__('+1(22)333-333-333')}}">
             </x-input>
+
+            <x-dropDownList
+                name="services[]"
+                label="{{__('Services')}}"
+                multiple
+            >
+                <x-slot:options>
+                    @foreach($services as $service)
+                        <option @selected(($employee->services->contains($service))) value="{{$service->id}}">{{$service->name}}</option>
+                    @endforeach
+                </x-slot:options>
+
+            </x-dropDownList>
+
             <button class="btn" type="submit">{{__('Update')}}</button>
         </form>
 

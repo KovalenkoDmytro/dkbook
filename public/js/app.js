@@ -2654,7 +2654,12 @@ function initDropDownList() {
   var dropDownLists = document.querySelectorAll('#dropDownList');
   dropDownLists.forEach(function (dropDownList) {
     new TomSelect(dropDownList.querySelector('select'), {
-      maxOptions: 500
+      maxOptions: 500,
+      plugins: {
+        remove_button: {
+          title: 'Remove this item'
+        }
+      }
     });
   });
 }
