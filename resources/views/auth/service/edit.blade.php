@@ -40,7 +40,7 @@
                         <x-slot:options>
                             @foreach(range(0, 5) as $hour)
                                 <option value="{{$hour}}" @selected($hour === $service->timeRange_hour) >
-                                    {{$hour}}
+                                    {{$hour}}h
                                 </option>
                             @endforeach
                         </x-slot:options>
@@ -56,7 +56,7 @@
                         <x-slot:options>
                             @foreach(range(0, 59, 5) as $minute)
                                 <option value="{{$minute}}" @selected($minute === $service->timeRange_minutes)>
-                                    {{$minute}}
+                                    {{$minute}}min
                                 </option>
                             @endforeach
                         </x-slot:options>

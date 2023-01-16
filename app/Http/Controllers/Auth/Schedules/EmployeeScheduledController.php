@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class EmployeeScheduledController extends HomeScheduledController
 {
-    public function show($id)
+    public function edit($id)
     {
         $employee = Auth::user()->company->getEmployee((int)$id);
         $scheduled_id = $employee->scheduled->id;
         $scheduled = $this->createScheduled($employee->scheduled);
-        return view('auth.scheduledEmployee.show', compact(['scheduled', 'employee', 'scheduled_id']));
+        return view('auth.scheduledEmployee.edit', compact(['scheduled', 'employee', 'scheduled_id']));
     }
 
     public function update(Request $request, $id)

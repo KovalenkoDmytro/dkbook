@@ -34,7 +34,7 @@
                         <x-slot:options>
                             @foreach(range(0, 5) as $hour)
                                 <option value="{{$hour}}">
-                                    {{$hour}}
+                                    {{$hour}}h
                                 </option>
                             @endforeach
                         </x-slot:options>
@@ -50,7 +50,7 @@
                         <x-slot:options>
                             @foreach(range(0, 59, 5) as $minute)
                                 <option value="{{$minute}}">
-                                    {{$minute}}
+                                    {{$minute}}min
                                 </option>
                             @endforeach
                         </x-slot:options>
