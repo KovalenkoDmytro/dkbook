@@ -86,9 +86,10 @@ class EmployeeController extends Controller
             if ($request->has('services')){
                 $employee->services()->sync($request->get('services'));
             }else
-                foreach ($employee->services()->get() as $services){
-                    $employee->services()->detach($services->id);
-            }
+                $employee->services()->detach();
+//                foreach ($employee->services()->get() as $services){
+//                    $employee->services()->detach($services->id);
+//            }
 
             return redirect()->route('employee.index')->with('success', 'employee has been updated');
 
