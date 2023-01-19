@@ -497,7 +497,7 @@ aside {
   width: 100%;
   display: flex;
   align-content: center;
-  align-items: end;
+  align-items: flex-end;
   justify-content: center;
 }
 .page-calendar .monthlyCalendar .calendar .week .day .appointments .icon_client {
@@ -951,4 +951,36 @@ aside {
 }
 .page__create_appointment .create_client__form.__show {
   display: block;
+}
+
+.page-service.__index .services__head {
+  background: #1991e6;
+  color: #ffffff;
+  display: grid;
+  grid-template-columns: 1fr minmax(90px, 120px) minmax(90px, 120px);
+}
+.page-service.__index .services__head .name {
+  padding: 10px;
+}
+.page-service.__index .services__items {
+  border: 1px solid #c4c7c8;
+  border-top: none;
+}
+.page-service.__index .services__items .services__item {
+  display: grid;
+  grid-template-columns: 1fr minmax(90px, 120px) minmax(90px, 120px);
+  border-bottom: 1px solid #c4c7c8;
+}
+.page-service.__index .services__items .services__item:last-child {
+  border-bottom: none;
+}
+.page-service.__index .services__items .services__item .name {
+  display: block;
+  padding: 10px;
+}
+.page-service.__index .price, .page-service.__index .time {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid #c4c7c8;
 }

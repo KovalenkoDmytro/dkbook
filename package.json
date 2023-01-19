@@ -22,6 +22,10 @@
         "webpack-cli": "^4.10.0"
     },
     "dependencies": {
+        "autoprefixer": "10.4.5",
         "normalize-scss": "^7.0.1"
+    },
+    "overrides": {
+        "autoprefixer": "10.4.5"
     }
 }
