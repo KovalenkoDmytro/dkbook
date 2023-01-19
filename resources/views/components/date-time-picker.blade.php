@@ -1,114 +1,97 @@
-{{--@props(--}}
-{{--['scheduled'=>false]--}}
-{{--)--}}
-{{--<div class="date-time-picker">--}}
-{{--    @dump($schedule_days)--}}
-{{--    @isset($title)--}}
-{{--        <h2>{{$title ?? ''}}</h2>--}}
-{{--    @endif--}}
+@props(
+['scheduled'=>false]
+)
+<div class="date-time-picker">
+    @foreach($schedule_days as $day)
+        @php
+            $hour_from__index = strpos($scheduled[$day],'-');
+            $hour_from = trim(substr($scheduled[$day],0,$hour_from__index));
+            $hour_from_hour = strpos($hour_from,':');
+            $hour_from_hour = substr($hour_from,0,$hour_from_hour);
+            $hour_from_minutes = strrpos($hour_from,':');
+            $hour_from_minutes = substr($hour_from,$hour_from_minutes+1);
 
-{{--    @isset($subtitle)--}}
-{{--        <p>{{$subtitle ?? ''}}</p>--}}
-{{--    @endif--}}
+            $hour_to__index = strrpos($scheduled[$day],'-');
+            $hour_to = trim(substr($scheduled[$day],$hour_to__index+1));
+            $hour_to_hour = strpos($hour_to,':');
+            $hour_to_hour = substr($hour_to,0,$hour_to_hour);
+            $hour_to_minutes = strrpos($hour_to,':');
+            $hour_to_minutes = substr($hour_to,$hour_to_minutes+1);
+        @endphp
+        <label>
+            <input type="checkbox" >
+            <span>{{$day}}</span>
+        </label>
+        <div class="timeRange">
+            <div class="timeRange_item __from">
+                <div class="hour">
+                    <span>{{__('Hour')}}</span>
+                    <x-dropDownList
+                        name="{{$day}}[from][hour]"
+                    >
+                        <x-slot:options>
+                            @foreach(range(0, 23) as $hour)
+                                <option value=" {{$hour < 10 ? '0'.$hour : $hour}}"
+                                    @selected((int)$hour_from_hour === $hour)
+                                >
+                                    {{$hour < 10 ? '0'.$hour : $hour}}h
+                                </option>
+                            @endforeach
+                        </x-slot:options>
+                    </x-dropDownList>
+                </div>
+                <div class="minutes">
+                    <span>{{__('Minutes')}}</span>
+                    <x-dropDownList
+                        name="{{$day}}[from][minutes]"
+                    >
+                        <x-slot:options>
+                            @foreach(range(0, 59,10) as $minutes)
+                                <option value="{{$minutes === 0 ? '00' : $minutes}}"
+                                    @selected((int)$hour_from_minutes === $minutes)
+                                >
+                                    {{$minutes === 0 ? '00' : $minutes}}min
+                                </option>
+                            @endforeach
+                        </x-slot:options>
+                    </x-dropDownList>
+                </div>
+            </div>
+            <div class="timeRange_item __to">
+                <div class="hour">
+                    <span>{{__('Hour')}}</span>
+                    <x-dropDownList
+                        name="{{$day}}[to][hour]"
+                    >
+                        <x-slot:options>
+                            @foreach(range(0, 23) as $hour)
+                                <option value=" {{$hour < 10 ? '0'.$hour : $hour}}"
+                                    @selected((int)$hour_to_hour === $hour)
+                                >
+                                    {{$hour < 10 ? '0'.$hour : $hour}}h
+                                </option>
+                            @endforeach
+                        </x-slot:options>
+                    </x-dropDownList>
+                </div>
+                <div class="minutes">
+                    <span>{{__('Minutes')}}</span>
+                    <x-dropDownList
+                        name="{{$day}}[to][minutes]"
+                    >
+                        <x-slot:options>
+                            @foreach(range(0, 59,5) as $minutes)
+                                <option value="{{$minutes === 0 ? '00' : $minutes}}"
+                                    @selected((int)$hour_to_minutes === $minutes)
+                                >
+                                    {{$minutes === 0 ? '00' : $minutes}}min
+                                </option>
+                            @endforeach
+                        </x-slot:options>
+                    </x-dropDownList>
+                </div>
+            </div>
+        </div>
+@endforeach
 
-{{--        <a class="btn icon icon_close" href="{{url()->previous()}}"></a>--}}
-{{--        <div class="days">--}}
 
-{{--            @if($scheduled)--}}
-{{--                @foreach($scheduled as $day => $hours)--}}
-{{--                    @php--}}
-{{--                        $hourFromValue = strpos($hours,' ');--}}
-{{--                        $hourFrom = substr($hours,0,$hourFromValue);--}}
-
-{{--                        $hourToValue = strrpos($hours,' ');--}}
-{{--                        $hourTo = substr($hours,$hourToValue);--}}
-{{--                    @endphp--}}
-{{--                @dump($hourToValue)--}}
-{{--                    <div class="day_row">--}}
-{{--                        <label>--}}
-{{--                            <input type="checkbox" >--}}
-{{--                            <span>{{$day}}</span>--}}
-{{--                        </label>--}}
-
-{{--                        <div class="timeRange">--}}
-{{--                            <div class="timeRange_item">--}}
-{{--                                <span>{{__('Hour')}}</span>--}}
-{{--                                <x-dropDownList--}}
-{{--                                    class="hour"--}}
-{{--                                    name="timeRange_hour"--}}
-{{--                                >--}}
-{{--                                    <x-slot:options>--}}
-{{--                                        @foreach(range(0, 23) as $hour)--}}
-{{--                                            <option value="{{$hour}}"--}}
-{{--                                                @selected($hour == $hourFrom)--}}
-{{--                                            >--}}
-{{--                                                {{$hour}}h--}}
-{{--                                            </option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </x-slot:options>--}}
-{{--                                </x-dropDownList>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="timeRange_item">--}}
-{{--                                <span>{{__('Hour')}}</span>--}}
-{{--                                <x-dropDownList--}}
-{{--                                    class="hour"--}}
-{{--                                    name="timeRange_hour"--}}
-{{--                                >--}}
-{{--                                    <x-slot:options>--}}
-{{--                                        @foreach(range(0, 23) as $hour)--}}
-{{--                                            <option value="{{$hour}}"--}}
-{{--                                                @selected($hour == $hourTo)--}}
-{{--                                            >--}}
-{{--                                                {{$hour}}h--}}
-{{--                                            </option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </x-slot:options>--}}
-{{--                                </x-dropDownList>--}}
-{{--                            </div>--}}
-
-{{--                        </div>--}}
-
-{{--                        <div class="hours">--}}
-{{--                            <x-select-drop-down  name="{{$day}}_from" :value="$hourFrom"/>--}}
-{{--                            <x-select-drop-down name="{{$day}}_to" :value="$hourTo"/>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                @endforeach--}}
-{{--            @else--}}
-{{--            @if()--}}
-{{--                @foreach($schedule_days as $day)--}}
-{{--                    <div class="day_row">--}}
-{{--                        <label>--}}
-{{--                            <input type="checkbox" >--}}
-{{--                            <span>{{$day}}</span>--}}
-{{--                        </label>--}}
-
-{{--                        <div class="hours">--}}
-
-{{--                            <div class="timeRange_item">--}}
-{{--                                <span>{{__('Minutes')}}</span>--}}
-{{--                                <x-dropDownList--}}
-{{--                                    class="minutes"--}}
-{{--                                    name="timeRange_minutes"--}}
-{{--                                >--}}
-{{--                                    <x-slot:options>--}}
-{{--                                        @foreach(range(0, 59, 5) as $minute)--}}
-{{--                                            <option value="{{$minute}}" @selected($minute === $service->timeRange_minutes)>--}}
-{{--                                                {{$minute}}min--}}
-{{--                                            </option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </x-slot:options>--}}
-{{--                                </x-dropDownList>--}}
-{{--                            </div>--}}
-{{--                            --}}
-{{--                            <x-select-drop-down name="{{$day}}_from"/>--}}
-{{--                            <x-select-drop-down name="{{$day}}_to"/>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                @endforeach--}}
-{{--            @endif--}}
-
-{{--            @endif--}}
-{{--        </div>--}}
-{{--</div>--}}

@@ -86,7 +86,7 @@ Route::name('dailyCalendar.')->middleware('auth')->group(function (){
 
 Route::name('employeeScheduled.')->group(function (){
     Route::get('/employeeScheduled/{id}/edit', [EmployeeScheduledController::class, 'edit'] )->name('edit');
-    Route::put('/employeeScheduled/update', [EmployeeScheduledController::class, 'update'] )->name('update');
+    Route::put('/employeeScheduled/{id}', [EmployeeScheduledController::class, 'update'] )->name('update');
 });
 
 

@@ -7,6 +7,7 @@ use Illuminate\View\Component;
 class DateTimePicker extends Component
 {
     private array $daysOfWeek = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday","sunday"];
+
     /**
      * Create a new component instance.
      *
@@ -28,4 +29,5 @@ class DateTimePicker extends Component
             'schedule_days'=> $this->daysOfWeek
         ]);
     }
+
 }
