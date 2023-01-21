@@ -2,16 +2,32 @@
 
 namespace App\Models;
 
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Notifications\Notifiable;
 
-class CompanyOwner extends Model implements Authenticatable
+class CompanyOwner extends Model implements Authenticatable, CanResetPassword
 {
     use HasFactory;
+    use Notifiable;
     protected $guarded = false;
     public $table = 'company_owners';
+    protected $fillable = [
+        'login',
+        'email',
+        'fullName',
+        'password',
+        'phone',
+        'timezone',
+    ];
+
+    protected $hidden = [
+        'remember_token',
+    ];
 
     public static function createUser(array $data)
     {
@@ -63,4 +79,15 @@ class CompanyOwner extends Model implements Authenticatable
     {
         // TODO: Implement getRememberTokenName() method.
     }
+
+    public function getEmailForPasswordReset()
+    {
+       return $this->email;
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
+
 }

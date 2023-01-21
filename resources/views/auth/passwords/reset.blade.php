@@ -8,10 +8,11 @@
                     <div class="card-header">{{ __('Reset Password') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('password.update') }}">
+{{--                        <form method="POST" action="{{ route('password.update') }}">--}}
+                        <form method="POST" >
                             @csrf
 
-                            <input type="hidden" name="token" value="{{ $token }}">
+{{--                            <input type="hidden" name="token" value="{{ $token }}">--}}
 
                             <div class="row mb-3">
                                 <label for="email"
@@ -24,7 +25,7 @@
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+{{--                                        <strong>{{ $message }}</strong>--}}
                                     </span>
                                     @enderror
                                 </div>
@@ -41,7 +42,7 @@
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+{{--                                        <strong>{{ $message }}</strong>--}}
                                     </span>
                                     @enderror
                                 </div>

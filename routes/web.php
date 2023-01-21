@@ -13,12 +13,28 @@ use App\Http\Controllers\Auth\Schedules\EmployeeScheduled\EditEmployeeScheduled;
 use App\Http\Controllers\Auth\Schedules\EmployeeScheduledController;
 use App\Http\Controllers\Auth\Schedules\HomeScheduledController;
 use App\Http\Controllers\Auth\ServiceController;
+use App\Http\Controllers\Auth\User\ForgotPasswordController;
 use App\Http\Controllers\Auth\User\LoginController;
+use App\Http\Controllers\Auth\User\ResetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Registration\CreateController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'] )->name('main');
+Route::name('user.')->group(function (){
+    Route::get('/login', [LoginController::class, 'index'] )->name('login');
+    Route::post('/login', [LoginController::class, 'login'] );
+    Route::get('/logout', [LoginController::class,'logout'] )->name('logout');
+});
+
+
+Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->middleware('guest')->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->middleware('guest')->name('password.email');
+
+
+Route::post('/reset-password',[ResetPasswordController::class, 'create'] )->middleware('guest')->name('password.reset');
+
+
 
 Route::name('registration.')->group(function (){
     Route::get('/step1', [CreateController::class, 'step1'] )->name('step1');
@@ -67,39 +83,20 @@ Route::name('scheduled.')->group(function (){
 //    Route::get('/employee-scheduled/{id}/edit', [EditEmployeeScheduled::class, 'index'] )->name('employee.edit')->where('id','[0-9]+');
 //    Route::put('/employee-scheduled/update', [EditEmployeeScheduled::class, 'update'] )->name('employee.update');
 });
-
-
-Route::name('user.')->group(function (){
-    Route::get('/login', [LoginController::class, 'index'] )->name('login');
-    Route::post('/login', [LoginController::class, 'login'] );
-    Route::get('/logout', [LoginController::class,'logout'] )->name('logout');
-});
-
-
-
 Route::name('monthlyCalendar.')->middleware('auth')->group(function (){
     Route::get('/calendar/month/{date?}', [CalendarController::class, 'index'] )->name('index');
 });
 Route::name('dailyCalendar.')->middleware('auth')->group(function (){
     Route::get('/calendar/day/{date?}', [DailyCalendarController::class, 'index'] )->name('index');
 });
-
 Route::name('employeeScheduled.')->group(function (){
     Route::get('/employeeScheduled/{id}/edit', [EmployeeScheduledController::class, 'edit'] )->name('edit');
     Route::put('/employeeScheduled/{id}', [EmployeeScheduledController::class, 'update'] )->name('update');
 });
-
-
 Route::name('dashboard.')->middleware('auth')->group(function (){
     Route::get('/main', [DashboardController::class, 'index'] )->name('main');
-
-
-
     //appointment
     Route::get('/appointment/create/{date}', [AppointmentController::class, 'index'] )->name('index');
     Route::post('/appointment/create', [AppointmentController::class, 'store'] )->name('store');
-
-
-
 });
 
