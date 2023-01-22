@@ -8,8 +8,6 @@ use App\Http\Controllers\Auth\DashboardController;
 use App\Http\Controllers\Auth\EmployeeController;
 use App\Http\Controllers\Auth\Schedules\CompanyScheduled\CreateCompanyScheduled;
 use App\Http\Controllers\Auth\Schedules\CompanyScheduled\EditCompanyScheduled;
-use App\Http\Controllers\Auth\Schedules\EmployeeScheduled\CreateEmployeeScheduled;
-use App\Http\Controllers\Auth\Schedules\EmployeeScheduled\EditEmployeeScheduled;
 use App\Http\Controllers\Auth\Schedules\EmployeeScheduledController;
 use App\Http\Controllers\Auth\Schedules\HomeScheduledController;
 use App\Http\Controllers\Auth\ServiceController;
@@ -27,12 +25,12 @@ Route::name('user.')->group(function (){
     Route::get('/logout', [LoginController::class,'logout'] )->name('logout');
 });
 
-
-Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->middleware('guest')->name('password.request');
-Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->middleware('guest')->name('password.email');
-
-
-Route::post('/reset-password',[ResetPasswordController::class, 'create'] )->middleware('guest')->name('password.reset');
+Route::name('password.')->middleware('guest')->group(function () {
+    Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->name('request');
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('email');
+    Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
+    Route::post('/reset-password', [ResetPasswordController::class, 'store'])->name('reset');
+});
 
 
 

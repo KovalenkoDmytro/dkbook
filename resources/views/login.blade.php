@@ -1,10 +1,18 @@
 @extends('layouts.main')
 
 @section('content')
+    @if(session('status'))
+        <p>{{session()->get('status')}}</p>
+    @endif
+
+    @error('error_auth')
+        @dump($errors->first('error_auth'))
+    @enderror
+
 
     <main class="container">
         <div class="page-login">
-{{--            <p>{{$error_auth}}</p>--}}
+
                 <h1>Login_permanent</h1>
                 <form action="" method="post">
                     @csrf

@@ -28,6 +28,7 @@ class CompanyOwner extends Model implements Authenticatable, CanResetPassword
     protected $hidden = [
         'remember_token',
     ];
+    private string $rememberToken;
 
     public static function createUser(array $data)
     {
@@ -65,14 +66,14 @@ class CompanyOwner extends Model implements Authenticatable, CanResetPassword
         return $this->password;
     }
 
-    public function getRememberToken()
+    public function getRememberToken(): string
     {
-        // TODO: Implement getRememberToken() method.
+        return $this->rememberToken;
     }
 
     public function setRememberToken($value)
     {
-        // TODO: Implement setRememberToken() method.
+        $this->rememberToken = $value;
     }
 
     public function getRememberTokenName()
