@@ -1,6 +1,6 @@
-@extends('layouts.main')
+@extends('layouts.guest')
 
-@section('content')
+@section('guest.content')
     @if(session('status'))
         <p>{{session()->get('status')}}</p>
     @endif
@@ -10,7 +10,7 @@
     @enderror
 
 
-    <main class="container">
+
         <div class="page-login">
 
                 <h1>Login_permanent</h1>
@@ -53,7 +53,7 @@
 
 
         </div>
-    </main>
+
 @endsection
 
 
