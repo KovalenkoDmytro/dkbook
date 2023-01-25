@@ -4,7 +4,6 @@
     <h1>Login_permanent</h1>
     <form action="" method="post">
         @csrf
-
             <x-input
                 for="email"
                 text="{{__('Email')}}"
@@ -14,7 +13,9 @@
                 value="{{ old('email') }}"
                 placeholder="{{__('StevJobs@apple.com')}}"
             >
+                <i class="fi fi-rr-envelope"></i>
             </x-input>
+
 
             <x-input
                 for="password"
@@ -25,6 +26,7 @@
                 value="{{ old('password') }}"
                 placeholder="{{__('Min. 8 characters')}}"
             >
+                <i class="fi fi-rr-lock"></i>
             </x-input>
 
 

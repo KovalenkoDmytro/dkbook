@@ -384,6 +384,23 @@ aside {
 .input_group.validate_error input {
   border-color: #e35c5c;
 }
+.input_group .input_icon {
+  position: relative;
+}
+.input_group .input_icon i {
+  display: block;
+  position: absolute;
+  top: calc(50% + 2px);
+  left: 10px;
+  transform: translateY(-50%);
+}
+.input_group .input_icon i:before {
+  color: #8e8e8e;
+}
+.input_group .input_icon input {
+  padding-left: 35px;
+  width: 100%;
+}
 .input_group .input_title {
   margin-bottom: 5px;
 }

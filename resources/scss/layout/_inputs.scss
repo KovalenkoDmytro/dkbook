@@ -8,6 +8,23 @@
             border-color: $danger_color;
         }
     }
+    .input_icon{
+        position: relative;
+        i{
+            display: block;
+            position: absolute;
+            top: calc(50% + 2px);
+            left: 10px;
+            transform: translateY(-50%);
+            &:before{
+                color: $gray_color;
+            }
+        }
+        input{
+            padding-left: 35px;
+            width: 100%;
+        }
+    }
     .input_title{
         margin-bottom: 5px;
     }
