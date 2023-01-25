@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 
+use App\Http\Controllers\Auth\Schedules\EmployeeScheduledController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Employee\CreateEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use App\Models\CompanyOwner;
 use App\Models\Employee;
+use App\Models\EmployeeSchedule;
 use App\Models\Service;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -38,6 +40,10 @@ class EmployeeController extends Controller
     {
         $company = Auth::user()->company;
         $new_employee = $request->validated();
+        $scheduled = new EmployeeScheduledController;
+        $scheduled_array = $scheduled->createScheduled();
+        $new_scheduled = EmployeeSchedule::create($scheduled_array);
+        $new_employee['employee_schedule_id'] = $new_scheduled->id;
 
         try {
             $employee = Employee::firstOrCreate($new_employee);
@@ -86,9 +92,7 @@ class EmployeeController extends Controller
             if ($request->has('services')){
                 $employee->services()->sync($request->get('services'));
             }else
-                foreach ($employee->services()->get() as $services){
-                    $employee->services()->detach($services->id);
-            }
+                $employee->services()->detach();
 
             return redirect()->route('employee.index')->with('success', 'employee has been updated');
 

@@ -12,14 +12,15 @@ class EmployeeScheduledController extends HomeScheduledController
     {
         $employee = Auth::user()->company->getEmployee((int)$id);
         $scheduled_id = $employee->scheduled->id;
-        $scheduled = $this->createScheduled($employee->scheduled);
+        $scheduled = $employee->scheduled->toArray();
         return view('auth.scheduledEmployee.edit', compact(['scheduled', 'employee', 'scheduled_id']));
     }
 
     public function update(Request $request, $id)
     {
+
         $scheduled = EmployeeSchedule::find((int)$id);
-        $new_scheduled = $this->createScheduledFromArray($request->all());
+        $new_scheduled = $this->prepareScheduled($request->all());
 
         try {
             $scheduled->update($new_scheduled);
@@ -28,4 +29,5 @@ class EmployeeScheduledController extends HomeScheduledController
             return redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
+
 }

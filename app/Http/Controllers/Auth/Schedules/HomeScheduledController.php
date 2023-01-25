@@ -9,7 +9,7 @@ use Illuminate\View\View;
 class HomeScheduledController extends Controller
 {
 
-    public function createScheduled($scheduledModel): array
+    public function createScheduled($scheduled =null): array
     {
 
         $scheduled = [
@@ -48,16 +48,16 @@ class HomeScheduledController extends Controller
 
     }
 
-    public function createScheduledFromArray(array $scheduled): array
+    public function prepareScheduled(array $scheduled): array
     {
         return [
-            'monday' => "{$scheduled['monday_from']} - {$scheduled['monday_to']}",
-            'tuesday' => "{$scheduled['tuesday_from']} - {$scheduled['tuesday_to']}",
-            'wednesday' => "{$scheduled['wednesday_from']} - {$scheduled['wednesday_to']}",
-            'thursday' => "{$scheduled['thursday_from']} - {$scheduled['thursday_to']}",
-            'friday' => "{$scheduled['friday_from']} - {$scheduled['friday_to']}",
-            'saturday' => "{$scheduled['saturday_from']} - {$scheduled['saturday_to']}",
-            'sunday' => "{$scheduled['sunday_from']} - {$scheduled['sunday_to']}",
+            'monday' => "{$scheduled['monday']['from']['hour']}:{$scheduled['monday']['from']['minutes']} - {$scheduled['monday']['to']['hour']}:{$scheduled['monday']['to']['minutes']}",
+            'tuesday' => "{$scheduled['tuesday']['from']['hour']}:{$scheduled['tuesday']['from']['minutes']} - {$scheduled['tuesday']['to']['hour']}:{$scheduled['tuesday']['to']['minutes']}",
+            'wednesday' => "{$scheduled['wednesday']['from']['hour']}:{$scheduled['wednesday']['from']['minutes']} - {$scheduled['wednesday']['to']['hour']}:{$scheduled['wednesday']['to']['minutes']}",
+            'thursday' => "{$scheduled['thursday']['from']['hour']}:{$scheduled['thursday']['from']['minutes']} - {$scheduled['thursday']['to']['hour']}:{$scheduled['thursday']['to']['minutes']}",
+            'friday' => "{$scheduled['friday']['from']['hour']}:{$scheduled['friday']['from']['minutes']} - {$scheduled['friday']['to']['hour']}:{$scheduled['friday']['to']['minutes']}",
+            'saturday' => "{$scheduled['saturday']['from']['hour']}:{$scheduled['saturday']['from']['minutes']} - {$scheduled['saturday']['to']['hour']}:{$scheduled['saturday']['to']['minutes']}",
+            'sunday' => "{$scheduled['sunday']['from']['hour']}:{$scheduled['sunday']['from']['minutes']} - {$scheduled['sunday']['to']['hour']}:{$scheduled['sunday']['to']['minutes']}",
         ];
     }
 }

@@ -53,10 +53,10 @@ class CreateEmployeeRequest extends FormRequest
             ]
         ];
     }
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'employee_schedule_id' => 1
-        ]);
-    }
+//    protected function prepareForValidation()
+//    {
+//        $this->merge([
+//            'employee_schedule_id' => 1
+//        ]);
+//    }
 }
