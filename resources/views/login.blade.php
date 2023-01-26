@@ -25,6 +25,7 @@
                         value="{{ old('email') }}"
                         placeholder="{{__('StevJobs@apple.com')}}"
                     >
+                        <i class="fi fi-rr-envelope"></i>
                     </x-input>
 
                     <x-input
@@ -36,6 +37,7 @@
                         value="{{ old('password') }}"
                         placeholder="{{__('Min. 8 characters')}}"
                     >
+                        <i class="fi fi-rr-lock"></i>
                     </x-input>
 
 

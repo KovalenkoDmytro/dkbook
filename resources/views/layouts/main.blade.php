@@ -16,7 +16,7 @@
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
-
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link rel="stylesheet" type="text/css" href="{{ asset('/access/css/DropDownSelector/TomSelect.css') }}">
 
 
