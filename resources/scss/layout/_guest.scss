@@ -1,0 +1,102 @@
+.__guest{
+    justify-content: center;
+    min-height: initial;
+    .wave{
+        position: absolute;
+        bottom: 0;
+    }
+    main{
+
+        min-height: 100vh;
+        z-index: 1;
+        .top{
+            display: flex;
+            justify-content: space-between;
+            align-content: center;
+            align-items: center;
+            .content{
+                display: flex;
+                align-content: center;
+                align-items: center;
+                .btn{
+                    margin-left: 15px;
+                }
+            }
+        }
+        >.content{
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            .window{
+                .window__header{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    h1{
+                        margin-top: 5px;
+                    }
+                }
+                .window__content{
+                    .notification{
+                        &.__error{
+                            padding: 15px;
+                            margin-bottom: 15px;
+                            border: 1px solid $danger_color;
+                            background: $background_error;
+                            color: $danger_color;
+                            &:not(:only-child){
+                                display: flex;
+                                align-items: center;
+                                align-content: center;
+                                justify-content: center;
+                                span{
+                                    display: block;
+                                    margin-left: 10px;
+                                }
+                            }
+                        }
+                    }
+                    .credential_window{
+                        padding: 15px;
+                        border: 1px solid $border_color;
+                        @include laptop{
+                            min-width: 385px;
+                        }
+
+                        .forget_password{
+                            display: flex;
+                            justify-content: space-between;
+                            align-content: center;
+                            align-items: center;
+                            margin: 15px 0;
+                            .input_group{
+                                margin: 0;
+                            }
+                            label{
+                                display: flex;
+                                justify-content: space-between;
+                                align-content: center;
+                                align-items: center;
+                            }
+                        }
+                        .btn{
+                            min-width: initial;
+                            width: 100%;
+                            justify-content: center;
+                        }
+                    }
+                }
+
+            }
+        }
+
+
+
+    }
+}
+
