@@ -5,8 +5,6 @@
         <p>{{session()->get('status')}}</p>
     @endif
 
-
-
     <div class="top">
         <div class="logo">
             <img src="" alt="Logo">

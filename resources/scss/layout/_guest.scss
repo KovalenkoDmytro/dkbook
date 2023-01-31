@@ -32,7 +32,11 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+
             .window{
+                @include tablet{
+                    min-width: 390px;
+                }
                 .window__header{
                     display: flex;
                     flex-direction: column;
@@ -43,22 +47,28 @@
                 }
                 .window__content{
                     .notification{
+                        padding: 15px;
+                        margin-bottom: 15px;
+                        &:not(:only-child){
+                            display: flex;
+                            align-items: center;
+                            align-content: center;
+                            justify-content: center;
+                            span{
+                                display: block;
+                                margin-left: 10px;
+                            }
+                        }
                         &.__error{
-                            padding: 15px;
-                            margin-bottom: 15px;
                             border: 1px solid $danger_color;
                             background: $background_error;
                             color: $danger_color;
-                            &:not(:only-child){
-                                display: flex;
-                                align-items: center;
-                                align-content: center;
-                                justify-content: center;
-                                span{
-                                    display: block;
-                                    margin-left: 10px;
-                                }
-                            }
+
+                        }
+                        &.__success{
+                            border: 1px solid $success_color;
+                            background: $background_success;
+                            color: $success_color;
                         }
                     }
                     .credential_window{

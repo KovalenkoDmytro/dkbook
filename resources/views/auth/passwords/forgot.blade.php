@@ -1,30 +1,44 @@
-@extends('layouts.main')
+@extends('layouts.guest')
 
-@section('content')
-    <main class="container">
-        <div class="page-password_forgot">
-            @if(session('status'))
-                <p>{{session()->get('status')}}</p>
-            @endif
+@section('guest.content')
+    <div class="content">
+        <div class="window">
+            <div class="window__header">
+                <x-icon-key/>
+                <h1>{{__('Forgot your password?')}}</h1>
+            </div>
+            <div class="window__content">
 
-            <form method="POST" action="{{ route('password.email') }}">
-                @csrf
-                <x-input
-                    text="{{ __('Email Address') }}"
-                    name="email"
-                    value="{{ old('email') }}"
-                    required
-                    autocomplete="email"
-                    autofocus
-                    error="{{$errors->first('email')}}"
-                >
-                </x-input>
+                @if(session()->has('success') )
+                    <div class="notification __success">
+                        <p>{{session()->get('success')}}</p>
+                    </div>
+                @elseif (session()->has('error'))
+                    <div class="notification __error">
+                        <p>{{session()->get('error')}}</p>
+                    </div>
+                @endif
 
-                <button type="submit" class="btn">
-                    {{ __('Send Password Reset Link') }}
-                </button>
+                <form class="credential_window" method="POST" action="{{ route('password.email') }}">
+                    @csrf
+                    <x-input
+                        text="{{ __('Email') }}"
+                        name="email"
+                        value="{{ old('email') }}"
+                        required
+                        autocomplete="email"
+                        autofocus
+                        placeholder="{{__('StevJobs@apple.com')}}"
+                        error="{{$errors->first('email')}}"
+                    >
+                        <i class="fi fi-rr-envelope"></i>
+                    </x-input>
 
-            </form>
+                    <button type="submit" class="btn">
+                        {{ __('Send reset link') }}
+                    </button>
+                </form>
+            </div>
         </div>
-    </main>
+    </div>
 @endsection

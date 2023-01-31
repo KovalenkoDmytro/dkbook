@@ -66,9 +66,9 @@ class CompanyOwner extends Model implements Authenticatable, CanResetPassword
         return $this->password;
     }
 
-    public function getRememberToken(): string
+    public function getRememberToken()
     {
-        return $this->rememberToken;
+//        return $this->rememberToken;
     }
 
     public function setRememberToken($value)
