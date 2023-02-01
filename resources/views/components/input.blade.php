@@ -37,7 +37,12 @@
         @else
             <input type='{{$type}}' id='{{$id}}' name='{{$name}}' placeholder="{{$placeholder}}" value="{{$value}}">
         @endif
-        <p class="error">{{$error}}</p>
+
+        @if(!empty($error))
+            <p class="error">{{$error}}</p>
+        @endif
+
+
     </label>
 @endif
 

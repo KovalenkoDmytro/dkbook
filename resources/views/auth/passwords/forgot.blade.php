@@ -8,14 +8,15 @@
                 <h1>{{__('Forgot your password?')}}</h1>
             </div>
             <div class="window__content">
-
                 @if(session()->has('success') )
                     <div class="notification __success">
-                        <p>{{session()->get('success')}}</p>
+                        <i class="fi fi-br-check"></i>
+                        <span>{{session()->get('success')}}</span>
                     </div>
                 @elseif (session()->has('error'))
                     <div class="notification __error">
-                        <p>{{session()->get('error')}}</p>
+                        <i class="fi fi-rr-exclamation"></i>
+                        <span>{{session()->get('error')}}</span>
                     </div>
                 @endif
 
