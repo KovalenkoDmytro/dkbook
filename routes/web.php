@@ -35,12 +35,13 @@ Route::name('password.')->middleware('guest')->group(function () {
 
 
 Route::name('registration.')->group(function (){
-    Route::get('/step1', [CreateController::class, 'step1'] )->name('step1');
-    Route::post('/step1', [CreateController::class, 'createOwner'] )->name('createOwner');
-    Route::get('/register-2', [CreateController::class, 'step2'] )->name('step2');
-    Route::post('/register-2', [CreateController::class, 'createCompany'] )->name('createCompany');
-    Route::get('/register-3', [CreateController::class, 'step3'] )->name('step3');
-    Route::post('/register-3', [CreateController::class, 'addPhotoCompany'] )->name('addPhotoCompany');
+    Route::get('registration/step1', [CreateController::class, 'step1'] )->name('step1');
+    Route::post('registration/step1', [CreateController::class, 'createOwner'] )->name('createOwner');
+    Route::get('registration/step2', [CreateController::class, 'step2'] )->name('step2');
+    Route::post('registration/step2', [CreateController::class, 'createCompany'] )->name('createCompany');
+    Route::get('registration/step3', [CreateController::class, 'step3'] )->name('step3');
+    Route::post('registration/step3', [CreateController::class, 'addPhotoCompany'] )->name('addPhotoCompany');
+
     Route::get('/register-4', [CreateController::class, 'step4'] )->name('step4');
     Route::get('/register-5', [CreateController::class, 'step5'] )->name('step5');
     Route::get('/register-6', [CreateController::class, 'step6'] )->name('step6');

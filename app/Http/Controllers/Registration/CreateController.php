@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Registration;
 
+use App\Http\Requests\CreateCompany;
 use App\Models\BusinessType;
 use App\Models\Company;
 use App\Models\CompanyLogo;
@@ -60,13 +61,9 @@ class CreateController extends HomeController
         );
         $owner_model = CompanyOwner::createUser($data);
 
-        $company_owner = CompanyOwner::getUser($request->input('login'));
-        session()->put('companyOwner_id', $company_owner[0]->id);
-
         if($owner_model){
             Auth::login($owner_model);
-
-            return redirect()->intended(route('company.step2'));
+            return redirect()->intended(route('registration.step2'));
         }
 
         return redirect(route('registration.step1'))->withErrors([
@@ -77,75 +74,40 @@ class CreateController extends HomeController
 
     public function step2(): View
     {
-
         return view("auth.registration.step2", [
-            'business_type' => collect(BusinessType::all())->map(function ($type) {
-                return [
-                    'id' => $type->id,
-                    'type' => $type->name
-                ];
-            }),
+            'business_type' => BusinessType::all()->pluck('name','id')->toArray()
         ]);
     }
 
-    public function createCompany(Request $request): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
+    public function createCompany(CreateCompany $request): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
     {
-        $data = $request->validate(
-            [
-                'name' => [
-                    'required',
-                    Rule::unique('companies')->whereNull('deleted_at'),
-                    'string',
-                    'max:20'],
-                'address' => ['required', 'string', 'max:20'],
-                'socialMedia' => 'string',
-                'business_type_id' => 'integer'
-            ]
-        );
+        $data = $request->validated();
+        $company = Company::create($data);
+        $company->update(['company_owner_id' => Auth::user()->id]);
 
-        Company::create($data);
-        //todo винести в model
-        $company_id = Company::where('name', $request->input('name'))->get();
-        session()->put('company_id', $company_id[0]->id);
-
-        DB::table('company_company_owner')->updateOrInsert([
-            'company_id' => session()->get('company_id'),
-            'company_owner_id' => session()->get('companyOwner_id')
-        ]);
-
-        return redirect(route('company.step3'));
+        return redirect(route('registration.step3'));
     }
 
     public function step3(): View
     {
-
         return view("auth.registration.step3");
     }
 
     public function addPhotoCompany(Request $request)
     {
-        $data = $request->validate(
-            [
-                'company_photo' => 'required|image:jpg,jpeg,webP,png',
-            ]
-        );
         if ($request->hasFile('company_photo')) {
-            $file_path = $request->company_photo->path();
-
             CompanyLogo::create([
-                'company_id' => session()->get('company_id'),
-                'path' => $file_path
+                'company_id' => Auth::user()->company->id,
+                'path' => $request->company_photo->path()
             ]);
-            return redirect(route('company.step4'));
         }
+        return redirect(route('registration.step4'));
     }
 
     public function step4(): View
     {
-//        $company_id = session()->get('company_id');
-        $services = Service::getServices();
         return view("auth.registration.step4", [
-            'services' => $services,
+            'services' => Auth::user()->company->services
         ]);
     }
 

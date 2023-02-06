@@ -5,7 +5,7 @@
         <div class="window">
             <div class="window__header">
                 <x-icon-key/>
-                <h1>{{__('Forgot your password?')}}</h1>
+                <h1>{{__('git ')}}</h1>
             </div>
             <div class="window__content">
                 @if(session()->has('success') )

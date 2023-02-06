@@ -30,7 +30,7 @@
 
 {{--    <script type="text/javascript" src="{{ asset('/access/js/Table/datatables.js') }}"></script>--}}
 
-    <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
+
     @vite(['resources/js/app.js', 'resources/scss/app.scss'])
 </head>
 <body>

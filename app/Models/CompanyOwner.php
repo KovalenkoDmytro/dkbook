@@ -42,13 +42,13 @@ class CompanyOwner extends Model implements Authenticatable, CanResetPassword
         ]);
     }
 
-    public static function getUser(string $login){
-        return CompanyOwner::where('login', $login)->get();
-    }
+//    public static function getUser(string $login){
+//        return CompanyOwner::where('login', $login)->get();
+//    }
 
     public function company()
     {
-        return $this->hasOne(Company::class);
+        return $this->hasOne(Company::class,'company_owner_id');
     }
 
     public function getAuthIdentifierName()

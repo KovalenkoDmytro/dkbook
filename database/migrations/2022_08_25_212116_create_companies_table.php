@@ -20,7 +20,6 @@ return new class extends Migration
             $table->foreignId('company_owner_id')->nullable()->constrained();
             $table->string('name');
             $table->string('address');
-            $table->string('socialMedia');
             $table->timestamps();
             $table->softDeletes();
 

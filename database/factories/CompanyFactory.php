@@ -26,7 +26,6 @@ class CompanyFactory extends Factory
             'company_owner_id'=>1,
             'name'=>fake()->company,
             'address'=>fake()->address,
-            'socialMedia'=>fake()->imageUrl,
         ];
     }
 }

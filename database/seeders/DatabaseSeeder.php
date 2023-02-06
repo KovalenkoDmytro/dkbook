@@ -38,7 +38,6 @@ class DatabaseSeeder extends Seeder
         BusinessType::create(['name' => 'Psychotherapy']);
         BusinessType::create(['name' => 'Dentist']);
         BusinessType::create(['name' => 'Tattoo Studio']);
-        BusinessType::create(['name' => 'Other']);
 
         CompanyOwner::factory(1)->create();
         $clients = Client::factory(6)->create();
