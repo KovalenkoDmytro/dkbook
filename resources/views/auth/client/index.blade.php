@@ -25,9 +25,9 @@
             <table id="dtBasicExample" class="table">
                 <thead>
                 <tr>
-                    <th>{{__('Name')}}</th>
-                    <th>{{__('Phone')}}</th>
-                    <th>{{__('E-mail')}}</th>
+                    <th><i class="fi fi-rr-money-check"></i> {{__('Name')}}</th>
+                    <th><i class="fi fi-rr-phone-call"></i> {{__('Phone')}}</th>
+                    <th><i class="fi fi-rr-envelope"></i> {{__('E-mail')}}</th>
                 </tr>
                 </thead>
                 <tbody>

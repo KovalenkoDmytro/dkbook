@@ -18,7 +18,8 @@
             name="name"
             error="{{$errors->first('name') ?? false}}"
             value="{{ old('name') }}"
-        ></x-input>
+        ><i class="fi fi-rr-money-check"></i>
+        </x-input>
 
 
         <div class="service-timeRange">
@@ -66,7 +67,9 @@
             name="price"
             placeholder="34.50"
             error="{{$errors->first('price') ?? false}}"
-        ></x-input>
+        >
+            <i class="fi fi-rr-money-bill-wave"></i>
+        </x-input>
 
 
         <button class="btn" type="submit">{{__('Add')}}</button>

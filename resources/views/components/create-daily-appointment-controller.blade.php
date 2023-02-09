@@ -30,7 +30,7 @@
                     <label for="select_minutes">{{__("minutes")}}</label>
                     <select id="select_minutes" autocomplete="off" name="booked_date">
                         @foreach($minutes_range as $minute)
-                            <option value="{{$chose_date->copy()->addMinutes($minute->format('i'))->toDateTimeString()}}">{{$minute->format('i')}}</option>
+                            <option value="{{$chose_date->copy()->addMinutes($minute->format('i'))->toDateTimeString()}}">{{$minute->format('i')}}min</option>
                         @endforeach
                     </select>
                 </div>

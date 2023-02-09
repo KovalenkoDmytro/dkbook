@@ -14,9 +14,9 @@
     <div class="page-service __index">
         <h1>{{__('Services pages')}}</h1>
         <div class="services__head">
-            <p class="name">{{__('Name')}}</p>
-            <p class="time">{{__('Time')}}</p>
-            <p class="price">{{__('Price')}}</p>
+            <p class="name"><i class="fi fi-rr-money-check"></i> {{__('Name')}}</p>
+            <p class="time"><i class="fi fi-rr-alarm-clock"></i> {{__('Time')}}</p>
+            <p class="price"><i class="fi fi-rr-money-bill-wave"></i>{{__('Price')}}</p>
         </div>
         <div class="services__items">
             @foreach($services as $service)
