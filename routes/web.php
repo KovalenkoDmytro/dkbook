@@ -54,6 +54,10 @@ Route::name('services.')->group(function (){
     Route::get('/service/{id}/edit', [ServiceController::class, 'edit'] )->name('edit');
     Route::put('/service/{id}', [ServiceController::class, 'update'] )->name('update');
     Route::delete('/service/{id}', [ServiceController::class, 'destroy'] )->name('destroy');
+
+    Route::post('/ajax/service/', [ServiceController::class, 'ajaxStore'] )->name('ajaxStore');
+
+
 });
 Route::name('employee.')->group(function (){
     Route::get('/employees', [EmployeeController::class, 'index'] )->name('index');

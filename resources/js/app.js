@@ -3,6 +3,7 @@
 
 import {app} from './helpers'
 import {initDropDownList} from "./dropDownList";
+import {initServiceCRUDE} from "./registration/serviceCRUDE";
 
 console.log('app.js')
 
@@ -153,4 +154,9 @@ app.run(() => {
 
 // DropDownList --- end ---
 
+
+
+app.run(()=>{
+    initServiceCRUDE();
+},'all','.page-registration .add-services')
 

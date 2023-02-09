@@ -19,27 +19,45 @@
           </p>
         </div>
 
-        <div class="buttons_wrapper">
-            @if($services->isNotEmpty())
-                <div class="btn" id="#showForm">
-                    <i class="icon icon_plus"></i>
-                    <span>{{__('Add next one service')}}</span>
-                </div>
-{{--            @else--}}
-{{--                <div class="btn">--}}
-{{--                    <i class="icon icon_plus"></i>--}}
-{{--                    <a href="{{route('services.index')}}">{{__('Add first service')}}</a>--}}
-{{--                </div>--}}
-            @endif
 
-{{--            @if($services->isNotEmpty())--}}
-{{--                <div class="btn">--}}
-{{--                    <a href="{{route('registration.step5')}}">{{__('Next step')}}</a>--}}
-{{--                </div>--}}
-{{--            @endif--}}
+        <div class="services__table">
+            <div class="services__head">
+                <p class="name">{{__('Name')}}</p>
+                <p class="time">{{__('Time')}}</p>
+                <p class="price">{{__('Price')}}</p>
+            </div>
+            <div class="services__items">
+                @if($services->isNotEmpty())
+                    @foreach($services as $service)
+                        <div class="services__item">
+                            <span class="name">{{$service->name}}</span>
+                            <span class="time">{{$service->timeRange_hour}} : {{$service->timeRange_minutes}}</span>
+                            <span class="price">{{$service->price}}</span>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
         </div>
 
-        <form id="formAddService">
+        <div class="buttons_wrapper">
+            <div class="btn" id="showForm">
+                <i class="icon icon_plus"></i>
+                @if($services->isNotEmpty())
+                    <span>{{__('Add next one service')}}</span>
+                @else
+                    <span>{{__('Add first service')}}</span>
+                @endif
+            </div>
+
+
+            @if($services->isNotEmpty())
+                <div class="btn">
+                    <a href="{{route('registration.step5')}}">{{__('Next step')}}</a>
+                </div>
+            @endif
+        </div>
+
+        <form id="formAddService" class="formAddService">
             <x-input
                 text="{{__('Service name')}}"
                 id="service_name"
@@ -91,21 +109,11 @@
                 placeholder="34.50"
             ></x-input>
 
-            <x-button>
-
-            </x-button>
+            <button class="btn" id="addNewService">{{__('Add new service')}}</button>
 
         </form>
 
     </section>
-
-    <script type="text/javascript">
-        const showForm = document.querySelector('#showForm')
-        const formAddService = document.querySelector('#formAddService')
-        showForm.addEventListener('click',function(){
-
-        })
-    </script>
 
 @endsection
 
