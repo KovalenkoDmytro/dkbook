@@ -11,27 +11,30 @@
                 text="{{__('Name')}}"
                 id="client_name"
                 name="name"
-                error="{{$errors->first('name') ?? false}}"
+                error="{{$errors->first('name')}}"
                 value="{{ $client->name }}"
                 placeholder="{{__('Steve Jobs')}}">
+                <i class="fi fi-rr-user"></i>
             </x-input>
             <x-input
                 for="client_email"
                 text="{{__('Email')}}"
                 id="client_email"
                 name="email"
-                error="{{$errors->first('email') ?? false}}"
+                error="{{$errors->first('email')}}"
                 value="{{$client->email }}"
                 placeholder="{{__('SteveJobs@apple.com')}}">
+                <i class="fi fi-rr-envelope"></i>
             </x-input>
             <x-input
                 for="client_phone"
                 text="{{__('Phone')}}"
                 id="client_phone"
                 name="phone"
-                error="{{$errors->first('phone') ?? false}}"
+                error="{{$errors->first('phone')}}"
                 value="{{ $client->phone }}"
                 placeholder="{{__('+48333-333-333')}}">
+                <i class="fi fi-rr-users-alt"></i>
             </x-input>
             <button class="btn" type="submit">{{__('Update')}}</button>
         </form>

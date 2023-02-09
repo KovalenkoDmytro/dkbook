@@ -11,8 +11,7 @@
             <h2>{!! Session::get('error') !!}</h2>
         </div>
     @endif
-    @dump($errors)
-{{--    @dump($service)--}}
+
     <form action="{{route('services.update',[$service->id])}}" method="post">
         @csrf
         @method("PUT")
@@ -24,7 +23,7 @@
             name="name"
             error="{{$errors->first('name')}}"
             value="{{ $service->name }}"
-        ></x-input>
+        ><i class="fi fi-rr-money-check"></i></x-input>
 
 
         <div class="service-timeRange">
@@ -71,7 +70,9 @@
             id="service_price"
             name="price"
             value="{{$service->price}}"
-        ></x-input>
+        >
+            <i class="fi fi-rr-money-bill-wave"></i>
+        </x-input>
 
         <button class="btn" type="submit">{{__('Update')}}</button>
 
