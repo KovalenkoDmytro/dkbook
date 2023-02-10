@@ -113,14 +113,9 @@ class CreateController extends HomeController
 
     public function step5(): View
     {
-        $company_id = session()->get('company_id');
-        $employeeModel = new Employee();
-        $employees = Employee::getCompanyEmployees($company_id);
-
         return view("auth.registration.step5", [
-            'employees' => $employees,
-            'company_id' => session()->get('company_id'),
-            'tableDB' => $employeeModel->getTable(),
+            'employees' => Auth::user()->company->employees,
+            'company_id' => Auth::user()->company->id,
         ]);
 
     }

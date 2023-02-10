@@ -13,18 +13,15 @@
 
     <section class="add-services">
         <div class="add-services_text">
-          <span>{{__('Add first services')}}</span>
-          <p>
-              {{__('Add at least one service from your offer. Later, you can add more services, assign them to categories and edit')}}
-          </p>
+            <p>{{__('Add at least one service from your offer. Later, you can add more services, assign them to categories and edit')}} </p>
         </div>
 
 
         <div class="services__table">
             <div class="services__head">
-                <p class="name">{{__('Name')}}</p>
-                <p class="time">{{__('Time')}}</p>
-                <p class="price">{{__('Price')}}</p>
+                <p class="name"><i class="fi fi-rr-money-check"></i>{{__('Name')}}</p>
+                <p class="time"><i class="fi fi-rr-alarm-clock"></i>{{__('Time')}}</p>
+                <p class="price"><i class="fi fi-rr-money-bill-wave"></i>{{__('Price')}}</p>
             </div>
             <div class="services__items">
                 @if($services->isNotEmpty())
@@ -50,11 +47,12 @@
             </div>
 
 
-            @if($services->isNotEmpty())
-                <div class="btn">
+{{--            @if($services->isNotEmpty())--}}
+                <div
+                    class="btn">
                     <a href="{{route('registration.step5')}}">{{__('Next step')}}</a>
                 </div>
-            @endif
+
         </div>
 
         <form id="formAddService" class="formAddService">

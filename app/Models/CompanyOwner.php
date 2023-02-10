@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\CanResetPassword;
@@ -41,10 +42,6 @@ class CompanyOwner extends Model implements Authenticatable, CanResetPassword
             'timezone' => $data['timezone']
         ]);
     }
-
-//    public static function getUser(string $login){
-//        return CompanyOwner::where('login', $login)->get();
-//    }
 
     public function company()
     {
