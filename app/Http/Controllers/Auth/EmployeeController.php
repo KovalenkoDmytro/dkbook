@@ -38,14 +38,14 @@ class EmployeeController extends Controller
 
     public function store(CreateEmployeeRequest $request)
     {
-        $company = Auth::user()->company;
-        $new_employee = $request->validated();
-        $scheduled = new EmployeeScheduledController;
-        $scheduled_array = $scheduled->createScheduled();
-        $new_scheduled = EmployeeSchedule::create($scheduled_array);
-        $new_employee['employee_schedule_id'] = $new_scheduled->id;
-
         try {
+            $company = Auth::user()->company;
+            $new_employee = $request->validated();
+            $scheduled = new EmployeeScheduledController;
+            $scheduled_array = $scheduled->createScheduled();
+            $new_scheduled = EmployeeSchedule::create($scheduled_array);
+            $new_employee['employee_schedule_id'] = $new_scheduled->id;
+
             $employee = Employee::firstOrCreate($new_employee);
             $company->employees()->attach($employee->id);
 
@@ -56,11 +56,32 @@ class EmployeeController extends Controller
 
         } catch (QueryException $exception) {
             return redirect()->back()->with('error', $exception->errorInfo[2]);
-
         }
     }
 
-    public function edit(Request $request, $id)
+    public function ajaxStore(CreateEmployeeRequest $request){
+
+        try {
+            $new_employee = $request->validated();
+            $scheduled = new EmployeeScheduledController;
+            $scheduled_array = $scheduled->createScheduled();
+            $new_scheduled = EmployeeSchedule::create($scheduled_array);
+            $new_employee['employee_schedule_id'] = $new_scheduled->id;
+
+            $employee = Employee::create($new_employee);
+            Auth::user()->company->employees()->attach($employee->id);
+            return response()->json([
+                'massage'=> 'employee has been added',
+                'employee' =>  collect($employee)->except(['updated_at', 'created_at'])
+            ],200);
+        } catch (QueryException $exception) {
+            return response()->json([
+                'massage'=> $exception->errorInfo[2],
+            ],400);
+        }
+    }
+
+    public function edit(Request $id)
     {
         $services = Auth::user()->company->services;
         $employee = Auth::user()->company->getEmployee((int)$id);
@@ -103,7 +124,7 @@ class EmployeeController extends Controller
 
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy(Request $id)
     {
         $company = Auth::user()->company;
         $employee = Employee::find($id);
@@ -119,61 +140,6 @@ class EmployeeController extends Controller
         }
 
     }
-
-
-//    public function index()
-//    {
-//        return view('auth.create_employee');
-//    }
-
-//    public function create(){
-//        return view('auth.dashboard.employees.create');
-//    }
-
-//    public function store(Request $request)
-//    {
-//        $data = $request->validate([
-//            'name' => [
-//                'required',
-//                'string',
-//                'max:25'],
-//            'email' => ['required',
-//                Rule::unique('employees')->whereNull('deleted_at'),
-//                'email',
-//                'string',
-//                'max:50'],
-//            'position' => [
-//                'required',
-//                'string',
-//                'max:15'],
-//            'phone' => [
-//                'required',
-//                Rule::unique('employees')->whereNull('deleted_at'),
-//                'string',
-//                'max:15'],
-//        ]);
-//
-//        $data['company_id'] = session()->get('company_id');
-//        $data['employee_schedule_id'] = 1;
-//
-//        Employee::create($data);
-//        return redirect(route('company.step5'));
-//        //todo exchange redirect
-//
-//    }
-
-
-//    public function show(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
-//    {
-//
-//        $owner = CompanyOwner::with('company.employees.scheduled', 'company.employees.services', 'company.clients')
-//            ->where('id', \auth()->id())
-//            ->first();
-//
-//        return view('auth.dashboard.employees.index',[
-//            'employees'=>$owner->company->employees->paginate(3),
-//        ]);
-//    }
 
     public function getAvailableEmployee(Request $request): \Illuminate\Http\JsonResponse
     {

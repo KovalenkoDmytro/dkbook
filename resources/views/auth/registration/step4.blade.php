@@ -46,12 +46,9 @@
                 @endif
             </div>
 
-
-{{--            @if($services->isNotEmpty())--}}
-                <div
-                    class="btn">
-                    <a href="{{route('registration.step5')}}">{{__('Next step')}}</a>
-                </div>
+            <div id="nextStep" class="btn nextStep {{$services->isNotEmpty() ? '__show' : ''}}" >
+                <a href="{{route('registration.step5')}}">{{__('Next step')}}</a>
+            </div>
 
         </div>
 

@@ -9,7 +9,6 @@
     <form action="{{route('employee.store')}}" method="post">
         @csrf
         <x-input
-            for="employee_name"
             text="{{__('Name')}}"
             id="employee_name"
             name="name"
@@ -19,7 +18,6 @@
             <i class="fi fi-rr-user"></i>
         </x-input>
         <x-input
-            for="employee_email"
             text="{{__('Email')}}"
             id="employee_email"
             name="email"
@@ -29,7 +27,6 @@
             <i class="fi fi-rr-envelope"></i>
         </x-input>
         <x-input
-            for="employee_position"
             text="{{__('Position')}}"
             id="employee_position"
             name="position"
@@ -39,7 +36,6 @@
             <i class="fi fi-rr-users-alt"></i>
         </x-input>
         <x-input
-            for="employee_phone"
             text="{{__('Phone')}}"
             id="employee_phone"
             name="phone"

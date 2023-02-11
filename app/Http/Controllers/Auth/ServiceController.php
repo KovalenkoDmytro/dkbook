@@ -50,10 +50,7 @@ class ServiceController extends Controller
             return response()->json([
                 'massage'=> $exception->errorInfo[2],
             ],400);
-
         }
-
-
     }
 
     public function edit($id)

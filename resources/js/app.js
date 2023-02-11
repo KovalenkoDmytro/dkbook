@@ -4,6 +4,7 @@
 import {app} from './helpers'
 import {initDropDownList} from "./dropDownList";
 import {initServiceCRUDE} from "./registration/serviceCRUDE";
+import {initEmployeeCRUDE} from "./registration/employeeCRUDE";
 
 console.log('app.js')
 
@@ -92,7 +93,7 @@ app.run(() => {
         },
         onItemAdd: getAvailableEmployees(),
     });
-    const dropDownSelector_select_minutes = new TomSelect(`#select_minutes`, {
+    new TomSelect(`#select_minutes`, {
         sortField: {
             field: "value",
             direction: "asc"
@@ -114,7 +115,7 @@ app.run(() => {
             }
         }
     });
-    const dropDownSelector_select_clients = new TomSelect('#select_clients', {
+    new TomSelect('#select_clients', {
         create: function(value){
 
             const clientCreate__form = document.querySelector('#create_client__form')
@@ -159,4 +160,6 @@ app.run(() => {
 app.run(()=>{
     initServiceCRUDE();
 },'all','.page-registration .add-services')
-
+app.run(()=>{
+    initEmployeeCRUDE();
+},'all','.page-registration .add-employee')

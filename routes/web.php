@@ -67,6 +67,8 @@ Route::name('employee.')->group(function (){
     Route::put('/employee/{id}', [EmployeeController::class, 'update'] )->name('update');
     Route::delete('/employee/{id}', [EmployeeController::class, 'destroy'] )->name('destroy');
     Route::post('/employees/available', [EmployeeController::class, 'getAvailableEmployee'] );
+
+    Route::post('/ajax/employee/', [EmployeeController::class, 'ajaxStore'] )->name('ajaxStore');
 });
 Route::name('client.')->middleware('auth')->group(function (){
     Route::get('/clients', [ClientController::class, 'index'] )->name('index');

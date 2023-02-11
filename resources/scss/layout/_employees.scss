@@ -1,0 +1,14 @@
+.employees{
+    @include tablet{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 25px;
+    }
+    .employee{
+        margin: 40px 0;
+        .employee__photo{
+            max-width: 150px;
+        }
+    }
+}
+

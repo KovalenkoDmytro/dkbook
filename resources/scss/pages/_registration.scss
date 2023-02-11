@@ -10,16 +10,16 @@
         text-align: center;
     }
 
-    .employee_items {
-        .employee_item {
-            display: flex;
-            align-items: center;
-
-            .employee_name {
-                margin-right: 10px;
+    .add-services, .add-employee{
+        .formAddService,.formAddEmployee{
+            display: none;
+            &.__show{
+                display: block;
             }
         }
+
     }
+
 
     .finishStepBlock{
         max-width: 50%;
@@ -38,6 +38,13 @@
         }
         .btn{
             margin: 20px auto 0;
+        }
+    }
+
+    .nextStep{
+        display: none;
+        &.__show{
+            display: block;
         }
     }
 

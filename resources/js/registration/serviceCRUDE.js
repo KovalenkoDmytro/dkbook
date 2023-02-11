@@ -4,6 +4,7 @@ export function initServiceCRUDE() {
     const showFormBtn = document.querySelector('#showForm')
     const form = document.querySelector('#formAddService')
     const addNewServiceBtn = document.querySelector('#addNewService')
+    const nextStep = document.querySelector('#nextStep')
 
     function showForm() {
         if (form.classList.contains('__show')){
@@ -31,7 +32,10 @@ export function initServiceCRUDE() {
             return Promise.reject(response);
         }).then(function (data) {
             toCreateTableItem(element ,data.service)
-
+            // to show nexstep button
+            if (!nextStep.classList.contains('__show')){
+                nextStep.classList.add('__show')
+            }
             //@todo add notification
             console.log(data);
         }).catch(function (error) {
