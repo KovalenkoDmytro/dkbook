@@ -75,17 +75,9 @@ class CreateController extends HomeController
     public function step2(): View
     {
         return view("auth.registration.step2", [
-            'business_type' => BusinessType::all()->pluck('name','id')->toArray()
+            'business_type' => BusinessType::all()->pluck('name','id')->toArray(),
+            'company'=> Auth::user()->company,
         ]);
-    }
-
-    public function createCompany(CreateCompany $request): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
-    {
-        $data = $request->validated();
-        $company = Company::create($data);
-        $company->update(['company_owner_id' => Auth::user()->id]);
-
-        return redirect(route('registration.step3'));
     }
 
     public function step3(): View
@@ -117,28 +109,18 @@ class CreateController extends HomeController
             'employees' => Auth::user()->company->employees,
             'company_id' => Auth::user()->company->id,
         ]);
-
     }
 
     public function step6(): View
     {
-
-        $companyModel = new Company();
-        $scheduled_id = Company::find(session()->get('company_id'))->company_schedule_id;
-        $scheduled = CompanySchedule::getScheduled($scheduled_id);
-
+        $scheduled = CompanySchedule::getScheduled(Auth::user()->company->company_schedule_id);
         return view("auth.registration.step6", [
-            'company_id' => session()->get('company_id'),
-            'tableDB' => $companyModel->getTable(),
             'scheduled' => $scheduled,
-            'scheduled_id' => $scheduled_id,
         ]);
     }
 
     public function step7(): View
     {
-        // deleted all data from session
-//        session()->flush();
         return view('auth.registration.finallyStep');
     }
 }

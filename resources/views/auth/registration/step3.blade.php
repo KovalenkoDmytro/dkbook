@@ -18,7 +18,13 @@
             <div class="progress-area"></div>
             <div class="uploaded-area"></div>
         </section>
-        <button class="btn" type="submit">{{__('Next step')}}</button>
+
+        <div class="buttons_wrapper">
+            <div class="btn" >
+                <a href="{{route('registration.step2')}}">{{__('Prev step')}}</a>
+            </div>
+            <button class="btn" type="submit">{{__('Next step')}}</button>
+        </div>
     </form>
 @endsection
 

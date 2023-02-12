@@ -27,7 +27,6 @@ class CreateCompany extends FormRequest
         return [
             'name' => [
                 'required',
-                Rule::unique('companies')->whereNull('deleted_at'),
                 'string',
                 'max:20'],
             'address' => ['required', 'string', 'max:20'],

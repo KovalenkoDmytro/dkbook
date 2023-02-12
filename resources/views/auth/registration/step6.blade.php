@@ -2,17 +2,24 @@
 
 @section('registration.content')
     <section class="company_scheduled">
-        <p> {{__('the latest add scheduled company')}}</p>
-
-            @if(isset($scheduled) && $scheduled_id !=1)
-                <x-scheduled-show :scheduled='$scheduled'/>
-            <div class="buttons_wrapper">
-                <a class="btn icon icon_edit" href="{{route('scheduled.company.edit',['id'=> $scheduled_id])}}"></a>
-                <a class="btn" href="{{route('company.step7')}}">{{__('Finish')}}</a>
+        <p> {{__('The latest add scheduled company. Later, you can edit it')}}</p>
+        <form action="{{route('companyScheduled.update')}}" method="post">
+            @csrf
+            <div class="scheduled_items">
+                <x-date-time-picker
+                    :scheduled="$scheduled"
+                />
             </div>
-            @else
-                <a class="btn" href="{{route('scheduled.index',['id'=> $company_id, 'table' =>$tableDB])}}">{{__('add scheduled')}}</a>
-            @endif
+            <div class="buttons_wrapper">
+                <div class="btn" >
+                    <a href="{{route('registration.step5')}}">{{__('Prev step')}}</a>
+                </div>
+                <div class="btn" >
+                    <a href="{{route('registration.step7')}}">{{__('Next step')}}</a>
+                </div>
+                <button class="btn" type="submit">{{__("Update scheduled")}}</button>
+            </div>
+        </form>
     </section>
 @endsection
 

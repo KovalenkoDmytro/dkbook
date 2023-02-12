@@ -23,6 +23,13 @@
         </div>
 
         <div class="buttons_wrapper">
+            <div class="btn" >
+                <a href="{{route('registration.step4')}}">{{__('Prev step')}}</a>
+            </div>
+            <div id="nextStep" class="btn nextStep {{$employees->isNotEmpty() ? '__show' : ''}}" >
+                <a href="{{route('registration.step6')}}">{{__('Next step')}}</a>
+            </div>
+
             <div class="btn" id="showForm">
                 <i class="icon icon_plus"></i>
                 @if($employees->isNotEmpty())
@@ -31,12 +38,7 @@
                     <span>{{__('Add first service')}}</span>
                 @endif
             </div>
-            <div class="btn" >
-                <a href="{{route('registration.step4')}}">{{__('Prev step')}}</a>
-            </div>
-            <div id="nextStep" class="btn nextStep {{$employees->isNotEmpty() ? '__show' : ''}}" >
-                <a href="{{route('registration.step6')}}">{{__('Next step')}}</a>
-            </div>
+
 
         </div>
 

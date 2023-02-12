@@ -4,7 +4,8 @@ export function initEmployeeCRUDE() {
     const showFormBtn = document.querySelector('#showForm')
     const form = document.querySelector('#formAddEmployee')
     const addNewItemBtn = document.querySelector('#addNewEmployee')
-    //
+    const nextStep = document.querySelector('#nextStep')
+
     function showForm() {
         if (form.classList.contains('__show')){
             form.classList.remove('__show')
@@ -31,7 +32,10 @@ export function initEmployeeCRUDE() {
             return Promise.reject(response);
         }).then(function (data) {
             toCreateTableItem(element ,data.employee)
-
+// to show nexstep button
+            if (!nextStep.classList.contains('__show')){
+                nextStep.classList.add('__show')
+            }
             //@todo add notification
             console.log(data);
         }).catch(function (error) {
@@ -53,7 +57,6 @@ export function initEmployeeCRUDE() {
             <p>${employee.phone}</p>
         `
         table.append(employeeItem)
-        console.log('ssssss')
     }
 
     showFormBtn.addEventListener('click',showForm)
