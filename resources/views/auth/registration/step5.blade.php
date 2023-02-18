@@ -33,9 +33,9 @@
             <div class="btn" id="showForm">
                 <i class="icon icon_plus"></i>
                 @if($employees->isNotEmpty())
-                    <span>{{__('Add next one service')}}</span>
+                    <span>{{__('Add next one employee')}}</span>
                 @else
-                    <span>{{__('Add first service')}}</span>
+                    <span>{{__('Add first employee')}}</span>
                 @endif
             </div>
 

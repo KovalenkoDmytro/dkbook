@@ -56,6 +56,7 @@ export function initServiceCRUDE() {
                 </div>
         `
         table.append(serviceItem)
+        showFormBtn.querySelector('span').textContent = 'Add another one service'
     }
 
     showFormBtn.addEventListener('click',showForm)

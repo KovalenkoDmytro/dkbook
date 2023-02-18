@@ -37,7 +37,8 @@
             >
                 <x-slot:options>
                     @foreach($business_type as $id => $type)
-                        <option @selected($company->business_type && $company->business_type->name === $type)
+                        <option
+                                @selected(isset($company->business_type) && $company->business_type && $company->business_type->name === $type)
                                 value="{{$id}}">{{$type}}
                         </option>
                     @endforeach

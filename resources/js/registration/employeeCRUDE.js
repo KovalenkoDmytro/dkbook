@@ -57,6 +57,7 @@ export function initEmployeeCRUDE() {
             <p>${employee.phone}</p>
         `
         table.append(employeeItem)
+        showFormBtn.querySelector('span').textContent = 'Add another one employee'
     }
 
     showFormBtn.addEventListener('click',showForm)

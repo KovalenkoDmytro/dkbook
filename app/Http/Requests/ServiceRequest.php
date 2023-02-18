@@ -28,7 +28,7 @@ class ServiceRequest extends FormRequest
             "name" => [
                 'required',
                 'string',
-                'max:20',
+                'max:255',
             ],
             'timeRange_hour'=> [
                 'required',

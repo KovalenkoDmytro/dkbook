@@ -28,7 +28,7 @@ class ServiceController extends Controller
             $new_service = $request->validated();
             Service::firstOrCreate($new_service);
 
-            return redirect()->route('services.index')->with('success', 'service has been added');
+            return redirect()->back()->with('success', 'service has been added');
 
         } catch (QueryException $exception) {
             return redirect()->back()->with('error', $exception->errorInfo[2]);

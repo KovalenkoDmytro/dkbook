@@ -31,17 +31,6 @@ class CompanyOwner extends Model implements Authenticatable, CanResetPassword
     ];
     private string $rememberToken;
 
-    public static function createUser(array $data)
-    {
-        return CompanyOwner::create([
-            'login' => $data['login'],
-            'email' => $data['email'],
-            'fullName' => $data['fullName'],
-            'phone' => $data['phone'],
-            'password' => Hash::make($data['password']),
-            'timezone' => $data['timezone']
-        ]);
-    }
 
     public function company()
     {

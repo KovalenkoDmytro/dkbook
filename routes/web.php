@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\User\ForgotPasswordController;
 use App\Http\Controllers\Auth\User\LoginController;
 use App\Http\Controllers\Auth\User\ResetPasswordController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CompanyOwnerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Registration\CreateController;
 use Illuminate\Support\Facades\Route;
@@ -35,7 +36,7 @@ Route::name('password.')->middleware('guest')->group(function () {
 
 Route::name('registration.')->group(function (){
     Route::get('/registration/step1', [CreateController::class, 'step1'] )->name('step1');
-    Route::post('/registration/step1', [CreateController::class, 'createOwner'] )->name('createOwner');
+//    Route::post('/registration/step1', [CreateController::class, 'createOwner'] )->name('createOwner');
     Route::get('/registration/step2', [CreateController::class, 'step2'] )->name('step2');
 //    Route::post('/registration/step2', [CreateController::class, 'createCompany'] )->name('createCompany');
     Route::get('/registration/step3', [CreateController::class, 'step3'] )->name('step3');
@@ -51,6 +52,10 @@ Route::name('company.')->group(function (){
     Route::put('/company', [CompanyController::class, 'update'] )->name('update');
 });
 
+Route::name('companyOwner.')->group(function (){
+    Route::post('/companyOwner', [CompanyOwnerController::class, 'store'] )->name('store');
+    Route::put('/companyOwner', [CompanyOwnerController::class, 'update'] )->name('update');
+});
 
 Route::name('services.')->group(function (){
     Route::get('/services', [ServiceController::class, 'index'] )->name('index');

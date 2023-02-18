@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers\Registration;
 
-use App\Http\Requests\CreateCompany;
 use App\Models\BusinessType;
-use App\Models\Company;
 use App\Models\CompanyLogo;
-use App\Models\CompanyOwner;
 use App\Models\CompanySchedule;
-use App\Models\Employee;
-use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
 
@@ -23,54 +15,9 @@ class CreateController extends HomeController
 
     public function step1(): View
     {
-        if(Auth::check()){
-            redirect(route('dashboard.main'));
-        }
         return view("auth.registration.step1");
     }
 
-    public function createOwner(Request $request)
-    {
-        $data = $request->validate(
-            [
-                'login' => [
-                    'required',
-                    Rule::unique('company_owners')->whereNull('deleted_at'),
-                    'max:20'],
-                'password' => [
-                    'required',
-                    Password::min(8)->mixedCase()->symbols()->numbers()->letters(),
-                    ],
-                'confirmPassword' => ['required', 'same:password'],
-                'email' => [
-                    'required',
-                    Rule::unique('company_owners')->whereNull('deleted_at'),
-                    'string',
-                    'email',
-                    'max:50',
-                  ],
-                'fullName' => ['required', 'string', 'max:35'],
-                'phone' => [
-                    'required',
-                    Rule::unique('company_owners')->whereNull('deleted_at'),
-                    'string',
-                    'max:15'],
-                'businessMode' => 'string',
-                'timezone'=> 'string',
-            ]
-        );
-        $owner_model = CompanyOwner::createUser($data);
-
-        if($owner_model){
-            Auth::login($owner_model);
-            return redirect()->intended(route('registration.step2'));
-        }
-
-        return redirect(route('registration.step1'))->withErrors([
-            'formError' => 'Error when created user'
-        ]);
-
-    }
 
     public function step2(): View
     {
