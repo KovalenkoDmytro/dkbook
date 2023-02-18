@@ -31,7 +31,6 @@ class Company extends Model
             $employee = $item;
         }
         return $employee;
-
     }
 
     public function owner()

@@ -27,6 +27,9 @@
                     </a>
                 </div>
             </div>
+            @if($times_start === 0)
+                <h2>{{__('Day off')}}</h2>
+            @else
             <div class="hour_items">
                 @for($count = $times_start ; $count <= $times_end; $count++)
                     <div class="{{ $present_day['hour'] === $count ? 'hours_item currently' :'hours_item'}}">
@@ -60,6 +63,8 @@
                     </div>
                 @endfor
             </div>
+
+            @endif
         </div>
     </div>
 @endsection

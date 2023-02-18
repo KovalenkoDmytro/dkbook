@@ -81,7 +81,7 @@ class EmployeeController extends Controller
         }
     }
 
-    public function edit(Request $id)
+    public function edit($id)
     {
         $services = Auth::user()->company->services;
         $employee = Auth::user()->company->getEmployee((int)$id);

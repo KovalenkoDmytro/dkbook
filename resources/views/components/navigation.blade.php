@@ -1,33 +1,33 @@
 <div class="navigation__wrapper">
     <nav class="navigation">
         <a class="navigation__link" href="{{route('dashboard.main')}}" title="main">
-            <img class="link__icon" src="{{asset('/access/icons/dashboard.svg')}}">
+            <x-icon-dashboard/>
             <span>{{__('Main')}}</span>
         </a>
         <a class="navigation__link" href="{{route('monthlyCalendar.index')}}" title="monthlyCalendar">
-            <img class="link__icon" src="{{asset('/access/icons/calendar_monthly.svg')}}">
+            <x-icon-calendar_monthly/>
             <span>{{__('Monthly Calendar')}} </span>
         </a>
         <a class="navigation__link" href="{{route('dailyCalendar.index')}}" title="dailyCalendar">
-            <img class="link__icon" src="{{asset('/access/icons/calendar_daily.svg')}}">
+            <x-icon-calendar_daily/>
             <span>{{__('Daily Calendar')}} </span>
         </a>
         <a class="navigation__link" href="{{route('employee.index')}}" title="employees">
-            <img class="link__icon" src="{{asset('/access/icons/employees.svg')}}">
+            <x-icon-employees/>
             <span>{{__('Employees')}}</span>
         </a>
         <a class="navigation__link" href="{{route('client.index')}}" title="clients">
-            <img class="link__icon" src="{{asset('/access/icons/clients.svg')}}">
+            <x-icon-clients/>
             <span>{{__('Clients')}} </span>
         </a>
         <a class="navigation__link" href="{{route('services.index')}}" title="services">
-            <img class="link__icon" src="">
+            <x-icon-services/>
             <span>{{__('Services')}} </span>
         </a>
     </nav>
     <div class="navigation __footer">
         <a class="navigation__link" href="{{route('user.logout')}}" title="logout">
-            <img class="link__icon" src="{{asset('/access/icons/logout.svg')}}">
+            <x-icon-logout/>
             <span>{{__('Logout')}}</span>
         </a>
     </div>

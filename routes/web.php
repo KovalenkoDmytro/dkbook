@@ -32,13 +32,9 @@ Route::name('password.')->middleware('guest')->group(function () {
     Route::post('/reset-password', [ResetPasswordController::class, 'store'])->name('reset');
 });
 
-
-
 Route::name('registration.')->group(function (){
     Route::get('/registration/step1', [CreateController::class, 'step1'] )->name('step1');
-//    Route::post('/registration/step1', [CreateController::class, 'createOwner'] )->name('createOwner');
     Route::get('/registration/step2', [CreateController::class, 'step2'] )->name('step2');
-//    Route::post('/registration/step2', [CreateController::class, 'createCompany'] )->name('createCompany');
     Route::get('/registration/step3', [CreateController::class, 'step3'] )->name('step3');
     Route::post('/registration/step3', [CreateController::class, 'addPhotoCompany'] )->name('addPhotoCompany');
     Route::get('/registration/step4', [CreateController::class, 'step4'] )->name('step4');
@@ -64,11 +60,9 @@ Route::name('services.')->group(function (){
     Route::get('/service/{id}/edit', [ServiceController::class, 'edit'] )->name('edit');
     Route::put('/service/{id}', [ServiceController::class, 'update'] )->name('update');
     Route::delete('/service/{id}', [ServiceController::class, 'destroy'] )->name('destroy');
-
     Route::post('/ajax/service/', [ServiceController::class, 'ajaxStore'] )->name('ajaxStore');
-
-
 });
+
 Route::name('employee.')->group(function (){
     Route::get('/employees', [EmployeeController::class, 'index'] )->name('index');
     Route::get('/employee/create', [EmployeeController::class, 'create'] )->name('create');
@@ -77,9 +71,9 @@ Route::name('employee.')->group(function (){
     Route::put('/employee/{id}', [EmployeeController::class, 'update'] )->name('update');
     Route::delete('/employee/{id}', [EmployeeController::class, 'destroy'] )->name('destroy');
     Route::post('/employees/available', [EmployeeController::class, 'getAvailableEmployee'] );
-
     Route::post('/ajax/employee/', [EmployeeController::class, 'ajaxStore'] )->name('ajaxStore');
 });
+
 Route::name('client.')->middleware('auth')->group(function (){
     Route::get('/clients', [ClientController::class, 'index'] )->name('index');
     Route::get('/client/create', [ClientController::class, 'create'] )->name('create');
@@ -91,10 +85,10 @@ Route::name('client.')->middleware('auth')->group(function (){
 Route::name('monthlyCalendar.')->middleware('auth')->group(function (){
     Route::get('/calendar/month/{date?}', [CalendarController::class, 'index'] )->name('index');
 });
+
 Route::name('dailyCalendar.')->middleware('auth')->group(function (){
     Route::get('/calendar/day/{date?}', [DailyCalendarController::class, 'index'] )->name('index');
 });
-
 
 Route::name('employeeScheduled.')->group(function (){
     Route::get('/employeeScheduled/{id}/edit', [EmployeeScheduledController::class, 'edit'] )->name('edit');
@@ -104,8 +98,6 @@ Route::name('employeeScheduled.')->group(function (){
 Route::name('companyScheduled.')->group(function (){
     Route::post('/companyScheduled/', [CompanyScheduledController::class, 'update'] )->name('update');
 });
-
-
 
 Route::name('dashboard.')->middleware('auth')->group(function (){
     Route::get('/main', [DashboardController::class, 'index'] )->name('main');
