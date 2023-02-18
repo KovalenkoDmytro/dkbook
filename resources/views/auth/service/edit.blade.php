@@ -12,6 +12,7 @@
         </div>
     @endif
 
+    <a class="btn" href="{{ url()->previous()}}">Back</a>
     <form action="{{route('services.update',[$service->id])}}" method="post">
         @csrf
         @method("PUT")

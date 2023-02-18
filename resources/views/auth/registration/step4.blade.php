@@ -22,6 +22,7 @@
                 <p class="name"><i class="fi fi-rr-money-check"></i>{{__('Name')}}</p>
                 <p class="time"><i class="fi fi-rr-alarm-clock"></i>{{__('Time')}}</p>
                 <p class="price"><i class="fi fi-rr-money-bill-wave"></i>{{__('Price')}}</p>
+                <div class="actions">{{__('Update/Destroy')}}</div>
             </div>
             <div class="services__items">
                 @if($services->isNotEmpty())
@@ -30,6 +31,9 @@
                             <span class="name">{{$service->name}}</span>
                             <span class="time">{{$service->timeRange_hour}} : {{$service->timeRange_minutes}}</span>
                             <span class="price">{{$service->price}}</span>
+                            <div class="buttons_wrapper">
+
+                            </div>
                         </div>
                     @endforeach
                 @endif

@@ -53,6 +53,7 @@ export function initServiceCRUDE() {
                     <span class="name">${service.name}</span>
                     <span class="time">${service.timeRange_hour} : ${service.timeRange_minutes}</span>
                     <span class="price">${service.price}.00</span>
+                    <div class="actions">Update/Destroy</div>
                 </div>
         `
         table.append(serviceItem)

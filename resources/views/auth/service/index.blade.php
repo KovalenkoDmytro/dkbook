@@ -18,6 +18,7 @@
                 <p class="name"><i class="fi fi-rr-money-check"></i> {{__('Name')}}</p>
                 <p class="time"><i class="fi fi-rr-alarm-clock"></i> {{__('Time')}}</p>
                 <p class="price"><i class="fi fi-rr-money-bill-wave"></i>{{__('Price')}}</p>
+                <div class="actions">{{__('Update/Destroy')}}</div>
             </div>
             <div class="services__items">
                 @foreach($services as $service)
@@ -28,6 +29,10 @@
                         </a>
                         <span class="time">{{$service->timeRange_hour}} : {{$service->timeRange_minutes}}</span>
                         <span class="price">{{$service->price}}</span>
+                        <div class="buttons_wrapper">
+                            <a class="btn" href="{{route('services.edit',[$service->id])}}"><i class="fi fi-rr-edit"></i></a>
+                        </div>
+
                     </div>
                 @endforeach
             </div>
