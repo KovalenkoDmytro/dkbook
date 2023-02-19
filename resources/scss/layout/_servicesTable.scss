@@ -1,7 +1,7 @@
 .services__table{
     .services__head{
-        background: $primary_color;
-        color: $white_color;
+        background: $success_color;
+        color: $headline_text_color;
         display: grid;
         grid-template-columns: 1fr minmax(90px, 120px) minmax(90px,120px) minmax(90px,120px);;
         .name{
@@ -11,12 +11,17 @@
     .services__items{
         border: 1px solid $border_color;
         border-top: none;
+        background: $primary_color;
         .services__item{
             display: grid;
             grid-template-columns: 1fr minmax(90px, 120px) minmax(90px,120px) minmax(90px,120px);;
             border-bottom: 1px solid $border_color;
+            color: $text_color;
             &:last-child{
                 border-bottom: none;
+            }
+            .service__item{
+                color: $text_color;
             }
             .name{
                 display: block;
