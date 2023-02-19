@@ -39,6 +39,12 @@
                         font-weight: 600;
                     }
                 }
+                .btn{
+                    background-color: $secondary_color;
+                    &:hover{
+                        background-color: $background_color;
+                    }
+                }
                 .icon{
                     margin: 0;
                 }
@@ -92,6 +98,9 @@
 
             .week {
                 height: 18%;
+                @include desktop{
+                    height: 25%;
+                }
 
                 .day {
                     display: flex;

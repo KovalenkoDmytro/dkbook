@@ -20,7 +20,7 @@
         </div>
     @endif
     <div class="page-clients __index">
-        <h1>{{__('Clients pages')}}</h1>
+        <h1>{{__('Clients')}}</h1>
         <div class="clients">
             <table id="dtBasicExample" class="table">
                 <thead>
@@ -60,7 +60,7 @@
 
     $(document).ready(function () {
 
-        const customTable = new DataTable('#dtBasicExample', {
+        new DataTable('#dtBasicExample', {
             dom: `
             <"actions"b>
             <"pagination"ip>
@@ -70,32 +70,7 @@
             `,
             searchDelay: 1500,
             lengthMenu: [[3, 25, 50, -1], [3, 25, 50, "All"]],
-            // fixedHeader: true,
-            // responsive: true,
-            // buttons: [
-            //     {
-            //         extend: 'copy',
-            //         text: 'Copy to clipboard',
-            //         className: 'btn',
-            //     },
-            //     {
-            //         extend: 'pdf',
-            //         className: 'btn',
-            //     },
-            //     {
-            //         extend: 'excel',
-            //         className: 'btn',
-            //     },
-            // {
-            //     extend: 'print',
-            //     text: 'Print current page',
-            //     className: 'btn',
-            //     autoPrint: false
-            // }
-            // ]
-
         });
-
 
         new TomSelect("#dataTables__select", {
             render: {
@@ -104,8 +79,6 @@
             searchField: null,
             create: false,
         });
-
-
     });
 
 </script>

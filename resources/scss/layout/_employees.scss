@@ -13,7 +13,9 @@
         align-items: center;
         padding: 30px;
         align-content: space-between;
-
+        .employee__name{
+            color: $headline_text_color;
+        }
         .employee__photo{
             max-width: 150px;
             margin-bottom: 20px;

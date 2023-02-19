@@ -16,7 +16,7 @@
 
 
     <div class="page-employees">
-        <h1>{{__('Employees pages')}}</h1>
+        <h1>{{__('Employees')}}</h1>
 
         {{$employees->links('components.pagination')}}
 

@@ -7,9 +7,9 @@
         <div class="pagination_navigation">
 
             @if($paginator->onFirstPage())
-                <a class="btn last_page inactive" href="{{$paginator->previousPageUrl()}}">Prev</a>
+                <a class="btn last_page inactive" href="{{$paginator->previousPageUrl()}}"><i class="fi fi-rr-angle-double-left"></i></a>
             @else
-                <a class="btn last_page" href="{{$paginator->previousPageUrl()}}">Prev</a>
+                <a class="btn last_page" href="{{$paginator->previousPageUrl()}}"><i class="fi fi-rr-angle-double-left"></i></a>
             @endif
 
 
@@ -35,9 +35,9 @@
             </div>
 
             @if($paginator->currentPage() === $paginator->lastPage())
-                <a class="btn last_page inactive" href="{{$paginator->nextPageUrl()}}">Next</a>
+                <a class="btn last_page inactive" href="{{$paginator->nextPageUrl()}}"><i class="fi fi-rr-angle-double-right"></i></a>
             @else
-                <a class="btn last_page" href="{{$paginator->nextPageUrl()}}">Next</a>
+                <a class="btn last_page" href="{{$paginator->nextPageUrl()}}"><i class="fi fi-rr-angle-double-right"></i></a>
             @endif
         </div>
     </div>

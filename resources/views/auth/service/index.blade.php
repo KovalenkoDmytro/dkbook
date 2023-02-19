@@ -12,7 +12,7 @@
         </div>
     @endif
     <div class="page-service __index">
-        <h1>{{__('Services pages')}}</h1>
+        <h1>{{__('Services')}}</h1>
         <div class="services__table">
             <div class="services__head">
                 <p class="name"><i class="fi fi-rr-money-check"></i> {{__('Name')}}</p>

@@ -2,10 +2,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
 }
 
 .navigation{
+    margin-top: 40px;
     .navigation__link{
         display: flex;
         align-content: center;

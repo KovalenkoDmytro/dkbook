@@ -5,27 +5,27 @@
         display: grid;
         grid-template-columns: 1fr minmax(90px, 120px) minmax(90px,120px) minmax(90px,120px);;
         .name{
-            padding: 10px;
+            padding: 15px;
         }
     }
     .services__items{
-        border: 1px solid $border_color;
         border-top: none;
         background: $primary_color;
         .services__item{
             display: grid;
             grid-template-columns: 1fr minmax(90px, 120px) minmax(90px,120px) minmax(90px,120px);;
-            border-bottom: 1px solid $border_color;
             color: $text_color;
             &:last-child{
                 border-bottom: none;
             }
             .service__item{
                 color: $text_color;
+                display: flex;
+                align-items: center;
             }
             .name{
                 display: block;
-                padding: 10px;
+                padding: 15px;
             }
         }
     }
@@ -33,6 +33,5 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        border-left: 1px solid $border_color;
     }
 }

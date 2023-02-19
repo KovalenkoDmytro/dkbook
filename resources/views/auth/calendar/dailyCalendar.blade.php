@@ -11,8 +11,7 @@
             </p>
             <div class="calendar_pagination">
                 <a class="btn today" href="{{route('dailyCalendar.index',['day'=>$today->toDateString()])}}">
-                    <span>{{__('today')}} </span>
-                    <span>{{ $today->toFormattedDateString()}}</span>
+                    <span>{{__('Today')}} ({{ $today->toFormattedDateString()}})</span>
                 </a>
                 <div class="pagination_items">
                     <a href="{{route('dailyCalendar.index',['day'=>$preview_day->toDateString()])}}"

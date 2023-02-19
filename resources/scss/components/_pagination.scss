@@ -9,6 +9,7 @@
     justify-content: space-between;
     .pagination__results{
         @include center;
+        color: $headline_text_color;
     }
     .pagination_navigation{
         @include center;
@@ -22,8 +23,17 @@
 
         .btn{
             margin: 0;
+            background-color: $primary_color;
+            color: $text_color;
+            padding: 15px;
+            &:hover, &.active{
+                background-color: $background_color;
+            }
             &.dots, &.inactive{
-                background-color: $gray_color;
+                background-color: #8e8e8e8c;
+            }
+            i{
+                font-size: 15px;
             }
         }
     }

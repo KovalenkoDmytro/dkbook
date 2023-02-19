@@ -1,13 +1,46 @@
 .page-clients.__index{
     .clients{
+        .pagination{
+            .pagination_navigation{
+                span{
+                    display: flex;
+                }
+            }
+        }
+        .filters{
+            display: flex;
+            justify-content: space-between;
+            align-content: center;
+            align-items: center;
+            margin-top: 40px;
+            .dataTables_length, .dataTables_filter{
+                float: initial;
+                label{
+                    display: flex;
+                    flex-direction: row;
+                    align-content: center;
+                    align-items: center;
+                }
+            }
+        }
         .table{
+            margin: 20px 0 40px 0;
             .table{
                 background-color: $secondary_color;
                 thead{
                     background-color: $success_color;
                     color: $headline_text_color;
                 }
+                tbody{
+                    td{
+                        a{
+                            color: $text_color;
+                        }
+
+                    }
+                }
             }
         }
     }
 }
+

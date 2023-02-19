@@ -1,14 +1,10 @@
 @extends('layouts.dashboard')
 @section('dashboard.content')
     <div class="page-calendar">
-        <h1>WELCOME TO Calendar</h1>
+        <h1>{{$choseMonth->locale(config('global.user.location'))->monthName}} {{$choseMonth->year}}</h1>
 
         <div class="monthlyCalendar">
             <div class="calendar_head">
-                <div class="choseMonth">
-                    <p class="month">{{$choseMonth->locale(config('global.user.location'))->monthName}}</p>
-                    <p class="year">{{$choseMonth->year}}</p>
-                </div>
                 <div class="pagination">
                     <a href="{{route('monthlyCalendar.index',['month'=>$prevMonth->toDateString()])}}"
                        class="btn prevMonth">
