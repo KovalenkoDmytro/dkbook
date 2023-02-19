@@ -15,11 +15,9 @@ class ClientController extends Controller
 {
     public function index()
     {
-        $owner = CompanyOwner::with('company.employees.scheduled', 'company.employees.services', 'company.clients')
-            ->where('id', \auth()->id())
-            ->first();
+//            CompanyOwner::with('company.employees.scheduled', 'company.employees.services', 'company.clients')
         return view('auth.client.index', [
-            'clients' => $owner->company->clients,
+            'clients' => Auth::user()->company->clients,
         ]);
     }
 

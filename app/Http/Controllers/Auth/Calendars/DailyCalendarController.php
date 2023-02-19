@@ -20,6 +20,7 @@ class DailyCalendarController extends CalendarController
         $appointment = new Appointment();
 
         $userTimezone = Auth::user()->timezone;
+        $company = Auth::user()->company;
 
         if ($request->has('day')) {
             $chose_day = $request->query('day');
@@ -30,13 +31,13 @@ class DailyCalendarController extends CalendarController
         }
 
 
-        $this->appointments = $appointment->getDailyAppointments($chose_day);
+        $this->appointments = $appointment->getDailyAppointments((int)$company->id, $chose_day);
 
         $this->prev_day = Carbon::createFromDate($chose_day->year, $chose_day->month, $chose_day->day - 1);
         $this->next_day = Carbon::createFromDate($chose_day->year, $chose_day->month, $chose_day->day + 1);
 
 
-        $working_time = Auth::user()->company->scheduled->toArray();
+        $working_time = $company->scheduled->toArray();
         $day_working_time = $working_time[strtolower($chose_day->englishDayOfWeek)];
 
 

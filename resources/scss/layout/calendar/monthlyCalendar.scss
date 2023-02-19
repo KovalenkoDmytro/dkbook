@@ -11,6 +11,7 @@
                 display: flex;
                 align-items: center;
                 align-content: center;
+                color: $headline_text_color;
                 @include laptop {
                     font-size: 25px;
                 }
@@ -62,7 +63,7 @@
                     &.today {
                         .date {
                             border-radius: 50%;
-                            background-color: $secondary_color;
+                            background-color:#F7C705;
                             color: $white_color;
                         }
 
@@ -98,20 +99,22 @@
                     align-items: flex-end;
                     &:not(._anotherMonth){
                         &.weekend{
-                            background-color: #fb7e01ab;
                             .date {
-                                color: #ac0000;
+                                color: #FF5A59;
                             }
                             &:hover{
-                                background-color: #ff8e1dcc;
+                                background-color: #ff5a5970;
                             }
                         }
                         &:not(.weekend){
                             .date{
-                                color: $success_color;
+                                color: $text_color;
                             }
                             &:hover{
                                 background-color: #00af744d;
+                                .date{
+                                    color: $success_color;
+                                }
                             }
                         }
                     }
@@ -126,12 +129,10 @@
                         align-content: center;
                         align-items: flex-end;
                         justify-content: center;
-                        .icon_client{
-                            font-size: 50px;
-                        }
-                        p{
-                            color: $gray_color;
-                        }
+                        background-color: $success_color;
+                        color: $white_color;
+                        margin-top: 5px;
+                        padding: 2px;
                     }
                 }
             }
@@ -141,7 +142,7 @@
 
                 .day {
                     border: none;
-
+                    color: $headline_text_color;
                 }
             }
         }

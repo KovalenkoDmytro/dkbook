@@ -30,7 +30,7 @@ class CompanyOwnerController extends Controller
     public function update(UpdateCompanyOwnerRequest $request)
     {
         try {
-            $company_owner = CompanyOwner::find(Auth::user()->id);
+            $company_owner = CompanyOwner::find(Auth::id());
             $company_owner_new_data = $request->validated();
             $company_owner->update($company_owner_new_data);
             return redirect()->back()->with('success', 'company owner has been updated');

@@ -29,7 +29,6 @@ class UpdateCompanyOwnerRequest extends FormRequest
         return [
             'login' => [
                 'required',
-//                Rule::unique('company_owners')->whereNull('deleted_at'),
                 'max:20'],
             'password' => [
                 'required',
@@ -38,7 +37,7 @@ class UpdateCompanyOwnerRequest extends FormRequest
             'confirmPassword' => ['required', 'same:password'],
             'email' => [
                 'required',
-//                Rule::unique('company_owners')->whereNull('deleted_at'),
+                Rule::unique('company_owners')->ignore(Auth::id()),
                 'string',
                 'email',
                 'max:50',
@@ -46,7 +45,7 @@ class UpdateCompanyOwnerRequest extends FormRequest
             'fullName' => ['required', 'string', 'max:35'],
             'phone' => [
                 'required',
-//                Rule::unique('company_owners')->whereNull('deleted_at'),
+                Rule::unique('company_owners')->ignore(Auth::id()),
                 'string',
                 'max:15'],
         ];

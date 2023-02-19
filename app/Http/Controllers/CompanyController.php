@@ -24,7 +24,7 @@ class CompanyController extends Controller
             'sunday' => '00:00 - 00:00',
         ]);
 
-        $company->update(['company_owner_id' => Auth::user()->id, 'company_schedule_id'=>$companyScheduled->id]);
+        $company->update(['company_owner_id' => Auth::id(), 'company_schedule_id'=>$companyScheduled->id]);
 
         return redirect(route('registration.step3'));
     }

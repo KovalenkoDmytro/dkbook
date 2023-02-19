@@ -12,9 +12,10 @@ class DashboardController extends Controller
 
     public function index( Request $request)
     {
-        $appointments_all = Auth::user()->company->appointments;
+        $company = Auth::user()->company;
+        $appointments_all = $company->appointments;
         $appointment_model = new Appointment();
-        $appointments_today = $appointment_model->getDailyAppointments(now());
+        $appointments_today = $appointment_model->getDailyAppointments((int)$company->id,now());
 
         return view('auth.dashboard.main', [
             'appointments_all' => count($appointments_all),

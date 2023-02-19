@@ -21,12 +21,10 @@ class EmployeeController extends Controller
 
     public function index()
     {
-        $owner = CompanyOwner::with('company.employees.scheduled', 'company.employees.services', 'company.clients')
-            ->where('id', \auth()->id())
-            ->first();
-
+        $company = Auth::user()->company;
+//            ::with('company.employees.scheduled', 'company.employees.services', 'company.clients')
         return view('auth.employee.index', [
-            'employees' => $owner->company->employees->paginate(3),
+            'employees' => $company->employees->paginate(3),
         ]);
     }
 

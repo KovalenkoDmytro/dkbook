@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class Appointment extends Model
@@ -35,18 +36,14 @@ class Appointment extends Model
             ->all();
     }
 
-    public function getDailyAppointments($date): array
+    public function getDailyAppointments(int $company_id, $date): array
     {
-        $company = Auth::user()->company;
-
-        return Appointment::where('company_id', $company->id)
+        return Appointment::where('company_id', $company_id)
             ->whereYear('date', $date->year)
             ->whereMonth('date', $date->month)
             ->whereDay('date', $date->day)
             ->with('company','client','service','employee')
             ->get()
             ->all();
-
-
     }
 }
