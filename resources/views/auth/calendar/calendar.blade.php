@@ -55,7 +55,9 @@
                                     </div>
                                 </a>
                             @else
-                                <p class='day _anotherMonth {{$day === 6 || $day === 7 ? 'weekend' :''}}'></p>
+                                <p class='day _anotherMonth
+{{--                                {{$day === 6 || $day === 7 ? 'weekend' :''}}--}}
+                                '></p>
                             @endif
                         @endfor
                     </div>
@@ -77,7 +79,9 @@
                                 </div>
                             </a>
                             @else
-                                <p class='day _anotherMonth {{$day === 6 || $day === 7 ? 'weekend' :''}}'></p>
+                                <p class='day _anotherMonth
+{{--                                {{$day === 6 || $day === 7 ? 'weekend' :''}}--}}
+                                '></p>
                             @endif
                         @endfor
                     </div>

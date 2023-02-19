@@ -24,6 +24,9 @@ main{
     max-width: 75%;
     width: 75%;
     padding: 0 15px;
+    @include laptop{
+        padding: 0 45px;
+    }
 }
 .icon_close{
     cursor: pointer;

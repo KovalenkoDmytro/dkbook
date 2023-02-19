@@ -11,6 +11,8 @@ html {
 body {
     margin: 0 !important;
     font-family: $font-family;
+    background-color: $background_color;
+    color: $text_color;
 }
 
 main {

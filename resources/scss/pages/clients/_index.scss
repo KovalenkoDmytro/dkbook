@@ -1,0 +1,13 @@
+.page-clients.__index{
+    .clients{
+        .table{
+            .table{
+                background-color: $secondary_color;
+                thead{
+                    background-color: $success_color;
+                    color: $headline_text_color;
+                }
+            }
+        }
+    }
+}

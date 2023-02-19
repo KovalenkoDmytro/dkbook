@@ -15,7 +15,11 @@
         color: $white_color;
         @include transition;
         &:hover{
-            background-color: $success_color;
+            background-color: #01b07529;
+            color: $success_color;
+            svg{
+                filter: invert(49%) sepia(98%) saturate(3149%) hue-rotate(132deg) brightness(96%) contrast(99%);
+            }
         }
         svg{
             max-width: 40px;

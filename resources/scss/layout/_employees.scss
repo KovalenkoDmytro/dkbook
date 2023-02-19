@@ -2,12 +2,21 @@
     @include tablet{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: 25px;
+        grid-gap: 40px;
+        margin: 40px 0;
     }
     .employee{
-        margin: 40px 0;
+        background-color: $secondary_color;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px;
+        align-content: space-between;
+
         .employee__photo{
             max-width: 150px;
+            margin-bottom: 20px;
         }
     }
 }

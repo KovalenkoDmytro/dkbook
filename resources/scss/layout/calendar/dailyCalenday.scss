@@ -34,7 +34,7 @@
                 }
 
                 &.currently {
-                    background-color: $warning_color;
+                    background-color: #fb7e01ab;
                 }
 
                 .title {
@@ -43,6 +43,7 @@
                     align-items: center;
                     padding: 15px;
                     border-right: 1px solid $border_color;
+                    background-color: $secondary_color;
                 }
 
                 .appointments {
