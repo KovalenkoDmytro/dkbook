@@ -91,6 +91,14 @@
     .error{
         color: $danger_color;
     }
+    input{
+        background-color: $secondary_color;
+        color: $white_color;
+        border: none;
+        &:focus{
+            border: 1px solid $white_color;
+        }
+    }
 }
 
 

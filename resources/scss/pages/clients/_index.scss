@@ -28,8 +28,15 @@
             .table{
                 background-color: $secondary_color;
                 thead{
-                    background-color: $success_color;
-                    color: $headline_text_color;
+
+                    th {
+                        background-color: $success_color;
+                        color: $headline_text_color;
+                        @include transition;
+                        &:hover{
+                            background-color: $button_color_hover;
+                        }
+                    }
                 }
                 tbody{
                     td{

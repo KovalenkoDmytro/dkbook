@@ -27,21 +27,35 @@
                     <img class="employee__photo" src="{{$employee['avatar']?? asset('/access/images/no_avatar.png')}}" alt="{{$employee['name']}}">
                     <p class="employee__name">{{$employee['name']}}</p>
                     <p class="employee__position">{{$employee['position']}}</p>
-                    <a href="mailto:{{$employee['email']}}">{{$employee['email']}}</a>
-                    <a href="tel:{{$employee['phone']}}">{{$employee['phone']}}</a>
 
-                    <a class="btn" href="{{route('employee.edit',[$employee->id])}}" >
-                        <span>{{__('Edit')}}</span>
-                    </a>
+                    <div class="wrapper">
+                        <i class="fi fi-rr-envelope"></i>
+                        <a href="mailto:{{$employee['email']}}">{{$employee['email']}}</a>
+                    </div>
+
+
+                    <div class="wrapper">
+                        <i class="fi fi-rr-phone-call"></i>
+                        <a href="tel:{{$employee['phone']}}">{{$employee['phone']}}</a>
+                    </div>
+
+                    <div class="buttons_wrapper">
+                        <a class="btn" href="{{route('employee.edit',[$employee->id])}}" >
+                            <span>{{__('Edit')}}</span>
+                        </a>
+                        <a class="btn" href="{{route('employee.destroy',[$employee->id])}}" >
+                            <span>{{__('Delete')}}</span>
+                        </a>
+                    </div>
+
                 </div>
             @endforeach
-            <a class="link __create"
-               title="{{__('create')}}"
-               href="{{route('employee.create')}}">
-                create
-            </a>
         </div>
-
+        <a class="btn __create"
+           title="{{__('create')}}"
+           href="{{route('employee.create')}}">
+            {{__("Add new")}}
+        </a>
         {{$employees->links('components.pagination')}}
     </div>
 @endsection

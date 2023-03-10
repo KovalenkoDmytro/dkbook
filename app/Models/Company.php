@@ -20,19 +20,6 @@ class Company extends Model
         return $this->table;
     }
 
-    public function getEmployee($employee_id)
-    {
-        $employees = Auth::user()->company->employees;
-        $employee_array = $employees->filter(function ($value, $key) use ($employee_id) {
-            return $value->id === $employee_id;
-        });
-
-        foreach ($employee_array as $item) {
-            $employee = $item;
-        }
-        return $employee;
-    }
-
     public function owner()
     {
         return $this->belongsTo(CompanyOwner::class);

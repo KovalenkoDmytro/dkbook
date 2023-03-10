@@ -18,8 +18,8 @@ class DashboardController extends Controller
         $appointments_today = $appointment_model->getDailyAppointments((int)$company->id,now());
 
         return view('auth.dashboard.main', [
-            'appointments_all' => count($appointments_all),
-            'appointments_today'=>count($appointments_today),
+            'appointments_all' => $appointments_all,
+            'appointments_today'=>$appointments_today,
         ]);
     }
 }

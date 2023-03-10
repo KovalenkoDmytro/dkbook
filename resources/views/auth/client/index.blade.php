@@ -50,7 +50,7 @@
             <a class="btn __create"
                title="{{__('create')}}"
                href="{{route('client.create')}}">
-                {{__('add new client')}}
+                {{__('Add new')}}
             </a>
         </div>
     </div>
@@ -69,7 +69,7 @@
             <"pagination"ip>
             `,
             searchDelay: 1500,
-            lengthMenu: [[3, 25, 50, -1], [3, 25, 50, "All"]],
+            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         });
 
         new TomSelect("#dataTables__select", {

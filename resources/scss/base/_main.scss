@@ -28,6 +28,14 @@ main{
         padding: 0 45px;
     }
 }
+label{
+    display: block;
+    margin-bottom: 5px;
+    &:first-letter {
+        text-transform: uppercase;
+    }
+}
+
 .icon_close{
     cursor: pointer;
 }

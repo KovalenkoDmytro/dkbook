@@ -5,11 +5,11 @@
     <h1>WELCOME TO Dashboard _permanent</h1>
 
     <div>
-        <span>{{$appointments_all}}</span>
+        <span>{{count($appointments_all)}}</span>
         <span>{{__('Appointments')}}</span>
     </div>
     <div>
-        <span>{{$appointments_today}}</span>
+        <span>{{count($appointments_today)}}</span>
         <span>{{__('Today Appointments')}}</span>
     </div>
 

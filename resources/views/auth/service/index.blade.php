@@ -36,7 +36,7 @@
                     </div>
                 @endforeach
             </div>
-            <a href="{{route('services.create')}}" class="btn" title="create">{{__('Create')}}</a>
+            <a href="{{route('services.create')}}" class="btn" title="create">{{__('Add new')}}</a>
         </div>
 
 

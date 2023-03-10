@@ -1,0 +1,47 @@
+.ts-wrapper{
+    &.multi{
+        &.has-items{
+            .ts-control{
+                background-color: $secondary_color;
+            }
+        }
+        .ts-control{
+            & > div{
+                background: $background_color;
+                color: $white_color;
+                padding-right: 0;
+            }
+        }
+    }
+
+    &.single.input-active {
+        .ts-control{
+            background: $secondary_color;
+            input{
+                color: $white_color;
+                &::placeholder{
+                    color: $white_color;
+                }
+            }
+
+        }
+    }
+
+
+    .ts-control{
+        border: none;
+        background: $secondary_color;
+    }
+}
+
+
+
+.ts-dropdown{
+    background-color: $secondary_color;
+   .option{
+       color: $white_color;
+       &.active{
+           background-color: $background_color
+       }
+   }
+}

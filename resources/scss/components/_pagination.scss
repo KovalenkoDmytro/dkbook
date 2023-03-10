@@ -20,6 +20,11 @@
                 background-color: $button_color_hover;
             }
         }
+        .ellipsis{
+            display: flex;
+            align-items: center;
+            padding: 15px;
+        }
 
         .btn{
             margin: 0;
