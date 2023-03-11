@@ -1,9 +1,5 @@
 @extends('layouts.dashboard')
 @section('dashboard.content')
-
-@dump($errors)
-
-
     <div class="page__create_appointment">
         <form action="{{route('dashboard.store')}}" method="POST">
             @csrf
