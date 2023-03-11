@@ -44,11 +44,28 @@
                                         <div id="appointment_toggle" class="appointment_toggle"></div>
                                         <div class="appointment_information">
                                             <i class="icon icon_close"></i>
-                                            <p>{{$appointment['date']}}</p>
-                                            <p>service - {{$appointment->service->name}}</p>
-                                            <p>client- {{$appointment->client->name}}</p>
-                                            <p>employee- {{$appointment->employee->name ?? 'deleted'}}</p>
-                                            <p>payed - {{$appointment['payed'] ? 'payed' : 'unpayed'}}</p>
+                                            <div class="information_items">
+                                                <div class="item">
+                                                    <p class="key">{{__("Date")}}</p>
+                                                    <p class="value">{{$appointment['date']}}</p>
+                                                </div>
+                                                <div class="item">
+                                                    <p class="key">{{__("Service")}}</p>
+                                                    <p class="value">{{$appointment->service->name}}</p>
+                                                </div>
+                                                <div class="item">
+                                                    <p class="key">{{__("Client")}}</p>
+                                                    <p class="value">{{$appointment->client->name}}</p>
+                                                </div>
+                                                <div class="item">
+                                                    <p class="key">{{__("Employee")}}</p>
+                                                    <p class="value">{{$appointment->employee->name ?? 'deleted'}}</p>
+                                                </div>
+                                                <div class="item">
+                                                    <p class="key">{{__("Payment status")}}</p>
+                                                    <p class="value">{{$appointment['payed'] ? 'payed' : 'unpayed'}}</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 @endif
