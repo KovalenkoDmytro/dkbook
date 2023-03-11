@@ -1,0 +1,30 @@
+.page-dashboard{
+    .statist_items{
+        display: flex;
+        flex-wrap: wrap;
+        .statist_item{
+            border: 1px solid $border_color;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            min-height: 150px;
+            margin-right: 25px;
+            .number{
+                font-size: 35px;
+            }
+            i{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &:before{
+                    font-size: 30px;
+                    margin-bottom: 10px;
+                }
+            }
+
+        }
+    }
+}
