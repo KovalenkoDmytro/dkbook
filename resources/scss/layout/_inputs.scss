@@ -14,7 +14,7 @@
 
             &:before {
                 content: "";
-                background-color: $white_color;
+                background-color: $secondary_color;
                 text-align: center;
                 min-width: 18px;
                 min-height: 18px;
@@ -23,7 +23,6 @@
                 position: relative;
                 display: block;
                 margin-right: 10px;
-                border: 1px solid $border_color;
                 @include transition;
             }
 
@@ -44,7 +43,6 @@
             &:checked + label {
                 &::before {
                     background: $primary_color;
-                    border: 1px solid $primary_color;
                     color: #fff;
                 }
 

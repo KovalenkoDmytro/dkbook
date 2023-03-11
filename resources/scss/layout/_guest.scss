@@ -73,7 +73,7 @@
                     }
                     .credential_window{
                         padding: 15px;
-                        border: 1px solid $border_color;
+                        border: 1px solid #3e3e3e;
                         @include laptop{
                             min-width: 385px;
                         }
