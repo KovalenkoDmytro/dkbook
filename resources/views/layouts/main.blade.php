@@ -29,7 +29,7 @@
 {{--    <script type="text/javascript" src="{{ asset('/access/js/Table/datatables.js') }}"></script>--}}
 
 
-    @vite(['resources/js/app.js', 'resources/scss/app.scss'])
+    @vite(['resources/js/app_old.js', 'resources/scss/app.scss'])
 </head>
 <body>
     @yield('content')
