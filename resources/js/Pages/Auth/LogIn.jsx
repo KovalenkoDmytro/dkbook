@@ -1,9 +1,10 @@
-import reducer from "../../reducer";
 import {useEffect, useReducer} from "react";
-import {Input} from "../../Components/Input";
-import InputPassword from "../../Components/InputPassword";
+import {Input} from "@/Components/Input";
 import {router} from "@inertiajs/core";
-import toShowNotification from "../../helpers";
+import reducer from "@/reducer";
+import toShowNotification from "@/helpers";
+import InputPassword from "@/Components/InputPassword";
+
 
 export default function LogIn({flash}) {
     const [data, setData] = useReducer(reducer, {
