@@ -1,6 +1,8 @@
 //--callback-- it is a function witch will be to call
 // --viewport-- is device size where callback will be to call
 // --viewport can receive a parameters with number which equals device screen size: it's mobile, laptop, and all
+import Swal from "sweetalert2";
+
 export const app = {
     'view': 'laptop',
     'run': function (callback, viewport, DOM_element_selector) {
@@ -28,3 +30,20 @@ export const app = {
     }
 }
 // -- general function end ---
+
+export default function toShowNotification (flash,settings) {
+    Swal.fire({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        icon: flash.type,
+        title: flash.message,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+        ...settings,
+    })
+}
