@@ -25,8 +25,9 @@ class LoginController extends Controller
             return redirect()->intended(route('dashboard.main'));
         }
 
-        return redirect(route('user.login'))->withErrors([
-            'error_auth'=>'Email or password is not correct'
+        return redirect(route('user.login'))->with([
+            'type'=>'error',
+            'message'=>'Email or password is not correct'
         ]);
 
     }
