@@ -1,3 +1,5 @@
 {
-	"Dashboard": "Welcome"
+	"input.label.email": "Email",
+	"input.label.password": "Password",
+    "button.label.login": "LogIn"
 }

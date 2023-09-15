@@ -24,8 +24,8 @@ export default function LogIn({flash}) {
             <p>{__('Dashboard')}</p>
             <Input
                 id={'email'}
-                label={('Email')}
-                placeholder={('StevJobs@apple.com')}
+                label={__('input.label.email')}
+                placeholder={'StevJobs@apple.com'}
                 value={data.email}
                 onInput={(event) => {
                     setData({
@@ -37,7 +37,7 @@ export default function LogIn({flash}) {
                 }
             />
             <InputPassword
-                label={('Password')}
+                label={__('input.label.password')}
                 onInput={(event) => {
                     setData({
                         type: 'add',
@@ -50,7 +50,7 @@ export default function LogIn({flash}) {
                  onClick={() => {
                      router.post(route('user.login'), {...data})
                  }}
-            >{("Log in")}</div>
+            >{__("button.label.login")}</div>
         </div>
     )
 }
