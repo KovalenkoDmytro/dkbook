@@ -1,5 +1,16 @@
 {
 	"input.label.email": "Email",
 	"input.label.password": "Password",
-    "button.label.login": "LogIn"
+
+	"button.label.login": "LogIn",
+
+	"page.dashboard.mainTitle" : "Welcome to Dashboard",
+
+	"navigation.linkTitle.mainPage" : "Main",
+	"navigation.linkTitle.monthlyCalendarPage": "Monthly calendar",
+	"navigation.linkTitle.dailyCalendarPage": "Daily calendar",
+	"navigation.linkTitle.employeesPage": "Employees",
+	"navigation.linkTitle.clientsPage": "Clients",
+	"navigation.linkTitle.servicesPage": "Services",
+	"navigation.linkTitle.logout": "LogOut"
 }
