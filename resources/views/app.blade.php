@@ -19,7 +19,8 @@
 
 
     <body>
-        <div id="app" class="app" data-page="{{ json_encode($page) }}"></div>
+    @inertia
+
     </body>
 
 </html>

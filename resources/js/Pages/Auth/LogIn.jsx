@@ -2,7 +2,7 @@ import {useEffect, useReducer} from "react";
 import {Input} from "@/Components/Input";
 import {router} from "@inertiajs/core";
 import reducer from "@/reducer";
-import toShowNotification from "@/helpers";
+import toShowNotification, {__} from "@/helpers";
 import InputPassword from "@/Components/InputPassword";
 
 
@@ -21,6 +21,7 @@ export default function LogIn({flash}) {
 
     return (
         <div className={'page _logIn'}>
+            <p>{__('Dashboard')}</p>
             <Input
                 id={'email'}
                 label={('Email')}
