@@ -4,6 +4,7 @@ import {router} from "@inertiajs/core";
 import reducer from "@/reducer";
 import toShowNotification, {__} from "@/helpers";
 import InputPassword from "@/Components/InputPassword";
+import Page from "@/Components/Page";
 
 
 export default function LogIn({flash}) {
@@ -20,8 +21,7 @@ export default function LogIn({flash}) {
     }, [flash])
 
     return (
-        <div className={'page _logIn'}>
-            <p>{__('Dashboard')}</p>
+        <Page pageName={'logIn'}>
             <Input
                 id={'email'}
                 label={__('input.label.email')}
@@ -51,6 +51,8 @@ export default function LogIn({flash}) {
                      router.post(route('user.login'), {...data})
                  }}
             >{__("button.label.login")}</div>
-        </div>
+
+        </Page>
+
     )
 }
