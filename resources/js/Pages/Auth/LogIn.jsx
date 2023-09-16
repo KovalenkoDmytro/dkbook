@@ -1,5 +1,5 @@
 import {useEffect, useReducer} from "react";
-import {Input} from "@/Components/Input";
+import InputCustom from "@/Components/InputCustom";
 import {router} from "@inertiajs/core";
 import reducer from "@/reducer";
 import toShowNotification, {__} from "@/helpers";
@@ -22,7 +22,7 @@ export default function LogIn({flash}) {
 
     return (
         <Page pageName={'logIn'}>
-            <Input
+            <InputCustom
                 id={'email'}
                 label={__('input.label.email')}
                 placeholder={'StevJobs@apple.com'}

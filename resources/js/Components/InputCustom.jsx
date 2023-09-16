@@ -1,6 +1,6 @@
 import {useId} from "react";
 
-export function Input({id = '', error='', placeholder='',required = false, label='', value='', onInput= event=>{}}) {
+export default function InputCustom({id = '', error='', placeholder='',required = false, label='', value='', onInput= event=>{}}) {
 
     const idDefault = useId()
 

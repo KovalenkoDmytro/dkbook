@@ -1,10 +1,17 @@
 {
+
+
+
 	"input.label.email": "Email",
 	"input.label.password": "Password",
 
 	"button.label.login": "LogIn",
 
 	"page.dashboard.mainTitle" : "Welcome to Dashboard",
+	"page.clients.btn.createClient" : "Create new client",
+	"page.createClient.input.label.clientName" : "Name",
+	"page.createClient.input.label.email" : "Email",
+	"page.createClient.input.label.phone" : "Cell phone",
 
 	"navigation.linkTitle.mainPage" : "Main",
 	"navigation.linkTitle.monthlyCalendarPage": "Monthly calendar",

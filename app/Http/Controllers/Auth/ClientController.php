@@ -23,18 +23,20 @@ class ClientController extends Controller
 //        ]);
     }
 
-    public function create()
+    public function create(): \Inertia\Response
     {
-        return view('auth.client.create');
+        return Inertia::render('Clients/Create');
+//        return view('auth.client.create');
     }
 
-    public function store(CreateClienRequest $request)
+    public function store(CreateClienRequest $request): \Illuminate\Http\RedirectResponse
     {
         $company = Auth::user()->company;
         try {
             $new_client = $request->validated();
             $client = Client::firstOrCreate($new_client);
             $company->clients()->attach($client->id);
+
             return redirect()->route('client.index')->with('success', 'client has been added');
 
         } catch (QueryException $exception) {
