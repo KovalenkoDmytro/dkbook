@@ -10,15 +10,17 @@ use App\Models\CompanyOwner;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class ClientController extends Controller
 {
-    public function index()
+    public function index(): \Inertia\Response
     {
-//            CompanyOwner::with('company.employees.scheduled', 'company.employees.services', 'company.clients')
-        return view('auth.client.index', [
-            'clients' => Auth::user()->company->clients,
-        ]);
+        return Inertia::render('Clients/Index',['clients' => Auth::user()->company->clients->paginate(10)]);
+
+        //        return view('auth.client.index', [
+//            'clients' => Auth::user()->company->clients,
+//        ]);
     }
 
     public function create()

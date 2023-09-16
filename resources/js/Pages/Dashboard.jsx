@@ -1,12 +1,13 @@
 import Page from "@/Components/Page";
 import {__} from "@/helpers";
-import Navigation from "@/Components/Navigation";
+import Authenticated from "@/Layouts/Authenticated";
 
 export default function Dashboard() {
     return (
-        <Page pageName={'dashboard'}>
-            <div>{__("page.dashboard.mainTitle")}</div>
-            <Navigation/>
-        </Page>
+        <Authenticated>
+            <Page pageName={'dashboard'}>
+                <div>{__("page.dashboard.mainTitle")}</div>
+            </Page>
+        </Authenticated>
     )
 }
