@@ -9,6 +9,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Implementations\Results\ErrorResult;
 use App\Implementations\Results\SuccessResult;
@@ -36,11 +37,32 @@ class ClientsService implements IClientService
         //
     }
 
-    public function getAll(): LengthAwarePaginator
+    public function create(array $data): IResult
     {
-        $clients = (new \App\Models\Client)->Companies();
-        return $clients->paginate(self::PER_PAGE);
-        // TODO: Implement getAll() method.
+        $company = Auth::user()->company;
+        try {
+            $new_client = Client::query()->firstOrCreate($data);
+            $company->clients()->attach($new_client->id);
+            return new SuccessResult('Client has been created.');
+        }catch (\Exception $exception) {
+
+            Log::error($exception->getMessage());
+            return new ErrorResult();
+        }
+    }
+
+    public function update(array $data , int $clientId): IResult
+    {
+        try {
+            $client = Client::query()->findOrFail($clientId);
+            $client->update($data);
+
+            return new SuccessResult('Client has been updated.');
+        } catch (\Exception $exception) {
+
+            Log::error($exception->getMessage());
+            return new ErrorResult();
+        }
     }
 
     public function delete(int $clientId): IResult
@@ -63,17 +85,10 @@ class ClientsService implements IClientService
         return Client::query()->findOrFail($clientId);
     }
 
-    public function update(array $data , int $clientId): IResult
+    public function getAll(): LengthAwarePaginator
     {
-        try {
-            $client = Client::query()->findOrFail($clientId);
-            $client->update($data);
-
-            return new SuccessResult('Client has been updated.');
-        } catch (\Exception $exception) {
-
-            Log::error($exception->getMessage());
-            return new ErrorResult();
-        }
+        $clients = (new \App\Models\Client)->Companies();
+        return $clients->paginate(self::PER_PAGE);
+        // TODO: Implement getAll() method.
     }
 }

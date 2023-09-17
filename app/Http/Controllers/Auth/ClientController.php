@@ -38,18 +38,8 @@ class ClientController extends Controller
 
     public function store(CreateClienRequest $request): RedirectResponse
     {
-        $company = Auth::user()->company;
-        try {
-            $new_client = $request->validated();
-            $client = Client::firstOrCreate($new_client);
-            $company->clients()->attach($client->id);
-
-            return redirect()->route('client.index')->with('success', 'client has been added');
-
-        } catch (QueryException $exception) {
-            return redirect()->back()->with('error', $exception->errorInfo[2]);
-
-        }
+        $result = $this->clientService->create($request->validated());
+        return redirect()->route('client.index')->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
     }
 
     public function edit(int $clientId): Response
