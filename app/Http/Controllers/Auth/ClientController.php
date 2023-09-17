@@ -10,9 +10,11 @@ use App\Interfaces\Services\ICompanyService;
 use App\Models\Client;
 use App\Models\CompanyOwner;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class ClientController extends Controller
 {
@@ -23,18 +25,18 @@ class ClientController extends Controller
         $this->clientService = $clientService;
         $this->companyService = $companyService;
     }
-    public function index(): \Inertia\Response
+    public function index(): Response
     {
         return Inertia::render('Clients/Index',['clients' => $this->companyService->getClients()]);
     }
 
-    public function create(): \Inertia\Response
+    public function create(): Response
     {
         return Inertia::render('Clients/Create');
 //        return view('auth.client.create');
     }
 
-    public function store(CreateClienRequest $request): \Illuminate\Http\RedirectResponse
+    public function store(CreateClienRequest $request): RedirectResponse
     {
         $company = Auth::user()->company;
         try {
@@ -48,46 +50,21 @@ class ClientController extends Controller
             return redirect()->back()->with('error', $exception->errorInfo[2]);
 
         }
-
     }
 
-    public function edit($id)
+    public function edit(int $clientId): Response
     {
-        $client = Client::find((int)$id);
-
-        return view('auth.client.edit', compact(['client']));
+        $client = $this->clientService->get($clientId);
+        return Inertia::render('Clients/Edit',['client' => $client]);
     }
 
-    public function update(UpdateClienRequest $request, $id)
+    public function update(UpdateClienRequest $request, $id): RedirectResponse
     {
-        $client = Client::find((int)$id);
-        $client->name = $request->input('name');
-
-        if(is_null($request->input('email'))){
-            $client->email = null;
-
-        }else{
-            $client->email = $request->input('email');
-        }
-
-        if(is_null($request->input('phone'))){
-            $client->phone = null;
-        }else{
-            $client->phone = $request->input('phone');
-        }
-
-
-        try {
-            $client->update();
-            return redirect()->route('client.index')->with('success', 'client has been added');
-
-        } catch (QueryException $exception) {
-            return redirect()->back()->with('error', $exception->errorInfo[2]);
-
-        }
+        $result = $this->clientService->update($request->all(),$id);
+        return back()->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
     }
 
-    public function destroy( int $clientId): \Illuminate\Http\RedirectResponse
+    public function destroy( int $clientId): RedirectResponse
     {
         $result = $this->clientService->delete($clientId);
         return back()->with(['type' => $result->getType(), 'message' => $result->getMessage()]);

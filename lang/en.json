@@ -16,6 +16,8 @@
 	"page.createClient.input.label.clientName" : "Name",
 	"page.createClient.input.label.email" : "Email",
 	"page.createClient.input.label.phone" : "Cell phone",
+    "page.createClient.btn.title.create" : "Create",
+    "page.editClient.btn.title.update" : "Edit",
 
 	"navigation.linkTitle.mainPage" : "Main",
 	"navigation.linkTitle.monthlyCalendarPage": "Monthly calendar",

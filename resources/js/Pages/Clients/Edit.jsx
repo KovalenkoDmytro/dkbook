@@ -1,17 +1,16 @@
-import toShowNotification, {__} from "@/helpers";
-import {useCallback, useEffect, useReducer} from "react";
-import reducer from "@/reducer";
 import Authenticated from "@/Layouts/Authenticated";
 import Page from "@/Components/Page";
 import InputCustom from "@/Components/InputCustom";
+import toShowNotification, {__} from "@/helpers";
+import {useCallback, useEffect, useReducer} from "react";
+import reducer from "@/reducer";
 import {router} from "@inertiajs/core";
 
-
-export default function Create({flash, errors}) {
+export default function Edit({flash,errors,client}) {
     const [data, setData] = useReducer(reducer, {
-        name: '',
-        email: '',
-        phone: '',
+        name: client.name,
+        email: client.email,
+        phone: client.phone,
     })
     //to show notification
     useEffect(() => {
@@ -19,8 +18,8 @@ export default function Create({flash, errors}) {
             toShowNotification(flash)
         }
     }, [flash])
-    const toCreate = useCallback((event) => {
-        router.post('/client', {...data}, {
+    const toUpdate  = useCallback((event) => {
+        router.put(`/client/${client.id}`, {...data}, {
             onProgress: () => {
                 event.target.setAttribute('disable', true)
             },
@@ -29,10 +28,9 @@ export default function Create({flash, errors}) {
             },
         })
     }, [data])
-
     return (
         <Authenticated>
-            <Page pageName={'createClient'}>
+            <Page pageName={'editClient'}>
                 <InputCustom
                     id={'client_name'}
                     label={__('page.createClient.input.label.clientName')}
@@ -78,7 +76,7 @@ export default function Create({flash, errors}) {
                     }
                     }
                 />
-                <div className="btn" onClick={toCreate}>{__("page.createClient.btn.title.create")}</div>
+                <div className="btn" onClick={toUpdate}>{__("page.editClient.btn.title.update")}</div>
             </Page>
         </Authenticated>
     )

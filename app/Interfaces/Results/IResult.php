@@ -8,5 +8,4 @@ interface IResult
 
     public function getMessage(): string;
 
-    public function getData(): array;
 }

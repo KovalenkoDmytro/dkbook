@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Employee;
 
+use App\Models\Client;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UpdateEmployeeRequest extends FormRequest
 {
@@ -23,6 +26,7 @@ class UpdateEmployeeRequest extends FormRequest
      */
     public function rules()
     {
+        $user = Client::where('name', '=', $this->name)->first();
         return [
             "name" => [
                 'required',
@@ -34,6 +38,7 @@ class UpdateEmployeeRequest extends FormRequest
                 'email',
                 'email:rfc,dns',
                 'max:50',
+//                Rule::unique('clients')->ignore($user->id),
             ],
             "position" => [
                 'required',
