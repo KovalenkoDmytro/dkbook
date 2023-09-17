@@ -32,7 +32,7 @@ class Company extends Model
         return $this->table;
     }
 
-    public function owner()
+    public function owner(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(CompanyOwner::class);
     }

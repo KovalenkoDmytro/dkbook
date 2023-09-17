@@ -14,9 +14,27 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //
+        // Hotel
+        $this->app->when(\App\Http\Controllers\Auth\ClientController::class)
+            ->needs(\App\Interfaces\Services\IClientService::class)
+            ->give(\App\Implementations\Services\ClientsService::class);
+
+        $this->app->bind(
+            \App\Interfaces\Services\IClientService::class,
+            \App\Implementations\Services\ClientsService::class
+        );
+
+        // Clients for company
+        $this->app->when(\App\Http\Controllers\CompanyController::class)
+            ->needs(\App\Interfaces\Services\ICompanyService::class)
+            ->give(\App\Implementations\Services\CompanyService::class);
+
+        $this->app->bind(
+            \App\Interfaces\Services\ICompanyService::class,
+            \App\Implementations\Services\CompanyService::class
+        );
     }
 
     /**
@@ -24,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         /**
          * Paginate a standard Laravel Collection.
@@ -39,7 +57,7 @@ class AppServiceProvider extends ServiceProvider
             $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
 
             return new LengthAwarePaginator(
-                $this->forPage($page, $perPage),
+                $this->forPage($page, $perPage)->values(),
                 $total ?: $this->count(),
                 $perPage,
                 $page,

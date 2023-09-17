@@ -5,7 +5,11 @@
 	"input.label.email": "Email",
 	"input.label.password": "Password",
 
+
 	"button.label.login": "LogIn",
+
+    "component.table.title.actions": "Actions",
+
 
 	"page.dashboard.mainTitle" : "Welcome to Dashboard",
 	"page.clients.btn.createClient" : "Create new client",

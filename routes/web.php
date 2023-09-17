@@ -74,13 +74,17 @@ Route::name('employee.')->group(function (){
     Route::post('/ajax/employee/', [EmployeeController::class, 'ajaxStore'] )->name('ajaxStore');
 });
 
-Route::name('client.')->middleware('auth')->group(function (){
-    Route::get('/clients', [ClientController::class, 'index'] )->name('index');
-    Route::get('/client/create', [ClientController::class, 'create'] )->name('create');
-    Route::post('/client', [ClientController::class, 'store'] )->name('store');
-    Route::get('/client/{id}', [ClientController::class, 'edit'] )->name('edit');
-    Route::put('/client/{id}', [ClientController::class, 'update'] )->name('update');
-});
+
+
+Route::resource('client',ClientController::class)->middleware('auth');
+
+//Route::name('client.')->middleware('auth')->group(function (){
+//    Route::get('/clients', [ClientController::class, 'index'] )->name('index');
+//    Route::get('/client/create', [ClientController::class, 'create'] )->name('create');
+//    Route::post('/client', [ClientController::class, 'store'] )->name('store');
+//    Route::get('/client/{id}', [ClientController::class, 'edit'] )->name('edit');
+//    Route::put('/client/{id}', [ClientController::class, 'update'] )->name('update');
+//});
 
 Route::name('monthlyCalendar.')->middleware('auth')->group(function (){
     Route::get('/calendar/month/{date?}', [CalendarController::class, 'index'] )->name('index');

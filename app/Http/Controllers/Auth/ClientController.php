@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\CreateClienRequest;
 use App\Http\Requests\Client\UpdateClienRequest;
+use App\Interfaces\Services\IClientService;
+use App\Interfaces\Services\ICompanyService;
 use App\Models\Client;
 use App\Models\CompanyOwner;
 use Illuminate\Database\QueryException;
@@ -14,13 +16,16 @@ use Inertia\Inertia;
 
 class ClientController extends Controller
 {
+    private IClientService $clientService;
+    private ICompanyService $companyService;
+    public function __construct(IClientService $clientService, ICompanyService $companyService)
+    {
+        $this->clientService = $clientService;
+        $this->companyService = $companyService;
+    }
     public function index(): \Inertia\Response
     {
-        return Inertia::render('Clients/Index',['clients' => Auth::user()->company->clients->paginate(10)]);
-
-        //        return view('auth.client.index', [
-//            'clients' => Auth::user()->company->clients,
-//        ]);
+        return Inertia::render('Clients/Index',['clients' => $this->companyService->getClients()]);
     }
 
     public function create(): \Inertia\Response
@@ -80,6 +85,12 @@ class ClientController extends Controller
             return redirect()->back()->with('error', $exception->errorInfo[2]);
 
         }
+    }
+
+    public function destroy( int $clientId): \Illuminate\Http\RedirectResponse
+    {
+        $result = $this->clientService->delete($clientId);
+        return back()->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
     }
 
 }
