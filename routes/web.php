@@ -3,17 +3,17 @@
 use App\Http\Controllers\Auth\AppointmentController;
 use App\Http\Controllers\Auth\Calendars\CalendarController;
 use App\Http\Controllers\Auth\Calendars\DailyCalendarController;
-use App\Http\Controllers\Auth\ClientController;
 use App\Http\Controllers\Auth\DashboardController;
-use App\Http\Controllers\Auth\EmployeeController;
 use App\Http\Controllers\Auth\Schedules\CompanyScheduledController;
 use App\Http\Controllers\Auth\Schedules\EmployeeScheduledController;
 use App\Http\Controllers\Auth\ServiceController;
 use App\Http\Controllers\Auth\User\ForgotPasswordController;
 use App\Http\Controllers\Auth\User\LoginController;
 use App\Http\Controllers\Auth\User\ResetPasswordController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyOwnerController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Registration\CreateController;
 use Illuminate\Support\Facades\Route;
@@ -63,28 +63,20 @@ Route::name('services.')->group(function (){
     Route::post('/ajax/service/', [ServiceController::class, 'ajaxStore'] )->name('ajaxStore');
 });
 
-Route::name('employee.')->group(function (){
-    Route::get('/employees', [EmployeeController::class, 'index'] )->name('index');
-    Route::get('/employee/create', [EmployeeController::class, 'create'] )->name('create');
-    Route::post('/employee', [EmployeeController::class, 'store'] )->name('store');
-    Route::get('/employee/{id}/edit', [EmployeeController::class, 'edit'] )->name('edit');
-    Route::put('/employee/{id}', [EmployeeController::class, 'update'] )->name('update');
-    Route::delete('/employee/{id}', [EmployeeController::class, 'destroy'] )->name('destroy');
-    Route::post('/employees/available', [EmployeeController::class, 'getAvailableEmployee'] );
-    Route::post('/ajax/employee/', [EmployeeController::class, 'ajaxStore'] )->name('ajaxStore');
-});
-
-
-
+//Route::name('employee.')->group(function (){
+//    Route::get('/employees', [EmployeeController::class, 'index'] )->name('index');
+//    Route::get('/employee/create', [EmployeeController::class, 'create'] )->name('create');
+//    Route::post('/employee', [EmployeeController::class, 'store'] )->name('store');
+//    Route::get('/employee/{id}/edit', [EmployeeController::class, 'edit'] )->name('edit');
+//    Route::put('/employee/{id}', [EmployeeController::class, 'update'] )->name('update');
+//    Route::delete('/employee/{id}', [EmployeeController::class, 'destroy'] )->name('destroy');
+//    Route::post('/employees/available', [EmployeeController::class, 'getAvailableEmployee'] );
+//    Route::post('/ajax/employee/', [EmployeeController::class, 'ajaxStore'] )->name('ajaxStore');
+//});
+Route::resource('employee',EmployeeController::class)->middleware('auth');
 Route::resource('client',ClientController::class)->middleware('auth');
 
-//Route::name('client.')->middleware('auth')->group(function (){
-//    Route::get('/clients', [ClientController::class, 'index'] )->name('index');
-//    Route::get('/client/create', [ClientController::class, 'create'] )->name('create');
-//    Route::post('/client', [ClientController::class, 'store'] )->name('store');
-//    Route::get('/client/{id}', [ClientController::class, 'edit'] )->name('edit');
-//    Route::put('/client/{id}', [ClientController::class, 'update'] )->name('update');
-//});
+
 
 Route::name('monthlyCalendar.')->middleware('auth')->group(function (){
     Route::get('/calendar/month/{date?}', [CalendarController::class, 'index'] )->name('index');

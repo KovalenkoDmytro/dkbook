@@ -8,4 +8,6 @@ interface ICompanyService
 {
     public function getClients();
 
+    public function getEmployees();
+
 }

@@ -3,9 +3,9 @@
 namespace App\Providers;
 
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         // Hotel
-        $this->app->when(\App\Http\Controllers\Auth\ClientController::class)
+        $this->app->when(\App\Http\Controllers\ClientController::class)
             ->needs(\App\Interfaces\Services\IClientService::class)
             ->give(\App\Implementations\Services\ClientsService::class);
 

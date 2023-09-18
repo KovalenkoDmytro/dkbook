@@ -1,18 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\CreateClienRequest;
 use App\Http\Requests\Client\UpdateClienRequest;
 use App\Interfaces\Services\IClientService;
 use App\Interfaces\Services\ICompanyService;
-use App\Models\Client;
-use App\Models\CompanyOwner;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 

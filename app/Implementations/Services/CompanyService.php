@@ -39,4 +39,10 @@ class CompanyService implements ICompanyService
         $companyId = Auth::user()->company->id;
         return Company::findOrFail($companyId)->clients->paginate(10)->onEachSide(2);
     }
+
+    public function getEmployees()
+    {
+        $companyId = Auth::user()->company->id;
+        return Company::findOrFail($companyId)->employees->paginate(10)->onEachSide(2);
+    }
 }
