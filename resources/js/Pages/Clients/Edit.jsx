@@ -2,7 +2,7 @@ import Authenticated from "@/Layouts/Authenticated";
 import Page from "@/Components/Page";
 import InputCustom from "@/Components/InputCustom";
 import toShowNotification, {__} from "@/helpers";
-import {useCallback, useEffect, useReducer} from "react";
+import {useCallback, useEffect, useMemo, useReducer} from "react";
 import reducer from "@/reducer";
 import {router} from "@inertiajs/core";
 
@@ -27,55 +27,71 @@ export default function Edit({flash,errors,client}) {
                 event.target.removeAttribute('disable')
             },
         })
-    }, [data])
+    }, [data, client.id])
+
+    const clientPhone_input = useMemo(()=>{
+        return(
+            <InputCustom
+                id={'client_phone'}
+                label={__('page.createClient.input.label.phone')}
+                placeholder={'+48333-333-333'}
+                value={data.phone}
+                error={errors.phone}
+                onInput={(event) => {
+                    setData({
+                        type: 'add',
+                        name: 'phone',
+                        value: event.target.value,
+                    })
+                }
+                }
+            />
+        )
+    },[data.phone, errors.phone])
+    const clientName_input = useMemo(()=>{
+        return(
+            <InputCustom
+                id={'client_name'}
+                label={__('page.createClient.input.label.clientName')}
+                placeholder={'Steve Jobs'}
+                value={data.name}
+                error={errors.name}
+                onInput={(event) => {
+                    setData({
+                        type: 'add',
+                        name: 'name',
+                        value: event.target.value,
+                    })
+                }
+                }
+            />
+        )
+    },[data.name, errors.name])
+    const clientEmail_input = useMemo(()=>{
+        return(
+            <InputCustom
+                id={'client_email'}
+                label={__('page.createClient.input.label.email')}
+                placeholder={'SteveJobs@apple.com'}
+                value={data.email}
+                error={errors.email}
+                onInput={(event) => {
+                    setData({
+                        type: 'add',
+                        name: 'email',
+                        value: event.target.value,
+                    })
+                }
+                }
+            />
+        )
+    },[data.email, errors.email])
     return (
         <Authenticated>
             <Page pageName={'editClient'}>
-                <InputCustom
-                    id={'client_name'}
-                    label={__('page.createClient.input.label.clientName')}
-                    placeholder={'Steve Jobs'}
-                    value={data.name}
-                    error={errors.name}
-                    onInput={(event) => {
-                        setData({
-                            type: 'add',
-                            name: 'name',
-                            value: event.target.value,
-                        })
-                    }
-                    }
-                />
-                <InputCustom
-                    id={'client_phone'}
-                    label={__('page.createClient.input.label.phone')}
-                    placeholder={'+48333-333-333'}
-                    value={data.phone}
-                    error={errors.phone}
-                    onInput={(event) => {
-                        setData({
-                            type: 'add',
-                            name: 'phone',
-                            value: event.target.value,
-                        })
-                    }
-                    }
-                />
-                <InputCustom
-                    id={'client_email'}
-                    label={__('page.createClient.input.label.email')}
-                    placeholder={'SteveJobs@apple.com'}
-                    value={data.email}
-                    error={errors.email}
-                    onInput={(event) => {
-                        setData({
-                            type: 'add',
-                            name: 'email',
-                            value: event.target.value,
-                        })
-                    }
-                    }
-                />
+                {clientName_input}
+                {clientPhone_input}
+                {clientEmail_input}
                 <div className="btn" onClick={toUpdate}>{__("page.editClient.btn.title.update")}</div>
             </Page>
         </Authenticated>

@@ -20,7 +20,7 @@
 
     <body>
     @inertia
-
+    <x-translations />
     </body>
 
 </html>
