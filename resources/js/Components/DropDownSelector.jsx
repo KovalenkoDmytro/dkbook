@@ -42,7 +42,7 @@ export default React.memo(function DropDownSelector({
             <select
                 id={id}
                 placeholder={placeholder}
-                defaultValue={selected}
+                defaultValue={[selected]}
                 multiple
             >
                 {children}

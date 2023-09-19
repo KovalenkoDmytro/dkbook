@@ -88,7 +88,8 @@ class EmployeeController extends Controller
     public function edit($employeeId): Response
     {
         $employee = $this->employeeService->get($employeeId);
-        return Inertia::render('Employees/Edit',['employee' => $employee]);
+        $services = $this->companyService->getServices();
+        return Inertia::render('Employees/Edit',compact(['employee','services']));
 
 
 //        $services = Auth::user()->company->services;

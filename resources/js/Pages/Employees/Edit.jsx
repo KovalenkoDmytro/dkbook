@@ -7,14 +7,14 @@ import {router} from "@inertiajs/core";
 import InputCustom from "@/Components/InputCustom";
 import DropDownSelector from "@/Components/DropDownSelector";
 
-export default function Create({services,flash,errors}) {
+export default function Edit({employee,services,flash,errors,}) {
     const [data, setData] = useReducer(reducer, {
-        name: '',
-        email: '',
-        phone: '',
-        position: '',
-        employeeSchedule: '',
-        services: '',
+        name: employee.name,
+        email: employee.email,
+        phone: employee.phone,
+        position: employee.position,
+        employeeSchedule: employee.employee_schedule_id,
+        services: employee.services,
     })
     //to show notification
     useEffect(() => {
@@ -22,7 +22,7 @@ export default function Create({services,flash,errors}) {
             toShowNotification(flash)
         }
     }, [flash])
-    const toCreate = useCallback((event) => {
+    const toUpdate = useCallback((event) => {
         router.post('/employee', {...data}, {
             onProgress: () => {
                 event.target.setAttribute('disable', true)
@@ -107,15 +107,15 @@ export default function Create({services,flash,errors}) {
                 }}
             >
                 {services.map((item, index)=> {
-                        return <option key={index} value={item.id}>{item.name}</option>
-                    })
+                    return <option key={index} value={item.id}>{item.name}</option>
+                })
                 }
             </DropDownSelector>
         )
     }, [data.services, services])
     return (
         <Authenticated>
-            <Page pageName={'createEmployee'}>
+            <Page pageName={'editEmployee'}>
                 {employeeName_input}
                 {employeePhone_input}
                 {employeeEmail_input}
