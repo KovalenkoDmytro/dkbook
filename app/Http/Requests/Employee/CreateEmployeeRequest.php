@@ -48,7 +48,7 @@ class CreateEmployeeRequest extends FormRequest
                 'min:9',
                 'unique:employees'
             ],
-            "employee_schedule_id"=>[
+            "employeeSchedule"=>[
                 'numeric'
             ]
         ];

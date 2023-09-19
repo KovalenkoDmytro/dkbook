@@ -18,6 +18,7 @@
 	"page.createClient.input.label.phone" : "Cell phone",
     "page.createClient.btn.title.create" : "Create",
     "page.editClient.btn.title.update" : "Edit",
+    "page.createEmployee.services.title" : "Services",
 
 	"navigation.linkTitle.mainPage" : "Main",
 	"navigation.linkTitle.monthlyCalendarPage": "Monthly calendar",
