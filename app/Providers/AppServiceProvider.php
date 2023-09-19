@@ -35,6 +35,16 @@ class AppServiceProvider extends ServiceProvider
             \App\Interfaces\Services\ICompanyService::class,
             \App\Implementations\Services\CompanyService::class
         );
+
+        //Employees for company
+        $this->app->when(\App\Http\Controllers\EmployeeController::class)
+            ->needs(\App\Interfaces\Services\IEmployeeService::class)
+            ->give(\App\Implementations\Services\EmployeeService::class);
+
+        $this->app->bind(
+            \App\Interfaces\Services\IEmployeeService::class,
+            \App\Implementations\Services\EmployeeService::class
+        );
     }
 
     /**

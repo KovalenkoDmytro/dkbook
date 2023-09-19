@@ -10,4 +10,6 @@ interface ICompanyService
 
     public function getEmployees();
 
+    public function getServices();
+
 }

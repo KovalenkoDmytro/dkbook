@@ -47,7 +47,7 @@ export default function Index({employees,flash}) {
                         </td>
                         <td>
                             <div className="buttons_wrapper actions">
-                                <Link href={route(`client.edit`, item.id)} alt={item.id}
+                                <Link href={route(`employee.edit`, item.id)} alt={item.id}
                                       className={"btn"}>
                                     <i className="icon icon_edit"></i>
                                     <span>{("Edit")}</span>
@@ -70,7 +70,7 @@ export default function Index({employees,flash}) {
         <Authenticated>
             <Page pageName={'employees'}>
                 {table}
-                <Link href={route('client.create')} className={'btn'}>{__("page.employees.btn.createClient")}</Link>
+                <Link href={route('employee.create')} className={'btn'}>{__("page.employees.btn.createClient")}</Link>
             </Page>
         </Authenticated>
     )
