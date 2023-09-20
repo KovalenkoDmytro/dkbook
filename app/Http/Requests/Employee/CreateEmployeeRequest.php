@@ -44,12 +44,15 @@ class CreateEmployeeRequest extends FormRequest
             "phone" => [
                 'string',
                 'nullable',
-                'max:15',
+                'max:19',
                 'min:9',
                 'unique:employees'
             ],
-            "employeeSchedule"=>[
+            "employee_schedule_id"=>[
                 'numeric'
+            ],
+            "services"=>[
+                'array'
             ]
         ];
     }

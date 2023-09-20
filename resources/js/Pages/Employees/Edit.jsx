@@ -98,7 +98,7 @@ export default function Edit({employee,services,flash,errors,}) {
                 settings={{
                     maxItems: 7,
                     onItemAdd: function (value) {
-                        dispatch({
+                        setData({
                             type: 'add',
                             name: 'services',
                             value: parseInt(value)

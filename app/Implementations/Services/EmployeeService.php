@@ -10,6 +10,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Implementations\Results\ErrorResult;
@@ -40,16 +41,18 @@ class EmployeeService implements IEmployeeService
 
     public function create(array $data): IResult
     {
-//        $company = Auth::user()->company;
-//        try {
-//            $new_client = Client::query()->firstOrCreate($data);
-//            $company->clients()->attach($new_client->id);
-//            return new SuccessResult('Client has been created.');
-//        }catch (\Exception $exception) {
-//
-//            Log::error($exception->getMessage());
-//            return new ErrorResult();
-//        }
+
+        $company = Auth::user()->company;
+        try {
+            $new_employee = Employee::query()->firstOrCreate(Arr::except($data, ['services']));
+            $new_employee->services()->sync($data['services']);
+            $company->employees()->attach($new_employee->id);
+            return new SuccessResult('Employee has been created.');
+        } catch (\Exception $exception) {
+
+            Log::error($exception->getMessage());
+            return new ErrorResult();
+        }
     }
 
     public function update(array $data , int $employeeId): IResult

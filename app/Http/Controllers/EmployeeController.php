@@ -12,6 +12,7 @@ use App\Models\CompanyOwner;
 use App\Models\Employee;
 use App\Models\EmployeeSchedule;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -39,30 +40,15 @@ class EmployeeController extends Controller
     {
         return Inertia::render('Employees/Create',['services' => $this->companyService->getServices()]);
     }
-//
-//    public function store(CreateEmployeeRequest $request)
-//    {
-//        try {
-//            $company = Auth::user()->company;
-//            $new_employee = $request->validated();
-//            $scheduled = new EmployeeScheduledController;
-//            $scheduled_array = $scheduled->createScheduled();
-//            $new_scheduled = EmployeeSchedule::create($scheduled_array);
-//            $new_employee['employee_schedule_id'] = $new_scheduled->id;
-//
-//            $employee = Employee::firstOrCreate($new_employee);
-//            $company->employees()->attach($employee->id);
-//
-//            if ($request->has('services')) {
-//                $employee->services()->sync($request->get('services'));
-//            }
-//            return redirect()->route('employee.index')->with('success', 'employee has been added');
-//
-//        } catch (QueryException $exception) {
-//            return redirect()->back()->with('error', $exception->errorInfo[2]);
-//        }
-//    }
-//
+
+    public function store(CreateEmployeeRequest $request): RedirectResponse
+    {
+        $result = $this->employeeService->create($request->validated());
+        return redirect()->route('client.index')->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
+
+
+    }
+
 //    public function ajaxStore(CreateEmployeeRequest $request){
 //
 //        try {

@@ -1,6 +1,6 @@
 import Authenticated from "@/Layouts/Authenticated";
 import Page from "@/Components/Page";
-import {useCallback, useEffect, useMemo, useReducer} from "react";
+import {Fragment, useCallback, useEffect, useMemo, useReducer} from "react";
 import reducer from "@/reducer";
 import toShowNotification, {__} from "@/helpers";
 import {router} from "@inertiajs/core";
@@ -13,8 +13,8 @@ export default function Create({services,flash,errors}) {
         email: '',
         phone: '',
         position: '',
-        employeeSchedule: '',
-        services: '',
+        services: [],
+        employee_schedule_id: 1,
     })
     //to show notification
     useEffect(() => {
@@ -23,6 +23,7 @@ export default function Create({services,flash,errors}) {
         }
     }, [flash])
     const toCreate = useCallback((event) => {
+        console.log(data)
         router.post('/employee', {...data}, {
             onProgress: () => {
                 event.target.setAttribute('disable', true)
@@ -70,6 +71,25 @@ export default function Create({services,flash,errors}) {
             />
         )
     },[data.name, errors.name])
+    const employeePosition_input = useMemo(()=>{
+        return(
+            <InputCustom
+                id={'employee_position'}
+                label={__('page.createEmployee.input.label.position')}
+                placeholder={'Hairdresser'}
+                value={data.position}
+                error={errors.position}
+                onInput={(event) => {
+                    setData({
+                        type: 'add',
+                        name: 'position',
+                        value: event.target.value,
+                    })
+                }
+                }
+            />
+        )
+    },[data.position, errors.position])
     const employeeEmail_input = useMemo(()=>{
         return(
             <InputCustom
@@ -90,6 +110,7 @@ export default function Create({services,flash,errors}) {
         )
     },[data.email, errors.email])
     const services_selector = useMemo(() => {
+        let chose_services = [...data.services]
         return (
             <DropDownSelector
                 id="services"
@@ -98,18 +119,26 @@ export default function Create({services,flash,errors}) {
                 settings={{
                     maxItems: 7,
                     onItemAdd: function (value) {
-                        dispatch({
+                        chose_services.push(parseInt(value))
+                        setData({
                             type: 'add',
                             name: 'services',
-                            value: parseInt(value)
+                            value: chose_services
+                        })
+                    },
+                    onItemRemove: function (value) {
+                        chose_services = chose_services.filter(id => id !== parseInt(value))
+                        setData({
+                            type: 'add',
+                            name: 'services',
+                            value: chose_services
                         })
                     }
                 }}
             >
                 {services.map((item, index)=> {
-                        return <option key={index} value={item.id}>{item.name}</option>
-                    })
-                }
+                    return <option key={index} value={item.id}>{item.name}</option>
+                })}
             </DropDownSelector>
         )
     }, [data.services, services])
@@ -119,7 +148,9 @@ export default function Create({services,flash,errors}) {
                 {employeeName_input}
                 {employeePhone_input}
                 {employeeEmail_input}
+                {employeePosition_input}
                 {services_selector}
+                <div className="btn" onClick={toCreate}>{__("page.createEmployee.btn.title.create")}</div>
             </Page>
         </Authenticated>
     )
