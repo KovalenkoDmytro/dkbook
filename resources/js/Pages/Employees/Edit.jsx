@@ -90,6 +90,7 @@ export default function Edit({employee,services,flash,errors,}) {
         )
     },[data.email, errors.email])
     const services_selector = useMemo(() => {
+        let chose_services = [...data.services]
         return (
             <DropDownSelector
                 id="services"
@@ -98,10 +99,19 @@ export default function Edit({employee,services,flash,errors,}) {
                 settings={{
                     maxItems: 7,
                     onItemAdd: function (value) {
+                        chose_services.push(parseInt(value))
                         setData({
                             type: 'add',
                             name: 'services',
-                            value: parseInt(value)
+                            value: [...new Set(chose_services)]
+                        })
+                    },
+                    onItemRemove: function (value) {
+                        chose_services = chose_services.filter(id => id !== parseInt(value))
+                        setData({
+                            type: 'add',
+                            name: 'services',
+                            value: [...new Set(chose_services)]
                         })
                     }
                 }}

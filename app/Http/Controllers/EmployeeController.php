@@ -45,8 +45,6 @@ class EmployeeController extends Controller
     {
         $result = $this->employeeService->create($request->validated());
         return redirect()->route('client.index')->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
-
-
     }
 
 //    public function ajaxStore(CreateEmployeeRequest $request){

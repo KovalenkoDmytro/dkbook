@@ -33,7 +33,17 @@ export default React.memo(function DropDownSelector({
     useEffect(() => {
         let select = document.getElementById(`${id}`)
         let control = select.tomselect;
-        control.addItem(selected);
+
+        if(Array.isArray(selected)){
+            selected.forEach(item=>{
+                control.addItem(item);
+            })
+        }
+        else {
+            control.addItem(selected);
+        }
+
+
     }, [selected])
 
     return (

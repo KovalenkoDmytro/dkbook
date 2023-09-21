@@ -86,7 +86,9 @@ class EmployeeService implements IEmployeeService
 
     public function get(int $employeeId): Model|Collection|Builder|array|null
     {
-        return Employee::query()->findOrFail($employeeId);
+        $employee = Employee::query()->findOrFail($employeeId);
+        $employee_array = $employee->toArray();
+        return Arr::prepend($employee_array, $employee->services()->get()->pluck('id'), 'services');
     }
 
     public function getAll(): LengthAwarePaginator
