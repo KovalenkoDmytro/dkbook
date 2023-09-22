@@ -10,6 +10,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -57,16 +58,17 @@ class EmployeeService implements IEmployeeService
 
     public function update(array $data , int $employeeId): IResult
     {
-//        try {
-//            $client = Client::query()->findOrFail($clientId);
-//            $client->update($data);
-//
-//            return new SuccessResult('Client has been updated.');
-//        } catch (\Exception $exception) {
-//
-//            Log::error($exception->getMessage());
-//            return new ErrorResult();
-//        }
+        try {
+            $employee = Employee::query()->findOrFail($employeeId);
+            $employee->update(Arr::except($data, ['services']));
+            $employee->services()->sync($data['services']);
+
+            return new SuccessResult('Employee has been updated.');
+        } catch (\Exception $exception) {
+
+            Log::error($exception->getMessage());
+            return new ErrorResult();
+        }
     }
 
     public function delete(int $employeeId): IResult

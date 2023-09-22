@@ -19,6 +19,7 @@
 	"page.createClient.input.label.phone" : "Cell phone",
     "page.createClient.btn.title.create" : "Create",
     "page.editClient.btn.title.update" : "Edit",
+    "page.updateEmployee.btn.title.update":"Update",
 
     "page.createEmployee.services.title" : "Services",
     "page.createEmployee.btn.title.create" : "Create",

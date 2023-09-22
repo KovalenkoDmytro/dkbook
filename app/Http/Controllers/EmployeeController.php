@@ -47,6 +47,39 @@ class EmployeeController extends Controller
         return redirect()->route('client.index')->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
     }
 
+    public function edit($employeeId): Response
+    {
+        $employee = $this->employeeService->get($employeeId);
+        $services = $this->companyService->getServices();
+        return Inertia::render('Employees/Edit',compact(['employee','services']));
+    }
+
+    public function update(UpdateEmployeeRequest $request, $id): RedirectResponse
+    {
+        $result = $this->employeeService->update($request->all(),$id);
+        return back()->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
+    }
+//
+//    public function destroy(Request $id)
+//    {
+//        $company = Auth::user()->company;
+//        $employee = Employee::find($id);
+//
+//        try {
+//            $employee->services()->detach();
+//            $company->employees()->detach($employee->id);
+//            $employee->delete();
+//            return redirect()->route('employee.index')->with('success', 'employee has been deleted');
+//
+//        } catch (QueryException $exception) {
+//            return redirect()->back()->with('error', $exception->errorInfo[2]);
+//        }
+//
+//    }
+
+
+
+
 //    public function ajaxStore(CreateEmployeeRequest $request){
 //
 //        try {
@@ -69,70 +102,6 @@ class EmployeeController extends Controller
 //        }
 //    }
 //
-    public function edit($employeeId): Response
-    {
-        $employee = $this->employeeService->get($employeeId);
-        $services = $this->companyService->getServices();
-        return Inertia::render('Employees/Edit',compact(['employee','services']));
-
-
-//        $services = Auth::user()->company->services;
-//        $employee = Auth::user()->company->getEmployee((int)$id);
-//        $employee_scheduled = $employee->scheduled;
-//        return view('auth.employee.edit', compact(['employee', 'employee_scheduled', 'services']));
-    }
-//
-//    public function update(UpdateEmployeeRequest $request, $id)
-//    {
-//        $employee = Employee::find($id);
-//        $employee->name = $request->input('name');
-//        $employee->position = $request->input('position');
-//
-//        if (is_null($request->input('email'))) {
-//            $employee->email = null;
-//
-//        } else {
-//            $employee->email = $request->input('email');
-//        }
-//
-//        if (is_null($request->input('phone'))) {
-//            $employee->phone = null;
-//        } else {
-//            $employee->phone = $request->input('phone');
-//        }
-//
-//        try {
-//            $employee->update();
-//            if ($request->has('services')){
-//                $employee->services()->sync($request->get('services'));
-//            }else
-//                $employee->services()->detach();
-//
-//            return redirect()->route('employee.index')->with('success', 'employee has been updated');
-//
-//        } catch (QueryException $exception) {
-//            return redirect()->back()->with('error', $exception->errorInfo[2]);
-//
-//        }
-//
-//    }
-//
-//    public function destroy(Request $id)
-//    {
-//        $company = Auth::user()->company;
-//        $employee = Employee::find($id);
-//
-//        try {
-//            $employee->services()->detach();
-//            $company->employees()->detach($employee->id);
-//            $employee->delete();
-//            return redirect()->route('employee.index')->with('success', 'employee has been deleted');
-//
-//        } catch (QueryException $exception) {
-//            return redirect()->back()->with('error', $exception->errorInfo[2]);
-//        }
-//
-//    }
 //    public function getAvailableEmployees($date, $service_id)
 //    {
 //        $chose_date = \Carbon\Carbon::parse($date);

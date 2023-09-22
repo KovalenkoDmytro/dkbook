@@ -13,7 +13,7 @@ export default function Edit({employee,services,flash,errors,}) {
         email: employee.email,
         phone: employee.phone,
         position: employee.position,
-        employeeSchedule: employee.employee_schedule_id,
+        employee_schedule_id: employee.employee_schedule_id,
         services: employee.services,
     })
     //to show notification
@@ -23,7 +23,8 @@ export default function Edit({employee,services,flash,errors,}) {
         }
     }, [flash])
     const toUpdate = useCallback((event) => {
-        router.post('/employee', {...data}, {
+        console.log(data)
+        router.put(`/employee/${employee.id}`, {...data}, {
             onProgress: () => {
                 event.target.setAttribute('disable', true)
             },
@@ -31,7 +32,7 @@ export default function Edit({employee,services,flash,errors,}) {
                 event.target.removeAttribute('disable')
             },
         })
-    }, [data])
+    }, [data, employee.id])
     const employeePhone_input = useMemo(()=>{
         return(
             <InputCustom
@@ -130,6 +131,8 @@ export default function Edit({employee,services,flash,errors,}) {
                 {employeePhone_input}
                 {employeeEmail_input}
                 {services_selector}
+                <div className="btn" onClick={toUpdate}>{__("page.updateEmployee.btn.title.update")}</div>
+
             </Page>
         </Authenticated>
     )
