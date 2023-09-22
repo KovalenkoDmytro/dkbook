@@ -27,7 +27,7 @@ export default function Index({employees,flash}) {
             confirmButtonText: 'Yes, delete it!',
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                router.delete(`/client/${elementID}`)
+                router.delete(`/employee/${elementID}`)
             }
         })
     }

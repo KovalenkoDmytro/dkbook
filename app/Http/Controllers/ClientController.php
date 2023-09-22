@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Client\CreateClienRequest;
 use App\Http\Requests\Client\UpdateClienRequest;
 use App\Interfaces\Services\IClientService;
-use App\Interfaces\Services\ICompanyService;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -13,21 +12,19 @@ use Inertia\Response;
 class ClientController extends Controller
 {
     private IClientService $clientService;
-    private ICompanyService $companyService;
-    public function __construct(IClientService $clientService, ICompanyService $companyService)
+
+    public function __construct(IClientService $clientService)
     {
         $this->clientService = $clientService;
-        $this->companyService = $companyService;
     }
     public function index(): Response
     {
-        return Inertia::render('Clients/Index',['clients' => $this->companyService->getClients()]);
+        return Inertia::render('Clients/Index',['clients' => $this->clientService->getAll()]);
     }
 
     public function create(): Response
     {
         return Inertia::render('Clients/Create');
-//        return view('auth.client.create');
     }
 
     public function store(CreateClienRequest $request): RedirectResponse

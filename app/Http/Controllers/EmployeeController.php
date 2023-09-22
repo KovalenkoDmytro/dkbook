@@ -33,7 +33,7 @@ class EmployeeController extends Controller
 
     public function index(): Response
     {
-        return Inertia::render('Employees/Index',['employees' => $this->companyService->getEmployees()]);
+        return Inertia::render('Employees/Index',['employees' => $this->employeeService->getAll()]);
     }
 
     public function create(): Response
@@ -54,98 +54,15 @@ class EmployeeController extends Controller
         return Inertia::render('Employees/Edit',compact(['employee','services']));
     }
 
-    public function update(UpdateEmployeeRequest $request, $id): RedirectResponse
+    public function update(UpdateEmployeeRequest $request, $employeeId): RedirectResponse
     {
-        $result = $this->employeeService->update($request->all(),$id);
+        $result = $this->employeeService->update($request->all(),$employeeId);
         return back()->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
     }
-//
-//    public function destroy(Request $id)
-//    {
-//        $company = Auth::user()->company;
-//        $employee = Employee::find($id);
-//
-//        try {
-//            $employee->services()->detach();
-//            $company->employees()->detach($employee->id);
-//            $employee->delete();
-//            return redirect()->route('employee.index')->with('success', 'employee has been deleted');
-//
-//        } catch (QueryException $exception) {
-//            return redirect()->back()->with('error', $exception->errorInfo[2]);
-//        }
-//
-//    }
 
-
-
-
-//    public function ajaxStore(CreateEmployeeRequest $request){
-//
-//        try {
-//            $new_employee = $request->validated();
-//            $scheduled = new EmployeeScheduledController;
-//            $scheduled_array = $scheduled->createScheduled();
-//            $new_scheduled = EmployeeSchedule::create($scheduled_array);
-//            $new_employee['employee_schedule_id'] = $new_scheduled->id;
-//
-//            $employee = Employee::create($new_employee);
-//            Auth::user()->company->employees()->attach($employee->id);
-//            return response()->json([
-//                'massage'=> 'employee has been added',
-//                'employee' =>  collect($employee)->except(['updated_at', 'created_at'])
-//            ],200);
-//        } catch (QueryException $exception) {
-//            return response()->json([
-//                'massage'=> $exception->errorInfo[2],
-//            ],400);
-//        }
-//    }
-//
-//    public function getAvailableEmployees($date, $service_id)
-//    {
-//        $chose_date = \Carbon\Carbon::parse($date);
-//        $available_employees = array();
-//        $dayOfWeek = strtolower($chose_date->englishDayOfWeek);
-//        $owner = CompanyOwner::with('company.employees.scheduled', 'company.employees.services')
-//            ->where('id', \auth()->id())
-//            ->first();
-//
-//
-//        foreach ($owner->company->employees as $employee) {
-//            $time_range = $employee->scheduled->$dayOfWeek;
-//            $time_start = trim(substr($time_range, 0, strpos($time_range, '-')));
-//            $time_end = trim(substr($time_range, strpos($time_range, '-') + 1));
-//            $time_min = Carbon::parse("$chose_date->year-$chose_date->month-$chose_date->day $time_start");
-//            $time_max = Carbon::parse("$chose_date->year-$chose_date->month-$chose_date->day $time_end");
-//
-//            // get all employees who make receive(passed) service
-//            foreach ($employee->services as $service){
-//                if($service->id === $service_id){
-//                    // get all employee who is works at chose time
-//                    if ($chose_date->between($time_min, $time_max)) {
-//                        $available_employees[] = $employee;
-//                    }
-//                }
-//            }
-//        }
-//        return $available_employees;
-//    }
-//    public function getAvailableEmployee(Request $request): \Illuminate\Http\JsonResponse
-//    {
-//
-//        $date = $request->get('date');
-//        $service_id = (int)$request->get('service_id');
-//
-//        $employee = new Employee();
-//        $available_employees = $employee->getAvailableEmployees($date, $service_id);
-//
-//        return response()->json([
-//            'time' => $date,
-//            'employees' => $available_employees
-//        ]);
-//
-//    }
-
-
+    public function destroy(int $employeeId): RedirectResponse
+    {
+        $result = $this->employeeService->delete($employeeId);
+        return back()->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
+    }
 }

@@ -87,8 +87,7 @@ class ClientsService implements IClientService
 
     public function getAll(): LengthAwarePaginator
     {
-        $clients = (new \App\Models\Client)->Companies();
-        return $clients->paginate(self::PER_PAGE);
-        // TODO: Implement getAll() method.
+        $clients = Client::query()->get();
+        return $clients->paginate(self::PER_PAGE)->onEachSide(2);
     }
 }

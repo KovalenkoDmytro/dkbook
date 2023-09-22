@@ -73,17 +73,19 @@ class EmployeeService implements IEmployeeService
 
     public function delete(int $employeeId): IResult
     {
-//        try {
-//            $client = Client::query()->findOrFail($clientId);
-//            $client->Companies()->wherePivot('client_id', '=', $clientId)->detach();
-//            $client->delete();
-//
-//            return new SuccessResult('Client has been deleted.');
-//        } catch (\Exception $exception) {
-//
-//            Log::error($exception->getMessage());
-//            return new ErrorResult();
-//        }
+        try {
+            $client = Employee::query()->findOrFail($employeeId);
+
+            $client->delete();
+            $client->company()->wherePivot('employee_id', '=', $employeeId)->detach();
+            $client->services()->wherePivot('employee_id', '=', $employeeId)->detach();
+
+            return new SuccessResult('Employee has been deleted.');
+        } catch (\Exception $exception) {
+
+            Log::error($exception->getMessage());
+            return new ErrorResult();
+        }
     }
 
     public function get(int $employeeId): Model|Collection|Builder|array|null
@@ -95,8 +97,7 @@ class EmployeeService implements IEmployeeService
 
     public function getAll(): LengthAwarePaginator
     {
-//        $employees = (new \App\Models\Client)->Companies();
-////        return $clients->paginate(self::PER_PAGE);
-
+        $employees = Employee::query()->get();
+        return $employees->paginate(self::PER_PAGE)->onEachSide(2);
     }
 }
