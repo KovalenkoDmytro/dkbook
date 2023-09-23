@@ -21,7 +21,7 @@ export default React.memo(function Navigation() {
                 <Link href={route('client.index')} title="clients">
                     <span>{__('navigation.linkTitle.clientsPage')}</span>
                 </Link>
-                <Link href={route('services.index')} title="services">
+                <Link href={route('service.index')} title="services">
                     <span>{__('navigation.linkTitle.servicesPage')}</span>
                 </Link>
                 <Link href={route('user.logout')} title="logout">

@@ -11,11 +11,6 @@ class Service extends Model
     use HasFactory;
     protected $guarded = false;
 
-    public static function getServices(): \Illuminate\Database\Eloquent\Collection
-    {
-        return Service::all()->where('company_id',Auth::user()->company->id);
-    }
-
     public function company(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Company::class);
