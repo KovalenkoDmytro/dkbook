@@ -44,7 +44,7 @@ class EmployeeController extends Controller
     public function store(CreateEmployeeRequest $request): RedirectResponse
     {
         $result = $this->employeeService->create($request->validated());
-        return redirect()->route('client.index')->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
+        return redirect()->route('employee.index')->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
     }
 
     public function edit($employeeId): Response

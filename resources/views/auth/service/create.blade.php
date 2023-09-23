@@ -6,7 +6,7 @@
             <h2>{!! Session::get('error') !!}</h2>
         </div>
     @endif
-    <form action="{{route('services.store')}}" method="post">
+    <form method="post">
         @csrf
 
         <p>{{__('Add service')}}</p>

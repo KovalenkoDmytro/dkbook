@@ -2,6 +2,8 @@
 
 namespace App\Implementations\Services;
 
+use App\Implementations\Results\ErrorResult;
+use App\Implementations\Results\SuccessResult;
 use App\Interfaces\Results\IResult;
 use App\Interfaces\Services\IServiceService;
 use App\Models\Service;
@@ -9,6 +11,9 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ServiceService implements IServiceService
 {
@@ -35,16 +40,15 @@ class ServiceService implements IServiceService
 
     public function create(array $data): IResult
     {
-//        $company = Auth::user()->company;
-//        try {
-//            $new_client = Client::query()->firstOrCreate($data);
-//            $company->clients()->attach($new_client->id);
-//            return new SuccessResult('Client has been created.');
-//        }catch (\Exception $exception) {
-//
-//            Log::error($exception->getMessage());
-//            return new ErrorResult();
-//        }
+        $service = Arr::add($data, 'company_id', Auth::user()->company->id);
+        try {
+            Service::query()->firstOrCreate($service);
+            return new SuccessResult('Employee has been created.');
+        }catch (\Exception $exception) {
+
+            Log::error($exception->getMessage());
+            return new ErrorResult();
+        }
     }
 
     public function update(array $data , int $serviceId): IResult

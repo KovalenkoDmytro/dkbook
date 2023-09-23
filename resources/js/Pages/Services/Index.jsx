@@ -69,9 +69,9 @@ export default function Index({services,flash}) {
 
     return (
         <Authenticated>
-            <Page pageName={'service'}>
+            <Page pageName={'services'}>
                 {table}
-                <Link href={route('employee.create')} className={'btn'}>{__("page.services.btn.createClient")}</Link>
+                <Link href={route('service.create')} className={'btn'}>{__("page.services.btn.createClient")}</Link>
             </Page>
         </Authenticated>
     )

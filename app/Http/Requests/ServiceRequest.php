@@ -12,7 +12,7 @@ class ServiceRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return Auth::check();
     }
@@ -22,7 +22,7 @@ class ServiceRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             "name" => [
@@ -31,7 +31,6 @@ class ServiceRequest extends FormRequest
                 'max:255',
             ],
             'timeRange_hour'=> [
-                'required',
                 'numeric',
                 'max:4',
             ],
@@ -46,22 +45,6 @@ class ServiceRequest extends FormRequest
                 'max:999',
                 'regex:/^\d+(\.\d{1,2})?$/'
             ],
-            'company_id'=>[
-                'required',
-                'numeric',
-            ]
         ];
-    }
-
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'company_id' => Auth::user()->company->id,
-        ]);
     }
 }

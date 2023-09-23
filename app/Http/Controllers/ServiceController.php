@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ServiceRequest;
 use App\Interfaces\Services\IServiceService;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 
 
@@ -18,23 +20,16 @@ class ServiceController extends Controller
         return Inertia::render('Services/Index',['services' => $this->serviceService->getAll()]);
     }
 
-//    public function create()
-//    {
-//        return view('auth.service.create');
-//    }
-//
-//    public function store(ServiceRequest $request)
-//    {
-//        try {
-//            $new_service = $request->validated();
-//            Service::firstOrCreate($new_service);
-//
-//            return redirect()->back()->with('success', 'service has been added');
-//
-//        } catch (QueryException $exception) {
-//            return redirect()->back()->with('error', $exception->errorInfo[2]);
-//        }
-//    }
+    public function create(): \Inertia\Response
+    {
+        return Inertia::render('Services/Create');
+    }
+
+    public function store(ServiceRequest $request): RedirectResponse
+    {
+        $result = $this->serviceService->create($request->validated());
+        return redirect()->route('service.index')->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
+    }
 //
 //    public function ajaxStore(ServiceRequest $request){
 //

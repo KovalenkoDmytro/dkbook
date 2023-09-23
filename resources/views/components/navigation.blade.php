@@ -20,7 +20,7 @@
             <x-icon-clients/>
             <span>{{__('Clients')}} </span>
         </a>
-        <a class="navigation__link" href="{{route('services.index')}}" title="services">
+        <a class="navigation__link" href="{{route('service.index')}}" title="services">
             <x-icon-services/>
             <span>{{__('Services')}} </span>
         </a>
