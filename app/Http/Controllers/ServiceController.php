@@ -37,6 +37,12 @@ class ServiceController extends Controller
         $service = Service::query()->findOrFail($serviceId);
         return Inertia::render('Services/Edit',compact('service'));
     }
+    public function update(ServiceRequest $request, $serviceId): RedirectResponse
+    {
+        $result = $this->serviceService->update($request->all(),$serviceId);
+        return back()->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
+    }
+
 
 //
 //    public function ajaxStore(ServiceRequest $request){

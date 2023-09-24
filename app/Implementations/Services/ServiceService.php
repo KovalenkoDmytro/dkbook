@@ -53,16 +53,16 @@ class ServiceService implements IServiceService
 
     public function update(array $data , int $serviceId): IResult
     {
-//        try {
-//            $client = Client::query()->findOrFail($clientId);
-//            $client->update($data);
-//
-//            return new SuccessResult('Client has been updated.');
-//        } catch (\Exception $exception) {
-//
-//            Log::error($exception->getMessage());
-//            return new ErrorResult();
-//        }
+        try {
+            $client = Service::query()->findOrFail($serviceId);
+            $client->update($data);
+
+            return new SuccessResult('Service has been updated.');
+        } catch (\Exception $exception) {
+
+            Log::error($exception->getMessage());
+            return new ErrorResult();
+        }
     }
 
     public function delete(int $serviceId): IResult
