@@ -1,17 +1,17 @@
 import Authenticated from "@/Layouts/Authenticated";
 import Page from "@/Components/Page";
+import toShowNotification, {__} from "@/helpers";
 import {useCallback, useEffect, useMemo, useReducer} from "react";
 import reducer from "@/reducer";
-import toShowNotification, {__} from "@/helpers";
 import {router} from "@inertiajs/core";
 import InputCustom from "@/Components/InputCustom";
 
-export default function Create({flash, errors}) {
+export default function Edit({service,flash,errors}) {
     const [data, setData] = useReducer(reducer, {
-        name: '',
-        timeRange_hour: 0,
-        timeRange_minutes: 15,
-        price: '0',
+        name: service.name,
+        timeRange_hour: service.timeRange_hour,
+        timeRange_minutes: service.timeRange_minutes,
+        price: service.price,
     })
     //to show notification
     useEffect(() => {
@@ -19,8 +19,9 @@ export default function Create({flash, errors}) {
             toShowNotification(flash)
         }
     }, [flash])
-    const toCreate = useCallback((event) => {
-        router.post('/service', {...data}, {
+    const toUpdate = useCallback((event) => {
+
+        router.put(`/service/${service.id}`, {...data}, {
             onProgress: () => {
                 event.target.setAttribute('disable', true)
             },
@@ -28,7 +29,7 @@ export default function Create({flash, errors}) {
                 event.target.removeAttribute('disable')
             },
         })
-    }, [data])
+    }, [data, service.id])
     const serviceName_input = useMemo(()=>{
         return(
             <InputCustom
@@ -119,7 +120,7 @@ export default function Create({flash, errors}) {
                 {serviceTimeMinutes_input}
                 {servicePrice_input}
             </Page>
-            <div className="btn" onClick={toCreate}>{__("page.createService.btn.title.create")}</div>
+            <div className="btn" onClick={toUpdate}>{__("page.updateService.btn.title.update")}</div>
         </Authenticated>
     )
 }

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ServiceRequest;
 use App\Interfaces\Services\IServiceService;
+use App\Models\Service;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
+use Inertia\Response;
 
 
 class ServiceController extends Controller
@@ -30,6 +32,12 @@ class ServiceController extends Controller
         $result = $this->serviceService->create($request->validated());
         return redirect()->route('service.index')->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
     }
+    public function edit($serviceId): Response
+    {
+        $service = Service::query()->findOrFail($serviceId);
+        return Inertia::render('Services/Edit',compact('service'));
+    }
+
 //
 //    public function ajaxStore(ServiceRequest $request){
 //
@@ -49,11 +57,7 @@ class ServiceController extends Controller
 //        }
 //    }
 //
-//    public function edit($id)
-//    {
-//        $service = Service::find((int)$id);
-//        return view('auth.service.edit', compact('service'));
-//    }
+
 //
 //    public function update(ServiceRequest $request, $id)
 //    {
