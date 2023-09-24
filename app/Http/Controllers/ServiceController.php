@@ -42,47 +42,11 @@ class ServiceController extends Controller
         $result = $this->serviceService->update($request->all(),$serviceId);
         return back()->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
     }
-
-
-//
-//    public function ajaxStore(ServiceRequest $request){
-//
-//        try {
-//            $service = $request->validated();
-//            $new_service = Service::firstOrCreate($service);
-//
-//            return response()->json([
-//                'massage'=> 'service has been added',
-//                'service' =>  collect($new_service)->except(['updated_at', 'created_at'])
-//            ],200);
-//
-//        } catch (QueryException $exception) {
-//            return response()->json([
-//                'massage'=> $exception->errorInfo[2],
-//            ],400);
-//        }
-//    }
-//
-
-//
-//    public function update(ServiceRequest $request, $id)
-//    {
-//        try {
-//            $service = Service::find((int)$id);
-//            $service_update = $request->validated();
-//            $service->update($service_update);
-//
-//            return redirect()->route('services.edit', [$id])->with('success', 'service has been updated');
-//
-//        } catch (QueryException $exception) {
-//            return redirect()->back()->with('error', $exception->errorInfo[2]);
-//
-//        }
-//    }
-//
-//    public function destroy()
-//    {
-//    }
+    public function destroy(int $serviceId): RedirectResponse
+    {
+        $result = $this->serviceService->delete($serviceId);
+        return back()->with(['type' => $result->getType(), 'message' => $result->getMessage()]);
+    }
 }
 
 

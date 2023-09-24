@@ -67,22 +67,22 @@ class ServiceService implements IServiceService
 
     public function delete(int $serviceId): IResult
     {
-//        try {
-//            $client = Client::query()->findOrFail($clientId);
-//            $client->Companies()->wherePivot('client_id', '=', $clientId)->detach();
-//            $client->delete();
-//
-//            return new SuccessResult('Client has been deleted.');
-//        } catch (\Exception $exception) {
-//
-//            Log::error($exception->getMessage());
-//            return new ErrorResult();
-//        }
+        try {
+            $service = Service::query()->findOrFail($serviceId);
+            $service->employees()->wherePivot('service_id', '=', $serviceId)->detach();
+            $service->delete();
+
+            return new SuccessResult('Client has been deleted.');
+        } catch (\Exception $exception) {
+
+            Log::error($exception->getMessage());
+            return new ErrorResult();
+        }
     }
 
     public function get(int $serviceId): Model|Collection|Builder|array|null
     {
-//        return Client::query()->findOrFail($clientId);
+        return Service::query()->findOrFail($serviceId);
     }
 
     public function getAll(): LengthAwarePaginator
