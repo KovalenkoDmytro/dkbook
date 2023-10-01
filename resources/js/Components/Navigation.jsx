@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "@inertiajs/react";
 import {__} from "@/helpers";
+import Calendar from "@/Pages/Calendar";
 
 
 export default React.memo(function Navigation() {
@@ -9,11 +10,8 @@ export default React.memo(function Navigation() {
                 <Link href={route('dashboard.main')} title="main">
                     <span>{__('navigation.linkTitle.mainPage')}</span>
                 </Link>
-                <Link href={route('monthlyCalendar.index')} title="monthlyCalendar">
-                    <span>{__('navigation.linkTitle.monthlyCalendarPage')}</span>
-                </Link>
-                <Link href={route('dailyCalendar.index')} title="dailyCalendar">
-                    <span>{__('navigation.linkTitle.dailyCalendarPage')}</span>
+                <Link href={route('calendar')} title="Calendar">
+                    <span>{__('navigation.linkTitle.сalendar')}</span>
                 </Link>
                 <Link href={route('employee.index')} title="employees">
                     <span>{__('navigation.linkTitle.employeesPage')}</span>

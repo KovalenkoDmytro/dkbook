@@ -1,14 +1,13 @@
 <?php
 
 use App\Http\Controllers\Auth\AppointmentController;
-use App\Http\Controllers\Auth\Calendars\CalendarController;
-use App\Http\Controllers\Auth\Calendars\DailyCalendarController;
 use App\Http\Controllers\Auth\DashboardController;
 use App\Http\Controllers\Auth\Schedules\CompanyScheduledController;
 use App\Http\Controllers\Auth\Schedules\EmployeeScheduledController;
 use App\Http\Controllers\Auth\User\ForgotPasswordController;
 use App\Http\Controllers\Auth\User\LoginController;
 use App\Http\Controllers\Auth\User\ResetPasswordController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyOwnerController;
@@ -57,16 +56,12 @@ Route::name('companyOwner.')->group(function (){
 Route::resource('employee',EmployeeController::class)->middleware('auth');
 Route::resource('client',ClientController::class)->middleware('auth');
 Route::resource('service',ServiceController::class)->middleware('auth');
+Route::match(['get'],'/calendar', [CalendarController::class, 'index'] )->name('calendar')->middleware('auth');
+Route::post('company/{id}/appointments', [CalendarController::class, 'ajaxAppointments'])->middleware('auth');
 
-
-
-Route::name('monthlyCalendar.')->middleware('auth')->group(function (){
-    Route::get('/calendar/month/{date?}', [CalendarController::class, 'index'] )->name('index');
-});
-
-Route::name('dailyCalendar.')->middleware('auth')->group(function (){
-    Route::get('/calendar/day/{date?}', [DailyCalendarController::class, 'index'] )->name('index');
-});
+//Route::name('dailyCalendar.')->middleware('auth')->group(function (){
+//    Route::get('/calendar/day/{date?}', [DailyCalendarController::class, 'index'] )->name('index');
+//});
 
 Route::name('employeeScheduled.')->group(function (){
     Route::get('/employeeScheduled/{id}/edit', [EmployeeScheduledController::class, 'edit'] )->name('edit');

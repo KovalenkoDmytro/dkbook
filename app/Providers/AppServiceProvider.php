@@ -55,6 +55,16 @@ class AppServiceProvider extends ServiceProvider
             \App\Interfaces\Services\IServiceService::class,
             \App\Implementations\Services\ServiceService::class
         );
+
+        //Appointments for calendar
+        $this->app->when(\App\Http\Controllers\CalendarController::class)
+            ->needs(\App\Interfaces\Services\IAppointmentService::class)
+            ->give(\App\Implementations\Services\AppointmentService::class);
+
+        $this->app->bind(
+            \App\Interfaces\Services\IAppointmentService::class,
+            \App\Implementations\Services\AppointmentService::class
+        );
     }
 
     /**
