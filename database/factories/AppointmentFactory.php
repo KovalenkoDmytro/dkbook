@@ -6,6 +6,8 @@ use App\Models\Client;
 use App\Models\Company;
 use App\Models\Employee;
 use App\Models\Service;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,15 +20,16 @@ class AppointmentFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
+        $date = Carbon::today('America/Vancouver')->addDays(rand(0, 5))->addSeconds(rand(0, 86400));
         return [
             'company_id' => Company::all()->random()->id,
             'client_id' => Client::all()->random()->id,
             'service_id' => Service::all()->random()->id,
             'employee_id'=>Employee::all()->random()->id,
-            'date'=>$this->faker->dateTimeBetween('- 5 days','+ 10 days'),
-
+            'start'=>$date,
+            'end'=>Carbon::parse($date)->addHour(1),
         ];
     }
 }

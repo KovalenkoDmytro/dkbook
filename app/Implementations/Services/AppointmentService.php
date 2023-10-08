@@ -100,7 +100,8 @@ class AppointmentService implements IAppointmentService
             $service = Service::query()->findOrFail($appointment->service_id);
             $appointments[] = [
                 'event_id' => $appointment->id,
-                'start' => Carbon::parse($appointment->date)->format('Y/m/d H:i'),
+                'start' => $appointment->start,
+                'end' => $appointment->end,
                 'payed' => (bool)$appointment->payed,
                 'client' => [
                     'name' => $client->name,
@@ -121,13 +122,14 @@ class AppointmentService implements IAppointmentService
         $appointments = Appointment::query()
             ->where('company_id', $companyId)
             ->when($filterView === 'day' , function ($q) use ($dateRage) {
-                $q->whereDate('date',$dateRage['start']);
+                $q->whereDate('start',$dateRage['start']);
+                $q->whereDate('end',$dateRage['start']);
             })
+
             ->when($filterView !== 'day' , function ($q) use ($dateRage) {
-                $q->whereBetween('date', [$dateRage['start'], $dateRage['end']]);
+                $q->whereBetween('start',[$dateRage['start'],$dateRage['end']]);
             })
             ->get();
-
         return $this->prepareAppointmentsArray($appointments);
     }
 

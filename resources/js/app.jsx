@@ -1,9 +1,11 @@
 import React from "react";
-import { createRoot } from 'react-dom/client';
-import { createInertiaApp } from '@inertiajs/react';
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import {createRoot} from 'react-dom/client';
+import {createInertiaApp} from '@inertiajs/react';
+import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
 import {StrictMode} from "react";
 import ContextProvider from "./Context";
+import {LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
@@ -19,7 +21,9 @@ createInertiaApp({
         root.render(
             <StrictMode>
                 <ContextProvider>
-                    <App {...props} />
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <App {...props} />
+                    </LocalizationProvider>
                 </ContextProvider>
             </StrictMode>
         );
@@ -29,4 +33,5 @@ createInertiaApp({
         showSpinner: true,
     },
 
-}).then(() =>{});
+}).then(() => {
+});

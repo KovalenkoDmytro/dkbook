@@ -37,13 +37,13 @@ class CompanyService implements ICompanyService
     public function getClients()
     {
         $companyId = Auth::user()->company->id;
-        return Company::findOrFail($companyId)->clients->paginate(10)->onEachSide(2);
+        return Company::findOrFail($companyId)->clients;
     }
 
     public function getEmployees()
     {
         $companyId = Auth::user()->company->id;
-        return Company::findOrFail($companyId)->employees->paginate(10)->onEachSide(2);
+        return Company::with('employees.services')->findOrFail($companyId);
     }
 
     public function getServices()
