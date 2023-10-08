@@ -11,14 +11,15 @@ import {__} from "@/helpers";
 import reducer from "@/reducer";
 import {Select, MenuItem} from "@mui/material";
 
+
 export default function Calendar({services, employees, auth}) {
     const [data, setData] = useReducer(reducer, {
         service_id: '',
         employee_id: '',
-        description: "",
+        description: '',
         payed: false,
-        start: new Date(),
-        end: new Date()
+        start: '',
+        end: '',
     });
     const [calendarView, setCalendarView] = useState("week")
 
@@ -69,6 +70,7 @@ export default function Calendar({services, employees, auth}) {
             <div>
                 <div style={{padding: "1rem"}}>
                     <p>week</p>
+
                     <Select
                         labelId="service_id"
                         id="service_id"
@@ -91,17 +93,25 @@ export default function Calendar({services, employees, auth}) {
 
                         })}
                     </Select>
+
+
                     <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        // value={age}
-                        label="Age"
-                        // onChange={handleChange}
+                        labelId="employee_id"
+                        id="employee_id"
+                        value={data.employee_id}
+                        label="employee_id"
+                        onChange={function (event, child) {
+                            setData({
+                                type: 'add',
+                                name: 'employee_id',
+                                value: parseInt(event.target.value)
+                            })
+                        }}
                     >
 
-                        {employees__array.map((item, index) => {
+                        {employees__array.map(item => {
                             return (
-                                <MenuItem key={`${item.name}_${item.id}_ww`} value={item.id}>{item.name}</MenuItem>
+                                <MenuItem key={`${item.name}_${item.id}_employee`} value={item.id}>{item.name}</MenuItem>
                             )
 
 
@@ -112,13 +122,16 @@ export default function Calendar({services, employees, auth}) {
             </div>
         );
     }, [])
-    const dayModalWindow = useMemo(() => {
+    const DayModalWindow = ({scheduler}) => {
         const employees__array = employees.filter(item => {
             if (item.services.length && item.services.some((item) => item.id === data.service_id)) {
                 return item
             }
         })
-
+        console.log(scheduler.state)
+        const startDate = format(scheduler.state.start.value, 'yyyy-MM-dd HH:mm:00')
+        const startEnd = format(scheduler.state.end.value, 'yyyy-MM-dd HH:mm:00')
+        console.log(startDate)
         return (
             <div>
                     <p>day</p>
@@ -135,9 +148,9 @@ export default function Calendar({services, employees, auth}) {
                             })
                         }}
                     >
-                        {services.map((item, index) => {
+                        {services.map((item) => {
                             return (
-                                <MenuItem key={`${item.name}_${item.id}_ww`} value={item.id}>{item.name}</MenuItem>
+                                <MenuItem key={`${item.name}_${item.id}_service`} value={item.id}>{item.name}</MenuItem>
                             )
                         })}
                     </Select>
@@ -145,97 +158,48 @@ export default function Calendar({services, employees, auth}) {
                         labelId="employee_id"
                         id="employee_id"
                         value={data.employee_id}
-                        label="Age"
+                        label="employee"
                         onChange={function (event, child) {
                             setData({
                                 type: 'add',
-                                name: 'service_id',
+                                name: 'employee_id',
                                 value: parseInt(event.target.value)
                             })
                         }}
                     >
-                        {employees__array.map((item, index) => {
+                        {employees__array.map((item) => {
                             return (
-                                <MenuItem key={`${item.name}_${item.id}_ww`} value={item.id}>{item.name}</MenuItem>
+                                <MenuItem key={`${item.name}_${item.id}_employee`} value={item.id}>{item.name}</MenuItem>
                             )
                         })}
                     </Select>
-
                     <TimePicker
-                        label="Controlled picker"
-                        // value={value}
-                        // onChange={(newValue) => setValue(newValue)}
+                        label="From"
+                        value={scheduler.state.start.value}
+                        onChange={(newValue) => {
+                            setData({
+                                type: 'add',
+                                name: 'start',
+                                value: format(newValue, 'yyyy-MM-dd HH:mm:00')
+                            })
+                        }}
                     />
-
-
-            </div>
-        );
-    }, [data])
-    const CustomEditor = ({scheduler}) => {
-        const event = scheduler.edited;
-        console.log(scheduler)
-
-        // Make your own form/state
-        const [state, setState] = useState({
-            title: event?.title || "",
-            description: event?.description || ""
-        });
-        const [error, setError] = useState("");
-
-        const handleChange = (value, name) => {
-            setState((prev) => {
-                return {
-                    ...prev,
-                    [name]: value
-                };
-            });
-        };
-        const handleSubmit = async () => {
-            // Your own validation
-            if (state.title.length < 3) {
-                return setError("Min 3 letters");
-            }
-
-            try {
-                scheduler.loading(true);
-
-                /**Simulate remote data saving */
-                const added_updated_event = (await new Promise((res) => {
-                    /**
-                     * Make sure the event have 4 mandatory fields
-                     * event_id: string|number
-                     * title: string
-                     * start: Date|string
-                     * end: Date|string
-                     */
-                    setTimeout(() => {
-                        res({
-                            event_id: event?.event_id || Math.random(),
-                            title: state.title,
-                            start: scheduler.state.start.value,
-                            end: scheduler.state.end.value,
-                            description: state.description
-                        });
-                    }, 3000);
-                }))
-
-                scheduler.onConfirm(added_updated_event, event ? "edit" : "create");
-                scheduler.close();
-            } finally {
-                scheduler.loading(false);
-            }
-        };
-
-        return (
-            <div>
-                <div style={{padding: "1rem"}}>
-                    <p>Load your custom form/fields</p>
-
-                </div>
+                    <TimePicker
+                        label="To"
+                        value={scheduler.state.end.value}
+                        onChange={(newValue) => {
+                            setData({
+                                type: 'add',
+                                name: 'end',
+                                value: format(newValue, 'yyyy-MM-dd HH:mm:00')
+                            })
+                        }}
+                    />
 
             </div>
         );
     }
+
     const Calendar = useMemo(() => {
         return (
             <Scheduler view="week"
@@ -244,10 +208,11 @@ export default function Calendar({services, employees, auth}) {
                            if (calendarView === 'week') {
                                return weekModalWindow
                            } else if (calendarView === 'day') {
-                               return dayModalWindow
-                           } else {
-                               return <CustomEditor scheduler={scheduler}/>
+                               return <DayModalWindow scheduler={scheduler}/>
                            }
+                           // else {
+                           //     return <CustomEditor scheduler={scheduler}/>
+                           // }
                        }}
                        week={{
                            startHour: 1,
@@ -273,32 +238,6 @@ export default function Calendar({services, employees, auth}) {
                                }),
                                config: {label: "Service", required: true, errMsg: "Plz Select User"}
                            },
-
-                           // {
-                           //     name: "user_id",
-                           //     type: "select",
-                           //     // Should provide options with type:"select"
-                           //     options: [
-                           //         {id: 1, text: "John", value: 1},
-                           //         {id: 2, text: "Mark", value: 2}
-                           //     ],
-                           //     config: {label: "User", required: true, errMsg: "Plz Select User"}
-                           // },
-                           // {
-                           //     name: "Description",
-                           //     type: "input",
-                           //     default: "Default Value...",
-                           //     config: {label: "Details", multiline: true, rows: 4}
-                           // },
-                           // {
-                           //     name: "anotherdate",
-                           //     type: "date",
-                           //     config: {
-                           //         label: "Other Date",
-                           //         md: 6,
-                           //         type: "datetime"
-                           //     }
-                           // }
                        ]}
                        draggable={true}
                        onViewChange={function (view, test) {
@@ -325,19 +264,6 @@ export default function Calendar({services, employees, auth}) {
         <Authenticated>
             <Page pageName={'calendar'}>
                 {Calendar}
-                {/*<Scheduler*/}
-                {/*    getRemoteEvents={toGetAppointments}*/}
-                {/*    week={{*/}
-                {/*        startHour: 1,*/}
-                {/*        endHour: 22,*/}
-                {/*    }}*/}
-                {/*    day={{*/}
-                {/*        startHour: 1,*/}
-                {/*        endHour: 22,*/}
-                {/*        step: 30,*/}
-                {/*        navigation: true*/}
-                {/*    }}*/}
-                {/*/>*/}
             </Page>
         </Authenticated>
     )
