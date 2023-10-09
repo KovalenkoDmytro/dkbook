@@ -2,7 +2,7 @@ import {Scheduler} from "@aldabil/react-scheduler";
 import Authenticated from "@/Layouts/Authenticated";
 import Page from "@/Components/Page";
 import React, {useEffect, useMemo, useReducer, useRef, useState} from "react";
-import {format, subDays} from 'date-fns'
+import {format, subDays, add} from 'date-fns'
 import {usePage} from "@inertiajs/react";
 import axios from "axios";
 import {TimePicker} from "@mui/x-date-pickers";
@@ -19,9 +19,10 @@ export default function Calendar({services, employees, auth}) {
         description: '',
         payed: false,
         start: '',
-        end: '',
+        end: ''
     });
     const [calendarView, setCalendarView] = useState("week")
+    const [choseServicePrice, setChoseServicePrice] = useState(null)
 
     const prepareAppointmentsArray = function (data) {
         let appointments = [];
@@ -123,15 +124,12 @@ export default function Calendar({services, employees, auth}) {
         );
     }, [])
     const DayModalWindow = ({scheduler}) => {
+
         const employees__array = employees.filter(item => {
             if (item.services.length && item.services.some((item) => item.id === data.service_id)) {
                 return item
             }
         })
-        console.log(scheduler.state)
-        const startDate = format(scheduler.state.start.value, 'yyyy-MM-dd HH:mm:00')
-        const startEnd = format(scheduler.state.end.value, 'yyyy-MM-dd HH:mm:00')
-        console.log(startDate)
         return (
             <div>
                     <p>day</p>
@@ -141,10 +139,26 @@ export default function Calendar({services, employees, auth}) {
                         value={data.service_id}
                         label="service"
                         onChange={function (event, child) {
+                            const choseService = services.find(item => item.id === parseInt(event.target.value))
+                            const result = add(scheduler.state.start.value, {
+                                hours: choseService.timeRange_hour,
+                                minutes: choseService.timeRange_minutes,
+                            })
+                            setChoseServicePrice(choseService.price)
                             setData({
                                 type: 'add',
                                 name: 'service_id',
                                 value: parseInt(event.target.value)
+                            })
+                            setData({
+                                type: 'add',
+                                name: 'start',
+                                value: scheduler.state.start.value
+                            })
+                            setData({
+                                type: 'add',
+                                name: 'end',
+                                value: result
                             })
                         }}
                     >
@@ -175,26 +189,34 @@ export default function Calendar({services, employees, auth}) {
                     </Select>
                     <TimePicker
                         label="From"
-                        value={scheduler.state.start.value}
+                        value={data.start}
                         onChange={(newValue) => {
                             setData({
                                 type: 'add',
                                 name: 'start',
-                                value: format(newValue, 'yyyy-MM-dd HH:mm:00')
+                                value: newValue
+
                             })
                         }}
+                    /*    format(newValue, 'yyyy-MM-dd HH:mm:00')*/
                     />
                     <TimePicker
                         label="To"
-                        value={scheduler.state.end.value}
+                        value={data.end}
                         onChange={(newValue) => {
                             setData({
                                 type: 'add',
                                 name: 'end',
-                                value: format(newValue, 'yyyy-MM-dd HH:mm:00')
+                                value: newValue
                             })
                         }}
                     />
+
+                <p className={'total'}>{choseServicePrice ?? null}</p>
+                    <button className={'btn'} onClick={()=>{scheduler.close()}}>{__("calendar.createAppointment.btn.close")}</button>
+                    <button className={'btn'} onClick={()=>{
+
+                    }}>{__("calendar.createAppointment.btn.confirm")}</button>
 
             </div>
         );
@@ -204,11 +226,11 @@ export default function Calendar({services, employees, auth}) {
         return (
             <Scheduler view="week"
                        getRemoteEvents={toGetAppointments}
-                       customEditor={(scheduler) => {
+                       customEditor={(scheduler, events) => {
                            if (calendarView === 'week') {
                                return weekModalWindow
                            } else if (calendarView === 'day') {
-                               return <DayModalWindow scheduler={scheduler}/>
+                               return <DayModalWindow scheduler={scheduler} events={events}/>
                            }
                            // else {
                            //     return <CustomEditor scheduler={scheduler}/>
@@ -241,19 +263,19 @@ export default function Calendar({services, employees, auth}) {
                        ]}
                        draggable={true}
                        onViewChange={function (view, test) {
-                           console.log(view, test)
+                           // console.log(view, test)
                            setCalendarView(view)
                        }}
-                       onSelectedDateChange={function (Date, test) {
-                           console.log(Date, test)
-                       }}
-                       onConfirm={function (event, action) {
-                           console.log(event)
-                           console.log(action)
-                       }}
-                       onDelete={function (id) {
-                           console.log(id)
-                       }}
+                       // onSelectedDateChange={function (Date, test) {
+                       //     console.log(Date, test)
+                       // }}
+                       // onConfirm={function (event, action) {
+                       //     console.log(event)
+                       //     console.log(action)
+                       // }}
+                       // onDelete={function (id) {
+                       //     console.log(id)
+                       // }}
 
             />)
 
