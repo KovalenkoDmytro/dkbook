@@ -87,7 +87,7 @@ export default function Edit({flash,errors,client}) {
         )
     },[data.email, errors.email])
     return (
-        <Authenticated>
+        <Authenticated header={__('page.editClient.header.edit')}>
             <Page pageName={'editClient'}>
                 {clientName_input}
                 {clientPhone_input}

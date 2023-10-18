@@ -15,6 +15,9 @@
 	"page.clients.btn.createClient" : "Create new client",
 
 	"page.createClient.header.addNew" : "Add new client",
+	"page.editClient.header.edit" : "Edit client",
+	"page.indexClient.header.clients" : "Clients",
+
 	"page.createClient.input.label.clientName" : "Name",
 	"page.createClient.input.label.email" : "Email",
 	"page.createClient.input.label.phone" : "Cell phone",

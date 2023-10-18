@@ -65,7 +65,7 @@ export default function Index({clients,flash}) {
     },[clients])
 
     return (
-        <Authenticated>
+        <Authenticated header={__('page.indexClient.header.clients')}>
             <Page pageName={'Clients'}>
                 {table}
                 <Link href={route('client.create')} className={'btn'}>{__("page.clients.btn.createClient")}</Link>
