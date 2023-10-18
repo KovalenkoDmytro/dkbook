@@ -45,7 +45,9 @@ label{
         padding: 0;
     }
     @include desktop {
-        max-width: 1156px;
+        max-width: 1440px;
     }
 }
-
+.page {
+    width: 100%;
+}

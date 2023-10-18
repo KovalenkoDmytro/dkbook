@@ -7,12 +7,9 @@
     }
     .container {
         justify-content: space-between;
-        align-items: center;
         margin: 0 auto;
         .navigation__links {
             display: flex;
-
-
             .navigation__link {
                 padding: 15px;
                 color: $white_color;
