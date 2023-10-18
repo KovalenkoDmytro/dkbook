@@ -88,7 +88,7 @@ export default function Create({flash, errors}) {
         )
     },[data.email, errors.email])
     return (
-        <Authenticated>
+        <Authenticated header={__('page.createClient.header.addNew')}>
             <Page pageName={'createClient'}>
                 {clientName_input}
                 {clientPhone_input}

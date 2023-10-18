@@ -49,12 +49,10 @@ export default function Index({clients,flash}) {
                             <div className="buttons_wrapper actions">
                                 <Link href={route(`client.edit`, item.id)} alt={item.id}
                                       className={"btn"}>
-                                    <i className="icon icon_edit"></i>
                                     <span>{("Edit")}</span>
                                 </Link>
-                                <div className="btn"
+                                <div className="btn _remove"
                                      onClick={() => toDestroy(item.id)}>
-                                    <i className="icon icon_destroy"></i>
                                     <span>{("Delete")}</span>
                                 </div>
                             </div>

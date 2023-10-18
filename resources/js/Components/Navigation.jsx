@@ -1,30 +1,74 @@
 import React from "react";
-import {Link} from "@inertiajs/react";
+import {Link, usePage} from "@inertiajs/react";
 import {__} from "@/helpers";
-import Calendar from "@/Pages/Calendar";
+
 
 
 export default React.memo(function Navigation() {
+    const {props, url} = usePage()
+
         return (
-            <nav>
-                <Link href={route('dashboard.main')} title="main">
-                    <span>{__('navigation.linkTitle.mainPage')}</span>
-                </Link>
-                <Link href={route('calendar')} title="Calendar">
-                    <span>{__('navigation.linkTitle.сalendar')}</span>
-                </Link>
-                <Link href={route('employee.index')} title="employees">
-                    <span>{__('navigation.linkTitle.employeesPage')}</span>
-                </Link>
-                <Link href={route('client.index')} title="clients">
-                    <span>{__('navigation.linkTitle.clientsPage')}</span>
-                </Link>
-                <Link href={route('service.index')} title="services">
-                    <span>{__('navigation.linkTitle.servicesPage')}</span>
-                </Link>
-                <Link href={route('user.logout')} title="logout">
-                    <span>{__('navigation.linkTitle.logout')}</span>
-                </Link>
+            <nav className={'navigation'}>
+                <div className={'container'}>
+                    <div className={'logo'}>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="146" height="47" viewBox="0 0 146 47">
+                            <defs>
+                                <pattern id="pattern" preserveAspectRatio="none" width="100%" height="100%" viewBox="0 0 187 181">
+                                    <image width="187" height="181" xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALsAAAC1CAYAAAAHmo4aAAAACXBIWXMAAAsTAAALEwEAmpwYAAAE9WlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOS4wLWMwMDEgNzkuYzAyMDRiMmRlZiwgMjAyMy8wMi8wMi0xMjoxNDoyNCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDI0LjUgKE1hY2ludG9zaCkiIHhtcDpDcmVhdGVEYXRlPSIyMDIzLTA1LTE4VDExOjUwOjQ1KzAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMy0wNi0xMlQxNToxNzowNiswMzowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0wNi0xMlQxNToxNzowNiswMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTU1YzZiY2UtZDcyNC00OWI0LWI1NGEtNGE2NTNkYWJjYTdlIiB4bXBNTTpEb2N1bWVu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"/>
+                                </pattern>
+                                <pattern id="pattern-2" preserveAspectRatio="none" width="100%" height="100%" viewBox="0 0 314 87">
+                                    <image width="314" height="87" xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAToAAABXCAYAAACUX4lsAAAACXBIWXMAAAsTAAALEwEAmpwYAAAF0mlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOS4wLWMwMDEgNzkuYzAyMDRiMmRlZiwgMjAyMy8wMi8wMi0xMjoxNDoyNCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDI0LjUgKE1hY2ludG9zaCkiIHhtcDpDcmVhdGVEYXRlPSIyMDIzLTA1LTE4VDExOjUwOjQ1KzAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMy0wNi0xNVQxMTo1MzowMyswMzowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0wNi0xNVQxMTo1MzowMyswMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6ODkxMGU2ZjUtMzYwZC00MTgxLWEyYmEtYzlmNGJhMmU0OWZiIiB4bXBNTTpEb2N1bWVu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"/>
+                                </pattern>
+                                <clipPath id="clip-MEININGER_Website_IBE-Logo-Mobile">
+                                    <rect width="146" height="47"/>
+                                </clipPath>
+                            </defs>
+                            <g id="MEININGER_Website_IBE-Logo-Mobile" clipPath="url(#clip-MEININGER_Website_IBE-Logo-Mobile)">
+                                <g id="Group_94" data-name="Group 94" transform="translate(6 5)">
+                                    <rect id="Logo2" width="37" height="36" fill="url(#pattern)"/>
+                                    <rect id="Logo3" width="79" height="21" transform="translate(46 8)" fill="url(#pattern-2)"/>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <div className={'navigation__links'}>
+                        <Link className={`navigation__link ${url.includes('/main') ? '_active' : ''}`} href={route('dashboard.main')} title="main">
+                            <span>{__('navigation.linkTitle.mainPage')}</span>
+                        </Link>
+                        <Link className={`navigation__link ${url.includes('/calendar') ? '_active' : ''}`} href={route('calendar')} title="Calendar">
+                            <span>{__('navigation.linkTitle.calendar')}</span>
+                        </Link>
+                        <Link className={`navigation__link ${url.includes('/employee') ? '_active' : ''}`} href={route('employee.index')} title="employees">
+                            <span>{__('navigation.linkTitle.employeesPage')}</span>
+                        </Link>
+                        <Link className={`navigation__link ${url.includes('/client') ? '_active' : ''}`} href={route('client.index')} title="clients">
+                            <span>{__('navigation.linkTitle.clientsPage')}</span>
+                        </Link>
+                        <Link className={`navigation__link ${url.includes('/service') ? '_active' : ''}`} href={route('service.index')} title="services">
+                            <span>{__('navigation.linkTitle.servicesPage')}</span>
+                        </Link>
+                        <Link className={`navigation__link`} href={route('user.logout')} title="logout">
+                            <span>{__('navigation.linkTitle.logout')}</span>
+                        </Link>
+                    </div>
+                    <div className={'userInfo'}>
+                        <div className="avatar">
+                            <svg height="52" viewBox="0 0 64 64" width="52" xmlns="http://www.w3.org/2000/svg">
+                                <g id="User">
+                                    <circle cx="32" cy="32" fill="#e6ecff" r="31"/>
+                                    <g fill="#4294ff">
+                                        <path
+                                            d="m56.877 50.4748a31.0647 31.0647 0 0 0 -49.7651-.0156 30.9669 30.9669 0 0 0 49.7651.0156z"/>
+                                        <circle cx="32" cy="22" r="12"/>
+                                    </g>
+                                </g>
+                            </svg>
+                            <p className="userName">{props.auth.user.fullName}</p>
+                            <i className="icon icon_arrow-downSecond"></i>
+                        </div>
+
+                    </div>
+                </div>
             </nav>
         )
     }

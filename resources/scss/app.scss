@@ -1,32 +1,9 @@
 @import "abstracts/varibles";
 @import "abstracts/mixins";
-
 @import "base/typegraphy";
 @import "base/normalize";
 @import "base/main";
-//
-@import "layout/main";
-@import "layout/aside";
-@import "layout/inputs";
-@import "layout/scheduled";
-@import "layout/calendar/monthlyCalendar";
-@import "layout/calendar/dailyCalenday";
-@import "layout/registerSteps/company_scheduled";
-@import "layout/guest";
-@import "layout/servicesTable";
-
-@import "components/selectDropDown";
-@import "components/progressBarRegister";
-@import "components/pagination";
+@import "layout/authenticated";
+@import "components/customTable";
+@import "components/buttons";
 @import "components/navigation";
-
-
-@import "pages/registration";
-@import "layout/employees";
-@import "pages/create-daily-appointment-controller";
-@import "pages/service/index";
-@import "pages/clients/index";
-@import "pages/DashboardMain";
-
-
-@import "vendor/TomSelector";

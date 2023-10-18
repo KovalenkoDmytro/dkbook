@@ -12,7 +12,7 @@ import reducer from "@/reducer";
 import {Select, MenuItem} from "@mui/material";
 
 
-export default function Calendar({services, employees, auth}) {
+export default function Calendar({services, employees, auth,errors}) {
     const [data, setData] = useReducer(reducer, {
         service_id: '',
         employee_id: '',
@@ -61,7 +61,7 @@ export default function Calendar({services, employees, auth}) {
 
 
 
-    const weekModalWindow = useMemo(() => {
+    const WeekModalWindow = ({scheduler}) => {
         const employees__array = employees.filter(item => {
             if (item.services.length && item.services.some((item) => item.id === data.service_id)) {
                 return item
@@ -71,7 +71,21 @@ export default function Calendar({services, employees, auth}) {
             <div>
                 <div style={{padding: "1rem"}}>
                     <p>week</p>
-
+                    <div className={`input_group ${errors.description !== undefined ? 'validate_error' : ''} _translate`}>
+                        <label htmlFor="description">{('Description')}</label>
+                        <textarea id="description"
+                                  value={data.description}
+                                  placeholder="Depending on the number of persons, the room is equipped with single, double or bunk beds."
+                                  onChange={event =>
+                                      setData({
+                                          type: 'add',
+                                          name: 'description',
+                                          value: event.target.value,
+                                      })
+                                  }
+                        />
+                        {errors.description && <p className="error">{errors.description}</p>}
+                    </div>
                     <Select
                         labelId="service_id"
                         id="service_id"
@@ -122,7 +136,7 @@ export default function Calendar({services, employees, auth}) {
 
             </div>
         );
-    }, [])
+    }
     const DayModalWindow = ({scheduler}) => {
 
         const employees__array = employees.filter(item => {
@@ -228,7 +242,7 @@ export default function Calendar({services, employees, auth}) {
                        getRemoteEvents={toGetAppointments}
                        customEditor={(scheduler, events) => {
                            if (calendarView === 'week') {
-                               return weekModalWindow
+                               return <WeekModalWindow scheduler={scheduler} events={events}/>
                            } else if (calendarView === 'day') {
                                return <DayModalWindow scheduler={scheduler} events={events}/>
                            }

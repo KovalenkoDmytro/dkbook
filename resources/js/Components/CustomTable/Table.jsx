@@ -13,7 +13,7 @@ export default React.memo(function Table({ data = [], columnsName = [], classNam
 
 
     return (
-        <div className={`${className} custom_table__component`}>
+        <div className={`${className} customTable __component`}>
             <div className="dataTables_wrapper">
                 <div className="table">
                     <table>
@@ -31,8 +31,8 @@ export default React.memo(function Table({ data = [], columnsName = [], classNam
                     </table>
                     {data.data.length === 0 && <div className={'noResults'}>No matching records found</div>}
                 </div>
-                {data.data.length > 0 && pagination}
             </div>
+            {data.data.length > 0 && pagination}
         </div>
     )
 })

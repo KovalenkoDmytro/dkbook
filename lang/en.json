@@ -14,6 +14,7 @@
 	"page.dashboard.mainTitle" : "Welcome to Dashboard",
 	"page.clients.btn.createClient" : "Create new client",
 
+	"page.createClient.header.addNew" : "Add new client",
 	"page.createClient.input.label.clientName" : "Name",
 	"page.createClient.input.label.email" : "Email",
 	"page.createClient.input.label.phone" : "Cell phone",

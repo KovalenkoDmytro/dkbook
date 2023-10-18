@@ -44,14 +44,14 @@ export default function Pagination({data}) {
                     if (link.url === null) {
                         return <Link
                             href={link.url}
-                            className={'page-item disabled'}
+                            className={'button disabled'}
                             key={`${link.label}_${index}`}
                             dangerouslySetInnerHTML={{__html: link.label}}
                         ></Link>
                     } else {
                         return <Link
                             href={link.url}
-                            className={`${link.active ? 'active' : ''} page-item`}
+                            className={`${link.active ? 'active' : ''} button`}
                             key={`${link.label}_${index}`}
                             dangerouslySetInnerHTML={{__html: link.label}}
                         ></Link>
@@ -62,9 +62,9 @@ export default function Pagination({data}) {
     }, [data.links])
 
     return (
-        <div className="pagination __laravel">
+        <div className="simplePagination">
             <p className="results">{("Results:")} {data.from} - {data.to} {("of")} {data.total}</p>
-            <div className="pages">
+            <div className="buttons">
                 {dimensions.width > 1199 ? desktopPagination : simplePagination}
             </div>
         </div>

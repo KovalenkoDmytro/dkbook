@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
         BusinessType::create(['name' => 'Tattoo Studio']);
 //
         CompanyOwner::factory(1)->create();
-        $clients = Client::factory(150)->create();
+        $clients = Client::factory(50)->create();
 
 
 
@@ -48,15 +48,15 @@ class DatabaseSeeder extends Seeder
         EmployeeSchedule::factory(4)->create();
 
 
-        $employees = Employee::factory(150)->create();
+        $employees = Employee::factory(15)->create();
 
         //        create relationship Client-Company
         Company::factory(1)
             ->create()
             ->each(function ($company) use ($clients) {
-            $company->clients()->attach($clients->random(100));})
+            $company->clients()->attach($clients->random(50));})
             ->each(function ($company) use ($employees) {
-                $company->employees()->attach($employees->random(100));
+                $company->employees()->attach($employees->random(10));
             });
 
 

@@ -1,0 +1,254 @@
+.customTable {
+
+    thead {
+        background-color: $secondary_color;
+    }
+
+    tbody {
+        tr {
+            border: 1px solid $border_color ;
+        }
+
+        tr + tr {
+            border-top: 1px solid $border_color;
+        }
+
+        .btn {
+            font-size: 15px;
+            padding: 5px 10px;
+            margin: 0 0 5px 0;
+        }
+    }
+
+    .noResults {
+        padding: 15px;
+        background-color: $white_color;
+        text-align: center;
+    }
+
+    &.__component {
+
+        .filters {
+
+            display: flex;
+            justify-content: space-between;
+            align-content: center;
+            align-items: center;
+            @include tablet {
+                margin: 15px 0;
+            }
+
+            .__search {
+                &:only-child {
+                    @include laptop {
+                        margin-left: auto;
+                    }
+                }
+            }
+
+            .__search {
+                @include laptop {
+                    width: 400px;
+                }
+            }
+
+            .btn {
+                margin: 0;
+                padding: 5px 10px;
+            }
+
+            .sorting {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+
+                @include tablet {
+                    flex-direction: row;
+                    align-content: center;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+
+                .sortingItem {
+                    margin: 10px 0;
+                    @include tablet {
+                        margin: initial;
+                    }
+
+                    .input_group.dropDownSelector {
+                        flex-direction: row;
+                        align-items: center;
+                        margin-top: 0;
+
+                        label {
+                            margin-bottom: 0;
+                        }
+                    }
+
+                    &.__search {
+                        margin-left: auto;
+                    }
+                }
+
+                .sortingItem + .sortingItem {
+
+                    @include tablet {
+                        margin-left: 1.5rem;
+                        &:last-child {
+                            margin: 0 0 0 auto;
+                        }
+                    }
+
+                }
+
+                label {
+                    font-weight: 800;
+                    margin-right: 15px;
+                }
+
+
+                select {
+                    padding-right: 30px !important;
+                }
+            }
+
+        }
+
+        .dataTables_wrapper {
+            overflow-y: hidden;
+            overflow-x: auto;
+            padding-left: 1px;
+
+            .table {
+                width: 100%;
+
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    thead {
+                        color: $white_color;
+                        tr{
+                            border: 1px solid $secondary_color ;
+                        }
+                        th {
+                            padding: 10px;
+                            text-transform: capitalize;
+                        }
+
+                        th + th {
+                            border-left: 1px solid $border_color ;
+                        }
+                    }
+
+                    tbody {
+                        tr {
+                            td {
+                                text-align: start;
+                                padding: 8px;
+                                border-bottom: 1px solid $border_color !important;
+                                border-left: 1px solid $border_color !important;
+
+                                &.button__actions {
+                                    white-space: nowrap;
+
+                                    .buttons {
+                                        @include laptop {
+                                            width: max-content;
+                                            margin-left: auto;
+                                        }
+
+                                        .btn {
+                                            max-width: max-content;
+                                        }
+
+                                    }
+
+                                    form {
+                                        display: inline-block;
+                                    }
+
+                                    .btn {
+                                        display: inline-block;
+                                        margin-bottom: 0;
+
+                                        &._remove {
+                                            margin-left: 10px;
+                                        }
+                                    }
+                                }
+
+                                &.link {
+                                    a {
+                                        color: $link_color;
+                                        text-decoration: underline;
+
+                                        &:hover {
+                                            color: $link_color_hover;
+                                        }
+                                    }
+                                }
+
+
+                                &.__id {
+                                    font-weight: bold;
+                                }
+
+                                &.center {
+                                    text-align: center;
+                                }
+
+                                .buttons_wrapper {
+                                    justify-content: flex-end;
+
+                                    .btn {
+                                        padding: 5px 10px;
+                                        margin-top: 0;
+                                        margin-bottom: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        .simplePagination{
+            display: flex;
+            margin: 10px 0;
+            @include tablet{
+                justify-content: space-between;
+            }
+
+            .buttons{
+                display: flex;
+                .button{
+                    background-color: $button_color;
+                    color: $white_color;
+                    @include tablet{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: relative;
+                        height: 36px;
+                        width: 36px;
+                    }
+
+                    &.active{
+                        background-color: $button_color_hover;
+                    }
+                    &.disabled{
+                        background-color: $gray_light_color;;
+                    }
+                    &:hover{
+                        background-color: $button_color_hover;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+
